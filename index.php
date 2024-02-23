@@ -1,5 +1,4 @@
 <!-- FORBIDDEN AREA: PHP SECTION -->
-
 <?php
 include 'DBconn.php';
 $conn = connect_to_database();
