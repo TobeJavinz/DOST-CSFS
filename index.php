@@ -3,7 +3,6 @@
 include 'DBconn.php';
 $conn = connect_to_database();
 
-
 // Registration
 if (isset($_POST['register'])) {
     // Sanitize and check for blank inputs
