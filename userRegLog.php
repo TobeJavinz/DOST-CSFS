@@ -2,28 +2,10 @@
 include 'DBconn.php';
 $conn = connect_to_database();
 
-// Registration
-if(isset($_POST['register'])) {
-    $name = $_POST['name'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
 
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    $stmt = $conn->prepare("INSERT INTO user_cred ( `username`, `password`, `name`) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $username,$hashed_password, $name);
-
-    if ($stmt->execute()) {
-        echo "Registration successful!";
-    } else {
-        echo "Error: " . $stmt->error;
-    }
-
-    $stmt->close();
-}
 
 // Login
-if(isset($_POST['login'])) {
+if (isset($_POST['login'])) {
     $login_username = $_POST['login_username'];
     $login_password = $_POST['login_password'];
 
@@ -34,14 +16,24 @@ if(isset($_POST['login'])) {
     $stmt->bind_result($hashed_password);
     $stmt->fetch();
 
-    if ($stmt->num_rows > 0 && password_verify($login_password, $hashed_password)) {
-        echo "Login successful!";
+    // Verify password
+    if (password_verify($login_password, $hashed_password)) {
+        // Password is correct
+        // You can add additional logic here if needed, such as setting session variables
+
+        $stmt->close();
+        $conn->close();
+        header("Location: dashboard.html"); // Redirect to dashboard.php if login is successful
+        exit;
     } else {
-        echo "Invalid username or password";
+        // Password is incorrect
+        echo "<script>alert('Incorrect username or password');</script>";
     }
 
     $stmt->close();
 }
 
 $conn->close();
+
+
 

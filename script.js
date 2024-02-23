@@ -8,7 +8,7 @@ registerBtn.addEventListener('click', () => {
 });
 
 login.addEventListener('click', () => {
-   window.location.href = "./dashboard.html";
+   //window.location.href = "./dashboard.html";
 });
 
 document.addEventListener('DOMContentLoaded', function() {
