@@ -80,9 +80,6 @@ $conn->close();
 ?>
 <!-- FORBIDDEN AREA: PHP SECTION -->
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -137,12 +134,12 @@ $conn->close();
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
                     <h1>Welcome Back!</h1>
-                    <p>Enter your personal details to use all of site features</p>
+                    <p>Enter your personal details to use all of system features</p>
                     <button class="hidden" id="login">Sign In</button>
                 </div>
                 <div class="toggle-panel toggle-right">
                     <h1>DOST - CSFS</h1>
-                    <p>Register with your personal details to use all of site features</p>
+                    <p>Register to use all of DOST system features</p>
                     <button class="hidden" id="register">Sign Up</button>
                 </div>
             </div>
