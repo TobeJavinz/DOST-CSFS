@@ -4,7 +4,7 @@ const login = document.getElementById('login');
 
 
 registerBtn.addEventListener('click', () => {
-    container.classList.add("active");
+    //container.classList.add("active");
 });
 
 login.addEventListener('click', () => {

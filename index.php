@@ -100,13 +100,13 @@ $conn->close();
         <div class="form-container sign-up">
             <form action="" method="POST">
                 <h1>Create Account</h1>
-                <div class="social-icons">
+                <!-- <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
-                <span>or use your email for registeration</span>
+                <span>or use your email for registeration</span> -->
                 <input required name="name" placeholder="Name">
                 <input required name="username" placeholder="Username">
                 <input required name="password" placeholder="Password">
@@ -118,13 +118,13 @@ $conn->close();
         <div class="form-container sign-in">
             <form action="" method="POST">
                 <h1>Sign In</h1>
-                <div class="social-icons">
+                <!-- <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
-                <span>or use your email password</span>
+                <span>or use your email password</span> -->
                 <input required name="login_username" type="text" placeholder="Username">
                 <input required name="login_password" type="password" placeholder="Password">
                 <a href="#">Forget Your Password?</a>
@@ -140,7 +140,7 @@ $conn->close();
                     <button class="hidden" id="login">Sign In</button>
                 </div>
                 <div class="toggle-panel toggle-right">
-                    <h1>Hello, Friend!</h1>
+                    <h1>DOST - CSFS</h1>
                     <p>Register with your personal details to use all of site features</p>
                     <button class="hidden" id="register">Sign Up</button>
                 </div>
@@ -148,6 +148,9 @@ $conn->close();
         </div>
     </div>
 
+
+
+    
     <script src="script.js"></script>
 </body>
 
