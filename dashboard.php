@@ -1,3 +1,15 @@
+<?php
+session_start();
+// Check if the user is logged in
+if(isset($_SESSION['name'])) {
+  $name = $_SESSION['name'];
+} else {
+  header("Location: index.php");
+}
+
+?>
+
+
 <!doctype html>
 <html>
 <head>

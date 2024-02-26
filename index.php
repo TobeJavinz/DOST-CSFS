@@ -1,5 +1,14 @@
 <!-- FORBIDDEN AREA: PHP SECTION -->
 <?php
+session_start();
+// Check if the user is logged in
+if(isset($_SESSION['name'])) {
+    header("Location: dashboard.php");
+  }
+  
+
+
+
 include 'DBconn.php';
 $conn = connect_to_database();
 
@@ -52,21 +61,21 @@ if (isset($_POST['login'])) {
     $login_username = $_POST['login_username'];
     $login_password = $_POST['login_password'];
 
-    $stmt = $conn->prepare("SELECT `password` FROM user_cred WHERE `username` = ?");
+    $stmt = $conn->prepare("SELECT `password`, `name` FROM user_cred WHERE `username` = ?");
     $stmt->bind_param("s", $login_username);
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($hashed_password);
+    $stmt->bind_result($hashed_password,$name);
     $stmt->fetch();
 
     // Verify password
     if (password_verify($login_password, $hashed_password)) {
         // Password is correct
         // You can add additional logic here if needed, such as setting session variables
-
+        $_SESSION['name'] = $name;
         $stmt->close();
         $conn->close();
-        header("Location: dashboard.html"); // Redirect to dashboard.php if login is successful
+        header("Location: dashboard.php"); // Redirect to dashboard.php if login is successful
         exit;
     } else {
         // Password is incorrect
