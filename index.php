@@ -132,7 +132,7 @@ $conn->close();
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your email password</span> -->
-                <input required name="login_username" type="text" placeholder="Username" pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]+$" title="Username must contain at least one letter and can include numbers">
+                <input required name="login_username" type="text" placeholder="Username" pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]+$" title="Username contains at least one letter and can include numbers">
                 <input required name="login_password" type="password" placeholder="Password">
                 <!-- <a href="#">Forget Your Password?</a> -->
                 <button type="submit" name="login" id="login">Sign In</button>
@@ -154,9 +154,6 @@ $conn->close();
             </div>
         </div>
     </div>
-
-
-
 
     <script src="script.js"></script>
 </body>
