@@ -2,10 +2,10 @@
 <?php
 session_start();
 // Check if the user is logged in
-if(isset($_SESSION['name'])) {
+if (isset($_SESSION['name'])) {
     header("Location: dashboard.php");
-  }
-  
+}
+
 
 
 
@@ -20,7 +20,7 @@ if (isset($_POST['register'])) {
     $password = trim($_POST['password']);
 
     if (empty($name) || empty($username) || empty($password)) {
-        echo "<script>alert('Please fill in all fields properly.');</script>";
+        echo "<script>alert('Please Fill In All Fields Properly.');</script>";
     } else {
         // Check if username already exists
         $stmt = $conn->prepare("SELECT * FROM user_cred WHERE username = ?");
@@ -35,7 +35,7 @@ if (isset($_POST['register'])) {
         $result_name = $stmt->get_result();
 
         if ($result_username->num_rows > 0) {
-            echo "<script>alert('Username Already Exists!');</script>";
+            echo "<script>alert('Staff Username Already Exists!');</script>";
         } elseif ($result_name->num_rows > 0) {
             echo "<script>alert('Staff Name Already Exists!');</script>";
         } else {
@@ -46,7 +46,7 @@ if (isset($_POST['register'])) {
             $stmt->bind_param("sss", $username, $hashed_password, $name);
 
             if ($stmt->execute()) {
-                echo "<script>alert('Staff Registered Successfully');</script>";
+                echo "<script>alert('Staff Registered Successfully!');</script>";
             } else {
                 echo "<script>alert('Registration Error " . $stmt->error . "');</script>";
             }
@@ -65,21 +65,20 @@ if (isset($_POST['login'])) {
     $stmt->bind_param("s", $login_username);
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($hashed_password,$name);
+    $stmt->bind_result($hashed_password, $name);
     $stmt->fetch();
 
     // Verify password
     if (password_verify($login_password, $hashed_password)) {
         // Password is correct
-        // You can add additional logic here if needed, such as setting session variables
         $_SESSION['name'] = $name;
         $stmt->close();
         $conn->close();
-        header("Location: dashboard.php"); // Redirect to dashboard.php if login is successful
+        header("Location: dashboard.php"); // Redirect
         exit;
     } else {
         // Password is incorrect
-        echo "<script>alert('Incorrect username or password');</script>";
+        echo "<script>alert('Incorrect Username or Password');</script>";
     }
 
     $stmt->close();
@@ -114,9 +113,10 @@ $conn->close();
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your email for registeration</span> -->
-                <input required name="name" placeholder="Name">
-                <input required name="username" placeholder="Username">
-                <input required name="password" placeholder="Password">
+                <input required name="name" type="text" placeholder="Full Name" pattern="[A-Za-z ]+" title="Please enter letters only">
+                <input required name="username" type="text" placeholder="Username" pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]+$" title="Username must contain at least one letter and can include numbers">
+                <input required name="password" type="password" placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$" title="Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long">
+
                 <button type="submit" name="register">Sign Up</button>
             </form>
         </div>
@@ -132,9 +132,9 @@ $conn->close();
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your email password</span> -->
-                <input required name="login_username" type="text" placeholder="Username">
+                <input required name="login_username" type="text" placeholder="Username" pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]+$" title="Username must contain at least one letter and can include numbers">
                 <input required name="login_password" type="password" placeholder="Password">
-                <a href="#">Forget Your Password?</a>
+                <!-- <a href="#">Forget Your Password?</a> -->
                 <button type="submit" name="login" id="login">Sign In</button>
             </form>
             <!-- LOGIN AREA END -->
@@ -157,9 +157,8 @@ $conn->close();
 
 
 
-    
+
     <script src="script.js"></script>
 </body>
 
 </html>
-
