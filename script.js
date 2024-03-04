@@ -3,6 +3,7 @@ const registerBtn = document.getElementById('register');
 const login = document.getElementById('login');
 
 
+
 registerBtn.addEventListener('click', () => {
     container.classList.add("active");
 });
@@ -33,6 +34,5 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error("One or more elements not found.");
     }
 });
-
 
 

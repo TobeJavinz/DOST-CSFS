@@ -113,9 +113,19 @@ $conn->close();
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your email for registeration</span> -->
-                <input required name="name" type="text" placeholder="Full Name" pattern="[A-Za-z ]+" title="Please enter letters only">
-                <input required name="username" type="text" placeholder="Username" pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]+$" title="Username must contain at least one letter and can include numbers">
-                <input required name="password" type="password" placeholder="Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$" title="Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long">
+                <input required name="name" type="text" placeholder="Full Name" pattern="[A-Za-z ]+"
+                    title="Please enter letters only">
+                <input required name="username" type="text" placeholder="Username"
+                    pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]+$"
+                    title="Username must contain at least one letter and can include numbers">
+
+                <input required id="password" name="password" type="password" placeholder="Password"
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$"
+                    title="Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long">
+
+                <input type="checkbox" id="showPassword">
+                <label for="showPassword" class=" text-gray-100 text-sm">Show Password</label>
+
 
                 <button type="submit" name="register">Sign Up</button>
             </form>
@@ -132,8 +142,15 @@ $conn->close();
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your email password</span> -->
-                <input required name="login_username" type="text" placeholder="Username" pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]+$" title="Username contains at least one letter and can include numbers">
-                <input required name="login_password" type="password" placeholder="Password">
+                <input required name="login_username" type="text" placeholder="Username"
+                    pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]+$"
+                    title="Username contains at least one letter and can include numbers">
+                <input class="absolute left-0 px-3 py-2" required id="logpassword" name="login_password" type="password"
+                    placeholder="Password">
+
+                <input type="checkbox" id="logshowPassword">
+                <label for="logshowPassword" class=" text-gray-100 text-sm">Show Password</label>
+
                 <!-- <a href="#">Forget Your Password?</a> -->
                 <button type="submit" name="login" id="login">Sign In</button>
             </form>
@@ -156,6 +173,26 @@ $conn->close();
     </div>
 
     <script src="script.js"></script>
+
+    <script>
+        const showPasswordCheckbox = document.getElementById('showPassword');
+        const passwordField = document.getElementById('password');
+
+        showPasswordCheckbox.addEventListener('change', function () {
+            const type = showPasswordCheckbox.checked ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+        });
+
+        
+        const logshowPasswordCheckbox = document.getElementById('logshowPassword');
+        const logpasswordField = document.getElementById('logpassword');
+
+        logshowPasswordCheckbox.addEventListener('change', function () {
+            const type = logshowPasswordCheckbox.checked ? 'text' : 'password';
+            logpasswordField.setAttribute('type', type);
+        });
+
+    </script>
 </body>
 
 </html>

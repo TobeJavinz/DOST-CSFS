@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show Password Example</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4">
+
+  <div class="flex items-center mb-4">
+    
+    <input id="password" type="password" class="ml-4 pl-4 pr-12 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none" placeholder="Password">
+    <input type="checkbox" id="showPassword" class="mr-2">
+    <label for="showPassword" class="text-gray-700">Show Password</label>
+  </div>
+
+  <script>
+    const showPasswordCheckbox = document.getElementById('showPassword');
+    const passwordField = document.getElementById('password');
+
+    showPasswordCheckbox.addEventListener('change', function() {
+      const type = showPasswordCheckbox.checked ? 'text' : 'password';
+      passwordField.setAttribute('type', type);
+    });
+  </script>
+</body>
+</html>
