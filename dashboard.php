@@ -1,5 +1,5 @@
 <?php
-include 'DBconn.php';
+include 'DBConn.php';
 $conn = connect_to_database();
 // get no. male
 $sql_male = "SELECT COUNT(*) AS male_count FROM data WHERE sex = 'male'";
@@ -29,14 +29,11 @@ $sql_training = "SELECT training_name, COUNT(*) AS total_recipients
 FROM data
 GROUP BY training_name";
 $result_training = $conn->query($sql_training);
-
 // returning
 $sql_returning = "SELECT COUNT(*) AS yes_count FROM data WHERE returning_customer = 'yes'; ";
 $result_returning = $conn->query($sql_returning);
 $row_returning = $result_returning->fetch_assoc();
 $total_returning = $row_returning["yes_count"];
-
-
 // firsttime
 $sql_firsttime = "SELECT COUNT(*) AS yes_count FROM data WHERE returning_customer = 'no'; ";
 $result_firsttime = $conn->query($sql_firsttime);
@@ -129,15 +126,15 @@ $total_firsttime = $row_firsttime["yes_count"];
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
           <!-- CARD CONTENT -->
           <div class="text-2xl font-medium text-gray-400">FIRST TIME CLIENTS</div>
-          <div class="flex justify-between mb-6">
+          <div class="flex justify-between mb-20">
             <div>
-              <div class="text-2xl font-semibold mb-1">
+              <div class="text-2xl font-semibold mb-4">
                 <?php echo $total_firsttime ?>
               </div>
             </div>
           </div>
           <!-- CARD CONTENT END -->
-          <div class="text-2xl font-medium text-gray-400">RETURNING CLIENTS</div>
+          <div class="text-2xl font-medium text-gray-400 ">RETURNING CLIENTS</div>
           <div class="flex justify-between mb-6">
             <div>
               <div class="text-2xl font-semibold mb-1">
@@ -153,12 +150,12 @@ $total_firsttime = $row_firsttime["yes_count"];
           <div class="flex justify-between mb-4">
             <div>
               <div class="text-2xl font-medium text-gray-400">TOTAL FEMALE</div>
-              <div class="flex items-center mb-1">
-                <div class="text-2xl font-semibold">
+              <div class="flex items-center mb-20">
+                <div class="text-2xl font-semibold mb-4">
                   <?php echo $female_count ?>
                 </div>
               </div>
-
+ 
               <div class="text-2xl font-medium text-gray-400">TOTAL MALE</div>
               <div class="flex justify-between mb-6">
                 <div>
