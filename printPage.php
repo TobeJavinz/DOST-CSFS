@@ -114,7 +114,7 @@
             <td>2</td>
             <td>37</td>
             <td>2</td>
-            <td>900</td>
+            <td>100</td>
         </tr>   <tr>
             <td>SQD0. Responsiveness</td>
             <td>I spent a reasonable amount of time for my transaction</td>
