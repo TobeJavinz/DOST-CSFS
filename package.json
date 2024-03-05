@@ -11,5 +11,8 @@
   "devDependencies": {
     "tailwindcss": "^3.4.1"
   },
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "jspdf": "^2.5.1"
+  }
 }
