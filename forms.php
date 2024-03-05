@@ -6,8 +6,11 @@
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
       rel="stylesheet"
-    />
+    /> 
     <link href="./src/output.css" rel="stylesheet" />
+
+
+
   </head>
 
   <body class="text-gray-800 font-inter">
@@ -97,7 +100,7 @@
                 <a
                   href="#"
                   class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50"
-                  >Settings</a
+                  >Setting</a
                 >
               </li>
               <li>
