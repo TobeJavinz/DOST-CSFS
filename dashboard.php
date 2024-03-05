@@ -19,7 +19,6 @@ $total_count = $row_total["total_recipients"];
 // number of recipient per sector
 $sql_tperSec = "SELECT  sector, COUNT(*) AS total_respondents  FROM data GROUP BY service, sector";
 $result_tperSec = $conn->query($sql_tperSec);
-
 // total services
 $sql_tperSer = "SELECT service, COUNT(*) AS total_respondents 
         FROM data
