@@ -3,16 +3,292 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Table with Edit and Delete Buttons</title>
     <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
-    <link rel="stylesheet" href="loginstyle.css" />
-    <title>Modern Login Page | AsmrProg</title>
+    <link href="./src/output.css" rel="stylesheet" />
   </head>
-
   <body>
-    <h1>Data</h1>
-    <script src="./src/loginscript.js"></script>
+    <section class="bg-white">
+      <div class="container">
+        <div class="flex flex-wrap -mx-4">
+          <div class="w-full px-4">
+            <div class="max-w-full overflow-x-auto">
+              <table class="table-auto w-full">
+                <thead>
+                  <tr class="bg-primary text-center">
+                    <!-- Headers -->
+                    <!-- Original 30 columns -->
+                    <th
+                      class="w-1/32 min-w-[80px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent"
+                    >
+                      Service ID
+                    </th>
+                    <!-- Add more headers as needed -->
+                    <th
+                      class="w-1/32 min-w-[200px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      Service
+                    </th>
+
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      Training Name
+                    </th>
+
+                    <!-- Add more headers as needed -->
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      Name
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      Designation
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent"
+                    >
+                      Company
+                    </th>
+                    <!-- Add more headers as needed -->
+                    <th
+                      class="w-1/32 min-w-[500px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 text-center"
+                    >
+                      Address
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[200px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 text-center"
+                    >
+                      Email
+                    </th>
+
+                    <th
+                      class="w-1/32 min-w-[200px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent"
+                    >
+                      Date
+                    </th>
+                    <!-- Add more headers as needed -->
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      Number
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      Age
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent"
+                    >
+                      Sex
+                    </th>
+                    <!-- Add more headers as needed -->
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      Technology
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      Customer Category
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent"
+                    >
+                      Returning Customer
+                    </th>
+                    <!-- Add more headers as needed -->
+                    <th
+                      class="w-1/32 min-w-[80px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      sqd0
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[80px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      sqd1
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[80px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent"
+                    >
+                      sqd2
+                    </th>
+                    <!-- Add more headers as needed -->
+                    <th
+                      class="w-1/32 min-w-[80px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      sqd3
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[80px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      sqd4
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[80px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent"
+                    >
+                      sqd5
+                    </th>
+                    <!-- Add more headers as needed -->
+                    <th
+                      class="w-1/32 min-w-[80px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      sqd6
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[80px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      sqd7
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[80px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent"
+                    >
+                      sqd8
+                    </th>
+                    <!-- Add more headers as needed -->
+                    <th
+                      class="w-1/32 min-w-[80px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      sqd9
+                    </th>
+
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      Net Promoter
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent"
+                    >
+                      Over-all Mood
+                    </th>
+                    <!-- Add more headers as needed -->
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      Comments
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      Agency Name
+                    </th>
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      Agency Score
+                    </th>
+                    <!-- Add headers for Edit and Delete buttons -->
+                    <th
+                      class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4"
+                    >
+                      Edit/Delete
+                    </th>
+                  </tr>
+                </thead>
+                <tbody id="table-body">
+                  <!-- Table rows will be dynamically generated here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      // Sample data representing rows in the table
+      const rowData = [
+        {
+          row1: "13",
+          row2: "Technology Training",
+          row3: "Web Development",
+          row4: "Alice Johnson",
+          row5: "Web Developer",
+          row6: "XYZ Group",
+          row7: "789 Oak Street",
+          row8: "alice.johnson@example.com",
+          row9: "2024-03-05", // Insert the date here
+          row10: "09518441342",
+          row11: "25",
+          row12: "Male",
+          row13: "Technology",
+          row14: "Regular Customer",
+          row15: "Yes",
+          row16: "5", // Move the value from row18
+          row17: "5", // Move the value from row19
+          row18: "3", // Move the value from row20
+          row19: "2", // Move the value from row21
+          row20: "5", // Move the value from row22
+          row21: "8", // Move the value from row23
+          row22: "4", // Move the value from row24
+          row23: "9", // Move the value from row25
+          row24: "8", // Move the value from row26
+          row25: "4", // Move the value from row27
+          row26: "9", // Move the value from row28
+          row27: "8", // Move the value from row29
+          row28: "Great!", // Move the value from row31
+          row29: "Upwork",
+          row30: "9", // Move the value from row32
+        },
+
+        // Add more rows as needed
+      ];
+      // Function to generate HTML for "Edit" and "Delete" buttons
+      function generateButtons() {
+        return `
+          <td class="text-center text-dark font-medium text-base py-5 px-2 bg-white border-b border-[#E8E8E8]">
+            <button class="border border-primary py-2 px-6 text-primary inline-block rounded hover:bg-primary hover:text-white">Edit</button>
+            <button class="border border-red-500 py-2 px-6 text-red-500 inline-block rounded hover:bg-red-500 hover:text-white">Delete</button>
+          </td>
+        `;
+      }
+
+      // Function to generate HTML for each table row
+      function generateTableRow(row) {
+        let dataColumnsHTML = "";
+
+        // Loop through each row property and generate table cells
+        for (let i = 1; i <= 30; i++) {
+          dataColumnsHTML += `
+        <td class="text-center text-dark font-medium text-base py-5 px-2 bg-[#F3F6FF] border-b border-[#E8E8E8]">${
+          row[`row${i}`]
+        }</td>
+      `;
+        }
+
+        return `
+      <tr>
+        <!-- Data columns -->
+        ${dataColumnsHTML}
+        <!-- Edit and Delete buttons -->
+        ${generateButtons()}
+      </tr>
+    `;
+      }
+
+      // Function to render table rows
+      function renderTable() {
+        const tableBody = document.getElementById("table-body");
+        let tableRowsHTML = "";
+
+        // Loop through rowData and generate HTML for each row
+        rowData.forEach((row) => {
+          tableRowsHTML += generateTableRow(row);
+        });
+
+        // Insert generated HTML into table body
+        tableBody.innerHTML = tableRowsHTML;
+      }
+
+      // Call renderTable function to generate table rows
+      renderTable();
+    </script>
   </body>
 </html>
