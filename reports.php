@@ -120,8 +120,8 @@
         </div>
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
           <div class="flex justify-between mb-4 items-start">
-            <div class="font-medium">Print PDF</div>
-            <button id="exportButton">Export to PDF</button>
+            <button id="exportButton">View PDF</button>
+           
 
           </div>
         </div>
@@ -137,30 +137,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
   <script>
     document.getElementById('exportButton').addEventListener('click', function () {
-      const doc = new jsPDF({
-        orientation: 'landscape'
-      });
-      // Create an image element
-      const img = new Image();
+      window.location.href = 'printPage.php';
 
-      // Set the source of the image
-      img.src = 'assets/logo.png';
-
-      // Wait for the image to load
-      img.onload = function () {
-        // Draw the image on the PDF document
-        doc.addImage(img, 'PNG', 70, 5, 200, 45);
-        // HTML-like content with custom header and body
-        const header = `<p><b>Customer Satisfaction Score</b></p>`;
-        const header1 = `<p>Statistical Analysis of the Numerical Ratings</p>`;
-
-
-        // Add HTML-like content to PDF
-        doc.fromHTML(header, 115, 38);
-        doc.fromHTML(header1, 100, 43);
-        // Save the PDF file
-        doc.save('CSF Stat Analysis.pdf');
-      };
     });
 
   </script>
