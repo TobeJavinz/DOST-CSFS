@@ -1,3 +1,37 @@
+<?php
+include 'DBconn.php';
+$conn = connect_to_database();
+
+$sql_male = "SELECT COUNT(*) AS male_count FROM data WHERE sex = 'male'";
+$result_male = $conn->query($sql_male);
+$row_male = $result_male->fetch_assoc();
+$male_count = $row_male["male_count"];
+
+$sql_female = "SELECT COUNT(*) AS female_count FROM data WHERE sex = 'female'";
+$result_female = $conn->query($sql_female);
+$row_female = $result_female->fetch_assoc();
+$female_count = $row_female["female_count"];
+
+$sql_total = "SELECT COUNT(*) AS total_recipients FROM data";
+$result_total = $conn->query($sql_total);
+$row_total = $result_total->fetch_assoc();
+$total_count = $row_total["total_recipients"];
+
+$sql_tperSec = "SELECT  sector, COUNT(*) AS total_respondents  FROM data GROUP BY service, sector";
+$result_tperSec = $conn->query($sql_tperSec);
+
+
+$sql_tperSer = "SELECT service, COUNT(*) AS total_respondents 
+        FROM data
+        GROUP BY service";
+$result_tperSer = $conn->query($sql_tperSer);
+
+$sql_training = "SELECT training_name, COUNT(*) AS total_recipients 
+FROM data
+GROUP BY training_name";
+
+$result_training = $conn->query($sql_training);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -80,22 +114,29 @@
     </div>
     <div class="p-6">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+        <!-- TOTAL NUMBER CARDS -->
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
+          <div class="text-2xl font-medium text-gray-400">TOTAL MALE</div>
           <div class="flex justify-between mb-6">
             <div>
-              <div class="text-2xl font-semibold mb-1">10</div>
-              <div class="text-sm font-medium text-gray-400">Total Male</div>
+              <div class="text-2xl font-semibold mb-1">
+                <?php echo $male_count ?>
+              </div>
+
             </div>
           </div>
         </div>
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
           <div class="flex justify-between mb-4">
             <div>
-              <div class="flex items-center mb-1">
-                <div class="text-2xl font-semibold">324</div>
+              <div class="text-2xl font-medium text-gray-400">
+                TOTAL FEMALE
               </div>
-              <div class="text-sm font-medium text-gray-400">
-                Total Female
+              <div class="flex items-center mb-1">
+
+                <div class="text-2xl font-semibold">
+                  <?php echo $female_count ?>
+                </div>
               </div>
             </div>
           </div>
@@ -103,23 +144,93 @@
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
           <div class="flex justify-between mb-6">
             <div>
-              <div class="text-2xl font-semibold mb-1">2,345</div>
-              <div class="text-sm font-medium text-gray-400">
-                Total Participants
+              <div class="text-2xl font-medium text-gray-400">
+                TOTAL RECIPIENTS
+              </div>
+              <div class="text-2xl font-semibold mb-1">
+                <?php echo $total_count ?>
+              </div>
+              <div class="text-sm font-medium">
+
+                <table style="width: 100%;text-align:center">
+                  <thead>
+                    <tr>
+                      <th>Sector</th>
+                      <th>Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    // Loop through the query results and display each row
+                    while ($row = $result_tperSec->fetch_assoc()) {
+                      echo "<tr>";
+                      echo "<td>" . $row['sector'] . "</td>";
+                      echo "<td>" . $row['total_respondents'] . "</td>";
+                      echo "</tr>";
+                    }
+                    ?>
+                  </tbody>
+                </table>
+
+
               </div>
             </div>
           </div>
         </div>
       </div>
+      <!-- TOTAL NUMBER CARDS END-->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
           <div class="flex justify-between mb-4 items-start">
-            <div class="font-medium">List of Trainings</div>
+            <div class="text-2xl font-medium text-gray-400">LIST OF CONDUCTED TRAININGS</div>
+          </div>
+          <div class="text-sm font-medium ">
+            <table style="width: 100%; text-align:center">
+              <thead>
+                <tr>
+                  <th>Training Name</th>
+                  <th>Total Recipients</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                // Loop through the query results and display each row
+                while ($row = $result_training->fetch_assoc()) {
+                  echo "<tr>";
+                  echo "<td>" . $row['training_name'] . "</td>";
+                  echo "<td>" . $row['total_recipients'] . "</td>";
+                  echo "</tr>";
+                }
+                ?>
+              </tbody>
+            </table>
           </div>
         </div>
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
           <div class="flex justify-between mb-4 items-start">
-            <div class="font-medium">List of Services</div>
+            <div class="text-2xl font-medium text-gray-400">LIST OF DELIVERED SERVICES</div>
+
+          </div>
+          <div class="text-sm font-medium ">
+            <table style="width: 100%; text-align:center">
+              <thead>
+                <tr>
+                  <th>Service</th>
+                  <th>Total Respondents</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                // Loop through the query results and display each row
+                while ($row = $result_tperSer->fetch_assoc()) {
+                  echo "<tr>";
+                  echo "<td>" . $row['service'] . "</td>";
+                  echo "<td>" . $row['total_respondents'] . "</td>";
+                  echo "</tr>";
+                }
+                ?>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
