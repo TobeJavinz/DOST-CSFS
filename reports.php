@@ -1,13 +1,21 @@
+<?php
+include 'DBconn.php';
+$conn = connect_to_database();
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="UTF-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
-
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/themes/airbnb.min.css">
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"></script>
   <link href="./src/output.css" rel="stylesheet" />
 </head>
 
@@ -119,11 +127,89 @@
           </div>
         </div>
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
-          <div class="flex justify-between mb-4 items-start">
-            <button id="exportButton">View PDF</button>
-           
+          <div class="flex justify-center mb-4 items-start">
+            <!-- DATE PICKER INPUT -->
+            <form method="post">
+              <div class="flex flex-col space-y-4">
+                <!-- Start Date Picker -->
+                <label for="start_date" class="block">Start Date:</label>
+                <input type="date" id="start_date" name="start_date"
+                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
 
+                <!-- End Date Picker -->
+                <label for="end_date" class="block">End Date:</label>
+                <input type="date" id="end_date" name="end_date"
+                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+
+                <!-- Service Input Field -->
+                <label for="service" class="block">Service:</label>
+                <input type="text" id="service" name="service"
+                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+
+                <!-- Training Name Input Field -->
+                <label for="training_name" class="block">Training Name:</label>
+                <input type="text" id="training_name" name="training_name"
+                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+
+                <!-- Submit Button -->
+                <button type="submit"
+                  class="bg-blue-500 text-Black px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-dashed focus:bg-blue-600">SEARCH</button>
+              </div>
+            </form>
+
+            <!-- printview
+            <button id="exportButton">View PDF</button> -->
           </div>
+         <!-- DATA RETURNED FROM SEARCH -->
+          <?php          
+  
+          if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Get the start date, end date, service, and training name from user input
+            $start_date = $_POST['start_date'];
+            $end_date = $_POST['end_date'];
+            $service = $_POST['service'];
+            $training_name = $_POST['training_name'];
+
+            // Query to retrieve general information based on date range, service, and training name
+            $sql = "SELECT COUNT(DISTINCT service) AS total_services,
+                 COUNT(DISTINCT training_name) AS total_training_names,
+                 COUNT(DISTINCT company) AS total_companies,
+                 COUNT(DISTINCT sector) AS total_sectors,
+                 SUM(CASE WHEN returning_customer = 'yes' THEN 1 ELSE 0 END) AS returning_customers,
+                 SUM(CASE WHEN returning_customer = 'no' THEN 1 ELSE 0 END) AS first_time_customers
+          FROM data
+          WHERE date BETWEEN '$start_date' AND '$end_date'
+          AND service = '$service'
+          AND training_name = '$training_name'";
+
+            $result = $conn->query($sql);
+            // Check if the query was successful
+            if ($result) {
+              // Fetch the result
+              $row = $result->fetch_assoc();
+              // Get the general information
+              $total_services = $row['total_services'];
+              $total_training_names = $row['total_training_names'];
+              $total_companies = $row['total_companies'];
+              $total_sectors = $row['total_sectors'];
+              $returning_customers = $row['returning_customers'];
+              $first_time_customers = $row['first_time_customers'];
+
+              // Output the general information
+              echo "Service: " . $service."<br>";
+              echo "Training: ". $training_name."<br>";
+              echo "Total Services: " . $total_services . "<br>";
+              echo "Total Training Names: " . $total_training_names . "<br>";
+              echo "Total Companies: " . $total_companies . "<br>";
+              echo "Total Sectors: " . $total_sectors . "<br>";
+              echo "Returning Clients: " . $returning_customers . "<br>";
+              echo "First Time Clients: " . $first_time_customers . "<br>";
+            } else {
+              // Handle the case where the query fails
+              echo "Error: " . $conn->error;
+            }
+          }
+          ?>
         </div>
       </div>
     </div>
@@ -133,7 +219,6 @@
   <script src="https://unpkg.com/@popperjs/core@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="./src/dashboard.js"></script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
   <script>
     document.getElementById('exportButton').addEventListener('click', function () {
@@ -147,3 +232,14 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+<!-- EVERYTHING YOU LOSE IS A STEP YOU TAKE -->

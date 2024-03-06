@@ -17,12 +17,10 @@ $result_total = $conn->query($sql_total);
 $row_total = $result_total->fetch_assoc();
 $total_count = $row_total["total_recipients"];
 // number of recipient per sector
-$sql_tperSec = "SELECT  sector, COUNT(*) AS total_respondents  FROM data GROUP BY service, sector";
+$sql_tperSec = "SELECT sector, COUNT(*) AS total_respondents FROM data GROUP BY sector";
 $result_tperSec = $conn->query($sql_tperSec);
 // total services
-$sql_tperSer = "SELECT service, COUNT(*) AS total_respondents 
-        FROM data
-        GROUP BY service";
+$sql_tperSer = "SELECT service, COUNT(*) AS total_respondents FROM data GROUP BY service";
 $result_tperSer = $conn->query($sql_tperSer);
 // total trainings
 $sql_training = "SELECT training_name, COUNT(*) AS total_recipients 
@@ -186,6 +184,9 @@ $total_firsttime = $row_firsttime["yes_count"];
                       <table class="min-w-full">
                         <thead class="bg-white border-b">
                           <tr>
+                          <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                              #
+                            </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                               Sector
                             </th>
@@ -200,6 +201,7 @@ $total_firsttime = $row_firsttime["yes_count"];
                           $count = 1;
                           while ($row = $result_tperSec->fetch_assoc()) {
                             echo "<tr class='" . (($count % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
+                            echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $count . "</td>";
                             echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $row['sector'] . "</td>";
                             echo "<td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-light'>" . $row['total_respondents'] . "</td>";
                             echo "</tr>";
@@ -326,4 +328,8 @@ $total_firsttime = $row_firsttime["yes_count"];
 
 
 
-<!-- IN THE DEATH OF HER REPUTATION, SHE FELT TRULY ALIVE -->
+<!-- and in the death of her REPUTATION, she felt truly alive... -->
+
+
+
+
