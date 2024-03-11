@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'DBconn.php';
 $conn = connect_to_database();
 
@@ -16,6 +17,7 @@ $conn = connect_to_database();
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/themes/airbnb.min.css">
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
   <link href="./src/output.css" rel="stylesheet" />
 </head>
 
@@ -90,43 +92,15 @@ $conn = connect_to_database();
       </ul>
     </div>
     <div class="p-6">
+
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6"></div>
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-        <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
-          <div class="flex justify-between mb-4 items-start">
-            <div class="font-medium">Training Statiscics</div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-            <div class="rounded-md border border-dashed border-gray-200 p-4">
-              <div class="flex items-center mb-0.5">
-                <div class="text-xl font-semibold">10</div>
-                <span
-                  class="p-1 rounded text-[12px] font-semibold bg-blue-500/10 text-blue-500 leading-none ml-1">$80</span>
-              </div>
-              <span class="text-gray-400 text-sm">Active</span>
-            </div>
-            <div class="rounded-md border border-dashed border-gray-200 p-4">
-              <div class="flex items-center mb-0.5">
-                <div class="text-xl font-semibold">50</div>
-                <span
-                  class="p-1 rounded text-[12px] font-semibold bg-emerald-500/10 text-emerald-500 leading-none ml-1">+$469</span>
-              </div>
-              <span class="text-gray-400 text-sm">Completed</span>
-            </div>
-            <div class="rounded-md border border-dashed border-gray-200 p-4">
-              <div class="flex items-center mb-0.5">
-                <div class="text-xl font-semibold"></div>
-                <span
-                  class="p-1 rounded text-[12px] font-semibold bg-rose-500/10 text-rose-500 leading-none ml-1">-$130</span>
-              </div>
-              <span class="text-gray-400 text-sm">Total</span>
-            </div>
-          </div>
-          <div>
-            <canvas id="order-chart"></canvas>
-          </div>
-        </div>
+
+        <!-- INPUUUT CAAAAARD -->
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+          <div class="flex justify-center mb-4 items-start">
+            <div class="font-medium">SEARCH DATA</div>
+          </div>
           <div class="flex justify-center mb-4 items-start">
             <!-- DATE PICKER INPUT -->
             <form method="post">
@@ -156,13 +130,28 @@ $conn = connect_to_database();
                   class="bg-blue-500 text-Black px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-dashed focus:bg-blue-600">SEARCH</button>
               </div>
             </form>
-
             <!-- printview
             <button id="exportButton">View PDF</button> -->
           </div>
-         <!-- DATA RETURNED FROM SEARCH -->
-          <?php          
-  
+          <!-- DATA RETURNED FROM SEARCH -->
+          <?php
+          // Start the session
+          
+
+          // Start the session
+          $total_services = 0;
+          $total_training_names = 0;
+          $total_companies = 0;
+          $total_sectors = 0;
+          $returning_customers = 0;
+          $first_time_customers = 0;
+          $total_male = 0;
+          $total_female = 0;
+          $start_date = 00 - 00 - 0000;
+          $end_date = 00 - 00 - 0000;
+          $training_name = '';
+          $service = '';
+
           if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Get the start date, end date, service, and training name from user input
             $start_date = $_POST['start_date'];
@@ -170,54 +159,235 @@ $conn = connect_to_database();
             $service = $_POST['service'];
             $training_name = $_POST['training_name'];
 
-            // Query to retrieve general information based on date range, service, and training name
-            $sql = "SELECT COUNT(DISTINCT service) AS total_services,
-                 COUNT(DISTINCT training_name) AS total_training_names,
-                 COUNT(DISTINCT company) AS total_companies,
-                 COUNT(DISTINCT sector) AS total_sectors,
-                 SUM(CASE WHEN returning_customer = 'yes' THEN 1 ELSE 0 END) AS returning_customers,
-                 SUM(CASE WHEN returning_customer = 'no' THEN 1 ELSE 0 END) AS first_time_customers
-          FROM data
-          WHERE date BETWEEN '$start_date' AND '$end_date'
-          AND service = '$service'
-          AND training_name = '$training_name'";
+
+            $sql = "SELECT 
+            total_services,
+            total_training_names,
+            total_companies,
+            total_sectors,
+            returning_customers,
+            first_time_customers,
+            total_male,
+            total_female
+        FROM 
+            (
+                SELECT 
+                    COUNT(DISTINCT service) AS total_services,
+                    COUNT(DISTINCT training_name) AS total_training_names,
+                    COUNT(DISTINCT company) AS total_companies,
+                    COUNT(DISTINCT sector) AS total_sectors,
+                    SUM(CASE WHEN sex = 'Male' THEN 1 ELSE 0 END) AS total_male,
+                    SUM(CASE WHEN sex = 'Female' THEN 1 ELSE 0 END) AS total_female,
+                    SUM(CASE WHEN returning_customer = 'yes' THEN 1 ELSE 0 END) AS returning_customers,
+                    SUM(CASE WHEN returning_customer = 'no' THEN 1 ELSE 0 END) AS first_time_customers
+                FROM 
+                    data
+                WHERE 
+                    ('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date')
+                    AND ('$service' = '' OR service = '$service')
+                    AND ('$training_name' = '' OR training_name = '$training_name')
+            ) AS subquery";
 
             $result = $conn->query($sql);
+
             // Check if the query was successful
             if ($result) {
               // Fetch the result
               $row = $result->fetch_assoc();
+
               // Get the general information
+          
+
               $total_services = $row['total_services'];
               $total_training_names = $row['total_training_names'];
               $total_companies = $row['total_companies'];
               $total_sectors = $row['total_sectors'];
               $returning_customers = $row['returning_customers'];
               $first_time_customers = $row['first_time_customers'];
-
+              $total_male = $row['total_male'];
+              $total_female = $row['total_female'];
+              // $service_names = $row['service_names'];
+              // $training_names = $row['training_names'];
+              // $company_names = $row['company_names'];
+              // $sector_names = $row['sector_names'];
+          
               // Output the general information
-              echo "Service: " . $service."<br>";
-              echo "Training: ". $training_name."<br>";
-              echo "Total Services: " . $total_services . "<br>";
-              echo "Total Training Names: " . $total_training_names . "<br>";
-              echo "Total Companies: " . $total_companies . "<br>";
-              echo "Total Sectors: " . $total_sectors . "<br>";
-              echo "Returning Clients: " . $returning_customers . "<br>";
-              echo "First Time Clients: " . $first_time_customers . "<br>";
+              // echo "Service: " . $service . "<br>";
+              // echo "Training: " . $training_name . "<br>";
+              // echo "Total Services: " . $total_services . "<br>";
+              // echo "Total Training Names: " . $total_training_names . "<br>";
+              // echo "Total Companies: " . $total_companies . "<br>";
+              // echo "Total Sectors: " . $total_sectors . "<br>";
+              // echo "Returning Clients: " . $returning_customers . "<br>";
+              // echo "First Time Clients: " . $first_time_customers . "<br><br>";
+          
+              // Output the names of services, training names, companies, and sectors
+              // echo "Service Names: " . $service_names . "<br>";
+              // echo "Training Names: " . $training_names . "<br>";
+              // echo "Company Names: " . $company_names . "<br>";
+              // echo "Sector Names: " . $sector_names . "<br>";
             } else {
               // Handle the case where the query fails
               echo "Error: " . $conn->error;
             }
           }
           ?>
+
+        </div>
+
+        <!-- STAT CAAAAAARD -->
+        <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
+          <div class="flex justify-between mb-4 items-start">
+            <div class="font-medium">
+              <?php echo "Service: ", $service ?><br>
+              <?php echo "Training: ", $training_name ?><br>
+
+              <?php echo "Date: ", $start_date . '  -- ' . $end_date ?>
+
+            </div>
+          </div>
+          <!-- UPPER Parent div -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+            <!-- services  -->
+            <div class="rounded-md border border-dashed border-gray-200 p-4">
+              <div class="flex items-center mb-0.5">
+                <div class="text-2xl font-semibold">
+                  <?php
+                  echo $total_services > 0 ? $total_services : "0";
+                  ?>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm">Services</span>
+            </div>
+            <!-- service end -->
+
+            <!-- training -->
+            <div class="rounded-md border border-dashed border-gray-200 p-4">
+              <div class="flex items-center mb-0.5">
+                <div class="text-2xl font-semibold">
+                  <?php
+                  echo $total_training_names > 0 ? $total_training_names : "0";
+                  ?>
+                </div>
+                <span
+                  class="p-1 rounded text-[12px] font-semibold bg-emerald-500/10 text-emerald-500 leading-none ml-1"></span>
+              </div>
+              <span class="text-gray-400 text-sm">Trainings</span>
+            </div>
+            <!-- training end -->
+
+
+            <!-- COMPANY -->
+            <div class="rounded-md border border-dashed border-gray-200 p-4">
+              <div class="flex items-center mb-0.5">
+                <div class="text-2xl font-semibold">
+                  <?php
+                  echo $total_companies > 0 ? $total_companies : "0";
+                  ?>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm">Firms</span>
+              <div>
+                <?php
+                echo '[table here]';
+                ?>
+              </div>
+            </div>
+            <!-- COMPAY END -->
+
+            <!-- SECTORS -->
+            <div class="rounded-md border border-dashed border-gray-200 p-4 mt-4">
+              <div class="flex items-center mt-0.5">
+                <div class="text-2xl font-semibold">
+                  <?php
+                  echo $total_sectors > 0 ? $total_sectors : "0";
+                  ?>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm">Sectors</span>
+              <div>
+                <?php echo '[table here]'; ?>
+              </div>
+            </div>
+            <!-- SECTORS END-->
+
+            <!-- Returning ad first time START-->
+            <div class="rounded-md border border-dashed border-gray-200 p-4 mt-4">
+              <div class="flex items-center mt-0.5">
+                <div class="text-2xl font-semibold">
+                  <?php
+                  echo $returning_customers > 0 ? $returning_customers : "0";
+                  ?>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm">Returning Clients</span>
+
+
+              <div class="flex items-center mt-0.5">
+                <div class="text-2xl font-semibold">
+                  <?php
+                  echo $first_time_customers > 0 ? $first_time_customers : "0";
+                  ?>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm">First Time Clients</span>
+            </div>
+            <!-- Returning ad first time END-->
+
+            <!-- F+MALE AND FEMALE START -->
+            <div class="rounded-md border border-dashed border-gray-200 p-4 mt-4">
+              <!-- Female -->
+              <div class="flex items-center mt-0.5">
+
+
+                <div class="text-l font-semibold">
+                  <?php
+                  echo $total_female > 0 ? $total_female : "0";
+                  ?>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm">Female Clients</span>
+              <!-- MALE -->
+              <div class="flex items-center mt-0.5">
+                <div class="text-l font-semibold">
+                  <?php echo $total_male > 0 ? $total_male : "0"; ?>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm">Male Clients</span>
+
+              <div class="text-l font-semibold">
+                <?php
+                echo "[value]";
+                ?>
+              </div>
+              <span class="text-gray-400 text-lg">TOTAL</span>
+            </div>
+            <!-- F+MALE AND FEMALE START -->
+
+          </div>
+          <!-- Upper Parent div end -->
+
+          <!-- LOWER PART CARD SECTION -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
+            <div class="rounded-md border border-dashed border-gray-200 p-4 mt-4">
+            </div>
+            <div class="rounded-md border border-dashed border-gray-200 p-4 mt-4">
+            </div>
+            <!-- LOWER PART CARD SECTION -->
+            <!-- <span class="text-gray-400 text-sm text-center">FOR EXPORTING DATA</span> -->
+          </div>
         </div>
       </div>
+
+
+
+    </div>
     </div>
   </main>
   <!-- end: Main -->
 
   <script src="https://unpkg.com/@popperjs/core@2"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <script src="./src/dashboard.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
   <script>
@@ -225,6 +395,7 @@ $conn = connect_to_database();
       window.location.href = 'printPage.php';
 
     });
+
 
   </script>
 

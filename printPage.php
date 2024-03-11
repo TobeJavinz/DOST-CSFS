@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +52,7 @@
         <p><b>Customer Satisfaction Score</b></p>
         <p>Statistical Analysis of the Numerical Ratings</p>
         <p><b>
-                <<'Training Name'>>
+                <?php echo $_SESSION['training_name']; ?>
             </b></p>
         <p>
             <<'Address'>>
@@ -88,7 +96,7 @@
 
         </tr>
         <tr>
-           
+
             <th>Strongly Agree</th>
             <th>Agree</th>
             <th>Disagree</th>
@@ -115,7 +123,8 @@
             <td>37</td>
             <td>2</td>
             <td>100</td>
-        </tr>   <tr>
+        </tr>
+        <tr>
             <td>SQD0. Responsiveness</td>
             <td>I spent a reasonable amount of time for my transaction</td>
             <td>10</td>
@@ -125,7 +134,8 @@
             <td>37</td>
             <td>2</td>
             <td>37</td>
-        </tr>   <tr>
+        </tr>
+        <tr>
             <td>SQD0. Responsiveness</td>
             <td>I spent a reasonable amount of time for my transaction</td>
             <td>10</td>
@@ -135,7 +145,8 @@
             <td>37</td>
             <td>2</td>
             <td>37</td>
-        </tr>   <tr>
+        </tr>
+        <tr>
             <td>SQD0. Responsiveness</td>
             <td>I spent a reasonable amount of time for my transaction</td>
             <td>10</td>
@@ -145,7 +156,8 @@
             <td>37</td>
             <td>2</td>
             <td>37</td>
-        </tr>   <tr>
+        </tr>
+        <tr>
             <td>SQD0. Responsiveness</td>
             <td>I spent a reasonable amount of time for my transaction</td>
             <td>10</td>
@@ -155,7 +167,8 @@
             <td>37</td>
             <td>2</td>
             <td>37</td>
-        </tr>   <tr>
+        </tr>
+        <tr>
             <td>SQD0. Responsiveness</td>
             <td>I spent a reasonable amount of time for my transaction</td>
             <td>10</td>
@@ -165,7 +178,8 @@
             <td>37</td>
             <td>2</td>
             <td>37</td>
-        </tr>   <tr>
+        </tr>
+        <tr>
             <td>SQD0. Responsiveness</td>
             <td>I spent a reasonable amount of time for my transaction</td>
             <td>10</td>
@@ -175,7 +189,8 @@
             <td>37</td>
             <td>2</td>
             <td>37</td>
-        </tr>   <tr>
+        </tr>
+        <tr>
             <td>Overall</td>
             <td></td>
             <td>10</td>
@@ -193,3 +208,6 @@
 </body>
 
 </html>
+
+<?php session_unset();
+session_destroy(); ?>
