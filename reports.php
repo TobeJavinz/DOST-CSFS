@@ -3,6 +3,90 @@ session_start();
 include 'DBconn.php';
 $conn = connect_to_database();
 
+// Start the session
+$total_services = 0;
+$total_training_names = 0;
+$total_companies = 0;
+$total_sectors = 0;
+$returning_customers = 0;
+$first_time_customers = 0;
+$total_male = 0;
+$total_female = 0;
+$start_date = 00 - 00 - 0000;
+$end_date = 00 - 00 - 0000;
+$training_name = '';
+$service = '';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Get the start date, end date, service, and training name from user input
+  $start_date = $_POST['start_date'];
+  $end_date = $_POST['end_date'];
+  $service = $_POST['service'];
+  $training_name = $_POST['training_name'];
+
+
+  $sql = "SELECT
+  COUNT(DISTINCT service) AS total_services,
+  COUNT(DISTINCT training_name) AS total_training_names,
+  COUNT(DISTINCT company) AS total_companies,
+  COUNT(DISTINCT sector) AS total_sectors,
+  GROUP_CONCAT(DISTINCT company) AS company_names,
+  GROUP_CONCAT(DISTINCT training_name) AS training_name,
+  GROUP_CONCAT(DISTINCT service) AS service,
+  sector,
+  COUNT(*) AS sector_count,
+  SUM(CASE WHEN sex = 'Male' THEN 1 ELSE 0 END) AS total_male,
+  SUM(CASE WHEN sex = 'Female' THEN 1 ELSE 0 END) AS total_female,
+  SUM(CASE WHEN returning_customer = 'yes' THEN 1 ELSE 0 END) AS returning_customers,
+  SUM(CASE WHEN returning_customer = 'no' THEN 1 ELSE 0 END) AS first_time_customers
+FROM
+  data
+WHERE
+  ('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date')
+  AND ('$service' = '' OR service = '$service')
+  AND ('$training_name' = '' OR training_name = '$training_name')
+GROUP BY
+  sector;";
+
+
+
+  $result = $conn->query($sql);
+
+  // Check if the query was successful
+  if ($result) {
+    // Fetch the result
+    $row = $result->fetch_assoc();
+
+    // Get the general information
+    $sector = $row['sector'];
+    $sector_number = $row['sector_count'];
+    $total_services = $row['total_services'];
+    $total_training_names = $row['total_training_names'];
+    $total_companies = $row['total_companies'];
+    $company_names = $row['company_names'];
+    $training_name = $row['training_name'];
+    $total_sectors = $row['total_sectors'];
+    $returning_customers = $row['returning_customers'];
+    $first_time_customers = $row['first_time_customers'];
+    $total_male = $row['total_male'];
+    $total_female = $row['total_female'];
+
+    // $service_names = $row['service_names'];
+    // $training_names = $row['training_names'];
+    // $company_names = $row['company_names'];
+    // $sector_names = $row['sector_names'];
+
+    // Split company names into an array
+    $sector = explode(',', $row['sector']);
+    $sector_number = explode(',', $row['sector_count']);
+    $training_name = explode(',', $row['training_name']);
+    $company_names = explode(',', $row['company_names']);
+    $service = explode(',', $row['service']);
+  } else {
+    // Handle the case where the query fails
+    echo "Error: " . $conn->error;
+  }
+}
 
 ?>
 
@@ -133,105 +217,6 @@ $conn = connect_to_database();
             <!-- printview
             <button id="exportButton">View PDF</button> -->
           </div>
-          <!-- DATA RETURNED FROM SEARCH -->
-          <?php
-          // Start the session
-          
-
-          // Start the session
-          $total_services = 0;
-          $total_training_names = 0;
-          $total_companies = 0;
-          $total_sectors = 0;
-          $returning_customers = 0;
-          $first_time_customers = 0;
-          $total_male = 0;
-          $total_female = 0;
-          $start_date = 00 - 00 - 0000;
-          $end_date = 00 - 00 - 0000;
-          $training_name = '';
-          $service = '';
-
-          if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Get the start date, end date, service, and training name from user input
-            $start_date = $_POST['start_date'];
-            $end_date = $_POST['end_date'];
-            $service = $_POST['service'];
-            $training_name = $_POST['training_name'];
-
-
-            $sql = "SELECT 
-            total_services,
-            total_training_names,
-            total_companies,
-            total_sectors,
-            returning_customers,
-            first_time_customers,
-            total_male,
-            total_female
-        FROM 
-            (
-                SELECT 
-                    COUNT(DISTINCT service) AS total_services,
-                    COUNT(DISTINCT training_name) AS total_training_names,
-                    COUNT(DISTINCT company) AS total_companies,
-                    COUNT(DISTINCT sector) AS total_sectors,
-                    SUM(CASE WHEN sex = 'Male' THEN 1 ELSE 0 END) AS total_male,
-                    SUM(CASE WHEN sex = 'Female' THEN 1 ELSE 0 END) AS total_female,
-                    SUM(CASE WHEN returning_customer = 'yes' THEN 1 ELSE 0 END) AS returning_customers,
-                    SUM(CASE WHEN returning_customer = 'no' THEN 1 ELSE 0 END) AS first_time_customers
-                FROM 
-                    data
-                WHERE 
-                    ('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date')
-                    AND ('$service' = '' OR service = '$service')
-                    AND ('$training_name' = '' OR training_name = '$training_name')
-            ) AS subquery";
-
-            $result = $conn->query($sql);
-
-            // Check if the query was successful
-            if ($result) {
-              // Fetch the result
-              $row = $result->fetch_assoc();
-
-              // Get the general information
-          
-
-              $total_services = $row['total_services'];
-              $total_training_names = $row['total_training_names'];
-              $total_companies = $row['total_companies'];
-              $total_sectors = $row['total_sectors'];
-              $returning_customers = $row['returning_customers'];
-              $first_time_customers = $row['first_time_customers'];
-              $total_male = $row['total_male'];
-              $total_female = $row['total_female'];
-              // $service_names = $row['service_names'];
-              // $training_names = $row['training_names'];
-              // $company_names = $row['company_names'];
-              // $sector_names = $row['sector_names'];
-          
-              // Output the general information
-              // echo "Service: " . $service . "<br>";
-              // echo "Training: " . $training_name . "<br>";
-              // echo "Total Services: " . $total_services . "<br>";
-              // echo "Total Training Names: " . $total_training_names . "<br>";
-              // echo "Total Companies: " . $total_companies . "<br>";
-              // echo "Total Sectors: " . $total_sectors . "<br>";
-              // echo "Returning Clients: " . $returning_customers . "<br>";
-              // echo "First Time Clients: " . $first_time_customers . "<br><br>";
-          
-              // Output the names of services, training names, companies, and sectors
-              // echo "Service Names: " . $service_names . "<br>";
-              // echo "Training Names: " . $training_names . "<br>";
-              // echo "Company Names: " . $company_names . "<br>";
-              // echo "Sector Names: " . $sector_names . "<br>";
-            } else {
-              // Handle the case where the query fails
-              echo "Error: " . $conn->error;
-            }
-          }
-          ?>
 
         </div>
 
@@ -239,15 +224,12 @@ $conn = connect_to_database();
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
           <div class="flex justify-between mb-4 items-start">
             <div class="font-medium">
-              <?php echo "Service: ", $service ?><br>
-              <?php echo "Training: ", $training_name ?><br>
-
-              <?php echo "Date: ", $start_date . '  -- ' . $end_date ?>
+              <?php echo "Date: ", $start_date . '  — ' . $end_date ?>
 
             </div>
           </div>
           <!-- UPPER Parent div -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
             <!-- services  -->
             <div class="rounded-md border border-dashed border-gray-200 p-4">
               <div class="flex items-center mb-0.5">
@@ -258,6 +240,29 @@ $conn = connect_to_database();
                 </div>
               </div>
               <span class="text-gray-400 text-sm">Services</span>
+              <div>
+                <table class="min-w-full">
+                  <thead class="bg-white border-b">
+                    <tr>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    // Loop through the array of company names and display them in the table
+                    foreach ($service as $index => $service) {
+                      echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
+                      // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ($index + 1) . "</td>";
+                      echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $service . "</td>";
+                      echo "</tr>";
+                      // query for debugging
+                       echo "SQL Query: " . $sql . "<br>";
+                    
+                    }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
             </div>
             <!-- service end -->
 
@@ -273,6 +278,29 @@ $conn = connect_to_database();
                   class="p-1 rounded text-[12px] font-semibold bg-emerald-500/10 text-emerald-500 leading-none ml-1"></span>
               </div>
               <span class="text-gray-400 text-sm">Trainings</span>
+              <div>
+                <table class="min-w-full">
+                  <thead class="bg-white border-b">
+                    <tr>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    // Loop through the array of company names and display them in the table
+                    foreach ($training_name as $index => $training_name) {
+                      echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
+                      // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ($index + 1) . "</td>";
+                      echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $training_name . "</td>";
+                      echo "</tr>";
+                      // query for debugging
+                      // echo "SQL Query: " . $sql . "<br>";
+                    
+                    }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
             </div>
             <!-- training end -->
 
@@ -288,12 +316,32 @@ $conn = connect_to_database();
               </div>
               <span class="text-gray-400 text-sm">Firms</span>
               <div>
-                <?php
-                echo '[table here]';
-                ?>
+                <table class="min-w-full">
+                  <thead class="bg-white border-b">
+                    <tr>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    // Loop through the array of company names and display them in the table
+                    foreach ($company_names as $index => $company) {
+                      echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
+                      // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ($index + 1) . "</td>";
+                      echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $company . "</td>";
+                      echo "</tr>";
+                      // query for debugging
+                      // echo "SQL Query: " . $sql . "<br>";
+                    
+                    }
+                    ?>
+                  </tbody>
+                </table>
+
               </div>
             </div>
-            <!-- COMPAY END -->
+            <!-- COMPANY END -->
+
 
             <!-- SECTORS -->
             <div class="rounded-md border border-dashed border-gray-200 p-4 mt-4">
@@ -306,7 +354,39 @@ $conn = connect_to_database();
               </div>
               <span class="text-gray-400 text-sm">Sectors</span>
               <div>
-                <?php echo '[table here]'; ?>
+                <table class="min-w-full">
+                  <thead class="bg-white border-b">
+                    <tr>
+                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        Sector
+                      </th>
+                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        Count
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                    // Loop through the arrays of sectors and their counts
+                    foreach ($sector as $index => $sector_name) {
+                      echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
+                      echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $sector_name . "</td>";
+
+                      // Check if the index exists in the $sector_number array
+                      if (isset($sector_number[$index])) {
+                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $sector_number[$index] . "</td>";
+                      } else {
+                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>0</td>"; // Default to 0 if the index is undefined
+                      }
+
+                      echo "</tr>";
+                    }
+                    ?>
+
+                  </tbody>
+                </table>
+
+
               </div>
             </div>
             <!-- SECTORS END-->
@@ -355,12 +435,12 @@ $conn = connect_to_database();
               </div>
               <span class="text-gray-400 text-sm">Male Clients</span>
 
-              <div class="text-l font-semibold">
+              <div class="text-2xl font-semibold">
                 <?php
-                echo "[value]";
+                echo $total_male + $total_female;
                 ?>
               </div>
-              <span class="text-gray-400 text-lg">TOTAL</span>
+              <span class="text-gray-400 text-lg">RESPONDENTS</span>
             </div>
             <!-- F+MALE AND FEMALE START -->
 
