@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+// Check if $SQD_1SD has no value and redirect to reports.php
+if (!isset ($_SESSION['SQD_1SD'])) {
+    header("Location: reports.php");
+    exit;
+}
+
+
 // Retrieve the session variables
 $SQD_1SD = $_SESSION['SQD_1SD'];
 $SQD_1D = $_SESSION['SQD_1D'];
@@ -20,41 +27,37 @@ $SQD_3NAD = $_SESSION['SQD_3NAD'];
 $SQD_3A = $_SESSION['SQD_3A'];
 $SQD_3SA = $_SESSION['SQD_3SA'];
 
-// $SQD_4SD = $_SESSION['SQD_4SD'];
-// $SQD_4D = $_SESSION['SQD_4D'];
-// $SQD_4NAD = $_SESSION['SQD_4NAD'];
-// $SQD_4A = $_SESSION['SQD_4A'];
-// $SQD_SAD = $_SESSION['SQD_24SA'];
+$SQD_4SD = $_SESSION['SQD_4SD'];
+$SQD_4D = $_SESSION['SQD_4D'];
+$SQD_4NAD = $_SESSION['SQD_4NAD'];
+$SQD_4A = $_SESSION['SQD_4A'];
+$SQD_4SA = $_SESSION['SQD_4SA'];
 
-// $SQD_5SD = $_SESSION['SQD_5SD'];
-// $SQD_5D = $_SESSION['SQD_5D'];
-// $SQD_5NAD = $_SESSION['SQD_5NAD'];
-// $SQD_5A = $_SESSION['SQD_5A'];
-// $SQD_5SA = $_SESSION['SQD_5SA'];
+$SQD_5SD = $_SESSION['SQD_5SD'];
+$SQD_5D = $_SESSION['SQD_5D'];
+$SQD_5NAD = $_SESSION['SQD_5NAD'];
+$SQD_5A = $_SESSION['SQD_5A'];
+$SQD_5SA = $_SESSION['SQD_5SA'];
 
-// $_SESSION['SQD_6SD'];
-// $_SESSION['SQD_6D'];
-// $_SESSION['SQD_6NAD'];
-// $_SESSION['SQD_6A'];
-// $_SESSION['SQD_6SA'];
+$SQD_6SD = $_SESSION['SQD_6SD'];
+$SQD_6D = $_SESSION['SQD_6D'];
+$SQD_6NAD = $_SESSION['SQD_6NAD'];
+$SQD_6A = $_SESSION['SQD_6A'];
+$SQD_6SA = $_SESSION['SQD_6SA'];
 
-// $_SESSION['SQD_7SD'];
-// $_SESSION['SQD_7D'];
-// $_SESSION['SQD_7NAD'];
-// $_SESSION['SQD_7A'];
-// $_SESSION['SQD_7SA'];
+$SQD_7SD = $_SESSION['SQD_7SD'];
+$SQD_7D = $_SESSION['SQD_7D'];
+$SQD_7NAD = $_SESSION['SQD_7NAD'];
+$SQD_7A = $_SESSION['SQD_7A'];
+$SQD_7SA = $_SESSION['SQD_7SA'];
 
-// $_SESSION['SQD_8SD'];
-// $_SESSION['SQD_8D'];
-// $_SESSION['SQD_8NAD'];
-// $_SESSION['SQD_8A'];
-// $_SESSION['SQD_8SA'];
+$SQD_8SD = $_SESSION['SQD_8SD'];
+$SQD_8D = $_SESSION['SQD_8D'];
+$SQD_8NAD = $_SESSION['SQD_8NAD'];
+$SQD_8A = $_SESSION['SQD_8A'];
+$SQD_8SA = $_SESSION['SQD_8SA'];
 
-// $_SESSION['SQD_9SD'];
-// $_SESSION['SQD_9D'];
-// $_SESSION['SQD_9NAD'];
-// $_SESSION['SQD_9A'];
-// $_SESSION['SQD_9SA'];
+
 
 ?>
 
@@ -68,7 +71,7 @@ $SQD_3SA = $_SESSION['SQD_3SA'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Print Page</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-
+    <link href="./src/output.css" rel="stylesheet" />
     <style>
         /* Position the header image at the top of each page */
 
@@ -99,10 +102,10 @@ $SQD_3SA = $_SESSION['SQD_3SA'];
     </script>
 </head>
 
-<body>
+<body style="margin: 20px;">
     <!-- Image header -->
-    <div class="header-image" style="text-align: center;">
-        <img src="assets/header.png" alt="Header Image" width="500">
+    <div class="header-image" style="text-align: center; margin: 0 auto;">
+        <img src="assets/header.png" alt="Header Image" width="500" style="display: block; margin: 0 auto;">
         <p><b>Customer Satisfaction Score</b></p>
         <p>Statistical Analysis of the Numerical Ratings</p>
         <p><b>
@@ -116,7 +119,7 @@ $SQD_3SA = $_SESSION['SQD_3SA'];
         </p>
     </div>
     <p><b>I. Count of Citizen's Charter(CC) Results</b></p>
-    <table class="table table-bordered" id="table">
+    <table class="table table-bordered text-center" id="table">
         <tr>
             <th></th>
             <th>Responses</th>
@@ -140,7 +143,7 @@ $SQD_3SA = $_SESSION['SQD_3SA'];
     </table>
 
     <p><b>II. Count of SQD Results</b></p>
-    <table class="table table-bordered" id="table">
+    <table class="table table-bordered text-center" id="table">
         <tr>
             <th colspan="2" rowspan="2">Service Quality Dimension</th>
             <th colspan="5">No. of Responses per Rating Scale</th>
@@ -160,116 +163,316 @@ $SQD_3SA = $_SESSION['SQD_3SA'];
         <tr>
             <td>SQD1. Responsiveness</td>
             <td>I spent a reasonable amount of time for my transaction</td>
-            <td><?php echo $SQD_1SD?></td> <!-- Strongly Disagree-->
-            <td><?php echo $SQD_1D ?></td> <!--  Disgree -->
-            <td><?php echo $SQD_1NAD ?></td> <!--  Neither Agree nor Agree -->
-            <td><?php echo $SQD_1A ?> </td> <!--  Agree -->
-            <td><?php echo $SQD_1SA ?> </td> <!--  Strongly Agree -->
-            <td><?php echo $SQD_1SD + $SQD_1D + $SQD_1NAD + $SQD_1A + $SQD_1SA; ?></td> <!--  Total Responses -->
-            <td><?php echo $total1 = ($SQD_1A * 4) + ($SQD_1SA * 5); ?></td> <!--  Total Score -->
-            <td><?php echo $total1 / ($SQD_1A + $SQD_1SA); ?></td> <!--  Rating-->
-            
+            <td>
+                <?php echo $SQD_1SD ?>
+            </td> <!-- Strongly Disagree-->
+            <td>
+                <?php echo $SQD_1D ?>
+            </td> <!--  Disgree -->
+            <td>
+                <?php echo $SQD_1NAD ?>
+            </td> <!--  Neither Agree nor Agree -->
+            <td>
+                <?php echo $SQD_1A ?>
+            </td> <!--  Agree -->
+            <td>
+                <?php echo $SQD_1SA ?>
+            </td> <!--  Strongly Agree -->
+            <td>
+                <?php echo $SQD_1SD + $SQD_1D + $SQD_1NAD + $SQD_1A + $SQD_1SA; ?>
+            </td> <!--  Total Responses -->
+            <td>
+                <?php echo $total1 = ($SQD_1A * 4) + ($SQD_1SA * 5); ?>
+            </td> <!--  Total Score -->
+            <td><strong>
+                    <?php echo round($total1 / ($SQD_1A + $SQD_1SA), 2); ?>
+                </strong></td> <!--  Rating-->
+
         </tr>
         <tr>
             <td>SQD2. Reliability</td>
             <td>The office followed the transaction's requirements and steps based on the information provided.</td>
-            <td><?php echo $SQD_2SD?></td> <!-- Strongly Disagree-->
-            <td><?php echo $SQD_2D ?></td> <!--  Disgree -->
-            <td><?php echo $SQD_2NAD ?></td> <!--  Neither Agree nor Agree -->
-            <td><?php echo $SQD_2A ?> </td> <!--  Agree -->
-            <td><?php echo $SQD_2SA ?> </td> <!--  Strongly Agree -->
-            <td><?php echo $SQD_2SD + $SQD_2D + $SQD_2NAD + $SQD_2A + $SQD_2SA; ?></td> <!--  Total Responses -->
-            <td><?php echo $total2 = ($SQD_2A * 4) + ($SQD_2SA * 5); ?></td> <!--  Total Score -->
-            <td><?php echo $total2 / ($SQD_2A + $SQD_2SA); ?></td> <!--  Rating-- -->
+            <td>
+                <?php echo $SQD_2SD ?>
+            </td> <!-- Strongly Disagree-->
+            <td>
+                <?php echo $SQD_2D ?>
+            </td> <!--  Disgree -->
+            <td>
+                <?php echo $SQD_2NAD ?>
+            </td> <!--  Neither Agree nor Agree -->
+            <td>
+                <?php echo $SQD_2A ?>
+            </td> <!--  Agree -->
+            <td>
+                <?php echo $SQD_2SA ?>
+            </td> <!--  Strongly Agree -->
+            <td>
+                <?php echo $SQD_2SD + $SQD_2D + $SQD_2NAD + $SQD_2A + $SQD_2SA; ?>
+            </td> <!--  Total Responses -->
+            <td>
+                <?php echo $total2 = ($SQD_2A * 4) + ($SQD_2SA * 5); ?>
+            </td> <!--  Total Score -->
+            <td><strong>
+                    <?php echo round($total2 / ($SQD_2A + $SQD_2SA), 2); ?>
+                </strong></td> <!--  Rating-- -->
         </tr>
         <tr>
             <td>SQD3.</td>
             <td>The steps (including) payment</td>
-            <td><?php echo $SQD_3SD?></td> <!-- Strongly Disagree-->
-            <td><?php echo $SQD_3D ?></td> <!--  Disgree -->
-            <td><?php echo $SQD_3NAD ?></td> <!--  Neither Agree nor Agree -->
-            <td><?php echo $SQD_3A ?> </td> <!--  Agree -->
-            <td><?php echo $SQD_3SA ?> </td> <!--  Strongly Agree -->
-            <td><?php echo $SQD_3SD + $SQD_3D + $SQD_3NAD + $SQD_3A + $SQD_3SA; ?></td> <!--  Total Responses -->
-            <td><?php echo $total3 = ($SQD_3A * 4) + ($SQD_3SA * 5); ?></td> <!--  Total Score -->
-            <td><?php echo $total3 / ($SQD_3A + $SQD_3SA); ?></td> <!--  Rating-- -->
+            <td>
+                <?php echo $SQD_3SD ?>
+            </td> <!-- Strongly Disagree-->
+            <td>
+                <?php echo $SQD_3D ?>
+            </td> <!--  Disgree -->
+            <td>
+                <?php echo $SQD_3NAD ?>
+            </td> <!--  Neither Agree nor Agree -->
+            <td>
+                <?php echo $SQD_3A ?>
+            </td> <!--  Agree -->
+            <td>
+                <?php echo $SQD_3SA ?>
+            </td> <!--  Strongly Agree -->
+            <td>
+                <?php echo $SQD_3SD + $SQD_3D + $SQD_3NAD + $SQD_3A + $SQD_3SA; ?>
+            </td> <!--  Total Responses -->
+            <td>
+                <?php echo $total3 = ($SQD_3A * 4) + ($SQD_3SA * 5); ?>
+            </td> <!--  Total Score -->
+            <td><strong>
+                    <?php echo round($total3 / ($SQD_3A + $SQD_3SA), 2); ?>
+                </strong></td> <!--  Rating-- -->
         </tr>
         <tr>
             <td>SQD4</td>
             <td>I spent a reasonable amount of time for my transaction</td>
-            <td>0</td> <!-- Strongly Disagree-->
-            <td>0</td> <!--  Disgree -->
-            <td>0</td> <!--  Neither Agree nor Agree -->
-            <td>0</td> <!--  Agree -->
-            <td>0</td> <!--  Strongly Disagree -->
-            <td>0</td> <!--  Total Responses -->
-            <td>0</td> <!--  Total Score -->
-            <td>0</td> <!--  Rating-->
+            <td>
+                <?php echo $SQD_4SD ?>
+            </td> <!-- Strongly Disagree-->
+            <td>
+                <?php echo $SQD_4D ?>
+            </td> <!--  Disgree -->
+            <td>
+                <?php echo $SQD_4NAD ?>
+            </td> <!--  Neither Agree nor Agree -->
+            <td>
+                <?php echo $SQD_4A ?>
+            </td> <!--  Agree -->
+            <td>
+                <?php echo $SQD_4SA ?>
+            </td> <!--  Strongly Agree -->
+            <td>
+                <?php echo $SQD_4SD + $SQD_4D + $SQD_4NAD + $SQD_4A + $SQD_4SA; ?>
+            </td> <!--  Total Responses -->
+            <td>
+                <?php echo $total4 = ($SQD_4A * 4) + ($SQD_4SA * 5); ?>
+            </td> <!--  Total Score -->
+            <td><strong>
+                    <?php echo round($total4 / ($SQD_4A + $SQD_4SA), 2); ?>
+                </strong></td> <!--  Rating-- -->
         </tr>
         <tr>
             <td>SQD5</td>
             <td>I spent a reasonable amount of time for my transaction</td>
-            <td>0</td> <!-- Strongly Disagree-->
-            <td>0</td> <!--  Disgree -->
-            <td>0</td> <!--  Neither Agree nor Agree -->
-            <td>0</td> <!--  Agree -->
-            <td>0</td> <!--  Strongly Disagree -->
-            <td>0</td> <!--  Total Responses -->
-            <td>0</td> <!--  Total Score -->
-            <td>0</td> <!--  Rating-->
+            <td>
+                <?php echo $SQD_5SD ?>
+            </td> <!-- Strongly Disagree-->
+            <td>
+                <?php echo $SQD_5D ?>
+            </td> <!--  Disgree -->
+            <td>
+                <?php echo $SQD_5NAD ?>
+            </td> <!--  Neither Agree nor Agree -->
+            <td>
+                <?php echo $SQD_5A ?>
+            </td> <!--  Agree -->
+            <td>
+                <?php echo $SQD_5SA ?>
+            </td> <!--  Strongly Agree -->
+            <td>
+                <?php echo $SQD_5SD + $SQD_5D + $SQD_5NAD + $SQD_5A + $SQD_5SA; ?>
+            </td> <!--  Total Responses -->
+            <td>
+                <?php echo $total5 = ($SQD_5A * 4) + ($SQD_5SA * 5); ?>
+            </td> <!--  Total Score -->
+            <td><strong>
+                    <?php echo round($total5 / ($SQD_5A + $SQD_5SA), 2); ?>
+                </strong></td> <!--  Rating-- -->
         </tr>
         <tr>
             <td>SQD6</td>
             <td>I spent a reasonable amount of time for my transaction</td>
-            <td>0</td> <!-- Strongly Disagree-->
-            <td>0</td> <!--  Disgree -->
-            <td>0</td> <!--  Neither Agree nor Agree -->
-            <td>0</td> <!--  Agree -->
-            <td>0</td> <!--  Strongly Disagree -->
-            <td>0</td> <!--  Total Responses -->
-            <td>0</td> <!--  Total Score -->
-            <td>0</td> <!--  Rating-->
+            <td>
+                <?php echo $SQD_6SD ?>
+            </td> <!-- Strongly Disagree-->
+            <td>
+                <?php echo $SQD_6D ?>
+            </td> <!--  Disgree -->
+            <td>
+                <?php echo $SQD_6NAD ?>
+            </td> <!--  Neither Agree nor Agree -->
+            <td>
+                <?php echo $SQD_6A ?>
+            </td> <!--  Agree -->
+            <td>
+                <?php echo $SQD_6SA ?>
+            </td> <!--  Strongly Agree -->
+            <td>
+                <?php echo $SQD_6SD + $SQD_6D + $SQD_6NAD + $SQD_6A + $SQD_6SA; ?>
+            </td> <!--  Total Responses -->
+            <td>
+                <?php echo $total6 = ($SQD_6A * 4) + ($SQD_6SA * 5); ?>
+            </td> <!--  Total Score -->
+            <td><strong>
+                    <?php echo round($total6 / ($SQD_6A + $SQD_6SA), 2); ?>
+                </strong></td> <!--  Rating-- -->
         </tr>
         <tr>
             <td>SQD7</td>
             <td>I spent a reasonable amount of time for my transaction</td>
-            <td>0</td> <!-- Strongly Disagree-->
-            <td>0</td> <!--  Disgree -->
-            <td>0</td> <!--  Neither Agree nor Agree -->
-            <td>0</td> <!--  Agree -->
-            <td>0</td> <!--  Strongly Disagree -->
-            <td>0</td> <!--  Total Responses -->
-            <td>0</td> <!--  Total Score -->
-            <td>0</td> <!--  Rating-->
+            <td>
+                <?php echo $SQD_7SD ?>
+            </td> <!-- Strongly Disagree-->
+            <td>
+                <?php echo $SQD_7D ?>
+            </td> <!--  Disgree -->
+            <td>
+                <?php echo $SQD_7NAD ?>
+            </td> <!--  Neither Agree nor Agree -->
+            <td>
+                <?php echo $SQD_7A ?>
+            </td> <!--  Agree -->
+            <td>
+                <?php echo $SQD_7SA ?>
+            </td> <!--  Strongly Agree -->
+            <td>
+                <?php echo $SQD_7SD + $SQD_7D + $SQD_7NAD + $SQD_7A + $SQD_7SA; ?>
+            </td> <!--  Total Responses -->
+            <td>
+                <?php echo $total7 = ($SQD_7A * 4) + ($SQD_7SA * 5); ?>
+            </td> <!--  Total Score -->
+            <td><strong>
+                    <?php echo round($total7 / ($SQD_7A + $SQD_7SA), 2); ?>
+                </strong></td> <!--  Rating-- -->
         </tr>
         <tr>
             <td>SQD8</td>
             <td>I spent a reasonable amount of time for my transaction</td>
-            <td>0</td> <!-- Strongly Disagree-->
-            <td>0</td> <!--  Disgree -->
-            <td>0</td> <!--  Neither Agree nor Agree -->
-            <td>0</td> <!--  Agree -->
-            <td>0</td> <!--  Strongly Disagree -->
-            <td>0</td> <!--  Total Responses -->
-            <td>0</td> <!--  Total Score -->
-            <td>0</td> <!--  Rating-->
+            <td >
+                <?php echo $SQD_8SD ?>
+            </td> <!-- Strongly Disagree-->
+            <td>
+                <?php echo $SQD_8D ?>
+            </td> <!--  Disgree -->
+            <td>
+                <?php echo $SQD_8NAD ?>
+            </td> <!--  Neither Agree nor Agree -->
+            <td>
+                <?php echo $SQD_8A ?>
+            </td> <!--  Agree -->
+            <td>
+                <?php echo $SQD_8SA ?>
+            </td> <!--  Strongly Agree -->
+            <td>
+                <?php echo $totalRes = $SQD_8SD + $SQD_8D + $SQD_8NAD + $SQD_8A + $SQD_8SA; ?>
+            </td> <!--  Total Responses -->
+            <td>
+                <?php echo $total8 = ($SQD_8A * 4) + ($SQD_8SA * 5); ?>
+            </td> <!--  Total Score -->
+            <td><strong>
+                    <?php echo round($total8 / ($SQD_8A + $SQD_8SA), 2); ?>
+                </strong></td> <!--  Rating-- -->
         </tr>
         <tr>
             <td>Overall</td>
             <td></td>
-            <td>0</td> <!-- Strongly Disagree-->
-            <td>0</td> <!--  Disgree -->
-            <td>0</td> <!--  Neither Agree nor Agree -->
-            <td>0</td> <!--  Agree -->
-            <td>0</td> <!--  Strongly Disagree -->
-            <td>0</td> <!--  Total Responses -->
-            <td>0</td> <!--  Total Score -->
-            <td>0</td> <!--  Rating-->
+            <td class="text-center">
+                <?php
+                echo $totalSD = $SQD_1SD + $SQD_2SD + $SQD_3SD + $SQD_4SD + $SQD_5SD + $SQD_6SD + $SQD_7SD + $SQD_8SD;
+                ?>
+            </td>
+
+            <td>
+                <?php echo $totalD = $SQD_1D + $SQD_2D + $SQD_3D + $SQD_4D + $SQD_5D + $SQD_6D + $SQD_7D + $SQD_8D; ?>
+            </td> <!--  D -->
+            <td>
+                <?php echo $totalNAD = $SQD_1NAD + $SQD_2NAD + $SQD_3NAD + $SQD_4NAD + $SQD_5NAD + $SQD_6NAD + $SQD_7NAD + $SQD_8NAD; ?>
+            </td> <!--  NAD -->
+
+            <td>
+                <?php echo $totalAgree = $SQD_1A + $SQD_2A + $SQD_3A + $SQD_4A + $SQD_5A + $SQD_6A + $SQD_7A + $SQD_8A; ?>
+            </td> <!-- A-->
+            <td>
+                <?php
+                echo $totalStronglyAgree = $SQD_1SA + $SQD_2SA + $SQD_3SA + $SQD_4SA + $SQD_5SA + $SQD_6SA + $SQD_7SA + $SQD_8SA;
+                ?>
+            </td> <!--  Total SA -->
+            <td>
+                <?php echo $totalRes * 8 ?>
+            </td> <!--  overall Total respo -->
+
+            <td>
+                <?php echo $totalScore = $total1 + $total2 + $total3 + $total4 + $total5 + $total6 + $total7 + $total8; ?>
+            </td> <!--  OVERALL TOTAL SCORE-->
+
+            <td><strong>
+                    <?php
+                    $totalResponses = $total1 + $total2 + $total3 + $total4 + $total5 + $total6 + $total7 + $total8;
+                    $totalAgreeSA = $totalAgree + $totalStronglyAgree;
+                    $averageRating = round($totalScore / $totalAgreeSA, 2);
+                    echo $averageRating;
+                    ?>
+                </strong> <!--  OVERALL AVERAGE RATING-->
+            </td>
         </tr>
         <!-- Add more rows as needed -->
     </table>
+    <p><b>III. Net Promoter Score</b></p>
+    <p class="bg-gray-200 bg-opacity-100 text-sm"><i>NPS = % of Promoters(5s) - % of Defractors (0 through 3)</p>
+    <p style="margin-top: 10px;">NPS1. Recommend DOST XI assistance to others</i></p>
+    <table class="table table-bordered text-center" id="table">
+        <tr>
 
-    <button type="button" id="printButton" onclick="printPage()" class="btn btn-primary">Print Page</button>
+            <th colspan="6">No. of Responses </th>
+            <th rowspan="2">NPS</th>
+        </tr>
+        <tr>
+
+            <th>Highly</th>
+            <th>Unlikely</th>
+            <th>Neutral</th>
+            <th>Likely</th>
+            <th>Highly Likely</th>
+            <th>TOTAL</th>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+        </tr>
+        <tr>
+            <td colspan="3">0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+            <td>0</td>
+
+  
+        </tr>
+    </table>
+
+
+
+
+
+    <button type="button" id="printButton" onclick="printPage()"
+        class="btn bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Print Page</button>
 </body>
 
 </html>
