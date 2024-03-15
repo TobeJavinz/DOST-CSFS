@@ -513,7 +513,7 @@ $NET_PROMOTER_5 = $_SESSION['NET_PROMOTER_5'];
                     <?php echo $percent5 . '%' ?>
                 </strong></td>
             <td><strong>
-                    <?php echo $NPS = $percent5 - ($percent12 + $percent3) . '%' ?>
+                    <?php echo $NPS = max(0, $percent5 - ($percent12 + $percent3)) . '%' ?>
                 </strong></td>
 
         </tr>
