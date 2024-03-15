@@ -365,7 +365,7 @@ $NET_PROMOTER_5 = $_SESSION['NET_PROMOTER_5'];
         <tr>
             <td>SQD8</td>
             <td>I spent a reasonable amount of time for my transaction</td>
-            <td >
+            <td>
                 <?php echo $SQD_8SD ?>
             </td> <!-- Strongly Disagree-->
             <td>
@@ -453,25 +453,37 @@ $NET_PROMOTER_5 = $_SESSION['NET_PROMOTER_5'];
             <th>TOTAL</th>
         </tr>
         <tr>
-       
-      
-            <td><?php echo $NET_PROMOTER_1 ?></td> <!--1 -->
-            <td><?php echo $NET_PROMOTER_2 ?></td> <!-- 2 -->
-            <td><?php echo $NET_PROMOTER_3 ?></td> <!-- 3 -->
-            <td><?php echo $NET_PROMOTER_4 ?></td> <!-- 4 -->
-            <td><?php echo $NET_PROMOTER_5 ?></td> <!-- 5 -->
-            <td rowspan="2"><?php echo $NET = $NET_PROMOTER_1 +  $NET_PROMOTER_2 + $NET_PROMOTER_3 + $NET_PROMOTER_4 + $NET_PROMOTER_5; ?></td>
-            
-          
+
+
+            <td>
+                <?php echo $NET_PROMOTER_1 ?>
+            </td> <!--1 -->
+            <td>
+                <?php echo $NET_PROMOTER_2 ?>
+            </td> <!-- 2 -->
+            <td>
+                <?php echo $NET_PROMOTER_3 ?>
+            </td> <!-- 3 -->
+            <td>
+                <?php echo $NET_PROMOTER_4 ?>
+            </td> <!-- 4 -->
+            <td>
+                <?php echo $NET_PROMOTER_5 ?>
+            </td> <!-- 5 -->
+            <td rowspan="2">
+                <?php echo $NET = $NET_PROMOTER_1 + $NET_PROMOTER_2 + $NET_PROMOTER_3 + $NET_PROMOTER_4 + $NET_PROMOTER_5; ?>
+            </td>
+
+
         </tr>
         <tr>
 
-        
-        <?php
+
+            <?php
             if ($NET_PROMOTER_1 == 0 && $NET_PROMOTER_2 == 0) {
                 $percent12 = 0;
             } else {
-                $percent12 = round(($NET_PROMOTER_1 + $NET_PROMOTER_2) / $NET * 100, 2) ;
+                $percent12 = round(($NET_PROMOTER_1 + $NET_PROMOTER_2) / $NET * 100, 2);
             }
             if ($NET_PROMOTER_3 == 0) {
                 $percent3 = 0;
@@ -486,21 +498,24 @@ $NET_PROMOTER_5 = $_SESSION['NET_PROMOTER_5'];
             if ($NET_PROMOTER_5 == 0) {
                 $percent5 = 0;
             } else {
-                $percent5 = round($NET_PROMOTER_5 / $NET * 100, 2) ;
+                $percent5 = round($NET_PROMOTER_5 / $NET * 100, 2);
             }
             ?>
 
+            <td colspan="2"><strong>
+                    <?php echo $percent12 . '%' ?><strong></td>
+            <td><strong>
+                    <?php echo $percent3 . '%' ?><strong></td>
+            <td><strong>
+                    <?php echo $percent4 . '%' ?>
+                </strong></td>
+            <td><strong>
+                    <?php echo $percent5 . '%' ?>
+                </strong></td>
+            <td><strong>
+                    <?php echo $NPS = $percent5 - ($percent12 + $percent3) . '%' ?>
+                </strong></td>
 
-            <td colspan="2"><strong><?php echo $percent12 . '%'?><strong></td>
-            <td><strong><?php echo $percent3 . '%'?><strong></td>
-            <td><strong><?php echo $percent4 . '%' ?></strong></td>
-            <td><strong><?php echo $percent5 . '%'?></strong></td>
-            <td><strong><?php echo $NPS =  $percent5 - ($percent12 + $percent3) . '%' ?></strong></td>
-
-
-       
-
-  
         </tr>
     </table>
 
@@ -513,7 +528,7 @@ $NET_PROMOTER_5 = $_SESSION['NET_PROMOTER_5'];
             <th rowspan="2">NPS</th>
         </tr>
         <tr>
-        
+
             <th>Highly</th>
             <th>Unlikely</th>
             <th>Neutral</th>
@@ -537,17 +552,17 @@ $NET_PROMOTER_5 = $_SESSION['NET_PROMOTER_5'];
     <p><b>IV. Summary of Information Gathered</b></p>
 
     <table class="table table-bordered text-center" id="table">
-    <tr>
-        <td>Type Of Training</td>
-        <td>No. Of Respondents</td>
-    </tr>
-    <tr>
-        <td>Data 1</td>
-        <td>Data 2</td>
-    </tr>
-    <!-- Add more rows as needed -->
-</table>
-    
+        <tr>
+            <td>Type Of Training</td>
+            <td>No. Of Respondents</td>
+        </tr>
+        <tr>
+            <td>Data 1</td>
+            <td>Data 2</td>
+        </tr>
+        <!-- Add more rows as needed -->
+    </table>
+
 
 
 

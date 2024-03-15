@@ -253,13 +253,7 @@ if ($result2) {
   echo "Error: " . $conn->error;
 }
 
-
 }
-
-
-
-
-
 ?>
 
 
@@ -422,13 +416,17 @@ if ($result2) {
                   <tbody>
                     <?php
                     // Loop through the array of company names and display them in the table
-                    foreach ($service as $index => $service) {
-                      echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
-                      // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ($index + 1) . "</td>";
-                      echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $service . "</td>";
-                      echo "</tr>";
-                      // query for debugging
-                      // echo "SQL Query: " . $sql . "<br>";
+                    if (empty($service)) {
+                      echo "<tr><td colspan='1'>No Data</td></tr>";
+                    } else {
+                      foreach ($service as $index => $service) {
+                        echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
+                        // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ($index + 1) . "</td>";
+                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $service . "</td>";
+                        echo "</tr>";
+                        // query for debugging
+                        // echo "SQL Query: " . $sql . "<br>";
+                      }
                     
                     }
                     ?>
@@ -460,14 +458,17 @@ if ($result2) {
                   <tbody>
                     <?php
                     // Loop through the array of company names and display them in the table
-                    foreach ($training_name as $index => $training_name) {
-                      echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
-                      // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ($index + 1) . "</td>";
-                      echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $training_name . "</td>";
-                      echo "</tr>";
-                      // query for debugging
-                      // echo "SQL Query: " . $sql . "<br>";
-                    
+                    if (empty($training_name)) {
+                      echo "<tr><td colspan='1'>No Data</td></tr>";
+                    } else {
+                      foreach ($training_name as $index => $training_name) {
+                        echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
+                        // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ($index + 1) . "</td>";
+                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $training_name . "</td>";
+                        echo "</tr>";
+                        // query for debugging
+                        // echo "SQL Query: " . $sql . "<br>";
+                      }
                     }
                     ?>
                   </tbody>
@@ -497,14 +498,17 @@ if ($result2) {
                   <tbody>
                     <?php
                     // Loop through the array of company names and display them in the table
-                    foreach ($company_names as $index => $company) {
-                      echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
-                      // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ($index + 1) . "</td>";
-                      echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $company . "</td>";
-                      echo "</tr>";
-                      // query for debugging
-                      // echo "SQL Query: " . $sql . "<br>";
-                    
+                    if (empty($company_names)) {
+                      echo "<tr><td colspan='1'>No Data</td></tr>";
+                    } else {
+                      foreach ($company_names as $index => $company) {
+                        echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
+                        // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ($index + 1) . "</td>";
+                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $company . "</td>";
+                        echo "</tr>";
+                        // query for debugging
+                        // echo "SQL Query: " . $sql . "<br>";
+                      }
                     }
                     ?>
                   </tbody>
@@ -539,12 +543,16 @@ if ($result2) {
                   </thead>
                   <tbody>
                     <?php
-                    // // // Loop through the arrays of sectors and their counts
-                    foreach ($sectors as $sector) {
-                      echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
-                      echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $sector['sector'] . "</td>";
-                      echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $sector['sector_count'] . "</td>";
-                      echo "</tr>";
+                    // Loop through the arrays of sectors and their counts
+                    if (empty($sectors)) {
+                      echo "<tr><td colspan='2'>No Data</td></tr>";
+                    } else {
+                      foreach ($sectors as $index => $sector) {
+                        echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
+                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $sector['sector'] . "</td>";
+                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $sector['sector_count'] . "</td>";
+                        echo "</tr>";
+                      }
                     }
                     ?>
                   </tbody>
