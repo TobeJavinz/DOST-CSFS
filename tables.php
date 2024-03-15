@@ -1,6 +1,6 @@
 <?php
 
-require 'DBConn.php';
+require 'conn.php';
 
 // Establish database connection
 $conn = connect_to_database();
@@ -140,8 +140,6 @@ $result = mysqli_query($conn, $query);
                         <th class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
                           cc3_2
                         </th>
-
-
                         <th class="w-1/32 min-w-[200px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
                           Service
                         </th>
@@ -296,6 +294,10 @@ $result = mysqli_query($conn, $query);
                         <th class="w-1/32 min-w-[100px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
                           Comments
                         </th>
+
+
+
+
                         <th class="w-1/32 min-w-[400px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
                           Actions
                         </th>
@@ -386,31 +388,31 @@ $result = mysqli_query($conn, $query);
                             <?php echo $row['returning_customer'] ?>
                           </td>
                           <td>
-                            <?php echo $row['sdq0'] ?>
+                            <?php echo $row['sqd0'] ?>
                           </td>
                           <td>
-                            <?php echo $row['sdq1'] ?>
+                            <?php echo $row['sqd1'] ?>
                           </td>
                           <td>
-                            <?php echo $row['sdq2'] ?>
+                            <?php echo $row['sqd2'] ?>
                           </td>
                           <td>
-                            <?php echo $row['sdq3'] ?>
+                            <?php echo $row['sqd3'] ?>
                           </td>
                           <td>
-                            <?php echo $row['sdq4'] ?>
+                            <?php echo $row['sqd4'] ?>
                           </td>
                           <td>
-                            <?php echo $row['sdq5'] ?>
+                            <?php echo $row['sqd5'] ?>
                           </td>
                           <td>
-                            <?php echo $row['sdq6'] ?>
+                            <?php echo $row['sqd6'] ?>
                           </td>
                           <td>
-                            <?php echo $row['sdq7'] ?>
+                            <?php echo $row['sqd7'] ?>
                           </td>
                           <td>
-                            <?php echo $row['sdq8'] ?>
+                            <?php echo $row['sqd8'] ?>
                           </td>
                           <td>
                             <?php echo $row['net_promoter'] ?>
@@ -448,14 +450,15 @@ $result = mysqli_query($conn, $query);
                           <td>
                             <?php echo $row['comments'] ?>
                           </td>
+
                           <td>
-                            <a href="tablestest.php?id=<?php echo $row['ServiceID'] ?>">
+                            <a href="update.php?ServiceID=<?php echo $row['ServiceID'] ?>">
                               <button type="submit" name="submit"
                                 class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mb-1 w-full">
                                 Edit
                               </button>
                             </a>
-                            <a href="delete_page.php?id=<?php echo $row['ServiceID'] ?>">
+                            <a href="delete_page.php?ServiceID=<?php echo $row['ServiceID'] ?>">
                               <button type="submit" name="submit"
                                 class="rounded-md border px-3 py-2 text-sm font-semibold text-red-600 hover:bg-red-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 w-full">
                                 Delete

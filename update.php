@@ -1,40 +1,89 @@
 <?php
+require 'conn.php';
 
-include 'DBConn.php';
 // Establish database connection
 $conn = connect_to_database();
 
-// Check if ServiceID is set
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+$ServiceID = "";
+$cc1_1 = "";
+$cc1_2 = "";
+$cc1_3 = "";
+$cc2_1 = "";
+$cc2_2 = "";
+$cc3_1 = "";
+$cc3_2 = "";
 
+$errormessage = "";
+$successmessage = "";
 
-    $query = "SELECT * FROM data WHERE ServiceID = '$id' ";
-    $result = mysqli_query($conn, $query);
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-    // Check if query was successful
-    if (!$result) {
-        // Fetch data from the result
-        die("query Failed" . mysqli_error());
-
-
-    } else {
-        // Query failed, handle the error
-        $row = mysqli_fetch_assoc($result);
-        // print_r($row);
+    if (!isset($_GET["ServiceID"])) {
+        header("location: /DOST-CSFS/tables.php");
+        exit;
     }
 
-}
+    $ServiceID = $_GET["ServiceID"];
 
+    $sql = "SELECT * FROM data WHERE ServiceID=$ServiceID";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
 
-
-if (isset($_POST['update'])) {
-
-    if (isset($_GET['id_new'])) {
-
-        $idnew = $_GET['id_new'];
+    if (!$row) {
+        header("location: /DOST-CSFS/tables.php");
+        exit;
     }
 
+    $cc1_1 = $row["cc1_1"];
+    $cc1_2 = $row["cc1_2"];
+    $cc1_3 = $row["cc1_3"];
+    $cc2_1 = $row["cc2_1"];
+    $cc2_2 = $row["cc2_2"];
+    $cc3_1 = $row["cc3_1"];
+    $cc3_2 = $row["cc3_2"];
+    $service = $row["service"];
+    $training_name = $row["training_name"];
+    $date = $row["date"];
+    $training_venue = $row["training_venue"];
+    $training_type = $row["training_type"];
+    $fname = $row["fname"];
+    $lname = $row["lname"];
+    $sex = $row["sex"];
+    $email = $row["email"];
+    $contact_info = $row["contact_info"];
+    $home_add = $row["home_add"];
+    $age = $row["age"];
+    $designation = $row["designation"];
+    $company = $row["company"];
+    $msme = $row["msme"];
+    $customer_category = $row["customer_category"];
+    $sector = $row["sector"];
+    $returning_customer = $row["returning_customer"];
+    $sqd0 = $row["sqd0"];
+    $sqd1 = $row["sqd1"];
+    $sqd2 = $row["sqd2"];
+    $sqd3 = $row["sqd3"];
+    $sqd4 = $row["sqd4"];
+    $sqd5 = $row["sqd5"];
+    $sqd6 = $row["sqd6"];
+    $sqd7 = $row["sqd7"];
+    $sqd8 = $row["sqd8"];
+    $net_promoter = $row["net_promoter"];
+    $ateneo = $row["ateneo"];
+    $doa = $row["doa"];
+    $dti = $row["dti"];
+    $fda = $row["fda"];
+    $sbc = $row["sbc"];
+    $tesda = $row["tesda"];
+    $uic = $row["uic"];
+    $other_agency = $row["other_agency"];
+    $other_agency_score = $row["other_agency_score"];
+    $overall_mood = $row["overall_mood"];
+    $comments = $row["comments"];
+
+} else {
+
+    $ServiceID = $_POST["ServiceID"];
     $cc1_1 = $_POST["cc1_1"];
     $cc1_2 = $_POST["cc1_2"];
     $cc1_3 = $_POST["cc1_3"];
@@ -82,34 +131,41 @@ if (isset($_POST['update'])) {
     $overall_mood = $_POST["overall_mood"];
     $comments = $_POST["comments"];
 
+    do {
+        if (
+            empty($cc1_1)
+        ) {
+            $errormessage = "Required fields are missing.";
+            break;
+        }
 
-    $query = "update 'data' set 'cc1_1' = '$cc1_1', 'cc1_2' = '$cc1_2', 'cc1_3' = '$cc1_3', 'cc2_1' = '$cc2_1',
-     'cc2_2' = '$cc2_2', 'cc3_1' = '$cc3_1', 'cc3_2' = '$cc3_2',
-      'service' = '$service', 'training_name' = '$training_name',
-       'date' = '$date', 'training_venue' = '$training_venue', 'training_type' = '$training_type', 'fname' = '$fname',
-        'lname' = '$lname', 'sex' = '$sex', 'email' = '$email', 'contact_info' = '$contact_info', 'home_add' = '$home_add',
-         'age' = '$age', 'designation' = '$designation', 'company' = '$company', 'msme' = '$msme', 'customer_category' = '$customer_category',
-          'sector' = '$sector', 'returning_customer' = '$returning_customer', 'sqd0' = '$sqd0', 'sqd1' = '$sqd1', 'sqd2' = '$sqd2', 'sqd3' = '$sqd3', 'sqd4' = '$sqd4', 'sqd5' = '$sqd5', 'sqd6' = '$sqd6', 'sqd7' = '$sqd7', 'sqd8' = '$sqd8',
-           'net_promoter' = '$net_promoter', 'ateneo' = '$ateneo', 'doa' = '$doa', 'dti' = '$dti', 'fda' = '$fda', 'sbc' = '$sbc', 'tesda' = '$tesda',
-            'uic' = '$uic', 'other_agency' = '$other_agency', 'other_agency_score' = '$other_agency_score',
-             'overall_mood' = '$overall_mood', 'comments' = '$comments' where 'ServiceID' = $id_new ";
+        $sql = "UPDATE data " .
+            "SET cc1_1 = '$cc1_1', cc1_2 = '$cc1_2', cc1_3 = '$cc1_3', cc2_1 = '$cc2_1', cc2_2 = '$cc2_2', cc3_1 = '$cc3_1', cc3_2 = '$cc3_2', 
+            service = '$service', training_name = '$training_name', date = '$date', training_venue = '$training_venue', training_type = '$training_type', 
+            fname = '$fname', lname = '$lname', sex = '$sex', email = '$email', contact_info = '$contact_info', home_add = '$home_add', 
+            age = '$age', designation = '$designation', company = '$company', msme = '$msme', customer_category = '$customer_category', 
+            sector = '$sector', returning_customer = '$returning_customer', sqd0 = '$sqd0', sqd1 = '$sqd1', sqd2 = '$sqd2', sqd3 = '$sqd3', 
+            sqd4 = '$sqd4', sqd5 = '$sqd5', sqd6 = '$sqd6', sqd7 = '$sqd7', sqd8 = '$sqd8', net_promoter = '$net_promoter', 
+            ateneo = '$ateneo', doa = '$doa', dti = '$dti', fda = '$fda', sbc = '$sbc', tesda = '$tesda', uic = '$uic', 
+            other_agency = '$other_agency', other_agency_score = '$other_agency_score', overall_mood = '$overall_mood', comments = '$comments'" .
+            "WHERE ServiceID = $ServiceID";
 
-    $result = mysqli_query($conn, $query);
+        $result = $conn->query($sql);
 
-    // Check if query was successful
-    if (!$result) {
-        // Fetch data from the result
-        die("query Failed" . mysqli_error());
+        if (!$result) {
+            $errormessage = "Invalid" . $conn->error;
+            break;
+        }
 
+        $successmessage = "updated successfully";
 
-    } else {
-        header('location:tables.php?update_msg=You Have succeed.');
-    }
+        header("location: /DOST-CSFS/tables.php");
+        exit;
+    } while (false);
 }
-
-
-
 ?>
+
+
 
 
 
@@ -169,9 +225,7 @@ if (isset($_POST['update'])) {
     <!-- end: Sidebar -->
 
 
-    <!-- start: Main -->
     <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
-
         <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
             <button type="button" class="text-lg text-gray-600 sidebar-toggle">
                 <i class="ri-menu-line"></i>
@@ -181,10 +235,7 @@ if (isset($_POST['update'])) {
                     <a class="text-base text-black font-bold">Admin</a>
                 </li>
             </ul>
-
-            <!-- profile avatar dropdown -->
             <ul class="ml-auto flex items-center">
-                <!-- avatar -->
                 <li class="dropdown ml-3">
                     <button type="button" class="dropdown-toggle flex items-center">
                         <img src="https://placehold.co/32x32" alt=""
@@ -214,272 +265,282 @@ if (isset($_POST['update'])) {
             <div class="grid grid-cols-1 gap-6">
                 <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md s  hadow-black/5">
                     <!-- diri isulod na div -->
-                    <section>
-                        <div class="container">
-                            <div class="flex flex-wrap -mx-4">
-                                <div class="w-full overflow-x-auto">
-                                    <table class="table-auto w-max">
-                                        <thead>
-                                            <tr>
+                    <form method="post" action="" autocomplete="off">
+                        <section>
+                            <div class="container">
+                                <div class="flex flex-wrap -mx-4">
+                                    <div class="w-full overflow-x-auto">
+                                        <table class="table-auto w-max">
+                                            <thead>
+                                                <tr class="bg-primary text-center">
+                                                    <th type="hidden"
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent text-center">
+                                                        Service ID
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        cc1_1
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        cc1_2
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        cc1_3
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        cc2_1
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        cc2_2
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        cc3_1
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        cc3_2
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-l font-bold text-black px-3 text-center lg:px-4 border">
-                                                    cc1_1
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-l font-bold text-black px-3 text-center lg:px-4 border">
-                                                    cc1_2
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-l font-bold text-black px-3 text-center lg:px-4 border">
-                                                    cc1_3
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-l font-bold text-black px-3 text-center lg:px-4 border">
-                                                    cc2_1
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    cc2_2
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    cc3_1
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    cc3_2
-                                                </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[200px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        Service
+                                                    </th>
 
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        Training Name
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[200px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        Date
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        Training Venue
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        Training Type
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[200px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    Service
-                                                </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        First Name
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        Last Name
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    Training Name
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[200px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    Date
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    Training Venue
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    Training Type
-                                                </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        Sex
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    First Name
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    Last Name
-                                                </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 text-center">
+                                                        Email
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    Sex
-                                                </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 text-center">
+                                                        Contact Info
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 text-center">
-                                                    Email
-                                                </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 text-center">
+                                                        Address
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 text-center">
-                                                    Contact Info
-                                                </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        Age
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 text-center">
-                                                    Address
-                                                </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        Designation
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        Company
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        MSME?
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    Age
-                                                </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        Customer Category
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    Designation
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    Company
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    MSME?
-                                                </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        Sector
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    Customer Category
-                                                </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        Returning Customer
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    Sector
-                                                </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        sqd0
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        sqd1
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        sqd2
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    Returning Customer
-                                                </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        sqd3
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        sqd4
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        sqd5
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    sqd0
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    sqd1
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    sqd2
-                                                </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        sqd6
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        sqd7
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        sqd8
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    sqd3
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    sqd4
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    sqd5
-                                                </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        Net Promoter
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        ateneo
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        Doa
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        DTI
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        FDA
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        SBC
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        TESDA
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        UIC
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        other agency
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        Agency score
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
+                                                        Over-all Mood
+                                                    </th>
 
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    sqd6
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    sqd7
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    sqd8
-                                                </th>
-
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    Net Promoter
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    ateneo
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    Doa
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    DTI
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    FDA
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    SBC
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    TESDA
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    UIC
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    other agency
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    Agency score
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                    Over-all Mood
-                                                </th>
-
-                                                <th
-                                                    class="w-1/32 min-w-[100px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    Comments
-                                                </th>
-                                                <th
-                                                    class="w-1/32 min-w-[400px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                    Actions
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <form action="tablestest.php?id_new=<?php echo $id; ?>" method="post">
+                                                    <th
+                                                        class="w-1/32 min-w-[100px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        Comments
+                                                    </th>
+                                                    <th
+                                                        class="w-1/32 min-w-[400px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
+                                                        Actions
+                                                    </th>
+                                                </tr>
+                                            </thead>
                                             <tbody>
-                                                <tr class=" text-center">
 
+                                                <tr class=" text-center">
                                                     <td>
+
                                                         <div class="mt-2">
-                                                            <input type="number" name="cc1_1"
-                                                                value="<?php echo $row['cc1_1'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 text-center shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="cc1_2"
-                                                                value="<?php echo $row['cc1_2'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 text-center shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="cc1_3"
-                                                                value="<?php echo $row['cc1_3'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 text-center shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="cc2_1"
-                                                                value="<?php echo $row['cc2_1'] ?>"
+                                                            <input type="hidden" value="<?php echo $row['ServiceID'] ?>"
+                                                                name="ServiceID"
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="mt-2">
-                                                            <input type="number" name="cc2_2"
-                                                                value="<?php echo $row['cc2_2'] ?>"
+                                                            <input type="number" value="<?php echo $row['cc1_1'] ?>"
+                                                                name="cc1_1"
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="mt-2">
-                                                            <input type="number" name="cc3_1"
-                                                                value="<?php echo $row['cc3_1'] ?>"
+                                                            <input type="number" value="<?php echo $row['cc1_2'] ?>"
+                                                                name="cc1_2"
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="mt-2">
-                                                            <input type="number" name="cc3_2"
-                                                                value="<?php echo $row['cc3_2'] ?>"
+                                                            <input type="number" value="<?php echo $row['cc1_3'] ?>"
+                                                                name="cc1_3"
+                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="mt-2">
+                                                            <input type="number" value="<?php echo $row['cc2_1'] ?>"
+                                                                name="cc2_1"
+                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="mt-2">
+                                                            <input type="number" value="<?php echo $row['cc2_2'] ?>"
+                                                                name="cc2_2"
+                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="mt-2">
+                                                            <input type="number" value="<?php echo $row['cc3_1'] ?>"
+                                                                name="cc3_1"
+                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="mt-2">
+                                                            <input type="number" value="<?php echo $row['cc3_2'] ?>"
+                                                                name="cc3_2"
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
                                                     </td>
@@ -499,7 +560,7 @@ if (isset($_POST['update'])) {
                                                     </td>
                                                     <td>
                                                         <div class="mt-2">
-                                                            <input type="date" name="date"
+                                                            <input type="text" name="date"
                                                                 value="<?php echo $row['date'] ?>"
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
@@ -511,6 +572,7 @@ if (isset($_POST['update'])) {
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
                                                     </td>
+
                                                     <td>
                                                         <div class="mt-2">
                                                             <input type="text" name="training_type"
@@ -525,6 +587,8 @@ if (isset($_POST['update'])) {
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
                                                     </td>
+
+
                                                     <td>
                                                         <div class="mt-2">
                                                             <input type="text" name="lname"
@@ -612,63 +676,63 @@ if (isset($_POST['update'])) {
                                                     <td>
                                                         <div class="form-group mt-2">
                                                             <input type="number" name="sqd0"
-                                                                value="<?php echo $row['sdq0'] ?>"
+                                                                value="<?php echo $row['sqd0'] ?>"
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="mt-2">
                                                             <input type="number" name="sqd1"
-                                                                value="<?php echo $row['sdq1'] ?>"
+                                                                value="<?php echo $row['sqd1'] ?>"
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="mt-2">
                                                             <input type="number" name="sqd2"
-                                                                value="<?php echo $row['sdq2'] ?>"
+                                                                value="<?php echo $row['sqd2'] ?>"
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="mt-2">
                                                             <input type="number" name="sqd3"
-                                                                value="<?php echo $row['sdq3'] ?>"
+                                                                value="<?php echo $row['sqd3'] ?>"
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="mt-2">
                                                             <input type="number" name="sqd4"
-                                                                value="<?php echo $row['sdq4'] ?>"
+                                                                value="<?php echo $row['sqd4'] ?>"
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="mt-2">
                                                             <input type="number" name="sqd5"
-                                                                value="<?php echo $row['sdq5'] ?>"
+                                                                value="<?php echo $row['sqd5'] ?>"
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="mt-2">
                                                             <input type="number" name="sqd6"
-                                                                value="<?php echo $row['sdq6'] ?>"
+                                                                value="<?php echo $row['sqd6'] ?>"
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="mt-2">
                                                             <input type="number" name="sqd7"
-                                                                value="<?php echo $row['sdq7'] ?>"
+                                                                value="<?php echo $row['sqd7'] ?>"
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="mt-2">
                                                             <input type="number" name="sqd8"
-                                                                value="<?php echo $row['sdq8'] ?>"
+                                                                value="<?php echo $row['sqd8'] ?>"
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
                                                     </td>
@@ -744,7 +808,7 @@ if (isset($_POST['update'])) {
                                                     </td>
                                                     <td>
                                                         <div class="mt-2">
-                                                            <input type="text" name="over_all_mood"
+                                                            <input type="text" name="overall_mood"
                                                                 value="<?php echo $row['overall_mood'] ?>"
                                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
                                                         </div>
@@ -759,31 +823,29 @@ if (isset($_POST['update'])) {
 
                                                     <td>
 
-                                                        <button type="submit" name="update"
+                                                        <button type="submit" name="submit"
                                                             class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mb-1 w-full">
-                                                            Save
+                                                            Update
                                                         </button>
 
                                                         <a href="tables.php">
-                                                            <button
+                                                            <button type="submit" name="submit"
                                                                 class="rounded-md border px-3 py-2 text-sm font-semibold text-red-600 hover:bg-red-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 w-full">
                                                                 Cancel
                                                             </button>
                                                         </a>
+
                                                     </td>
 
                                                 </tr>
 
-
-
-
                                             </tbody>
-                                        </form>
-                                    </table>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </form>
                 </div>
 
             </div>
