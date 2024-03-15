@@ -567,8 +567,8 @@ $NET_PROMOTER_5 = $_SESSION['NET_PROMOTER_5'];
 
 
 
-    <button type="button" id="printButton" onclick="printPage()"
-        class="btn bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded float-right">Print Page</button>
+    <!-- <button type="button" id="printButton" onclick="printPage()"
+        class="btn bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded float-right">Print Page</button> -->
 </body>
 
 </html>

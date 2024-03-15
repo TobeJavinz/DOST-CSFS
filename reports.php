@@ -390,7 +390,28 @@ if ($result2) {
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
           <div class="flex justify-between mb-4 items-start">
             <div class="font-medium">
-              <?php echo "Date: ", $start_date . '  — ' . $end_date ?>
+              <?php
+              if (empty($start_date) && empty($end_date)) {
+                echo "Showing All Date";
+              } else {
+                $start_month = date('n', strtotime($start_date));
+                $end_month = date('n', strtotime($end_date));
+
+                if ($start_month == 1 && $end_month == 3) {
+                  echo "Showing 1st Quarter ";
+                } elseif ($start_month == 4 && $end_month == 6) {
+                  echo "Showing 2nd Quarter";
+                } elseif ($start_month == 7 && $end_month == 9) {
+                  echo "Showing 3rd Quarter";
+                } elseif ($start_month == 10 && $end_month == 12) {
+                  echo "Showing 4th Quarter";
+                } else {
+                  $start_month_formatted = date('F j, Y', strtotime($start_date));
+                  $end_month_formatted = date('F j, Y', strtotime($end_date));
+                  echo $start_month_formatted . " to " . $end_month_formatted;
+                }
+              }
+              ?>
 
             </div>
           </div>
@@ -639,7 +660,7 @@ if ($result2) {
           </div>
 
           <!-- LOWER PART CARD SECTION -->
-          <button id="exportButton" class="text-gray-400 text-sm text-center">EXPORT DATA</button>
+          <button id="exportButton" class="btn btn-primary hover:bg-blue-700 text-gray py-2 px-4 rounded float-right">EXPORT DATA</button>
         </div>
 
       </div>
