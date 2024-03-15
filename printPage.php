@@ -57,6 +57,11 @@ $SQD_8NAD = $_SESSION['SQD_8NAD'];
 $SQD_8A = $_SESSION['SQD_8A'];
 $SQD_8SA = $_SESSION['SQD_8SA'];
 
+$NET_PROMOTER_1 = $_SESSION['NET_PROMOTER_1'];
+$NET_PROMOTER_2 = $_SESSION['NET_PROMOTER_2'];
+$NET_PROMOTER_3 = $_SESSION['NET_PROMOTER_3'];
+$NET_PROMOTER_4 = $_SESSION['NET_PROMOTER_4'];
+$NET_PROMOTER_5 = $_SESSION['NET_PROMOTER_5'];
 
 
 ?>
@@ -102,7 +107,7 @@ $SQD_8SA = $_SESSION['SQD_8SA'];
     </script>
 </head>
 
-<body style="margin: 20px;">
+<body style="margin: 20px; margin-bottom: 50px;">
     <!-- Image header -->
     <div class="header-image" style="text-align: center; margin: 0 auto;">
         <img src="assets/header.png" alt="Header Image" width="500" style="display: block; margin: 0 auto;">
@@ -436,10 +441,79 @@ $SQD_8SA = $_SESSION['SQD_8SA'];
         <tr>
 
             <th colspan="6">No. of Responses </th>
-            <th rowspan="2">NPS</th>
+            <th rowspan="3">NPS</th>
         </tr>
         <tr>
 
+            <th>Highly Unlikely</th>
+            <th>Unlikely</th>
+            <th>Neutral</th>
+            <th>Likely</th>
+            <th>Highly Likely</th>
+            <th>TOTAL</th>
+        </tr>
+        <tr>
+       
+      
+            <td><?php echo $NET_PROMOTER_1 ?></td> <!--1 -->
+            <td><?php echo $NET_PROMOTER_2 ?></td> <!-- 2 -->
+            <td><?php echo $NET_PROMOTER_3 ?></td> <!-- 3 -->
+            <td><?php echo $NET_PROMOTER_4 ?></td> <!-- 4 -->
+            <td><?php echo $NET_PROMOTER_5 ?></td> <!-- 5 -->
+            <td rowspan="2"><?php echo $NET = $NET_PROMOTER_1 +  $NET_PROMOTER_2 + $NET_PROMOTER_3 + $NET_PROMOTER_4 + $NET_PROMOTER_5; ?></td>
+            
+          
+        </tr>
+        <tr>
+
+        
+        <?php
+            if ($NET_PROMOTER_1 == 0 && $NET_PROMOTER_2 == 0) {
+                $percent12 = 0;
+            } else {
+                $percent12 = round(($NET_PROMOTER_1 + $NET_PROMOTER_2) / $NET * 100, 2) ;
+            }
+            if ($NET_PROMOTER_3 == 0) {
+                $percent3 = 0;
+            } else {
+                $percent3 = round($NET_PROMOTER_3 / $NET * 100, 2);
+            }
+            if ($NET_PROMOTER_4 == 0) {
+                $percent4 = 0;
+            } else {
+                $percent4 = round($NET_PROMOTER_4 / $NET * 100, 2);
+            }
+            if ($NET_PROMOTER_5 == 0) {
+                $percent5 = 0;
+            } else {
+                $percent5 = round($NET_PROMOTER_5 / $NET * 100, 2) ;
+            }
+            ?>
+
+
+            <td colspan="2"><strong><?php echo $percent12 . '%'?><strong></td>
+            <td><strong><?php echo $percent3 . '%'?><strong></td>
+            <td><strong><?php echo $percent4 . '%' ?></strong></td>
+            <td><strong><?php echo $percent5 . '%'?></strong></td>
+            <td><strong><?php echo $NPS =  $percent5 - ($percent12 + $percent3) . '%' ?></strong></td>
+
+
+       
+
+  
+        </tr>
+    </table>
+
+
+    <p style="margin-top: 10px;"><i>NPS2. Recommend similar assistance availed from the following agencies: </i></p>
+    <table class="table table-bordered text-center" id="table">
+        <tr>
+            <th rowspan="2">Name of Agency</th>
+            <th colspan="6">No. of Responses </th>
+            <th rowspan="2">NPS</th>
+        </tr>
+        <tr>
+        
             <th>Highly</th>
             <th>Unlikely</th>
             <th>Neutral</th>
@@ -448,6 +522,7 @@ $SQD_8SA = $_SESSION['SQD_8SA'];
             <th>TOTAL</th>
         </tr>
         <tr>
+            <td>Ateneo</td>
             <td>0</td>
             <td>0</td>
             <td>0</td>
@@ -456,23 +531,29 @@ $SQD_8SA = $_SESSION['SQD_8SA'];
             <td>0</td>
             <td>0</td>
         </tr>
-        <tr>
-            <td colspan="3">0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
 
-  
-        </tr>
     </table>
 
+    <p><b>IV. Summary of Information Gathered</b></p>
+
+    <table class="table table-bordered text-center" id="table">
+    <tr>
+        <td>Type Of Training</td>
+        <td>No. Of Respondents</td>
+    </tr>
+    <tr>
+        <td>Data 1</td>
+        <td>Data 2</td>
+    </tr>
+    <!-- Add more rows as needed -->
+</table>
+    
 
 
 
 
     <button type="button" id="printButton" onclick="printPage()"
-        class="btn bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded">Print Page</button>
+        class="btn bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded float-right">Print Page</button>
 </body>
 
 </html>
