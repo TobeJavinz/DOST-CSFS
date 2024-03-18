@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 <?php
 require 'DBConn.php';
 
@@ -1755,3 +1757,4 @@ if (isset ($_POST["submit"])) {
 </body>
 
 </html>
+>>>>>>> origin/main
