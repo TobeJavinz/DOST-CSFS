@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 session_start();
 include 'DBconn.php';
@@ -277,6 +278,8 @@ if ($result2) {
 ?>
 
 
+=======
+>>>>>>> origin/main
 <!DOCTYPE html>
 <html>
 
@@ -284,23 +287,34 @@ if ($result2) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+<<<<<<< HEAD
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/themes/airbnb.min.css">
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"></script>
   <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
+=======
+>>>>>>> origin/main
   <link href="./src/output.css" rel="stylesheet" />
 </head>
 
 <body class="text-gray-800 font-inter">
   <!-- start: Sidebar -->
+<<<<<<< HEAD
   <div class="fixed left-0 top-0 w-64 h-full bg-gray-900 p-4 z-50 sidebar-menu transition-transform">
+=======
+  <!-- <div class="fixed left-0 top-0 w-64 h-full bg-gray-900 p-4 z-50 sidebar-menu transition-transform">
+>>>>>>> origin/main
     <a href="#" class="flex items-center pb-4 border-b border-b-gray-800">
       <img src="./assets/1.png" alt="" class="w-8 h-8 rounded object-cover" />
       <span class="text-lg font-bold text-white ml-3">DOST CSFS</span>
     </a>
     <ul class="mt-4">
       <li class="mb-1 group">
+<<<<<<< HEAD
         <a href="./dashboard.php"
+=======
+        <a href="./dashboard.html"
+>>>>>>> origin/main
           class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
           <i class="ri-home-2-line mr-3 text-lg"></i>
           <span class="text-sm">Dashboard</span>
@@ -318,6 +332,7 @@ if ($result2) {
       <li class="mb-1 group active">
         <a href="#"
           class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+<<<<<<< HEAD
           <i class="ri-settings-2-line mr-3 text-lg"></i>
           <span class="text-sm">Reports</span>
         </a>
@@ -327,6 +342,26 @@ if ($result2) {
   <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
   <!-- end: Sidebar -->
 
+=======
+          <i class="ri-file-chart-line mr-3 text-lg"></i>
+          <span class="text-sm">Reports</span>
+        </a>
+      </li>
+      <li class="mb-1 group">
+        <a href="./index2.html"
+          class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
+          <i class="ri-admin-line mr-3 text-lg"></i>
+          <span class="text-sm">Admin</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div> -->
+  <!-- end: Sidebar -->
+
+  <?php include 'header.php' ?>
+
+>>>>>>> origin/main
   <!-- start: Main -->
   <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
     <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
@@ -361,6 +396,7 @@ if ($result2) {
         </li>
       </ul>
     </div>
+<<<<<<< HEAD
     <div class="p-6">
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6"></div>
@@ -690,11 +726,54 @@ if ($result2) {
 
 
     </div>
+=======
+
+    <!-- chart -->
+
+    <div class="p-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6"></div>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+        <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
+          <div class="flex justify-between mb-4 items-start">
+            <div class="font-medium">Training Statiscics</div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+            <div class="rounded-md border border-dashed border-gray-200 p-4">
+              <div class="flex items-center mb-0.5">
+                <div class="text-xl font-semibold">10</div>
+              </div>
+              <span class="text-gray-400 text-sm">Female</span>
+            </div>
+            <div class="rounded-md border border-dashed border-gray-200 p-4">
+              <div class="flex items-center mb-0.5">
+                <div class="text-xl font-semibold">50</div>
+              </div>
+              <span class="text-gray-400 text-sm">Male</span>
+            </div>
+            <div class="rounded-md border border-dashed border-gray-200 p-4">
+              <div class="flex items-center mb-0.5">
+                <div class="text-xl font-semibold">60</div>
+              </div>
+              <span class="text-gray-400 text-sm">Total Participants</span>
+            </div>
+          </div>
+          <div>
+            <canvas id="order-chart"></canvas>
+          </div>
+        </div>
+        <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
+          <div class="flex justify-between mb-4 items-start">
+            <div class="font-medium">Print PDF</div>
+          </div>
+        </div>
+      </div>
+>>>>>>> origin/main
     </div>
   </main>
   <!-- end: Main -->
 
   <script src="https://unpkg.com/@popperjs/core@2"></script>
+<<<<<<< HEAD
 
   <script src="./src/dashboard.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
@@ -722,3 +801,10 @@ if ($result2) {
 
 
 <!-- EVERYTHING YOU LOSE IS A STEP YOU TAKE -->
+=======
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="./src/dashboard.js"></script>
+</body>
+
+</html>
+>>>>>>> origin/main

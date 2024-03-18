@@ -484,6 +484,10 @@ $result = mysqli_query($conn, $query);
       </div>
     </div>
 
+    Service ID: 12
+    <br>
+    cc1_1: 1
+
   </main>
   <!-- end: Main -->
 
