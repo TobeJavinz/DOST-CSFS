@@ -100,7 +100,7 @@ if (isset ($_POST["submit"])) {
 <body class="text-gray-800 font-inter">
 
 
-  <?php include 'header.php' ?>
+  <?php include 'sidebar.php' ?>
 
   <!-- start: Main -->
   <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
