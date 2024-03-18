@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 // Check if $SQD_1SD has no value and redirect to reports.php
@@ -63,6 +64,17 @@ $NET_PROMOTER_3 = $_SESSION['NET_PROMOTER_3'];
 $NET_PROMOTER_4 = $_SESSION['NET_PROMOTER_4'];
 $NET_PROMOTER_5 = $_SESSION['NET_PROMOTER_5'];
 
+$cc1_1 = $_SESSION['cc1_1'];
+$cc1_2 = $_SESSION['cc1_2'];
+$cc1_3 = $_SESSION['cc1_3'];
+$cc2_1 = $_SESSION['cc2_1'];
+$cc2_2 = $_SESSION['cc2_2'];
+$cc3_1 = $_SESSION['cc3_1'];
+$cc3_2 = $_SESSION['cc3_2'];
+$training_name = $_SESSION['training_name'];
+$training_address = $_SESSION['training_venue'];
+$training_date = $_SESSION['date'];
+
 
 ?>
 
@@ -114,17 +126,21 @@ $NET_PROMOTER_5 = $_SESSION['NET_PROMOTER_5'];
         <p><b>Customer Satisfaction Score</b></p>
         <p>Statistical Analysis of the Numerical Ratings</p>
         <p><b>
-                <?php echo $_SESSION['training_name']; ?>
+                <?php echo $training_name; ?>
             </b></p>
         <p>
-            <<'Address'>>
+            <?php if (!empty ($training_name)) { ?>
+                <td>
+                    <?php echo $training_address; ?>
+                </td>
+            <?php } ?>
         </p>
         <p>
-            <<'Date'>>
+            <?php echo $_SESSION['quarter'] ?? $training_date; ?>
         </p>
     </div>
     <p><b>I. Count of Citizen's Charter(CC) Results</b></p>
-    <table class="table table-bordered text-center" id="table">
+    <table class="table table-bordered" id="table">
         <tr>
             <th></th>
             <th>Responses</th>
@@ -132,19 +148,56 @@ $NET_PROMOTER_5 = $_SESSION['NET_PROMOTER_5'];
         </tr>
         <tr>
             <td>CC1. Yes, aware before my transaction here</td>
-            <td></td>
+            <td>
+                <?php echo $cc1_1 ?>
+            </td>
 
         </tr>
         <tr>
             <td>CC1. Yes, aware before my transaction here</td>
-            <td></td>
+            <td>
+                <?php echo $cc1_2 ?>
+            </td>
 
         </tr>
         <tr>
             <td>CC1. N0, aware before my transaction here</td>
-            <td></td>
+            <td>
+                <?php echo $cc1_3 ?>
+            </td>
+
+        <tr>
+            <td>CC2. Yes, aware before my transaction here</td>
+            <td>
+                <?php echo $cc2_1 ?>
+            </td>
 
         </tr>
+        <tr>
+            <td>CC2. Yes, aware before my transaction here</td>
+            <td>
+                <?php echo $cc2_2 ?>
+            </td>
+
+        </tr>
+        <tr>
+            <td>CC3. N0, aware before my transaction here</td>
+            <td>
+                <?php echo $cc3_1 ?>
+            </td>
+
+        </tr>
+        <tr>
+            <td>CC3. N0, aware before my transaction here</td>
+            <td>
+                <?php echo $cc3_1 ?>
+            </td>
+
+        </tr>
+
+
+
+
     </table>
 
     <p><b>II. Count of SQD Results</b></p>

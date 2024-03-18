@@ -178,9 +178,16 @@ FROM
   SUM(CASE WHEN net_promoter = 2 THEN 1 ELSE 0 END) AS NET_PROMOTER_2,
   SUM(CASE WHEN net_promoter = 3 THEN 1 ELSE 0 END) AS NET_PROMOTER_3,
   SUM(CASE WHEN net_promoter = 4 THEN 1 ELSE 0 END) AS NET_PROMOTER_4,
-  SUM(CASE WHEN net_promoter = 5 THEN 1 ELSE 0 END) AS NET_PROMOTER_5
-
-
+  SUM(CASE WHEN net_promoter = 5 THEN 1 ELSE 0 END) AS NET_PROMOTER_5,
+  cc1_1,
+  cc1_2,
+  cc1_3,
+  cc2_1,
+  cc2_2,
+  cc3_1,
+  cc3_2,
+  training_venue,
+  date
 
   FROM 
   data
@@ -247,6 +254,19 @@ if ($result2) {
   $_SESSION['NET_PROMOTER_3'] = $resp['NET_PROMOTER_3'];
   $_SESSION['NET_PROMOTER_4'] = $resp['NET_PROMOTER_4'];
   $_SESSION['NET_PROMOTER_5'] = $resp['NET_PROMOTER_5'];
+
+  $_SESSION['cc1_1'] = $resp['cc1_1'];
+  $_SESSION['cc1_2'] = $resp['cc1_2'];
+  $_SESSION['cc1_3'] = $resp['cc1_3'];
+  $_SESSION['cc2_1'] = $resp['cc2_1'];
+  $_SESSION['cc2_2'] = $resp['cc2_2'];
+  $_SESSION['cc3_1'] = $resp['cc3_1'];
+  $_SESSION['cc3_2'] = $resp['cc3_2'];
+  
+  $_SESSION['training_name'] = $SearchTraining_name;
+  $_SESSION['training_venue'] = $resp['training_venue'];
+  $_SESSION['date'] = $resp['date'];
+ 
 
 } else {
   // Handle the case where the query fails
@@ -398,13 +418,13 @@ if ($result2) {
                 $end_month = date('n', strtotime($end_date));
 
                 if ($start_month == 1 && $end_month == 3) {
-                  echo "Showing 1st Quarter ";
+                  echo "Showing ".$_SESSION['quarter'] =  "1st Quarter ";
                 } elseif ($start_month == 4 && $end_month == 6) {
-                  echo "Showing 2nd Quarter";
+                  echo "Showing ".$_SESSION['quarter'] = "2nd Quarter ";
                 } elseif ($start_month == 7 && $end_month == 9) {
-                  echo "Showing 3rd Quarter";
+                  echo "Showing ".$_SESSION['quarter'] = "3rd Quarter ";
                 } elseif ($start_month == 10 && $end_month == 12) {
-                  echo "Showing 4th Quarter";
+                  echo "Showing ".$_SESSION['quarter'] ="4th Quarter ";
                 } else {
                   $start_month_formatted = date('F j, Y', strtotime($start_date));
                   $end_month_formatted = date('F j, Y', strtotime($end_date));
@@ -554,12 +574,12 @@ if ($result2) {
                 <table class="min-w-full">
                   <thead class="bg-white border-b">
                     <tr>
-                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                      <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
 
                       </th>
                       <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                         #
-                      </th>
+                      </th> -->
                     </tr>
                   </thead>
                   <tbody>

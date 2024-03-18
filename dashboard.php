@@ -37,6 +37,25 @@ $sql_firsttime = "SELECT COUNT(*) AS yes_count FROM data WHERE returning_custome
 $result_firsttime = $conn->query($sql_firsttime);
 $row_firsttime = $result_firsttime->fetch_assoc();
 $total_firsttime = $row_firsttime["yes_count"];
+
+// MSME count
+$sql_msme = "SELECT COUNT(*) AS msme_count FROM data WHERE msme = 'yes'; ";
+$result_msme = $conn->query($sql_msme);
+$row_msme = $result_msme->fetch_assoc();
+$total_msme = $row_msme["msme_count"];
+// non-food trainings
+
+$sql_nonfood = "SELECT COUNT(*) AS nonfood_count FROM data WHERE training_type = 'non-food'; ";
+$result_nonfood = $conn->query($sql_nonfood);
+$row_nonfood = $result_nonfood->fetch_assoc();
+$total_nonfood = $row_nonfood["nonfood_count"];
+
+// food trainings
+$sql_food = "SELECT COUNT(*) AS food_count FROM data WHERE training_type = 'food'; ";
+$result_food = $conn->query($sql_food);
+$row_food = $result_food->fetch_assoc();
+$total_food = $row_food["food_count"];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -73,7 +92,7 @@ $total_firsttime = $row_firsttime["yes_count"];
       </li>
 
       <li class="mb-1 group">
-        <a href="reports.html"
+        <a href="reports.php"
           class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
           <i class="ri-settings-2-line mr-3 text-lg"></i>
           <span class="text-sm">Reports</span>
@@ -135,12 +154,12 @@ $total_firsttime = $row_firsttime["yes_count"];
                         <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                           #
                         </th> -->
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                          Training Name
+                        <!-- <th scope="col" class="text-sm font-sm text-gray-900 px-6 py-4 text-left">
+                          
                         </th>
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                          #
-                        </th>
+                        <th scope="col" class="text-sm font-sm text-gray-900 px-6 py-4 text-left">
+                          
+                        </th> -->
                       </tr>
                     </thead>
                     <tbody>
@@ -180,12 +199,12 @@ $total_firsttime = $row_firsttime["yes_count"];
                         <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                           #
                         </th> -->
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                           Services
                         </th>
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                           #
-                        </th>
+                        </th> -->
                       </tr>
                     </thead>
                     <tbody>
@@ -223,12 +242,12 @@ $total_firsttime = $row_firsttime["yes_count"];
                   <table class="min-w-full">
                     <thead class="bg-white border-b">
                       <tr>
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                        <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                           #
                         </th>
                         <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                           Firms
-                        </th>
+                        </th> -->
                       </tr>
                     </thead>
                     <tbody>
@@ -243,8 +262,9 @@ $total_firsttime = $row_firsttime["yes_count"];
                       $index = 1; // For numbering each row
                       while ($row = $Firms_result->fetch_assoc()) {
                         echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
+                       
+                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . ucwords($row['Services']) . "</td>";
                         echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $index . "</td>";
-                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $row['Services'] . "</td>";
 
                         echo "</tr>";
                         $index++;
@@ -312,7 +332,7 @@ $total_firsttime = $row_firsttime["yes_count"];
           <div class="flex justify-between mb-6">
             <div>
               <div class="text-2xl font-semibold mb-1">
-                <?php echo "[value]" ?>
+                <?php echo $total_msme ?>
               </div>
             </div>
           </div>
@@ -321,7 +341,7 @@ $total_firsttime = $row_firsttime["yes_count"];
           <div class="flex justify-between mb-6">
             <div>
               <div class="text-2xl font-semibold mb-1">
-                <?php echo "[value]" ?>
+                <?php echo $total_nonfood ?>
               </div>
             </div>
           </div>
@@ -330,7 +350,7 @@ $total_firsttime = $row_firsttime["yes_count"];
           <div class="flex justify-between mb-6">
             <div>
               <div class="text-2xl font-semibold mb-1">
-                <?php echo "[value]" ?>
+                <?php echo $total_food ?>
               </div>
             </div>
           </div>
@@ -357,11 +377,11 @@ $total_firsttime = $row_firsttime["yes_count"];
                             <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                               #
                             </th> -->
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                               Sector
                             </th>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                              Total
+                           <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                              Total -->
                             </th>
                           </tr>
                         </thead>
@@ -372,7 +392,7 @@ $total_firsttime = $row_firsttime["yes_count"];
                           while ($row = $result_tperSec->fetch_assoc()) {
                             echo "<tr class='" . (($count % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
                             // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $count . "</td>";
-                            echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $row['sector'] . "</td>";
+                            echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ucwords($row['sector']) . "</td>";
                             echo "<td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-light'>" . $row['total_respondents'] . "</td>";
                             echo "</tr>";
                             $count++;
