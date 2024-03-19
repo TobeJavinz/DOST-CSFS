@@ -144,7 +144,6 @@ $training_date = $_SESSION['date'];
         <tr>
             <th></th>
             <th>Responses</th>
-
         </tr>
         <tr>
             <td>CC1. Yes, aware before my transaction here</td>
@@ -582,24 +581,153 @@ $training_date = $_SESSION['date'];
         </tr>
         <tr>
 
-            <th>Highly</th>
+            <th>Highly Unlikely</th>
             <th>Unlikely</th>
             <th>Neutral</th>
             <th>Likely</th>
             <th>Highly Likely</th>
             <th>TOTAL</th>
+           
         </tr>
         <tr>
-            <td>Ateneo</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
-            <td>0</td>
+            <td>ATENEO</td>
+            <td><?php echo $_SESSION['ateneo_1'] ?></td>
+            <td><?php echo $_SESSION['ateneo_2'] ?></td>
+            <td><?php echo $_SESSION['ateneo_3'] ?></td>
+            <td><?php echo $_SESSION['ateneo_4'] ?></td>
+            <td><?php echo $_SESSION['ateneo_5'] ?></td>
+            <td><?php echo $atnSUM = $_SESSION['ateneo_1'] + $_SESSION['ateneo_2'] + $_SESSION['ateneo_3'] + $_SESSION['ateneo_4'] + $_SESSION['ateneo_5']  ?></td>
+            
+            <?php
+            $ateneo_1 = $_SESSION['ateneo_1'];
+            $ateneo_2 = $_SESSION['ateneo_2'];
+            $ateneo_3 = $_SESSION['ateneo_3'];
+            $ateneo_5 = $_SESSION['ateneo_5'];
+            $result = round(($ateneo_5 / $atnSUM) -  ($ateneo_1 + $ateneo_2 + $ateneo_3) / $atnSUM, 2) * 100;
+        
+            if ($result < 0) {
+                $result = 0;
+            }
+            ?>
+            <td><strong><?php echo $result . "%"; ?></strong></td>
         </tr>
+        <tr>
+            <td>DOA</td>
+            <td><?php echo $_SESSION['doa_1'] ?></td>
+            <td><?php echo $_SESSION['doa_2'] ?></td>
+            <td><?php echo $_SESSION['doa_3'] ?></td>
+            <td><?php echo $_SESSION['doa_4'] ?></td>
+            <td><?php echo $_SESSION['doa_5'] ?></td>
+            <td><?php echo $doaSUM = $_SESSION['doa_1'] + $_SESSION['doa_2'] + $_SESSION['doa_3'] + $_SESSION['doa_4'] + $_SESSION['doa_5']  ?></td>
+            
+            <?php
+            $doa_1 = $_SESSION['doa_1'];
+            $doa_2 = $_SESSION['doa_2'];
+            $doa_3 = $_SESSION['doa_3'];
+            $doa_5 = $_SESSION['doa_5'];
+            if ($doaSUM != 0) {
+                $result = round($doa_5 / $doaSUM - ($doa_1 + $doa_2 + $doa_3) / $doaSUM, 2) * 100;
+                 if ($result < 0)  $result = 0; 
+            } else {
+                $result = 0;
+            }
+        
+            
+            ?>
+            <td><strong><?php echo $result . "%"; ?></strong></td>
+        </tr>
+        <tr>
+            <td>DTI</td>
+            <td><?php echo $_SESSION['dti_1'] ?></td>
+            <td><?php echo $_SESSION['dti_2'] ?></td>
+            <td><?php echo $_SESSION['dti_3'] ?></td>
+            <td><?php echo $_SESSION['dti_4'] ?></td>
+            <td><?php echo $_SESSION['dti_5'] ?></td>
+            <td><?php echo $dtiSUM = $_SESSION['dti_1'] + $_SESSION['dti_2'] + $_SESSION['dti_3'] + $_SESSION['dti_4'] + $_SESSION['dti_5']  ?></td>
+            <?php
+            $dti_1 = $_SESSION['dti_1'];
+            $dti_2 = $_SESSION['dti_2'];
+            $dti_3 = $_SESSION['dti_3'];
+            $dti_5 = $_SESSION['dti_5'];
 
+            if ($dtiSUM != 0) {
+                $result = round($dti_5 / $dtiSUM - ($$dti_1 + $$dti_2 + $$dti_3) / $dtiSUM, 2) * 100;
+                 if ($result < 0)  $result = 0; 
+            } else {
+                $result = 0;
+            }
+            ?>
+            <td><strong><?php echo $result . "%"; ?></strong></td>
+        </tr>
+        <tr>
+            <td>FDA</td>
+            <td><?php echo $_SESSION['fda_1'] ?></td>
+            <td><?php echo $_SESSION['fda_2'] ?></td>
+            <td><?php echo $_SESSION['fda_3'] ?></td>
+            <td><?php echo $_SESSION['fda_4'] ?></td>
+            <td><?php echo $_SESSION['fda_5'] ?></td>
+            <td><?php echo $fdaSUM = $_SESSION['fda_1'] + $_SESSION['fda_2'] + $_SESSION['fda_3'] + $_SESSION['fda_4'] + $_SESSION['fda_5']  ?></td>
+            <?php
+            $fda_1 = $_SESSION['fda_1'];
+            $fda_2 = $_SESSION['fda_2'];
+            $fda_3 = $_SESSION['fda_3'];
+            $fda_5 = $_SESSION['fda_5'];
+            if ($fdaSUM != 0) {
+                $result = round($fda_5 / $fdaSUM - ($fda_1 + $fda_2 + $fda_3) / $fdaSUM, 2) * 100;
+                 if ($result < 0)  $result = 0; 
+            } else {
+                $result = 0;
+            }
+            ?>
+            <td><strong><?php echo $result . "%"; ?></strong></td>
+             
+
+ 
+        </tr>
+        <tr>
+            <td>SBC</td>
+            <td><?php echo $_SESSION['sbc_1'] ?></td>
+            <td><?php echo $_SESSION['sbc_2'] ?></td>
+            <td><?php echo $_SESSION['sbc_3'] ?></td>
+            <td><?php echo $_SESSION['sbc_4'] ?></td>
+            <td><?php echo $_SESSION['sbc_5'] ?></td>
+            <td><?php echo $sbcSUM = $_SESSION['sbc_1'] + $_SESSION['sbc_2'] + $_SESSION['sbc_3'] + $_SESSION['sbc_4'] + $_SESSION['sbc_5']  ?></td>
+            <?php
+            $sbc_1 = $_SESSION['sbc_1'];
+            $sbc_2 = $_SESSION['sbc_2'];
+            $sbc_3 = $_SESSION['sbc_3'];
+            $sbc_5 = $_SESSION['sbc_5'];
+            if ($sbcSUM != 0) {
+                $result = round($sbc_5 / $sbcSUM - ($sbc_1 + $sbc_2 + $sbc_3) / $sbcSUM, 2) * 100;
+                 if ($result < 0)  $result = 0; 
+            } else {
+                $result = 0;
+            }
+            ?>
+            <td><strong><?php echo $result . "%"; ?></strong></td>
+        </tr>
+        <tr>
+            <td><?php echo $_SESSION['other_agency']?></td>
+            <td><?php echo $_SESSION['other_agency_1'] ?></td>
+            <td><?php echo $_SESSION['other_agency_2'] ?></td>
+            <td><?php echo $_SESSION['other_agency_3'] ?></td>
+            <td><?php echo $_SESSION['other_agency_4'] ?></td>
+            <td><?php echo $_SESSION['other_agency_5'] ?></td>
+            <td><?php echo $other_agency_SUM = $_SESSION['other_agency_1'] + $_SESSION['other_agency_2'] + $_SESSION['other_agency_3'] + $_SESSION['other_agency_4'] + $_SESSION['other_agency_5']  ?></td>
+            <?php
+            $other_agency_1 = $_SESSION['other_agency_1'];
+            $other_agency_2 = $_SESSION['other_agency_2'];
+            $other_agency_3 = $_SESSION['other_agency_3'];
+            $other_agency_5 = $_SESSION['other_agency_5'];
+            if ($other_agency_SUM != 0) {
+                $result = round($other_agency_5 / $other_agency_SUM - ($other_agency_1 + $other_agency_2 + $other_agency_3) / $other_agency_SUM, 2) * 100;
+                 if ($result < 0)  $result = 0; 
+            } else {
+                $result = 0;
+            }
+            ?>
+            <td><strong><?php echo $result . "%"; ?></strong></td>
+        </tr>
     </table>
 
     <p><b>IV. Summary of Information Gathered</b></p>
@@ -615,10 +743,6 @@ $training_date = $_SESSION['date'];
         </tr>
         <!-- Add more rows as needed -->
     </table>
-
-
-
-
 
     <!-- <button type="button" id="printButton" onclick="printPage()"
         class="btn bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded float-right">Print Page</button> -->
