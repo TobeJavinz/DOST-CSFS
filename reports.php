@@ -16,6 +16,7 @@ $start_date = 00 - 00 - 0000;
 $end_date = 00 - 00 - 0000;
 $training_name = '';
 $service = '';
+$msme_count = 0;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Get the start date, end date, service, and training name from user input
@@ -227,6 +228,24 @@ FROM
   SUM(CASE WHEN other_agency_score = 3 THEN 1 ELSE 0 END) AS other_agency_3,
   SUM(CASE WHEN other_agency_score = 4 THEN 1 ELSE 0 END) AS other_agency_4,
   SUM(CASE WHEN other_agency_score = 5 THEN 1 ELSE 0 END) AS other_agency_5,
+
+  SUM(CASE WHEN msme = 'yes' THEN 1 ELSE 0 END) AS msme_count,
+
+  SUM(CASE WHEN training_type = 'food' THEN 1 ELSE 0 END) AS food_count,
+  SUM(CASE WHEN training_type = 'non-food' THEN 1 ELSE 0 END) AS nonfood_count,
+
+  SUM(CASE WHEN customer_category = 'youth' THEN 1 ELSE 0 END) AS youth_count,
+  SUM(CASE WHEN customer_category = '4Ps Member' THEN 1 ELSE 0 END) AS FPs_count,
+  SUM(CASE WHEN customer_category = 'IP Group Member' THEN 1 ELSE 0 END) AS IP_count,
+  SUM(CASE WHEN customer_category = 'Differently-Abled' THEN 1 ELSE 0 END) AS DA_count,
+  SUM(CASE WHEN customer_category = 'SC' THEN 1 ELSE 0 END) AS SC_count,
+  
+  SUM(CASE WHEN sector = 'academe' THEN 1 ELSE 0 END) AS acad_count,
+  SUM(CASE WHEN sector = 'cso' THEN 1 ELSE 0 END) AS cso_count,
+  SUM(CASE WHEN sector = 'industry' THEN 1 ELSE 0 END) AS ind_count,
+  SUM(CASE WHEN sector = 'government' THEN 1 ELSE 0 END) AS gov_count,
+  SUM(CASE WHEN sector = 'media' THEN 1 ELSE 0 END) AS med_count,
+
   other_agency,
   cc1_1,
   cc1_2,
@@ -236,7 +255,8 @@ FROM
   cc3_1,
   cc3_2,
   training_venue,
-  date
+  date,
+  company
 
   FROM 
   data
@@ -327,7 +347,7 @@ FROM
     $_SESSION['doa_3'] = $resp['doa_3'];
     $_SESSION['doa_4'] = $resp['doa_4'];
     $_SESSION['doa_5'] = $resp['doa_5'];
-    
+
     $_SESSION['dti_1'] = $resp['dti_1'];
     $_SESSION['dti_2'] = $resp['dti_2'];
     $_SESSION['dti_3'] = $resp['dti_3'];
@@ -353,6 +373,26 @@ FROM
     $_SESSION['other_agency_4'] = $resp['other_agency_4'];
     $_SESSION['other_agency_5'] = $resp['other_agency_5'];
 
+    $msme_count = $resp['msme_count'];
+    $_SESSION['food_count'] = $resp['food_count'];
+    $_SESSION['nonfood_count'] = $resp['nonfood_count'];
+
+    $_SESSION['youth_count'] = $resp['youth_count'];
+    $_SESSION['FPs_count'] = $resp['FPs_count'];
+    $_SESSION['IP_count'] = $resp['IP_count'];
+    $_SESSION['DA_count'] = $resp['DA_count'];
+    $_SESSION['SC_count'] = $resp['SC_count'];
+
+    $_SESSION['acad_count'] = $resp['acad_count'];
+    $_SESSION['cso_count'] = $resp['cso_count'];
+    $_SESSION['ind_count'] = $resp['ind_count'];
+    $_SESSION['gov_count'] = $resp['gov_count'];
+    $_SESSION['med_count'] = $resp['med_count'];
+
+    $_SESSION['firms_name'] = (array) $resp['company'];
+    
+
+
   } else {
     // Handle the case where the query fails
     echo "Error: " . $conn->error;
@@ -360,7 +400,6 @@ FROM
 
 }
 ?>
-
 
 <!DOCTYPE html>
 <html>
@@ -579,7 +618,7 @@ FROM
               <div class="flex items-center mb-0.5">
                 <div class="text-2xl font-semibold">
                   <?php
-                  echo $total_companies > 0 ? $total_companies : "0";
+                  echo $_SESSION['firms'] = $total_companies > 0 ? $total_companies : "0";
                   ?>
                 </div>
               </div>
@@ -593,6 +632,7 @@ FROM
                   </thead>
                   <tbody>
                     <?php
+
                     // Loop through the array of company names and display them in the table
                     if (empty ($company_names)) {
                       echo "<tr><td colspan='1'>No Data</td></tr>";
@@ -639,16 +679,23 @@ FROM
                   </thead>
                   <tbody>
                     <?php
+
+
                     // Loop through the arrays of sectors and their counts
                     if (empty ($sectors)) {
                       echo "<tr><td colspan='2'>No Data</td></tr>";
                     } else {
+                      // Initialize an empty array to store the sectors and their counts
+                      $sectorData = array();
+
                       foreach ($sectors as $index => $sector) {
                         echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
                         echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $sector['sector'] . "</td>";
                         echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $sector['sector_count'] . "</td>";
                         echo "</tr>";
                       }
+                  
+    
                     }
                     ?>
                   </tbody>
@@ -662,7 +709,7 @@ FROM
               <div class="flex items-center mt-0.5">
                 <div class="text-2xl font-semibold">
                   <?php
-                  echo $returning_customers > 0 ? $returning_customers : "0";
+                  echo $_SESSION['returning'] = $returning_customers > 0 ? $returning_customers : "0";
                   ?>
                 </div>
               </div>
@@ -672,7 +719,7 @@ FROM
               <div class="flex items-center mt-0.5">
                 <div class="text-2xl font-semibold">
                   <?php
-                  echo $first_time_customers > 0 ? $first_time_customers : "0";
+                  echo $_SESSION['firstTime'] = $first_time_customers > 0 ? $first_time_customers : "0";
                   ?>
                 </div>
               </div>
@@ -685,7 +732,7 @@ FROM
 
               <div class="text-2xl font-semibold">
                 <?php
-                echo $total_male + $total_female;
+                echo $_SESSION['totalRes'] = $total_male + $total_female;
                 ?>
               </div>
               <span class="text-gray-400 text-lg ">CSF Respondents</span>
@@ -697,7 +744,7 @@ FROM
 
                 <div class="text-l font-semibold">
                   <?php
-                  echo $total_female > 0 ? $total_female : "0";
+                  echo $_SESSION['totalFem'] = $total_female > 0 ? $total_female : "0";
                   ?>
                 </div>
               </div>
@@ -706,7 +753,7 @@ FROM
               <div class="flex items-center mt-0.5">
 
                 <div class="text-l font-semibold">
-                  <?php echo $total_male > 0 ? $total_male : "0"; ?>
+                  <?php echo $_SESSION['totalMel'] = $total_male > 0 ? $total_male : "0"; ?>
                 </div>
               </div>
               <span class="text-gray-400 text-sm">Male Clients</span>
@@ -723,12 +770,12 @@ FROM
 
               <div class="flex items-center mt-0.5">
 
-                <div class="text-l font-semibold">
-                  <?php echo '[value]'; ?>
+                <div class="text-2xl font-semibold">
+                  <?php echo $_SESSION['msme_count'] = $msme_count ?>
                 </div>
               </div>
               <span class="text-gray-400 text-sm">MSMEs Assisted</span>
-
+                    
             </div>
 
 

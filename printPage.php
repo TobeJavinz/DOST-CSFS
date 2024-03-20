@@ -587,39 +587,65 @@ $training_date = $_SESSION['date'];
             <th>Likely</th>
             <th>Highly Likely</th>
             <th>TOTAL</th>
-           
+
         </tr>
         <tr>
             <td>ATENEO</td>
-            <td><?php echo $_SESSION['ateneo_1'] ?></td>
-            <td><?php echo $_SESSION['ateneo_2'] ?></td>
-            <td><?php echo $_SESSION['ateneo_3'] ?></td>
-            <td><?php echo $_SESSION['ateneo_4'] ?></td>
-            <td><?php echo $_SESSION['ateneo_5'] ?></td>
-            <td><?php echo $atnSUM = $_SESSION['ateneo_1'] + $_SESSION['ateneo_2'] + $_SESSION['ateneo_3'] + $_SESSION['ateneo_4'] + $_SESSION['ateneo_5']  ?></td>
-            
+            <td>
+                <?php echo $_SESSION['ateneo_1'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['ateneo_2'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['ateneo_3'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['ateneo_4'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['ateneo_5'] ?>
+            </td>
+            <td>
+                <?php echo $atnSUM = $_SESSION['ateneo_1'] + $_SESSION['ateneo_2'] + $_SESSION['ateneo_3'] + $_SESSION['ateneo_4'] + $_SESSION['ateneo_5'] ?>
+            </td>
+
             <?php
             $ateneo_1 = $_SESSION['ateneo_1'];
             $ateneo_2 = $_SESSION['ateneo_2'];
             $ateneo_3 = $_SESSION['ateneo_3'];
             $ateneo_5 = $_SESSION['ateneo_5'];
-            $result = round(($ateneo_5 / $atnSUM) -  ($ateneo_1 + $ateneo_2 + $ateneo_3) / $atnSUM, 2) * 100;
-        
+            $result = round(($ateneo_5 / $atnSUM) - ($ateneo_1 + $ateneo_2 + $ateneo_3) / $atnSUM, 2) * 100;
+
             if ($result < 0) {
                 $result = 0;
             }
             ?>
-            <td><strong><?php echo $result . "%"; ?></strong></td>
+            <td><strong>
+                    <?php echo $result . "%"; ?>
+                </strong></td>
         </tr>
         <tr>
             <td>DOA</td>
-            <td><?php echo $_SESSION['doa_1'] ?></td>
-            <td><?php echo $_SESSION['doa_2'] ?></td>
-            <td><?php echo $_SESSION['doa_3'] ?></td>
-            <td><?php echo $_SESSION['doa_4'] ?></td>
-            <td><?php echo $_SESSION['doa_5'] ?></td>
-            <td><?php echo $doaSUM = $_SESSION['doa_1'] + $_SESSION['doa_2'] + $_SESSION['doa_3'] + $_SESSION['doa_4'] + $_SESSION['doa_5']  ?></td>
-            
+            <td>
+                <?php echo $_SESSION['doa_1'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['doa_2'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['doa_3'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['doa_4'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['doa_5'] ?>
+            </td>
+            <td>
+                <?php echo $doaSUM = $_SESSION['doa_1'] + $_SESSION['doa_2'] + $_SESSION['doa_3'] + $_SESSION['doa_4'] + $_SESSION['doa_5'] ?>
+            </td>
+
             <?php
             $doa_1 = $_SESSION['doa_1'];
             $doa_2 = $_SESSION['doa_2'];
@@ -627,23 +653,37 @@ $training_date = $_SESSION['date'];
             $doa_5 = $_SESSION['doa_5'];
             if ($doaSUM != 0) {
                 $result = round($doa_5 / $doaSUM - ($doa_1 + $doa_2 + $doa_3) / $doaSUM, 2) * 100;
-                 if ($result < 0)  $result = 0; 
+                if ($result < 0)
+                    $result = 0;
             } else {
                 $result = 0;
             }
-        
-            
+
             ?>
-            <td><strong><?php echo $result . "%"; ?></strong></td>
+            <td><strong>
+                    <?php echo $result . "%"; ?>
+                </strong></td>
         </tr>
         <tr>
             <td>DTI</td>
-            <td><?php echo $_SESSION['dti_1'] ?></td>
-            <td><?php echo $_SESSION['dti_2'] ?></td>
-            <td><?php echo $_SESSION['dti_3'] ?></td>
-            <td><?php echo $_SESSION['dti_4'] ?></td>
-            <td><?php echo $_SESSION['dti_5'] ?></td>
-            <td><?php echo $dtiSUM = $_SESSION['dti_1'] + $_SESSION['dti_2'] + $_SESSION['dti_3'] + $_SESSION['dti_4'] + $_SESSION['dti_5']  ?></td>
+            <td>
+                <?php echo $_SESSION['dti_1'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['dti_2'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['dti_3'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['dti_4'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['dti_5'] ?>
+            </td>
+            <td>
+                <?php echo $dtiSUM = $_SESSION['dti_1'] + $_SESSION['dti_2'] + $_SESSION['dti_3'] + $_SESSION['dti_4'] + $_SESSION['dti_5'] ?>
+            </td>
             <?php
             $dti_1 = $_SESSION['dti_1'];
             $dti_2 = $_SESSION['dti_2'];
@@ -652,21 +692,36 @@ $training_date = $_SESSION['date'];
 
             if ($dtiSUM != 0) {
                 $result = round($dti_5 / $dtiSUM - ($$dti_1 + $$dti_2 + $$dti_3) / $dtiSUM, 2) * 100;
-                 if ($result < 0)  $result = 0; 
+                if ($result < 0)
+                    $result = 0;
             } else {
                 $result = 0;
             }
             ?>
-            <td><strong><?php echo $result . "%"; ?></strong></td>
+            <td><strong>
+                    <?php echo $result . "%"; ?>
+                </strong></td>
         </tr>
         <tr>
             <td>FDA</td>
-            <td><?php echo $_SESSION['fda_1'] ?></td>
-            <td><?php echo $_SESSION['fda_2'] ?></td>
-            <td><?php echo $_SESSION['fda_3'] ?></td>
-            <td><?php echo $_SESSION['fda_4'] ?></td>
-            <td><?php echo $_SESSION['fda_5'] ?></td>
-            <td><?php echo $fdaSUM = $_SESSION['fda_1'] + $_SESSION['fda_2'] + $_SESSION['fda_3'] + $_SESSION['fda_4'] + $_SESSION['fda_5']  ?></td>
+            <td>
+                <?php echo $_SESSION['fda_1'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['fda_2'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['fda_3'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['fda_4'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['fda_5'] ?>
+            </td>
+            <td>
+                <?php echo $fdaSUM = $_SESSION['fda_1'] + $_SESSION['fda_2'] + $_SESSION['fda_3'] + $_SESSION['fda_4'] + $_SESSION['fda_5'] ?>
+            </td>
             <?php
             $fda_1 = $_SESSION['fda_1'];
             $fda_2 = $_SESSION['fda_2'];
@@ -674,24 +729,39 @@ $training_date = $_SESSION['date'];
             $fda_5 = $_SESSION['fda_5'];
             if ($fdaSUM != 0) {
                 $result = round($fda_5 / $fdaSUM - ($fda_1 + $fda_2 + $fda_3) / $fdaSUM, 2) * 100;
-                 if ($result < 0)  $result = 0; 
+                if ($result < 0)
+                    $result = 0;
             } else {
                 $result = 0;
             }
             ?>
-            <td><strong><?php echo $result . "%"; ?></strong></td>
-             
+            <td><strong>
+                    <?php echo $result . "%"; ?>
+                </strong></td>
 
- 
+
+
         </tr>
         <tr>
             <td>SBC</td>
-            <td><?php echo $_SESSION['sbc_1'] ?></td>
-            <td><?php echo $_SESSION['sbc_2'] ?></td>
-            <td><?php echo $_SESSION['sbc_3'] ?></td>
-            <td><?php echo $_SESSION['sbc_4'] ?></td>
-            <td><?php echo $_SESSION['sbc_5'] ?></td>
-            <td><?php echo $sbcSUM = $_SESSION['sbc_1'] + $_SESSION['sbc_2'] + $_SESSION['sbc_3'] + $_SESSION['sbc_4'] + $_SESSION['sbc_5']  ?></td>
+            <td>
+                <?php echo $_SESSION['sbc_1'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['sbc_2'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['sbc_3'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['sbc_4'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['sbc_5'] ?>
+            </td>
+            <td>
+                <?php echo $sbcSUM = $_SESSION['sbc_1'] + $_SESSION['sbc_2'] + $_SESSION['sbc_3'] + $_SESSION['sbc_4'] + $_SESSION['sbc_5'] ?>
+            </td>
             <?php
             $sbc_1 = $_SESSION['sbc_1'];
             $sbc_2 = $_SESSION['sbc_2'];
@@ -699,21 +769,38 @@ $training_date = $_SESSION['date'];
             $sbc_5 = $_SESSION['sbc_5'];
             if ($sbcSUM != 0) {
                 $result = round($sbc_5 / $sbcSUM - ($sbc_1 + $sbc_2 + $sbc_3) / $sbcSUM, 2) * 100;
-                 if ($result < 0)  $result = 0; 
+                if ($result < 0)
+                    $result = 0;
             } else {
                 $result = 0;
             }
             ?>
-            <td><strong><?php echo $result . "%"; ?></strong></td>
+            <td><strong>
+                    <?php echo $result . "%"; ?>
+                </strong></td>
         </tr>
         <tr>
-            <td><?php echo $_SESSION['other_agency']?></td>
-            <td><?php echo $_SESSION['other_agency_1'] ?></td>
-            <td><?php echo $_SESSION['other_agency_2'] ?></td>
-            <td><?php echo $_SESSION['other_agency_3'] ?></td>
-            <td><?php echo $_SESSION['other_agency_4'] ?></td>
-            <td><?php echo $_SESSION['other_agency_5'] ?></td>
-            <td><?php echo $other_agency_SUM = $_SESSION['other_agency_1'] + $_SESSION['other_agency_2'] + $_SESSION['other_agency_3'] + $_SESSION['other_agency_4'] + $_SESSION['other_agency_5']  ?></td>
+            <td>
+                <?php echo $_SESSION['other_agency'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['other_agency_1'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['other_agency_2'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['other_agency_3'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['other_agency_4'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['other_agency_5'] ?>
+            </td>
+            <td>
+                <?php echo $other_agency_SUM = $_SESSION['other_agency_1'] + $_SESSION['other_agency_2'] + $_SESSION['other_agency_3'] + $_SESSION['other_agency_4'] + $_SESSION['other_agency_5'] ?>
+            </td>
             <?php
             $other_agency_1 = $_SESSION['other_agency_1'];
             $other_agency_2 = $_SESSION['other_agency_2'];
@@ -721,31 +808,155 @@ $training_date = $_SESSION['date'];
             $other_agency_5 = $_SESSION['other_agency_5'];
             if ($other_agency_SUM != 0) {
                 $result = round($other_agency_5 / $other_agency_SUM - ($other_agency_1 + $other_agency_2 + $other_agency_3) / $other_agency_SUM, 2) * 100;
-                 if ($result < 0)  $result = 0; 
+                if ($result < 0)
+                    $result = 0;
             } else {
                 $result = 0;
             }
             ?>
-            <td><strong><?php echo $result . "%"; ?></strong></td>
+            <td><strong>
+                    <?php echo $result . "%"; ?>
+                </strong></td>
         </tr>
     </table>
 
     <p><b>IV. Summary of Information Gathered</b></p>
 
-    <table class="table table-bordered text-center" id="table">
+    <table class="table table-bordered" id="table">
         <tr>
             <td>Type Of Training</td>
-            <td>No. Of Respondents</td>
+            <td class="text-right">Food:<strong>
+                    <?php echo $_SESSION['food_count'] ?>
+                </strong></td>
+            <td class="text-right">Non-Food:<strong>
+                    <?php echo $_SESSION['nonfood_count'] ?>
+                </strong></td>
         </tr>
         <tr>
-            <td>Data 1</td>
-            <td>Data 2</td>
-        </tr>
-        <!-- Add more rows as needed -->
-    </table>
+            <td>No. Of Respondents(CFS Collected)</td>
+            <td class="text-right"><strong>
+                    <?php echo $_SESSION['totalRes'] ?>
+                </strong></td>
 
+        </tr>
+        <tr>
+            <td>No. Of Customers Assisted/Participants, breakdown as follows: </td>
+            <td class="text-right">Male: <strong>
+                    <?php echo $_SESSION['totalMel'] ?>
+                </strong> </td>
+            <td class="text-right">Female: <strong>
+                    <?php echo $_SESSION['totalFem'] ?>
+                </strong> </td>
+        </tr>
+
+        <tr>
+            <td>No. Of Respondents per Customer Category: </td>
+            <td class="text-right">SC: <strong>
+                    <?php echo $_SESSION['SC_count'] ?>
+                </strong></td>
+            <td class="text-right">Differently-Abled: <strong>
+                    <?php echo $_SESSION['DA_count'] ?>
+                </strong> </td>
+            <td class="text-right">4Ps Member: <strong>
+                    <?php echo $_SESSION['FPs_count'] ?>
+                </strong></td>
+            <td class="text-right">Youth: <strong>
+                    <?php echo $_SESSION['youth_count'] ?>
+                </strong> </td>
+            <td class="text-right">IP Group Member: <strong>
+                    <?php echo $_SESSION['IP_count'] ?>
+                </strong></td>
+        </tr>
+
+        <tr>
+        <tr>
+            <td>No. Of Respondents per Sector: </td>
+            <td class="text-right">Industry: <strong>
+                    <?php echo $_SESSION['ind_count'] ?>
+                </strong></td>
+            <td class="text-right">CSO: <strong>
+                    <?php echo $_SESSION['cso_count'] ?>
+                </strong></td>
+            <td class="text-right">Academe: <strong>
+                    <?php echo $_SESSION['acad_count'] ?>
+                </strong></td>
+            <td class="text-right">Government: <strong>
+                    <?php echo $_SESSION['gov_count'] ?>
+                </strong></td>
+            <td class="text-right">Media: <strong>
+                    <?php echo $_SESSION['med_count'] ?>
+                </strong></td>
+
+
+
+
+        </tr>
+
+
+        <tr>
+            <td>No. Of First Time Customers: </td>
+            <td class="text-right"><strong>
+                    <?php echo $_SESSION['firstTime'] ?>
+                </strong></td>
+        </tr>
+
+        <tr>
+            <td>No. Of Returning Customers: </td>
+            <td class="text-right"><strong>
+                    <?php echo $_SESSION['returning'] ?>
+                </strong></td>
+        </tr>
+        <tr>
+            <td>No. Of Firms Assisted: </td>
+            <td class="text-right"><strong>
+                    <?php echo $_SESSION['firms'] ?>
+                </strong></td>
+
+            <?php
+            // BUUUG
+            if (isset ($_SESSION['firms_name']) && is_array($_SESSION['firms_name'])) {
+                // Loop through the array and print each firm
+                foreach ($_SESSION['firms_name'] as $index => $firm) {
+                    echo "<td>" . ($index + 1) . ". " . ucwords($firm) . "</td>";
+                }
+            } else {
+                echo "<td>No firms stored in the session.</td>";
+            }
+
+            ?>
+        </tr>
+        <tr>
+            <td>No. Of MSMEs Assisted: </td>
+            <td class="text-right"><strong>
+                    <?php echo $_SESSION['msme_count'] ?>
+                </strong></td>
+        </tr>
+
+
+    </table>
+    <p><b>Overall Mood/Feeling that best descibes the experience with DOST XI: </b></p>
     <!-- <button type="button" id="printButton" onclick="printPage()"
         class="btn bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded float-right">Print Page</button> -->
+    <table class="table table-bordered mt-4" id="table">
+        <tr>
+            <td>Comment/s</td>
+            <td>Response to Comments</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+
+        </tr>
+    </table>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
+        <p class="mt-5">
+            Prepared by:<br><br> <b>[Acc. Name]</b><br> [position]<br> [timestamp]
+        </p>
+
+        <p class="mt-5">
+            Approved by:<br><br> <b>[Admin. Name]</b><br> PSTD<br> [timestamp]
+        </p>
+    </div>
 </body>
 
 </html>
