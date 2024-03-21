@@ -82,9 +82,10 @@ FROM
     $first_time_customers = $row['first_time_customers'];
     $total_male = $row['total_male'];
     $total_female = $row['total_female'];
+    
 
+    
 
-    // Split company names into an array
 
     $training_name = explode(',', $row['training_name']);
     $company_names = explode(',', $row['company_names']);
@@ -266,9 +267,8 @@ FROM
   AND ('$SearchTraining_name' = '' OR training_name = '$SearchTraining_name')";
 
   $result2 = $conn->query($sql2);
-
   if ($result2) {
-    $resp = $result2->fetch_assoc(); // Use fetch_assoc() to get a single row
+    $resp = $result2->fetch_assoc();// Use fetch_assoc() to get a single row
 
     $_SESSION['SQD_1SD'] = $resp['SQD_1SD'];
     $_SESSION['SQD_1D'] = $resp['SQD_1D'];
@@ -388,17 +388,44 @@ FROM
     $_SESSION['ind_count'] = $resp['ind_count'];
     $_SESSION['gov_count'] = $resp['gov_count'];
     $_SESSION['med_count'] = $resp['med_count'];
-
-    $_SESSION['firms_name'] = (array) $resp['company'];
+   
+   
     
-
-
   } else {
     // Handle the case where the query fails
     echo "Error: " . $conn->error;
   }
 
+// Gettingv commenrs separetu
+$com = "SELECT comments FROM data";
+
+// Execute the query
+$result4 = $conn->query($com);
+
+// Check if the query was successful
+if ($result4) {
+  // Fetch all the comments from the result
+  $comments = [];
+  while ($row4 = $result4->fetch_assoc()) {
+    $comments[] = $row4['comments'];
+  }
+  $_SESSION['comments'] = array();
+
+  // Store the comments in the session as an array
+  if (!isset($_SESSION['comments'])) {
+    $_SESSION['comments'] = [];
+  }
+  $_SESSION['comments']= $comments;
+} else {
+  // Handle the case where the query fails
+  echo "Error: " . $conn->error;
 }
+
+
+
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -637,15 +664,25 @@ FROM
                     if (empty ($company_names)) {
                       echo "<tr><td colspan='1'>No Data</td></tr>";
                     } else {
+
+                      $_SESSION['firms_name'] = array(); 
                       foreach ($company_names as $index => $company) {
                         echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
                         // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ($index + 1) . "</td>";
                         echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $company . "</td>";
                         echo "</tr>";
+                        $_SESSION['firms_name'][] = $company;
                         // query for debugging
                         // echo "SQL Query: " . $sql . "<br>";
                       }
+
                     }
+                 
+
+                 
+                    
+
+
                     ?>
                   </tbody>
                 </table>
@@ -814,12 +851,6 @@ FROM
 </body>
 
 </html>
-
-
-
-
-
-
 
 
 

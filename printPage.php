@@ -911,19 +911,20 @@ $training_date = $_SESSION['date'];
             <td class="text-right"><strong>
                     <?php echo $_SESSION['firms'] ?>
                 </strong></td>
-
-            <?php
-            // BUUUG
-            if (isset ($_SESSION['firms_name']) && is_array($_SESSION['firms_name'])) {
-                // Loop through the array and print each firm
-                foreach ($_SESSION['firms_name'] as $index => $firm) {
-                    echo "<td>" . ($index + 1) . ". " . ucwords($firm) . "</td>";
+            <td>
+                <?php
+                // BUUUG
+                if (isset ($_SESSION['firms_name']) && is_array($_SESSION['firms_name'])) {
+                    // Loop through the array and print each firm
+                    foreach ($_SESSION['firms_name'] as $index => $firm) {
+                        echo ($index + 1) . ". " . ucwords($firm). "<br>";
+                    }
+                } else {
+                    echo "<td>-</td>";
                 }
-            } else {
-                echo "<td>No firms stored in the session.</td>";
-            }
 
-            ?>
+                ?>
+            </td>
         </tr>
         <tr>
             <td>No. Of MSMEs Assisted: </td>
@@ -931,20 +932,66 @@ $training_date = $_SESSION['date'];
                     <?php echo $_SESSION['msme_count'] ?>
                 </strong></td>
         </tr>
-
+        <tr>
+                <td>No. Of First Time Customers: </td>
+                <td class="text-right"><strong>
+                        <?php echo $_SESSION['firstTime'] ?>
+                    </strong></td>
+            </tr>
 
     </table>
     <p><b>Overall Mood/Feeling that best descibes the experience with DOST XI: </b></p>
     <!-- <button type="button" id="printButton" onclick="printPage()"
         class="btn bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded float-right">Print Page</button> -->
     <table class="table table-bordered mt-4" id="table">
+ 
+
         <tr>
             <td>Comment/s</td>
             <td>Response to Comments</td>
         </tr>
+
         <tr>
-            <td></td>
-            <td></td>
+            <td>
+            <?php
+            if (isset($_SESSION['comments']) && is_array($_SESSION['comments'])) {
+                // Loop through the array and print each comment
+                foreach ($_SESSION['comments'] as $index => $comment) {
+                    echo ($index + 1) . ". " . nl2br(htmlspecialchars(ucwords($comment))) . "<br>";
+                }
+            } else {
+                echo "-";
+            }
+            ?>
+            </td>
+            <td ondblclick="editText()">
+                <textarea id="myInput" onkeypress="handleKeyPress(event)"></textarea>
+                <span id="myText"></span>
+            </td>
+
+            <script>
+            function handleKeyPress(e) {
+                var keyCode = e.keyCode || e.which;
+                if (keyCode == 13 && !e.shiftKey) { // 13 is the Enter key
+                    e.preventDefault();
+                    var input = document.getElementById('myInput');
+                    var text = document.getElementById('myText');
+                    text.innerHTML = input.value.replace(/\n/g, '<br>');
+                    input.style.display = 'none';
+                    text.style.display = 'inline';
+                }
+            }
+
+            function editText() {
+                var input = document.getElementById('myInput');
+                var text = document.getElementById('myText');
+                input.style.display = 'inline';
+                text.style.display = 'none';
+                input.focus();
+            }
+            </script>
+            </tr>
+            </td>
 
         </tr>
     </table>
