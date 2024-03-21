@@ -532,26 +532,43 @@ if ($result4) {
           <div class="flex justify-between mb-4 items-start">
             <div class="font-medium">
               <?php
-              if (empty ($start_date) && empty ($end_date)) {
-                echo "Showing All Date";
+
+              if (empty($start_date) && empty($end_date)) {
+                echo "Showing All CSF Data";
               } else {
                 $start_month = date('n', strtotime($start_date));
                 $end_month = date('n', strtotime($end_date));
 
-                if ($start_month == 1 && $end_month == 3) {
-                  echo "Showing " . $_SESSION['quarter'] = "1st Quarter ";
-                } elseif ($start_month == 4 && $end_month == 6) {
-                  echo "Showing " . $_SESSION['quarter'] = "2nd Quarter ";
-                } elseif ($start_month == 7 && $end_month == 9) {
-                  echo "Showing " . $_SESSION['quarter'] = "3rd Quarter ";
-                } elseif ($start_month == 10 && $end_month == 12) {
-                  echo "Showing " . $_SESSION['quarter'] = "4th Quarter ";
+                if ($start_date == $end_date) {
+                  echo "Showing " . date('F j, Y', strtotime($start_date))." CSF Data";
                 } else {
-                  $start_month_formatted = date('F j, Y', strtotime($start_date));
-                  $end_month_formatted = date('F j, Y', strtotime($end_date));
-                  echo $start_month_formatted . " to " . $end_month_formatted;
+                  echo "Showing " . date('F j, Y', strtotime($start_date)) . " - " . date('F j, Y', strtotime($end_date)).
+                  " CSF Data";
+                }
+
+                  if ($start_month == 1 && $end_month == 3) {
+                    echo "Showing " . ($_SESSION['quarter'] = "1st Quarter")." CSF Data";
+                  } elseif ($start_month == 4 && $end_month == 6) {
+                    echo "Showing " . ($_SESSION['quarter'] = "2nd Quarter")." CSF Data";
+                  } elseif ($start_month == 7 && $end_month == 9) {
+                    echo "Showing " . ($_SESSION['quarter'] = "3rd Quarter")." CSF Data";
+                  } elseif ($start_month == 10 && $end_month == 12) {
+                    echo "Showing " . ($_SESSION['quarter'] = "4th Quarter")." CSF Data";
+                  } else{
                 }
               }
+            
+            
+                // else {
+                //   echo "Showing " . date('F j, Y', strtotime($start_date)) . " to " . date('F j, Y', strtotime($end_date));
+                // }
+
+                // } else {
+                //   $start_month_formatted = date('F j, Y', strtotime($start_date));
+                //   $end_month_formatted = date('F j, Y', strtotime($end_date));
+                //   echo $start_month_formatted . " to " . $end_month_formatted;
+                // }
+              
               ?>
 
             </div>
