@@ -205,7 +205,7 @@ $result = mysqli_query($conn, $query);
 
       </div>
     </div>
-    </div>
+    </div>           
   </main>
   <!-- end: Main -->
 

@@ -997,16 +997,14 @@ $training_date = $_SESSION['date'];
     </table>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
         <p class="mt-5">
-            Prepared by:<br><br> <b>[Acc. Name]</b><br> [position]<br> [timestamp]
+            Prepared by:<br><br> <b><?php echo $_SESSION['name'] ?></b><br><?php echo $_SESSION['position'] ?><br> <?php echo date('m/d/Y') ?>
         </p>
 
-        <p class="mt-5">
-            Approved by:<br><br> <b>[Admin. Name]</b><br> PSTD<br> [timestamp]
+        <p class="mt-5" >
+            Approved by:<br><br> <b>[Admin. Name]</b><br> PSTD<br><?php echo date('m/d/Y') ?>
         </p>
     </div>
 </body>
 
 </html>
 
-<?php session_unset();
-session_destroy(); ?>

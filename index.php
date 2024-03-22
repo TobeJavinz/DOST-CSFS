@@ -6,9 +6,6 @@ if (isset($_SESSION['name'])) {
     header("Location: dashboard.php");
 }
 
-
-
-
 include 'DBconn.php';
 $conn = connect_to_database();
 
@@ -18,8 +15,9 @@ if (isset($_POST['register'])) {
     $name = trim($_POST['name']);
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
+    $position = trim($_POST['position']);
 
-    if (empty($name) || empty($username) || empty($password)) {
+    if (empty($name) || empty($username) || empty($password) || empty($position)){
         echo "<script>alert('Please Fill In All Fields Properly.');</script>";
     } else {
         // Check if username already exists
@@ -42,8 +40,8 @@ if (isset($_POST['register'])) {
             // No duplicate username or name found, proceed with registration
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-            $stmt = $conn->prepare("INSERT INTO user_cred (username, password, name) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $username, $hashed_password, $name);
+            $stmt = $conn->prepare("INSERT INTO user_cred (username, password, name, position) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $username, $hashed_password, $name, $position);
 
             if ($stmt->execute()) {
                 echo "<script>alert('Staff Registered Successfully!');</script>";
@@ -61,17 +59,19 @@ if (isset($_POST['login'])) {
     $login_username = $_POST['login_username'];
     $login_password = $_POST['login_password'];
 
-    $stmt = $conn->prepare("SELECT `password`, `name` FROM user_cred WHERE `username` = ?");
+    $stmt = $conn->prepare("SELECT `password`, `name`,`position` FROM user_cred WHERE `username` = ?");
     $stmt->bind_param("s", $login_username);
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($hashed_password, $name);
+    $stmt->bind_result($hashed_password, $name, $position);
     $stmt->fetch();
 
     // Verify password
     if (password_verify($login_password, $hashed_password)) {
         // Password is correct
         $_SESSION['name'] = $name;
+        $_SESSION['position'] = $position;
+
         $stmt->close();
         $conn->close();
         header("Location: dashboard.php"); // Redirect
@@ -115,9 +115,8 @@ $conn->close();
                 <span>or use your email for registeration</span> -->
                 <input required name="name" type="text" placeholder="Full Name" pattern="[A-Za-z ]+"
                     title="Please enter letters only">
-                <input required name="username" type="text" placeholder="Username"
-                    pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]+$"
-                    title="Username must contain at least one letter and can include numbers">
+                <input required name="position" type="text" placeholder="Position">
+                <input required name="username" type="text" placeholder="Username">
 
                 <input required id="password" name="password" type="password" placeholder="Password"
                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$"

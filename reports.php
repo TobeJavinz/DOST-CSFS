@@ -694,11 +694,6 @@ if ($result4) {
                       }
 
                     }
-                 
-
-                 
-                    
-
 
                     ?>
                   </tbody>
@@ -872,4 +867,4 @@ if ($result4) {
 
 
 
-<!-- EVERYTHING YOU LOSE IS A STEP YOU TAKE -->
+<!-- EVERYTHING YOU LOSE IS A STEP YOU TAKE -TS-->
