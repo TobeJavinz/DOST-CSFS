@@ -1,5 +1,8 @@
 <?php
 
+// header("Cache-Control: no cache");
+// session_cache_limiter("private_no_expire");
+
 session_start();
 
 // Check if $SQD_1SD has no value and redirect to reports.php
@@ -76,6 +79,7 @@ $training_address = $_SESSION['training_venue'];
 $training_date = $_SESSION['date'];
 
 
+
 ?>
 
 
@@ -117,14 +121,20 @@ $training_date = $_SESSION['date'];
             window.print();
             document.getElementById('printButton').style.display = 'block';
             document.getElementById('backButton').style.display = 'block';
+
+        
         }
+
+        document.getElementById('backButton').addEventListener('click', function () {
+                // Navigate back
+                window.history.back();
+            });
     </script>
 </head>
 
 <body style="margin: 20px; margin-bottom: 50px;">
-    
-    <a href="javascript:history.back()" id="backButton" style="margin-bottom: 20px;">&#8592; Back</a>
-   
+
+
 
     <!-- Image header -->
     <div class="header-image" style="text-align: center; margin: 0 auto;">
@@ -923,7 +933,7 @@ $training_date = $_SESSION['date'];
                 if (isset ($_SESSION['firms_name']) && is_array($_SESSION['firms_name'])) {
                     // Loop through the array and print each firm
                     foreach ($_SESSION['firms_name'] as $index => $firm) {
-                        echo ($index + 1) . ". " . ucwords($firm). "<br>";
+                        echo ($index + 1) . ". " . ucwords($firm) . "<br>";
                     }
                 } else {
                     echo "<td>-</td>";
@@ -939,17 +949,19 @@ $training_date = $_SESSION['date'];
                 </strong></td>
         </tr>
         <tr>
-                <td>No. Of First Time Customers: </td>
-                <td class="text-right"><strong>
-                        <?php echo $_SESSION['firstTime'] ?>
-                    </strong></td>
-            </tr>
+            <td>No. Of First Time Customers: </td>
+            <td class="text-right"><strong>
+                    <?php echo $_SESSION['firstTime'] ?>
+                </strong></td>
+        </tr>
 
     </table>
-    <p><b>Overall Mood/Feeling that best descibes the experience with DOST XI: </b></p>
-    
+    <p><b>Overall Mood/Feeling that best descibes the experience with DOST XI: </b>
+        <?php echo $_SESSION['final_mood'] ?>
+    </p>
+
     <table class="table table-bordered mt-4" id="table">
- 
+
 
         <tr>
             <td>Comment/s</td>
@@ -958,16 +970,16 @@ $training_date = $_SESSION['date'];
 
         <tr>
             <td>
-            <?php
-            if (isset($_SESSION['comments']) && is_array($_SESSION['comments'])) {
-                // Loop through the array and print each comment
-                foreach ($_SESSION['comments'] as $index => $comment) {
-                    echo ($index + 1) . ". " . nl2br(htmlspecialchars(ucwords($comment))) . "<br>";
+                <?php
+                if (isset ($_SESSION['comments']) && is_array($_SESSION['comments'])) {
+                    // Loop through the array and print each comment
+                    foreach ($_SESSION['comments'] as $index => $comment) {
+                        echo ($index + 1) . ". " . nl2br(htmlspecialchars(ucwords($comment))) . "<br>";
+                    }
+                } else {
+                    echo "-";
                 }
-            } else {
-                echo "-";
-            }
-            ?>
+                ?>
             </td>
             <td ondblclick="editText()">
                 <textarea id="myInput" onkeypress="handleKeyPress(event)"></textarea>
@@ -975,46 +987,56 @@ $training_date = $_SESSION['date'];
             </td>
 
             <script>
-            function handleKeyPress(e) {
-                var keyCode = e.keyCode || e.which;
-                if (keyCode == 13 && !e.shiftKey) { // 13 is the Enter key
-                    e.preventDefault();
+                function handleKeyPress(e) {
+                    var keyCode = e.keyCode || e.which;
+                    if (keyCode == 13 && !e.shiftKey) { // 13 is the Enter key
+                        e.preventDefault();
+                        var input = document.getElementById('myInput');
+                        var text = document.getElementById('myText');
+                        text.innerHTML = input.value.replace(/\n/g, '<br>');
+                        input.style.display = 'none';
+                        text.style.display = 'inline';
+                    }
+                }
+
+                function editText() {
                     var input = document.getElementById('myInput');
                     var text = document.getElementById('myText');
-                    text.innerHTML = input.value.replace(/\n/g, '<br>');
-                    input.style.display = 'none';
-                    text.style.display = 'inline';
+                    input.style.display = 'inline';
+                    text.style.display = 'none';
+                    input.focus();
                 }
-            }
-
-            function editText() {
-                var input = document.getElementById('myInput');
-                var text = document.getElementById('myText');
-                input.style.display = 'inline';
-                text.style.display = 'none';
-                input.focus();
-            }
             </script>
-            </tr>
-            </td>
+        </tr>
+        </td>
 
         </tr>
     </table>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
-   
+
         <p class="mt-5">
-            Prepared by:<br><br> <b><?php echo $_SESSION['name'] ?></b><br><?php echo $_SESSION['position'] ?><br> <?php echo date('m/d/Y') ?>
+            Prepared by:<br><br> <b>
+                <?php echo $_SESSION['name'] ?>
+            </b><br>
+            <?php echo $_SESSION['position'] ?><br>
+            <?php echo date('m/d/Y') ?>
         </p>
 
-        <p class="mt-5" >
-            Approved by:<br><br> <b><?php echo $_SESSION['AdminName'] ?></b><br><?php echo $_SESSION['AdminPosition'] ?><br><?php echo date('m/d/Y') ?>
+        <p class="mt-5">
+            Approved by:<br><br> <b>
+                <?php echo $_SESSION['AdminName'] ?>
+            </b><br>
+            <?php echo $_SESSION['AdminPosition'] ?><br>
+            <?php echo date('m/d/Y') ?>
         </p>
-        
+
     </div>
+
+<a href="javascript:void(0);" onclick="history.back()" id="backButton" style="margin-bottom: 20px; font-size: 18px;">&#8592; Back</a>
+
     <button type="button" id="printButton" onclick="printPage()"
         class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-right"
-        style="background-color: blue;">Print Page</button> 
+        style="background-color: blue;">Print Page</button>
 </body>
 
 </html>
-

@@ -1,4 +1,9 @@
 <?php
+header("Cache-Control: no cache");
+session_cache_limiter("private_no_expire");
+
+
+
 session_start();
 include 'DBconn.php';
 $conn = connect_to_database();
@@ -82,9 +87,9 @@ FROM
     $first_time_customers = $row['first_time_customers'];
     $total_male = $row['total_male'];
     $total_female = $row['total_female'];
-    
 
-    
+
+
 
 
     $training_name = explode(',', $row['training_name']);
@@ -388,42 +393,69 @@ FROM
     $_SESSION['ind_count'] = $resp['ind_count'];
     $_SESSION['gov_count'] = $resp['gov_count'];
     $_SESSION['med_count'] = $resp['med_count'];
-   
-   
-    
+
+
+
   } else {
     // Handle the case where the query fails
     echo "Error: " . $conn->error;
   }
 
-// Gettingv commenrs separetu
-$com = "SELECT comments FROM data";
+  // Gettingv commenrs separetu
+  $com = "SELECT comments FROM data";
 
-// Execute the query
-$result4 = $conn->query($com);
+  // Execute the query
+  $result4 = $conn->query($com);
 
-// Check if the query was successful
-if ($result4) {
-  // Fetch all the comments from the result
-  $comments = [];
-  while ($row4 = $result4->fetch_assoc()) {
-    $comments[] = $row4['comments'];
+  // Check if the query was successful
+  if ($result4) {
+    // Fetch all the comments from the result
+    $comments = [];
+    while ($row4 = $result4->fetch_assoc()) {
+      $comments[] = $row4['comments'];
+    }
+    $_SESSION['comments'] = array();
+
+    // Store the comments in the session as an array
+    if (!isset ($_SESSION['comments'])) {
+      $_SESSION['comments'] = [];
+    }
+    $_SESSION['comments'] = $comments;
+  } else {
+    // Handle the case where the query fails
+    echo "Error: " . $conn->error;
   }
-  $_SESSION['comments'] = array();
 
-  // Store the comments in the session as an array
-  if (!isset($_SESSION['comments'])) {
-    $_SESSION['comments'] = [];
+
+  $mood = "SELECT 
+CASE 
+    WHEN COUNT(*) > 1 THEN 
+        FIRST_VALUE(overall_mood) OVER (ORDER BY COUNT(*) DESC, mood_weight DESC)
+    ELSE 
+        overall_mood
+END AS final_mood
+FROM (
+SELECT 
+    overall_mood,
+    COUNT(*) OVER (PARTITION BY overall_mood) AS mood_count,
+    CASE 
+        WHEN overall_mood = 'Delighted' THEN 5
+        WHEN overall_mood = 'Satisfied' THEN 4
+        WHEN overall_mood = 'Neutral' THEN 3
+        WHEN overall_mood = 'Unsatisfied' THEN 2
+        WHEN overall_mood = 'Disappointed' THEN 1
+        ELSE 0
+    END AS mood_weight
+FROM data
+) AS mood_weights
+GROUP BY overall_mood
+LIMIT 1";
+
+  $result5 = $conn->query($mood);
+  if ($result5) {
+    $moodResp = $result5->fetch_assoc();
+    $_SESSION['final_mood'] = $moodResp['final_mood'];
   }
-  $_SESSION['comments']= $comments;
-} else {
-  // Handle the case where the query fails
-  echo "Error: " . $conn->error;
-}
-
-
-
-
 }
 
 ?>
@@ -494,7 +526,7 @@ if ($result4) {
           </div>
           <div class="flex justify-center mb-4 items-start">
             <!-- DATE PICKER INPUT -->
-            <form method="post">
+            <form method="post" id="searchForm">
               <div class="flex flex-col space-y-4">
                 <!-- Start Date Picker -->
                 <label for="start_date" class="block">Start Date:</label>
@@ -533,41 +565,41 @@ if ($result4) {
             <div class="font-medium">
               <?php
 
-              if (empty($start_date) && empty($end_date)) {
+              if (empty ($start_date) && empty ($end_date)) {
                 echo "Showing All CSF Data";
               } else {
                 $start_month = date('n', strtotime($start_date));
                 $end_month = date('n', strtotime($end_date));
 
                 if ($start_date == $end_date) {
-                  echo "Showing " . date('F j, Y', strtotime($start_date))." CSF Data";
+                  echo "Showing " . date('F j, Y', strtotime($start_date)) . " CSF Data";
                 } else {
-                  echo "Showing " . date('F j, Y', strtotime($start_date)) . " - " . date('F j, Y', strtotime($end_date)).
-                  " CSF Data";
+                  echo "Showing " . date('F j, Y', strtotime($start_date)) . " - " . date('F j, Y', strtotime($end_date)) .
+                    " CSF Data";
                 }
 
-                  if ($start_month == 1 && $end_month == 3) {
-                    echo "Showing " . ($_SESSION['quarter'] = "1st Quarter")." CSF Data";
-                  } elseif ($start_month == 4 && $end_month == 6) {
-                    echo "Showing " . ($_SESSION['quarter'] = "2nd Quarter")." CSF Data";
-                  } elseif ($start_month == 7 && $end_month == 9) {
-                    echo "Showing " . ($_SESSION['quarter'] = "3rd Quarter")." CSF Data";
-                  } elseif ($start_month == 10 && $end_month == 12) {
-                    echo "Showing " . ($_SESSION['quarter'] = "4th Quarter")." CSF Data";
-                  } else{
+                if ($start_month == 1 && $end_month == 3) {
+                  echo "<br><i>Showing " . ($_SESSION['quarter'] = "1st Quarter Of ". date('Y')) . " CSF Data </i>";
+                } elseif ($start_month == 4 && $end_month == 6) {
+                  echo "<br><i>Showing " . ($_SESSION['quarter'] = "2nd Quarter Of ". date('Y')) . " CSF Data </i>";
+                } elseif ($start_month == 7 && $end_month == 9) {
+                  echo "<br><i> Showing " . ($_SESSION['quarter'] = "3rd Quarter Of ". date('Y')) . " CSF Data </i>";
+                } elseif ($start_month == 10 && $end_month == 12) {
+                  echo "<br><i>Showing " . ($_SESSION['quarter'] = "4th Quarter Of " . date('Y')) . " CSF Data </i>";
+                } else {
                 }
               }
-            
-            
-                // else {
-                //   echo "Showing " . date('F j, Y', strtotime($start_date)) . " to " . date('F j, Y', strtotime($end_date));
-                // }
 
-                // } else {
-                //   $start_month_formatted = date('F j, Y', strtotime($start_date));
-                //   $end_month_formatted = date('F j, Y', strtotime($end_date));
-                //   echo $start_month_formatted . " to " . $end_month_formatted;
-                // }
+
+              // else {
+              //   echo "Showing " . date('F j, Y', strtotime($start_date)) . " to " . date('F j, Y', strtotime($end_date));
+              // }
+              
+              // } else {
+              //   $start_month_formatted = date('F j, Y', strtotime($start_date));
+              //   $end_month_formatted = date('F j, Y', strtotime($end_date));
+              //   echo $start_month_formatted . " to " . $end_month_formatted;
+              // }
               
               ?>
 
@@ -682,7 +714,7 @@ if ($result4) {
                       echo "<tr><td colspan='1'>No Data</td></tr>";
                     } else {
 
-                      $_SESSION['firms_name'] = array(); 
+                      $_SESSION['firms_name'] = array();
                       foreach ($company_names as $index => $company) {
                         echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
                         // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ($index + 1) . "</td>";
@@ -743,8 +775,8 @@ if ($result4) {
                         echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $sector['sector_count'] . "</td>";
                         echo "</tr>";
                       }
-                  
-    
+
+
                     }
                     ?>
                   </tbody>
@@ -824,7 +856,7 @@ if ($result4) {
                 </div>
               </div>
               <span class="text-gray-400 text-sm">MSMEs Assisted</span>
-                    
+
             </div>
 
 
@@ -852,12 +884,17 @@ if ($result4) {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
   <script>
     document.getElementById('exportButton').addEventListener('click', function () {
-      window.location.href = 'printPage.php';
-      <?php  ?>
+      
+        // Redirect to printPage.php
+ 
+       // header("Location: printPage.php");
+        window.location.href = 'printPage.php';
+        $_SESSION['form_submitted'] = true;
+       
     });
+</script>
 
 
-  </script>
 
 
 </body>
