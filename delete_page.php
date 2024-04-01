@@ -17,4 +17,3 @@ if (isset($_GET["ServiceID"])) {
 
 header("location: /DOST-CSFS/tables.php");
 exit;
-?>
