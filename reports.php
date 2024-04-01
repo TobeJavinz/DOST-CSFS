@@ -98,11 +98,10 @@ FROM
   } else {
     // Handle the case where the query fails
     echo "Error: " . $conn->error;
-  }
-  ;
+  };
 
-  $SearchService = isset ($_POST['service']) ? $_POST['service'] : '';
-  $SearchTraining_name = isset ($_POST['training_name']) ? $_POST['training_name'] : '';
+  $SearchService = isset($_POST['service']) ? $_POST['service'] : '';
+  $SearchTraining_name = isset($_POST['training_name']) ? $_POST['training_name'] : '';
 
   $sql1 = "SELECT 
       subquery.sector, 
@@ -126,7 +125,6 @@ FROM
   // Check if the query was successful
   if ($result1) {
     $sectors = $result1->fetch_all(MYSQLI_ASSOC);
-
   } else {
     // Handle the case where the query fails
     echo "Error: " . $conn->error;
@@ -273,7 +271,7 @@ FROM
 
   $result2 = $conn->query($sql2);
   if ($result2) {
-    $resp = $result2->fetch_assoc();// Use fetch_assoc() to get a single row
+    $resp = $result2->fetch_assoc(); // Use fetch_assoc() to get a single row
 
     $_SESSION['SQD_1SD'] = $resp['SQD_1SD'];
     $_SESSION['SQD_1D'] = $resp['SQD_1D'];
@@ -393,9 +391,6 @@ FROM
     $_SESSION['ind_count'] = $resp['ind_count'];
     $_SESSION['gov_count'] = $resp['gov_count'];
     $_SESSION['med_count'] = $resp['med_count'];
-
-
-
   } else {
     // Handle the case where the query fails
     echo "Error: " . $conn->error;
@@ -417,7 +412,7 @@ FROM
     $_SESSION['comments'] = array();
 
     // Store the comments in the session as an array
-    if (!isset ($_SESSION['comments'])) {
+    if (!isset($_SESSION['comments'])) {
       $_SESSION['comments'] = [];
     }
     $_SESSION['comments'] = $comments;
@@ -496,19 +491,15 @@ LIMIT 1";
           <button type="button" class="dropdown-toggle flex items-center">
             <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle" />
           </button>
-          <ul
-            class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
+          <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
             <li>
-              <a href="#"
-                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
+              <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
             </li>
             <li>
-              <a href="#"
-                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
+              <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
             </li>
             <li>
-              <a href="#"
-                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
+              <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
             </li>
           </ul>
         </li>
@@ -530,27 +521,22 @@ LIMIT 1";
               <div class="flex flex-col space-y-4">
                 <!-- Start Date Picker -->
                 <label for="start_date" class="block">Start Date:</label>
-                <input type="date" id="start_date" name="start_date"
-                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                <input type="date" id="start_date" name="start_date" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
 
                 <!-- End Date Picker -->
                 <label for="end_date" class="block">End Date:</label>
-                <input type="date" id="end_date" name="end_date"
-                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                <input type="date" id="end_date" name="end_date" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
 
                 <!-- Service Input Field -->
                 <label for="service" class="block">Service:</label>
-                <input type="text" id="service" name="service"
-                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                <input type="text" id="service" name="service" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
 
                 <!-- Training Name Input Field -->
                 <label for="training_name" class="block">Training Name:</label>
-                <input type="text" id="training_name" name="training_name"
-                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                <input type="text" id="training_name" name="training_name" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
 
                 <!-- Submit Button -->
-                <button type="submit"
-                  class="bg-blue-500 text-Black px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-dashed focus:bg-blue-600">SEARCH</button>
+                <button type="submit" class="bg-blue-500 text-Black px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-dashed focus:bg-blue-600">SEARCH</button>
               </div>
             </form>
             <!-- printview
@@ -565,7 +551,7 @@ LIMIT 1";
             <div class="font-medium">
               <?php
 
-              if (empty ($start_date) && empty ($end_date)) {
+              if (empty($start_date) && empty($end_date)) {
                 echo "Showing All CSF Data";
               } else {
                 $start_month = date('n', strtotime($start_date));
@@ -579,13 +565,13 @@ LIMIT 1";
                 }
 
                 if ($start_month == 1 && $end_month == 3) {
-                  echo "<br><i>Showing " . ($_SESSION['quarter'] = "1st Quarter Of ". date('Y')) . " CSF Data </i>";
+                  echo "<br><i>" . ($_SESSION['quarter'] = "1st Quarter Of " . date('Y')) . "</i>";
                 } elseif ($start_month == 4 && $end_month == 6) {
-                  echo "<br><i>Showing " . ($_SESSION['quarter'] = "2nd Quarter Of ". date('Y')) . " CSF Data </i>";
+                  echo "<br><i>" . ($_SESSION['quarter'] = "2nd Quarter Of " . date('Y')) . "</i>";
                 } elseif ($start_month == 7 && $end_month == 9) {
-                  echo "<br><i> Showing " . ($_SESSION['quarter'] = "3rd Quarter Of ". date('Y')) . " CSF Data </i>";
+                  echo "<br><i>" . ($_SESSION['quarter'] = "3rd Quarter Of " . date('Y')) . "</i>";
                 } elseif ($start_month == 10 && $end_month == 12) {
-                  echo "<br><i>Showing " . ($_SESSION['quarter'] = "4th Quarter Of " . date('Y')) . " CSF Data </i>";
+                  echo "<br><i>" . ($_SESSION['quarter'] = "4th Quarter Of " . date('Y')) . "</i>";
                 } else {
                 }
               }
@@ -594,13 +580,13 @@ LIMIT 1";
               // else {
               //   echo "Showing " . date('F j, Y', strtotime($start_date)) . " to " . date('F j, Y', strtotime($end_date));
               // }
-              
+
               // } else {
               //   $start_month_formatted = date('F j, Y', strtotime($start_date));
               //   $end_month_formatted = date('F j, Y', strtotime($end_date));
               //   echo $start_month_formatted . " to " . $end_month_formatted;
               // }
-              
+
               ?>
 
             </div>
@@ -627,7 +613,7 @@ LIMIT 1";
                   <tbody>
                     <?php
                     // Loop through the array of company names and display them in the table
-                    if (empty ($service)) {
+                    if (empty($service)) {
                       echo "<tr><td colspan='1'>No Data</td></tr>";
                     } else {
                       foreach ($service as $index => $service) {
@@ -638,7 +624,6 @@ LIMIT 1";
                         // query for debugging
                         // echo "SQL Query: " . $sql . "<br>";
                       }
-
                     }
                     ?>
                   </tbody>
@@ -655,8 +640,7 @@ LIMIT 1";
                   echo $total_training_names > 0 ? $total_training_names : "0";
                   ?>
                 </div>
-                <span
-                  class="p-1 rounded text-[12px] font-semibold bg-emerald-500/10 text-emerald-500 leading-none ml-1"></span>
+                <span class="p-1 rounded text-[12px] font-semibold bg-emerald-500/10 text-emerald-500 leading-none ml-1"></span>
               </div>
               <span class="text-gray-400 text-sm">Trainings</span>
               <div>
@@ -669,7 +653,7 @@ LIMIT 1";
                   <tbody>
                     <?php
                     // Loop through the array of company names and display them in the table
-                    if (empty ($training_name)) {
+                    if (empty($training_name)) {
                       echo "<tr><td colspan='1'>No Data</td></tr>";
                     } else {
                       foreach ($training_name as $index => $training_name) {
@@ -710,7 +694,7 @@ LIMIT 1";
                     <?php
 
                     // Loop through the array of company names and display them in the table
-                    if (empty ($company_names)) {
+                    if (empty($company_names)) {
                       echo "<tr><td colspan='1'>No Data</td></tr>";
                     } else {
 
@@ -724,7 +708,6 @@ LIMIT 1";
                         // query for debugging
                         // echo "SQL Query: " . $sql . "<br>";
                       }
-
                     }
 
                     ?>
@@ -763,7 +746,7 @@ LIMIT 1";
 
 
                     // Loop through the arrays of sectors and their counts
-                    if (empty ($sectors)) {
+                    if (empty($sectors)) {
                       echo "<tr><td colspan='2'>No Data</td></tr>";
                     } else {
                       // Initialize an empty array to store the sectors and their counts
@@ -775,8 +758,6 @@ LIMIT 1";
                         echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $sector['sector_count'] . "</td>";
                         echo "</tr>";
                       }
-
-
                     }
                     ?>
                   </tbody>
@@ -832,7 +813,7 @@ LIMIT 1";
               <span class="text-gray-400 text-sm">Female Clients</span>
               <!-- MALE -->
               <div class="flex items-center mt-0.5">
-
+                
                 <div class="text-l font-semibold">
                   <?php echo $_SESSION['totalMel'] = $total_male > 0 ? $total_male : "0"; ?>
                 </div>
@@ -840,7 +821,7 @@ LIMIT 1";
               <span class="text-gray-400 text-sm">Male Clients</span>
 
             </div>
-            <!-- F+MALE AND FEMALE START -->
+            <!-- FEMALE AND FEMALE START -->
 
           </div>
           <!-- Upper Parent div end -->
@@ -863,8 +844,7 @@ LIMIT 1";
           </div>
 
           <!-- LOWER PART CARD SECTION -->
-          <button id="exportButton"
-            class="btn btn-primary hover:bg-blue-700 text-gray py-2 px-4 rounded float-right">EXPORT DATA</button>
+          <button id="exportButton" class="btn btn-primary hover:bg-blue-700 text-gray py-2 px-4 rounded float-right">EXPORT DATA</button>
         </div>
 
       </div>
@@ -883,16 +863,16 @@ LIMIT 1";
   <script src="./src/dashboard.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
   <script>
-    document.getElementById('exportButton').addEventListener('click', function () {
-      
-        // Redirect to printPage.php
- 
-       // header("Location: printPage.php");
-        window.location.href = 'printPage.php';
-        $_SESSION['form_submitted'] = true;
-       
+    document.getElementById('exportButton').addEventListener('click', function() {
+
+      // Redirect to printPage.php
+
+      // header("Location: printPage.php");
+      window.location.href = 'printPage.php';
+      $_SESSION['form_submitted'] = true;
+
     });
-</script>
+  </script>
 
 
 
