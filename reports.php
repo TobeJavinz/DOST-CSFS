@@ -552,7 +552,7 @@ LIMIT 1";
               <?php
 
               if (empty($start_date) && empty($end_date)) {
-                echo "Showing All CSF Data";
+                echo  "Showing All CSF Data";
               } else {
                 $start_month = date('n', strtotime($start_date));
                 $end_month = date('n', strtotime($end_date));
@@ -813,7 +813,7 @@ LIMIT 1";
               <span class="text-gray-400 text-sm">Female Clients</span>
               <!-- MALE -->
               <div class="flex items-center mt-0.5">
-                
+
                 <div class="text-l font-semibold">
                   <?php echo $_SESSION['totalMel'] = $total_male > 0 ? $total_male : "0"; ?>
                 </div>

@@ -794,8 +794,8 @@ $training_date = $_SESSION['date'];
             <td><strong>
                     <?php echo $result . "%"; ?>
                 </strong></td>
-        </tr>
-        <tr>
+            </tr>
+            <tr>
             <td>
                 <?php echo $_SESSION['other_agency'] ?>
             </td>
@@ -833,210 +833,210 @@ $training_date = $_SESSION['date'];
             <td><strong>
                     <?php echo $result . "%"; ?>
                 </strong></td>
-        </tr>
-    </table>
+            </tr>
+            </table>
 
-    <p><b>IV. Summary of Information Gathered</b></p>
+            <p><b>IV. Summary of Information Gathered</b></p>
 
-    <table class="table table-bordered" id="table">
-        <tr>
-            <td>Type Of Training</td>
-            <td class="text-right">Food:<strong>
-                    <?php echo $_SESSION['food_count'] ?>
-                </strong></td>
-            <td class="text-right">Non-Food:<strong>
-                    <?php echo $_SESSION['nonfood_count'] ?>
-                </strong></td>
-        </tr>
-        <tr>
-            <td>No. Of Respondents(CFS Collected)</td>
-            <td class="text-right"><strong>
-                    <?php echo $_SESSION['totalRes'] ?>
-                </strong></td>
+            <table class="table table-bordered" id="table">
+            <tr>
+                <td>Type Of Training</td>
+                <td class="text-right">Food:<strong>
+                        <?php echo $_SESSION['food_count'] ?>
+                    </strong></td>
+                <td class="text-right">Non-Food:<strong>
+                        <?php echo $_SESSION['nonfood_count'] ?>
+                    </strong></td>
+            </tr>
+            <tr>
+                <td>No. Of Respondents(CFS Collected)</td>
+                <td class="text-right"><strong>
+                        <?php echo $_SESSION['totalRes'] ?>
+                    </strong></td>
 
-        </tr>
-        <tr>
-            <td>No. Of Customers Assisted/Participants, breakdown as follows: </td>
-            <td class="text-right">Male: <strong>
-                    <?php echo $_SESSION['totalMel'] ?>
-                </strong> </td>
-            <td class="text-right">Female: <strong>
-                    <?php echo $_SESSION['totalFem'] ?>
-                </strong> </td>
-        </tr>
+            </tr>
+            <tr>
+                <td>No. Of Customers Assisted/Participants, breakdown as follows: </td>
+                <td class="text-right">Male: <strong>
+                        <?php echo $_SESSION['totalMel'] ?>
+                    </strong> </td>
+                <td class="text-right">Female: <strong>
+                        <?php echo $_SESSION['totalFem'] ?>
+                    </strong> </td>
+            </tr>
 
-        <tr>
-            <td>No. Of Respondents per Customer Category: </td>
-            <td class="text-right">SC: <strong>
-                    <?php echo $_SESSION['SC_count'] ?>
-                </strong></td>
-            <td class="text-right">Differently-Abled: <strong>
-                    <?php echo $_SESSION['DA_count'] ?>
-                </strong> </td>
-            <td class="text-right">4Ps Member: <strong>
-                    <?php echo $_SESSION['FPs_count'] ?>
-                </strong></td>
-            <td class="text-right">Youth: <strong>
-                    <?php echo $_SESSION['youth_count'] ?>
-                </strong> </td>
-            <td class="text-right">IP Group Member: <strong>
-                    <?php echo $_SESSION['IP_count'] ?>
-                </strong></td>
-        </tr>
+            <tr>
+                <td>No. Of Respondents per Customer Category: </td>
+                <td class="text-right">SC: <strong>
+                        <?php echo $_SESSION['SC_count'] ?>
+                    </strong></td>
+                <td class="text-right">Differently-Abled: <strong>
+                        <?php echo $_SESSION['DA_count'] ?>
+                    </strong> </td>
+                <td class="text-right">4Ps Member: <strong>
+                        <?php echo $_SESSION['FPs_count'] ?>
+                    </strong></td>
+                <td class="text-right">Youth: <strong>
+                        <?php echo $_SESSION['youth_count'] ?>
+                    </strong> </td>
+                <td class="text-right">IP Group Member: <strong>
+                        <?php echo $_SESSION['IP_count'] ?>
+                    </strong></td>
+            </tr>
 
-        <tr>
-        <tr>
-            <td>No. Of Respondents per Sector: </td>
-            <td class="text-right">Industry: <strong>
-                    <?php echo $_SESSION['ind_count'] ?>
-                </strong></td>
-            <td class="text-right">CSO: <strong>
-                    <?php echo $_SESSION['cso_count'] ?>
-                </strong></td>
-            <td class="text-right">Academe: <strong>
-                    <?php echo $_SESSION['acad_count'] ?>
-                </strong></td>
-            <td class="text-right">Government: <strong>
-                    <?php echo $_SESSION['gov_count'] ?>
-                </strong></td>
-            <td class="text-right">Media: <strong>
-                    <?php echo $_SESSION['med_count'] ?>
-                </strong></td>
-
-
+            <tr>
+            <tr>
+                <td>No. Of Respondents per Sector: </td>
+                <td class="text-right">Industry: <strong>
+                        <?php echo $_SESSION['ind_count'] ?>
+                    </strong></td>
+                <td class="text-right">CSO: <strong>
+                        <?php echo $_SESSION['cso_count'] ?>
+                    </strong></td>
+                <td class="text-right">Academe: <strong>
+                        <?php echo $_SESSION['acad_count'] ?>
+                    </strong></td>
+                <td class="text-right">Government: <strong>
+                        <?php echo $_SESSION['gov_count'] ?>
+                    </strong></td>
+                <td class="text-right">Media: <strong>
+                        <?php echo $_SESSION['med_count'] ?>
+                    </strong></td>
 
 
-        </tr>
 
 
-        <tr>
-            <td>No. Of First Time Customers: </td>
-            <td class="text-right"><strong>
-                    <?php echo $_SESSION['firstTime'] ?>
-                </strong></td>
-        </tr>
+            </tr>
 
-        <tr>
-            <td>No. Of Returning Customers: </td>
-            <td class="text-right"><strong>
-                    <?php echo $_SESSION['returning'] ?>
-                </strong></td>
-        </tr>
-        <tr>
-            <td>No. Of Firms Assisted: </td>
-            <td class="text-right"><strong>
-                    <?php echo $_SESSION['firms'] ?>
-                </strong></td>
-            <td>
-                <?php
-                // BUUUG
-                if (isset ($_SESSION['firms_name']) && is_array($_SESSION['firms_name'])) {
-                    // Loop through the array and print each firm
-                    foreach ($_SESSION['firms_name'] as $index => $firm) {
-                        echo ($index + 1) . ". " . ucwords($firm) . "<br>";
+
+            <tr>
+                <td>No. Of First Time Customers: </td>
+                <td class="text-right"><strong>
+                        <?php echo $_SESSION['firstTime'] ?>
+                    </strong></td>
+            </tr>
+
+            <tr>
+                <td>No. Of Returning Customers: </td>
+                <td class="text-right"><strong>
+                        <?php echo $_SESSION['returning'] ?>
+                    </strong></td>
+            </tr>
+            <tr>
+                <td>No. Of Firms Assisted: </td>
+                <td class="text-right"><strong>
+                        <?php echo $_SESSION['firms'] ?>
+                    </strong></td>
+                <td>
+                    <?php
+                    // BUUUG
+                    if (isset ($_SESSION['firms_name']) && is_array($_SESSION['firms_name'])) {
+                        // Loop through the array and print each firm
+                        foreach ($_SESSION['firms_name'] as $index => $firm) {
+                            echo ($index + 1) . ". " . ucwords($firm) . "<br>";
+                        }
+                    } else {
+                        echo "<td>-</td>";
                     }
-                } else {
-                    echo "<td>-</td>";
-                }
 
-                ?>
-            </td>
-        </tr>
-        <tr>
-            <td>No. Of MSMEs Assisted: </td>
-            <td class="text-right"><strong>
-                    <?php echo $_SESSION['msme_count'] ?>
-                </strong></td>
-        </tr>
-        <tr>
-            <td>No. Of First Time Customers: </td>
-            <td class="text-right"><strong>
-                    <?php echo $_SESSION['firstTime'] ?>
-                </strong></td>
-        </tr>
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td>No. Of MSMEs Assisted: </td>
+                <td class="text-right"><strong>
+                        <?php echo $_SESSION['msme_count'] ?>
+                    </strong></td>
+            </tr>
+            <tr>
+                <td>No. Of First Time Customers: </td>
+                <td class="text-right"><strong>
+                        <?php echo $_SESSION['firstTime'] ?>
+                    </strong></td>
+            </tr>
 
-    </table>
-    <p><b>Overall Mood/Feeling that best descibes the experience with DOST XI: </b>
-        <?php echo $_SESSION['final_mood'] ?>
-    </p>
+            </table>
+            <p><b>Overall Mood/Feeling that best descibes the experience with DOST XI: </b>
+                <?php echo $_SESSION['final_mood'] ?>
+            </p>
 
-    <table class="table table-bordered mt-4" id="table">
+            <table class="table table-bordered mt-4" id="table">
 
 
-        <tr>
-            <td>Comment/s</td>
-            <td>Response to Comments</td>
-        </tr>
+            <tr>
+                <td>Comment/s</td>
+                <td>Response to Comments</td>
+            </tr>
 
-        <tr>
-            <td>
-                <?php
-                if (isset ($_SESSION['comments']) && is_array($_SESSION['comments'])) {
-                    // Loop through the array and print each comment
-                    foreach ($_SESSION['comments'] as $index => $comment) {
-                        echo ($index + 1) . ". " . nl2br(htmlspecialchars(ucwords($comment))) . "<br>";
+            <tr>
+                <td>
+                    <?php
+                    if (isset ($_SESSION['comments']) && is_array($_SESSION['comments'])) {
+                        // Loop through the array and print each comment
+                        foreach ($_SESSION['comments'] as $index => $comment) {
+                            echo ($index + 1) . ". " . nl2br(htmlspecialchars(ucwords($comment))) . "<br>";
+                        }
+                    } else {
+                        echo "-";
                     }
-                } else {
-                    echo "-";
-                }
-                ?>
-            </td>
-            <td ondblclick="editText()">
-                <textarea id="myInput" onkeypress="handleKeyPress(event)"></textarea>
-                <span id="myText"></span>
-            </td>
+                    ?>
+                </td>
+                <td ondblclick="editText()">
+                    <textarea id="myInput" onkeypress="handleKeyPress(event)"></textarea>
+                    <span id="myText"></span>
+                </td>
 
-            <script>
-                function handleKeyPress(e) {
-                    var keyCode = e.keyCode || e.which;
-                    if (keyCode == 13 && !e.shiftKey) { // 13 is the Enter key
-                        e.preventDefault();
+                <script>
+                    function handleKeyPress(e) {
+                        var keyCode = e.keyCode || e.which;
+                        if (keyCode == 13 && !e.shiftKey) { // 13 is the Enter key
+                            e.preventDefault();
+                            var input = document.getElementById('myInput');
+                            var text = document.getElementById('myText');
+                            text.innerHTML = input.value.replace(/\n/g, '<br>');
+                            input.style.display = 'none';
+                            text.style.display = 'inline';
+                        }
+                    }
+
+                    function editText() {
                         var input = document.getElementById('myInput');
                         var text = document.getElementById('myText');
-                        text.innerHTML = input.value.replace(/\n/g, '<br>');
-                        input.style.display = 'none';
-                        text.style.display = 'inline';
+                        input.style.display = 'inline';
+                        text.style.display = 'none';
+                        input.focus();
                     }
-                }
+                </script>
+            </tr>
+            </td>
 
-                function editText() {
-                    var input = document.getElementById('myInput');
-                    var text = document.getElementById('myText');
-                    input.style.display = 'inline';
-                    text.style.display = 'none';
-                    input.focus();
-                }
-            </script>
-        </tr>
-        </td>
+            </tr>
+            </table>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
 
-        </tr>
-    </table>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
+            <p class="mt-5">
+                Prepared by:<br><br> <b>
+                    <?php echo $_SESSION['name'] ?>
+                </b><br>
+                <?php echo $_SESSION['position'] ?><br>
+                <?php echo date('m/d/Y') ?>
+            </p>
 
-        <p class="mt-5">
-            Prepared by:<br><br> <b>
-                <?php echo $_SESSION['name'] ?>
-            </b><br>
-            <?php echo $_SESSION['position'] ?><br>
-            <?php echo date('m/d/Y') ?>
-        </p>
+            <p class="mt-5">
+                Approved by:<br><br> <b>
+                    <?php echo $_SESSION['AdminName'] ?>
+                </b><br>
+                <?php echo $_SESSION['AdminPosition'] ?><br>
+                <?php echo date('m/d/Y') ?>
+            </p>
 
-        <p class="mt-5">
-            Approved by:<br><br> <b>
-                <?php echo $_SESSION['AdminName'] ?>
-            </b><br>
-            <?php echo $_SESSION['AdminPosition'] ?><br>
-            <?php echo date('m/d/Y') ?>
-        </p>
+            </div>
 
-    </div>
+            <a href="javascript:void(0);" onclick="history.back()" id="backButton" style="margin-bottom: 20px; font-size: 18px;">&#8592; Back</a>
 
-<a href="javascript:void(0);" onclick="history.back()" id="backButton" style="margin-bottom: 20px; font-size: 18px;">&#8592; Back</a>
+            <button type="button" id="printButton" onclick="printPage()"
+                class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-right"
+                style="background-color: blue;">Print Page</button>
+            </body>
 
-    <button type="button" id="printButton" onclick="printPage()"
-        class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-right"
-        style="background-color: blue;">Print Page</button>
-</body>
-
-</html>
+            </html>
