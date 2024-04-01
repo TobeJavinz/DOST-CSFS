@@ -112,14 +112,20 @@ $training_date = $_SESSION['date'];
     </style>
     <script>
         function printPage() {
-            document.getElementById('printButton').style.display = 'none'; // Hide the button
+            document.getElementById('printButton').style.display = 'none';
+            document.getElementById('backButton').style.display = 'none'; // Hide the button
             window.print();
             document.getElementById('printButton').style.display = 'block';
+            document.getElementById('backButton').style.display = 'block';
         }
     </script>
 </head>
 
 <body style="margin: 20px; margin-bottom: 50px;">
+    
+    <a href="javascript:history.back()" id="backButton" style="margin-bottom: 20px;">&#8592; Back</a>
+   
+
     <!-- Image header -->
     <div class="header-image" style="text-align: center; margin: 0 auto;">
         <img src="assets/header.png" alt="Header Image" width="500" style="display: block; margin: 0 auto;">
@@ -941,8 +947,7 @@ $training_date = $_SESSION['date'];
 
     </table>
     <p><b>Overall Mood/Feeling that best descibes the experience with DOST XI: </b></p>
-    <!-- <button type="button" id="printButton" onclick="printPage()"
-        class="btn bg-blue-500 hover:bg-blue-700 text-black font-bold py-2 px-4 rounded float-right">Print Page</button> -->
+    
     <table class="table table-bordered mt-4" id="table">
  
 
@@ -996,14 +1001,19 @@ $training_date = $_SESSION['date'];
         </tr>
     </table>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
+   
         <p class="mt-5">
             Prepared by:<br><br> <b><?php echo $_SESSION['name'] ?></b><br><?php echo $_SESSION['position'] ?><br> <?php echo date('m/d/Y') ?>
         </p>
 
         <p class="mt-5" >
-            Approved by:<br><br> <b>[Admin. Name]</b><br> PSTD<br><?php echo date('m/d/Y') ?>
+            Approved by:<br><br> <b><?php echo $_SESSION['AdminName'] ?></b><br><?php echo $_SESSION['AdminPosition'] ?><br><?php echo date('m/d/Y') ?>
         </p>
+        
     </div>
+    <button type="button" id="printButton" onclick="printPage()"
+        class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-right"
+        style="background-color: blue;">Print Page</button> 
 </body>
 
 </html>

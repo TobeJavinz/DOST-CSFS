@@ -853,7 +853,7 @@ if ($result4) {
   <script>
     document.getElementById('exportButton').addEventListener('click', function () {
       window.location.href = 'printPage.php';
-
+      <?php  ?>
     });
 
 

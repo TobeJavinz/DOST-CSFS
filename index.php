@@ -66,11 +66,20 @@ if (isset($_POST['login'])) {
     $stmt->bind_result($hashed_password, $name, $position);
     $stmt->fetch();
 
+    $stmt1 = $conn->prepare("SELECT `name` as `adminName`,`position` as `adminPos`  FROM user_cred WHERE `admin` =  'y'");
+    $stmt1->execute();
+    $stmt1->store_result();
+    $stmt1->bind_result($adminName, $adminPos);
+    $stmt1->fetch();
+    $_SESSION['AdminName'] = $adminName;
+    $_SESSION['AdminPosition'] = $adminPos;
     // Verify password
     if (password_verify($login_password, $hashed_password)) {
         // Password is correct
         $_SESSION['name'] = $name;
         $_SESSION['position'] = $position;
+
+
 
         $stmt->close();
         $conn->close();
