@@ -3,7 +3,7 @@
 // header("Cache-Control: no cache");
 // session_cache_limiter("private_no_expire");
 
-session_start();
+include 'session_auth.php';
 
 // Check if $SQD_1SD has no value and redirect to reports.php
 if (!isset ($_SESSION['SQD_1SD'])) {

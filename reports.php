@@ -3,8 +3,8 @@ header("Cache-Control: no cache");
 session_cache_limiter("private_no_expire");
 
 
-
-session_start();
+// session_start();
+ include 'session_auth.php';
 include 'DBconn.php';
 $conn = connect_to_database();
 

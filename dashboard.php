@@ -1,6 +1,6 @@
 <?php
-session_start();
 
+include 'session_auth.php';
 include 'DBConn.php';
 $conn = connect_to_database();
 // get no. male
@@ -133,7 +133,7 @@ $total_food = $row_food["food_count"];
                 class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
             </li> -->
             <li>
-              <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-red-500 hover:bg-gray-50">Logout</a>
+              <button onclick=" window.location.href ='session_destroy.php'" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-red-500 hover:bg-gray-50">Logout</button>
             </li>
           </ul>
         </li>
