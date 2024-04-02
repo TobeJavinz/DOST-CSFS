@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (!isset($_SESSION['login'])) {
+  header("Location: admin.php");
+}
 
 require 'DBConn.php';
 
@@ -201,8 +205,6 @@ $result = mysqli_query($conn, $query);
             </ul>
           </div>
         </div>
-
-
       </div>
     </div>
     </div>           

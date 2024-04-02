@@ -67,6 +67,9 @@ $total_food = $row_food["food_count"];
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
   <link href="./src/output.css" rel="stylesheet" />
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <title>DASHBOARD</title>
+
 </head>
 
 <body class="text-gray-800 font-inter">
@@ -132,7 +135,7 @@ $total_food = $row_food["food_count"];
               <a href="#"
                 class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
             </li> -->
-            <li>
+            <li>  
               <button onclick=" window.location.href ='session_destroy.php'" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-red-500 hover:bg-gray-50">Logout</button>
             </li>
           </ul>

@@ -1,10 +1,10 @@
 <?php
+ include 'session_auth.php';
 header("Cache-Control: no cache");
-session_cache_limiter("private_no_expire");
 
 
 // session_start();
- include 'session_auth.php';
+
 include 'DBconn.php';
 $conn = connect_to_database();
 
@@ -467,6 +467,9 @@ LIMIT 1";
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"></script>
   <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
   <link href="./src/output.css" rel="stylesheet" />
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <title>REPORTS</title>
+
 </head>
 
 <body class="text-gray-800 font-inter">
@@ -851,15 +854,12 @@ LIMIT 1";
 
     </div>
 
-
-
     </div>
     </div>
   </main>
   <!-- end: Main -->
 
   <script src="https://unpkg.com/@popperjs/core@2"></script>
-
   <script src="./src/dashboard.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
   <script>

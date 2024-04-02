@@ -136,6 +136,7 @@ $conn->close();
 
 
                 <button type="submit" name="register">Sign Up</button>
+               
             </form>
         </div>
         <!-- REGISTRATION AREA END -->
@@ -151,7 +152,7 @@ $conn->close();
                 </div>
                 <span>or use your email password</span> -->
                 <input required name="login_username" type="text" placeholder="Username"
-                    pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]+$"
+                   
                     title="Username contains at least one letter and can include numbers">
                 <input class="absolute left-0 px-3 py-2" required id="logpassword" name="login_password" type="password"
                     placeholder="Password">
@@ -161,6 +162,7 @@ $conn->close();
 
                 <!-- <a href="#">Forget Your Password?</a> -->
                 <button type="submit" name="login" id="login">Sign In</button>
+                <p  href="admin.php">Admin?</p>
             </form>
             <!-- LOGIN AREA END -->
         </div>
@@ -175,6 +177,7 @@ $conn->close();
                     <h1>DOST - CSFS</h1>
                     <p>Register to use all of DOST system features</p>
                     <button class="hidden" id="register">Sign Up</button>
+
                 </div>
             </div>
         </div>
