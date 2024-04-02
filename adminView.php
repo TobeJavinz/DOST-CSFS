@@ -165,7 +165,6 @@ $result = mysqli_query($conn, $query);
             </tbody>
           </table>
 
-
           <div class="flex items-center justify-between mt-6">
             <div class="flex items-center">
               <label for="rowsPerPage" class="mr-2 font-bold">Rows per page:</label>
@@ -177,7 +176,6 @@ $result = mysqli_query($conn, $query);
                 <option value="100">100</option>
               </select>
             </div>
-
 
             <ul class="flex items-center">
               <li class="mr-1">

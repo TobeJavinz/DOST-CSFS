@@ -162,7 +162,7 @@ $conn->close();
 
                 <!-- <a href="#">Forget Your Password?</a> -->
                 <button type="submit" name="login" id="login">Sign In</button>
-                <p  href="admin.php">Admin?</p>
+                <a  href="admin.php">Admin?</a>
             </form>
             <!-- LOGIN AREA END -->
         </div>
