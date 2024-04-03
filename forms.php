@@ -336,7 +336,7 @@ if (isset($_POST["submit"])) {
                                                 of
                                                 Service</label>
                                             <div class="mt-2">
-                                                <select id="" name="service"
+                                                <select required id="" name="service"
                                                     class="block w-full rounded-custom border-0 px-4 py-2 pr-4 text-gray-900 outline-none shadow-sm ring-1 ring-inset ring-gray focus:ring-2 focus:ring-inset focus:ring-custom sm:max-w-xs sm:text-sm sm:leading-6">
                                                     <option value="" selected hidden>Select Options</option>
                                                     <option value="Technology Intervention">Technology Intervention
@@ -365,7 +365,7 @@ if (isset($_POST["submit"])) {
                                                 class="block text-sm font-medium leading-6 text-gray-900">Training
                                                 Title</label>
                                             <div class="mt-2">
-                                                <input type="text" name="training_name"
+                                                <input required type="text" name="training_name"
                                                     class="block w-full rounded-custom border-0 py-1.5 px-4  text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
@@ -374,7 +374,7 @@ if (isset($_POST["submit"])) {
                                                 <label for="" class=" block text-sm font-medium leading-6
                                             text-gray-900">Date</label>
                                             <div class="mt-2">
-                                                <input id="" name="date" type="date"
+                                                <input required id="" name="date" type="date"
                                                     class="block w-10 rounded-custom  px-4 py-1 text-center text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
@@ -383,7 +383,7 @@ if (isset($_POST["submit"])) {
                                             <label for=""
                                                 class=" block text-sm font-medium leading-6 text-gray-900">Venue</label>
                                             <div class="mt-2">
-                                                <input type="text" name="training_venue"
+                                                <input required type="text" name="training_venue"
                                                     class="block w-full rounded-custom py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
@@ -397,7 +397,7 @@ if (isset($_POST["submit"])) {
 
                                         <div class="pt-2 flex flex-wrap items-center gap-4  ">
                                             <div class="flex items-center gap-x-3">
-                                                <input name="training_type" value="Food" type="radio"
+                                                <input required  name="training_type" value="Food" type="radio"
                                                     class="h-4 w-4 border-gray-300 ">
                                                 <label for=""
                                                     class="block text-sm  leading-6 text-gray-900">Food</label>
@@ -460,11 +460,11 @@ if (isset($_POST["submit"])) {
                                             <label for=""
                                                 class="block text-sm font-medium leading-6 text-gray-900">Sex</label>
                                             <div class="mt-2">
-                                                <select id="" name="sex"
+                                                <select required id="" name="sex"
                                                     class="block w-full rounded-md border-0 py-2 pl-4 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6">
                                                     <option value="" selected hidden>Select Options</option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
+                                                    <option value="male">Male</option>
+                                                    <option value="female">Female</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -500,7 +500,7 @@ if (isset($_POST["submit"])) {
                                             <label for=""
                                                 class="block text-sm font-medium leading-6 text-gray-900">Designation</label>
                                             <div class="mt-2">
-                                                <input type="text" name="designation"
+                                                <input required type="text" name="designation"
                                                     class="block w-full rounded-md border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
@@ -509,7 +509,7 @@ if (isset($_POST["submit"])) {
                                                 class="block text-sm font-medium leading-6 text-gray-900">Company
                                                 Name</label>
                                             <div class="mt-2">
-                                                <input type="text" name="company"
+                                                <input required type="text" name="company"
                                                     class="block w-full rounded-md border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
@@ -528,7 +528,7 @@ if (isset($_POST["submit"])) {
 
                                         <div class=" flex flex-wrap items-center gap-4">
                                             <div class="flex items-center gap-x-3">
-                                                <input name="msme" value="Yes" type="radio"
+                                                <input required name="msme" value="Yes" type="radio"
                                                     class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                 <label for="" class="block text-sm  leading-6 text-gray-900">Yes</label>
                                             </div>
@@ -549,7 +549,7 @@ if (isset($_POST["submit"])) {
                                         </label>
                                         <div class=" flex flex-wrap items-center gap-4">
                                             <div class="relative flex items-center gap-x-1">
-                                                <input name="customer_category[]" value="senior" type="checkbox"
+                                                <input required name="customer_category[]" value="SC" type="checkbox"
                                                     class="h-4 w-4 rounded border-gray-300 ">
                                                 <label for="" class=" text-gray-900">Senior Citizen</label>
                                             </div>
@@ -591,7 +591,7 @@ if (isset($_POST["submit"])) {
 
                                         <div class=" flex flex-wrap items-center gap-4">
                                             <div class="relative flex items-center gap-x-1">
-                                                <input name="sector[]" value="industry" type="checkbox"
+                                                <input required name="sector[]" value="industry" type="checkbox"
                                                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                 <label for="" class=" text-gray-900">Industry</label>
                                             </div>
@@ -628,7 +628,7 @@ if (isset($_POST["submit"])) {
 
                                 <div class="flex flex-wrap items-center gap-4">
                                     <div class="flex items-center gap-x-3">
-                                        <input name="returning_customer" value="Yes" type="radio"
+                                        <input required name="returning_customer" value="Yes" type="radio"
                                             class="h-4 w-4 border-gray-300 text-default focus:ring-custom">
                                         <label for="" class="block text-sm  leading-6 text-gray-900">Yes</label>
                                     </div>
@@ -664,7 +664,7 @@ if (isset($_POST["submit"])) {
                             </legend>
                             <div class="pt-5 flex flex-wrap items-center gap-4">
                                 <div class="flex items-center gap-x-3">
-                                    <input name="overall_mood" value="Delighted" type="radio"
+                                    <input checked  name="overall_mood" value="Delighted" type="radio"
                                         class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
                                     <label class="block text-sm font-medium leading-6 text-gray-900">Delighted
                                     </label>

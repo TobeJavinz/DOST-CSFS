@@ -171,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         $successmessage = "updated successfully";
 
-        header("location: /DOST-CSFS/tables.php");
+        header("location: tables.php");
         exit;
     } while (false);
 }

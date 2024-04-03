@@ -634,7 +634,11 @@ $training_date = $_SESSION['date'];
             $ateneo_2 = $_SESSION['ateneo_2'];
             $ateneo_3 = $_SESSION['ateneo_3'];
             $ateneo_5 = $_SESSION['ateneo_5'];
-            $result = round(($ateneo_5 / $atnSUM) - ($ateneo_1 + $ateneo_2 + $ateneo_3) / $atnSUM, 2) * 100;
+            if ($atnSUM == 0) {
+                $result = 0;
+            } else {
+                $result = round($ateneo_5 / $atnSUM - ($ateneo_1 + $ateneo_2 + $ateneo_3) / $atnSUM, 2) * 100;
+            }
 
             if ($result < 0) {
                 $result = 0;
