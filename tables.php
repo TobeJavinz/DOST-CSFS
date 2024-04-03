@@ -1,8 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION['login'])) {
-  header("Location: admin.php");
-}
 
 require 'DBConn.php';
 
@@ -47,6 +43,7 @@ $result = mysqli_query($conn, $query);
   <!-- start: Sidebar -->
   <?php include 'sidebar.php' ?>
   <!-- end: Sidebar -->
+
 
   <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
     <?php
@@ -277,8 +274,9 @@ $result = mysqli_query($conn, $query);
                   }
                 }
                 ?>
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+
 
           </div>
 
@@ -309,7 +307,7 @@ $result = mysqli_query($conn, $query);
 
       </div>
     </div>
-    </div>           
+    </div>
   </main>
   <!-- end: Main -->
 

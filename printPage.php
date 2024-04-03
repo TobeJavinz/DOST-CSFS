@@ -1032,7 +1032,7 @@ $training_date = $_SESSION['date'];
                 <?php echo $_SESSION['AdminPosition'] ?><br>
                 <?php echo date('m/d/Y') ?>
             </p>
-
+ 
             </div>
 
             <a href="javascript:void(0);" onclick="history.back()" id="backButton" style="margin-bottom: 20px; font-size: 18px;">&#8592; Back</a>

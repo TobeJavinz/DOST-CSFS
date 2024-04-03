@@ -8,57 +8,12 @@ if (isset($_SESSION['name'])) {
 include 'DBconn.php';
 $conn = connect_to_database();
 
-// Registration
-if (isset($_POST['register'])) {
-    // Sanitize and check for blank inputs
-    $name = trim($_POST['name']);
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
-    $position = trim($_POST['position']);
-
-    if (empty($name) || empty($username) || empty($password) || empty($position)){
-        echo "<script>alert('Please Fill In All Fields Properly.');</script>";
-    } else {
-        // Check if username already exists
-        $stmt = $conn->prepare("SELECT * FROM user_cred WHERE username = ?");
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $result_username = $stmt->get_result();
-
-        // Check if name already exists
-        $stmt = $conn->prepare("SELECT * FROM user_cred WHERE name = ?");
-        $stmt->bind_param("s", $name);
-        $stmt->execute();
-        $result_name = $stmt->get_result();
-
-        if ($result_username->num_rows > 0) {
-            echo "<script>alert('Staff Username Already Exists!');</script>";
-        } elseif ($result_name->num_rows > 0) {
-            echo "<script>alert('Staff Name Already Exists!');</script>";
-        } else {
-            // No duplicate username or name found, proceed with registration
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-            $stmt = $conn->prepare("INSERT INTO user_cred (username, password, name, position) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $username, $hashed_password, $name, $position);
-
-            if ($stmt->execute()) {
-                echo "<script>alert('Staff Registered Successfully!');</script>";
-            } else {
-                echo "<script>alert('Registration Error " . $stmt->error . "');</script>";
-            }
-
-            $stmt->close();
-        }
-    }
-}
-
 // Login
 if (isset($_POST['login'])) {
     $login_username = $_POST['login_username'];
     $login_password = $_POST['login_password'];
 
-    $stmt = $conn->prepare("SELECT `password`, `name`,`position` FROM user_cred WHERE `username` = ?");
+    $stmt = $conn->prepare("SELECT `password`, `name`, `position` FROM user_cred WHERE `username` = ?");
     $stmt->bind_param("s", $login_username);
     $stmt->execute();
     $stmt->store_result();
@@ -72,13 +27,12 @@ if (isset($_POST['login'])) {
     $stmt1->fetch();
     $_SESSION['AdminName'] = $adminName;
     $_SESSION['AdminPosition'] = $adminPos;
+
     // Verify password
     if (password_verify($login_password, $hashed_password)) {
         // Password is correct
         $_SESSION['name'] = $name;
         $_SESSION['position'] = $position;
-
-
 
         $stmt->close();
         $conn->close();
@@ -130,63 +84,74 @@ $conn->close();
                     </div>
 
                 </div>
-                <span>or use your email for registeration</span> -->
-                <input required name="name" type="text" placeholder="Full Name" pattern="[A-Za-z ]+"
-                    title="Please enter letters only">
-                <input required name="position" type="text" placeholder="Position">
-                <input required name="username" type="text" placeholder="Username">
-
-                <input required id="password" name="password" type="password" placeholder="Password"
-                pattern="^[A-Za-z\d!@#$%^&*]{8,}$"
-                    title="Password must contain at least one uppercase letter, one lowercase letter, one number, one special character(!@#$%^&*), and be at least 8 characters long">
-
-                <input type="checkbox" id="showPassword">
-                <label for="showPassword" class=" text-gray-100 text-sm">Show Password</label>
 
 
-                <button type="submit" name="register">Sign Up</button>
-               
-            </form>
-        </div>
-        <!-- REGISTRATION AREA END -->
-        <!-- LOGIN AREA START-->
-        <div class="form-container sign-in">
-            <form action="" method="POST">
-                <h1>Sign In</h1>
-                <!-- <div class="social-icons">
-                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your email password</span> -->
-                <input required name="login_username" type="text" placeholder="Username"
-                   
-                    title="Username contains at least one letter and can include numbers">
-                <input class="absolute left-0 px-3 py-2" required id="logpassword" name="login_password" type="password"
-                    placeholder="Password">
+                <!-- Right column container with form -->
+                <div class="md:w-8/12 lg:ms-6 lg:w-5/12">
+                    <div class="min-h-full justify-center lg:px-8 " style="width: 500px; height: 400px;">
+                        <div
+                            class="flex min-h-full flex-col justify-center bg-white rounded-md border border-gray-200 px-6 py-5 shadow-md shadow-black">
+                            <div class="sm:mx-auto sm:w-full sm:max-w-sm">
 
-                <input type="checkbox" id="logshowPassword">
-                <label for="logshowPassword" class=" text-gray-100 text-sm">Show Password</label>
 
-                <!-- <a href="#">Forget Your Password?</a> -->
-                <button type="submit" name="login" id="login">Sign In</button>
-                <a  href="admin.php">Admin?</a>
-            </form>
-            <!-- LOGIN AREA END -->
-        </div>
-        <div class="toggle-container">
-            <div class="toggle">
-                <div class="toggle-panel toggle-left">
-                    <h1>Welcome Back!</h1>
-                    <p>Enter your personal details to use all of system features</p>
-                    <button class="hidden" id="login">Sign In</button>
-                </div>
-                <div class="toggle-panel toggle-right">
-                    <h1>DOST - CSFS</h1>
-                    <p>Register to use all of DOST system features</p>
-                    <button class="hidden" id="register">Sign Up</button>
+                                <h2 class=" text-left text-4xl font-bold leading-9 tracking-tight text-gray-900 mt-4">
+                                    Sign In
+                                </h2>
+                            </div>
 
+                            <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                                <form class="space-y-6" action="" method="POST">
+                                    <div>
+                                        <label for="email"
+                                            class="block text-sm font-medium leading-6 text-gray-900">Username</label>
+                                        <div class="mt-2">
+                                            <input required name="login_username" type="text" placeholder="Username"
+                                                pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]+$"
+                                                title="Username contains at least one letter and can include numbers"
+                                                class="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div>
+                                            <div class="flex items-center justify-between">
+                                                <label for="password"
+                                                    class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                                            </div>
+                                            <div class="mt-2">
+                                                <input required id="logpassword" name="login_password" type="password"
+                                                    placeholder="Password" class="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6 mb-2
+                                                " />
+                                            </div>
+                                            <input type="checkbox" id="showPassword" class="ml-4 mt-4 mb-4">
+                                            <label for="showPassword" class=" text-gray-100 text-sm">Show
+                                                Password</label>
+                                        </div>
+
+                                        <div>
+                                            <a href="dashboard.php">
+                                                <button type="submit" name="login" id="login"
+                                                    class="flex w-full justify-center rounded-md bg-custom px-3 py-1.5 mb-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-custom2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 mt-2 ">
+                                                    Sign in
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </form>
+                                <p class="mt-6 text-center text-sm text-gray-500">
+                                    Not yet a member?
+                                    <a href="signup.php" class="font-semibold leading-6 text-default ">Sign
+                                        Up
+                                        now!</a>
+                                </p>
+                                <p class=" mt-4 text-center text-sm text-gray-500">
+                                    Are you an admin?
+                                    <a href="admin.php" class="font-semibold leading-6 text-default ">Login here!</a>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
