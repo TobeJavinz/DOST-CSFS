@@ -112,20 +112,20 @@ function hidePopper(popperId) {
 }
 // end: Popper
 
-const groups = document.querySelectorAll(".group");
-groups.forEach((groups) => {
-  groups.addEventListener("click", () => {
-    groups.classList.add("active");
-  });
-});
+// const groups = document.querySelectorAll(".group");
+// groups.forEach((groups) => {
+//   groups.addEventListener("click", () => {
+//     groups.classList.add("active");
+//   });
+// });
 
-const showPasswordCheckbox = document.getElementById("showPassword");
-const passwordField = document.getElementById("password");
+// const showPasswordCheckbox = document.getElementById("showPassword");
+// const passwordField = document.getElementById("password");
 
-showPasswordCheckbox.addEventListener("change", function () {
-  const type = showPasswordCheckbox.checked ? "text" : "password";
-  passwordField.setAttribute("type", type);
-});
+// showPasswordCheckbox.addEventListener("change", function () {
+//   const type = showPasswordCheckbox.checked ? "text" : "password";
+//   passwordField.setAttribute("type", type);
+// });
 
 const logshowPasswordCheckbox = document.getElementById("logshowPassword");
 const logpasswordField = document.getElementById("logpassword");
