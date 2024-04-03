@@ -278,7 +278,23 @@ FROM
     $_SESSION['SQD_1NAD'] = $resp['SQD_1NAD'];
     $_SESSION['SQD_1A'] = $resp['SQD_1A'];
     $_SESSION['SQD_1SA'] = $resp['SQD_1SA'];
+    $_SESSION['SQD_1SD'] = $resp['SQD_1SD'];
+    $_SESSION['SQD_1D'] = $resp['SQD_1D'];
+    $_SESSION['SQD_1NAD'] = $resp['SQD_1NAD'];
+    $_SESSION['SQD_1A'] = $resp['SQD_1A'];
+    $_SESSION['SQD_1SA'] = $resp['SQD_1SA'];
 
+    $_SESSION['SQD_2SD'] = $resp['SQD_2SD'];
+    $_SESSION['SQD_2D'] = $resp['SQD_2D'];
+    $_SESSION['SQD_2NAD'] = $resp['SQD_2NAD'];
+    $_SESSION['SQD_2A'] = $resp['SQD_2A'];
+    $_SESSION['SQD_2SA'] = $resp['SQD_2SA'];
+
+    $_SESSION['SQD_3SD'] = $resp['SQD_3SD'];
+    $_SESSION['SQD_3D'] = $resp['SQD_3D'];
+    $_SESSION['SQD_3NAD'] = $resp['SQD_3NAD'];
+    $_SESSION['SQD_3A'] = $resp['SQD_3A'];
+    $_SESSION['SQD_3SA'] = $resp['SQD_3SA'];
     $_SESSION['SQD_2SD'] = $resp['SQD_2SD'];
     $_SESSION['SQD_2D'] = $resp['SQD_2D'];
     $_SESSION['SQD_2NAD'] = $resp['SQD_2NAD'];
@@ -480,34 +496,10 @@ LIMIT 1";
 
   <!-- start: Main -->
   <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
-    <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
-      <button type="button" class="text-lg text-gray-600 sidebar-toggle">
-        <i class="ri-menu-line"></i>
-      </button>
-      <ul class="flex items-center text-sm ml-4">
-        <li class="mr-2">
-          <a class="text-base text-black font-bold">Reports</a>
-        </li>
-      </ul>
-      <ul class="ml-auto flex items-center">
-        <li class="dropdown ml-3">
-          <button type="button" class="dropdown-toggle flex items-center">
-            <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle" />
-          </button>
-          <ul class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-            <li>
-              <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+    <?php
+    $headerText = "Reports";
+    include 'header.php';
+    ?>
     <div class="p-6">
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6"></div>
@@ -847,7 +839,8 @@ LIMIT 1";
           </div>
 
           <!-- LOWER PART CARD SECTION -->
-          <button id="exportButton" class="btn btn-primary hover:bg-blue-700 text-gray py-2 px-4 rounded float-right">EXPORT DATA</button>
+          <button id="exportButton"
+            class="btn btn-primary hover:bg-blue-700 text-gray py-2 px-4 rounded float-right">EXPORT DATA</button>
         </div>
 
       </div>
@@ -860,7 +853,8 @@ LIMIT 1";
   <!-- end: Main -->
 
   <script src="https://unpkg.com/@popperjs/core@2"></script>
-  <script src="./src/dashboard.js"></script>
+
+  <script src="./src/script.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
   <script>
     document.getElementById('exportButton').addEventListener('click', function() {

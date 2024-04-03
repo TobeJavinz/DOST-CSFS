@@ -1,4 +1,3 @@
-<!-- FORBIDDEN AREA: PHP SECTION -->
 <?php
 session_start();
 // Check if the user is logged in
@@ -94,32 +93,42 @@ if (isset($_POST['login'])) {
 }
 
 $conn->close();
+
+
 ?>
-<!-- FORBIDDEN AREA: PHP SECTION -->
+
 
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-full bg-white">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="loginstyle.css">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-    <title>DOST- CSFS</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="./src/output.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <div class="container" id="container">
-        <!-- REGISTRATION AREA START -->
-        <div class="form-container sign-up">
-            <form action="" method="POST">
-                <h1>Create Account</h1>
-                <!-- <div class="social-icons">
-                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+    <section class="h-screen mt-10">
+        <div class="container h-full px-6 py-24 ">
+
+            <div class="flex h-full flex-wrap items-center justify-center lg:justify-between">
+                <!-- Left column container with background-->
+                <div class="flex flex-col px-6 py-12 lg:px-8">
+                    <div class="sm:mx-auto sm:w-full sm:max-w-sm mt-10">
+                        <img class="" src="assets/csfs.png" alt="Your Company" />
+                        <h2 class="mt-10 text-left text-4xl font-bold leading-9 tracking-tight text-black font-poppins">
+                            Welcome to <br>Department of Science and Technology</h2>
+                        <p class="mt-10 text-left text-lg font-bold text-default">
+                            Customer
+                            Satisfaction Feedback System</p>
+                    </div>
+
                 </div>
                 <span>or use your email for registeration</span> -->
                 <input required name="name" type="text" placeholder="Full Name" pattern="[A-Za-z ]+"
@@ -180,30 +189,28 @@ $conn->close();
 
                 </div>
             </div>
+
         </div>
-    </div>
+    </section>
 
-    <script src="script.js"></script>
-
-    <script>
-        const showPasswordCheckbox = document.getElementById('showPassword');
-        const passwordField = document.getElementById('password');
-
-        showPasswordCheckbox.addEventListener('change', function () {
-            const type = showPasswordCheckbox.checked ? 'text' : 'password';
-            passwordField.setAttribute('type', type);
-        });
-
-        
-        const logshowPasswordCheckbox = document.getElementById('logshowPassword');
-        const logpasswordField = document.getElementById('logpassword');
-
-        logshowPasswordCheckbox.addEventListener('change', function () {
-            const type = logshowPasswordCheckbox.checked ? 'text' : 'password';
-            logpasswordField.setAttribute('type', type);
-        });
-
-    </script>
 </body>
+<script>
+    const showPasswordCheckbox = document.getElementById("showPassword");
+    const passwordField = document.getElementById("logpassword");
+
+    showPasswordCheckbox.addEventListener("change", function () {
+        const type = showPasswordCheckbox.checked ? "text" : "password";
+        passwordField.setAttribute("type", type);
+    });
+
+    const logshowPasswordCheckbox = document.getElementById("logshowPassword");
+    const logpasswordField = document.getElementById("logpassword");
+
+    logshowPasswordCheckbox.addEventListener("change", function () {
+        const type = logshowPasswordCheckbox.checked ? "text" : "password";
+        logpasswordField.setAttribute("type", type);
+    });
+</script>
+
 
 </html>

@@ -1,13 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./**/*.{html,js}"],
+  content: ["./**/*.html"],
   theme: {
     extend: {},
     fontFamily: {
-      'poppins': ['Poppins', 'sans-serif'],
+      poppins: ["Poppins", "sans-serif"],
     },
   },
-  plugins: [
-    //  require('@tailwindcss/forms')
-  ],
-}
+  plugins: [require("@tailwindcss/forms")],
+};

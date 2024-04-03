@@ -142,6 +142,7 @@ if (isset($_POST['login'])) {
       </div>
     </div>
 
-    <script src="./src/loginscript.js"></script>
-  </body>
+  <script src="./src/script.js"></script>
+</body>
+
 </html>

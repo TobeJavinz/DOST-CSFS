@@ -9,6 +9,113 @@
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
+.poppins-thin {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+}
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
 *,
 ::before,
 ::after {
@@ -150,6 +257,14 @@ pre {
 }
 
 /*
+Add a background color to the desired element.
+*/
+
+.element {
+  background-color: #ff0000; /* Replace #ff0000 with your desired color value */
+}
+
+/*
 Add the correct font size in all browsers.
 */
 
@@ -242,6 +357,7 @@ button,
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button;
+  appearance: button;
   /* 1 */
   background-color: transparent;
   /* 2 */
@@ -289,6 +405,7 @@ Correct the cursor style of increment and decrement buttons in Safari.
 
 [type="search"] {
   -webkit-appearance: textfield;
+  appearance: textfield;
   /* 1 */
   outline-offset: -2px;
   /* 2 */
@@ -396,6 +513,14 @@ textarea::placeholder {
   /* 2 */
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0; /* Ensure no default margin */
+  padding-right: 4px; /* Ensure no default padding */
+}
+
 /*
 Set the default cursor for buttons.
 */
@@ -476,7 +601,7 @@ video {
   --tw-ring-inset: ;
   --tw-ring-offset-width: 0px;
   --tw-ring-offset-color: #fff;
-  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-color: #0d4e86;
   --tw-ring-offset-shadow: 0 0 #0000;
   --tw-ring-shadow: 0 0 #0000;
   --tw-shadow: 0 0 #0000;
@@ -782,6 +907,10 @@ video {
   margin-left: 1rem;
 }
 
+.ml-custom {
+  margin-left: 5rem;
+}
+
 .ml-auto {
   margin-left: auto;
 }
@@ -794,12 +923,20 @@ video {
   margin-right: 0.75rem;
 }
 
+.mr-10 {
+  margin-right: 2rem;
+}
+
 .mt-1 {
   margin-top: 0.25rem;
 }
 
 .mt-10 {
   margin-top: 2.5rem;
+}
+
+.mt-20 {
+  margin-top: 5rem;
 }
 
 .mt-2 {
@@ -949,12 +1086,23 @@ video {
   width: 1.5rem;
 }
 
+.w-customwidth {
+  width: 5rem;
+}
+
 .w-64 {
   width: 16rem;
 }
 
 .w-8 {
   width: 2rem;
+}
+.w-16 {
+  width: 3rem;
+}
+
+.w-10 {
+  width: 10rem;
 }
 
 .w-\[this-is\\\\\] {
@@ -1926,6 +2074,9 @@ video {
 .rounded-md {
   border-radius: 0.375rem;
 }
+.rounded-custom {
+  border-radius: 0.6rem;
+}
 
 .rounded-b {
   border-bottom-right-radius: 0.25rem;
@@ -2080,6 +2231,11 @@ video {
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 
+.border-custom {
+  --tw-border-opacity: 1;
+  border-color: #48c4d3;
+}
+
 .border-transparent {
   border-color: transparent;
 }
@@ -2108,9 +2264,9 @@ video {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
-.bg-gray-900 {
+.bg-gray {
   --tw-bg-opacity: 1;
-  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+  background-color: gray;
 }
 
 .bg-indigo-600 {
@@ -2121,6 +2277,11 @@ video {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-custom {
+  --tw-bg-opacity: 1;
+  background-color: #48c4d3;
 }
 
 .decoration-slice {
@@ -2299,6 +2460,22 @@ video {
   padding-left: 1rem;
 }
 
+.pl-5 {
+  padding-left: 2rem;
+}
+
+.pl-6 {
+  padding-left: 3rem;
+}
+
+.pl-10 {
+  padding-left: 5rem;
+}
+
+.pt-2 {
+  padding-top: 0.8rem;
+}
+
 .pt-5 {
   padding-top: 1.25rem;
 }
@@ -2366,6 +2543,14 @@ video {
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
+}
+
+.text-4xl {
+  font-size: 40px;
+}
+
+.text-3xl {
+  font-size: 30px;
 }
 
 .text-\[13px\] {
@@ -2544,7 +2729,7 @@ video {
 
 .text-gray-600 {
   --tw-text-opacity: 1;
-  color: rgb(75 85 99 / var(--tw-text-opacity));
+  color: #8c8c8c;
 }
 
 .text-gray-800 {
@@ -2560,6 +2745,10 @@ video {
 .text-indigo-600 {
   --tw-text-opacity: 1;
   color: rgb(79 70 229 / var(--tw-text-opacity));
+}
+.text-default {
+  --tw-text-opacity: 1;
+  color: #48c4d3;
 }
 
 .text-red-500 {
@@ -2833,9 +3022,14 @@ video {
   --tw-ring-inset: inset;
 }
 
-.ring-gray-300 {
+.ring-gray {
   --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
+  --tw-ring-color: #929292;
+}
+
+.ring-custom {
+  --tw-ring-opacity: ;
+  --tw-ring-color: #48c4d3;
 }
 
 .blur {
@@ -3096,7 +3290,15 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
+.hover\:bg-custom:hover {
+  --tw-bg-opacity: 1;
+  background-color: #48c4d3;
+}
 
+.hover\:bg-custom2:hover {
+  --tw-bg-opacity: 1;
+  background-color: #2aa8b6;
+}
 .hover\:bg-gray-950:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(3 7 18 / var(--tw-bg-opacity));
@@ -3118,12 +3320,20 @@ video {
 
 .hover\:text-blue-500:hover {
   --tw-text-opacity: 1;
-  color: rgb(59 130 246 / var(--tw-text-opacity));
+  color: #48c4d3;
+  font-weight: 600;
+  text-decoration: underline;
 }
 
 .hover\:text-gray-100:hover {
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity));
+}
+
+.hover\:customtext:hover {
+  --tw-text-opacity: 1;
+  color: white;
+  font-weight: 600;
 }
 
 .hover\:text-white:hover {
@@ -3145,9 +3355,10 @@ video {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
     var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-    calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+    calc(2.5px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
     var(--tw-shadow, 0 0 #0000);
+  background-color: #d6eff2;
 }
 
 .focus\:ring-inset:focus {
@@ -3156,7 +3367,12 @@ video {
 
 .focus\:ring-indigo-600:focus {
   --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(79 70 229 / var(--tw-ring-opacity));
+  --tw-ring-color: #1985e3;
+}
+
+.focus\:ring-custom:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: #2aa8b6;
 }
 
 .focus\:hover\:text-center:hover:focus {
@@ -3180,7 +3396,7 @@ video {
 }
 
 .focus-visible\:outline-indigo-600:focus-visible {
-  outline-color: #4f46e5;
+  outline-color: #0d4e86;
 }
 
 .group.active .group-\[\.active\]\:bg-gray-800 {

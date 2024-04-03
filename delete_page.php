@@ -1,15 +1,15 @@
 <?php
 
 
-if (isset($_GET["ServiceID"])) {
+if (isset ($_GET["ServiceID"])) {
     $ServiceID = $_GET["ServiceID"];
 
-    require 'conn.php';
+    require 'DBConn.php';
 
     // Establish database connection
     $conn = connect_to_database();
 
-    $sql = "DELETE FROM testing WHERE ServiceID=$ServiceID";
+    $sql = "DELETE FROM data WHERE ServiceID=$ServiceID";
     $conn->query($sql);
 
 
