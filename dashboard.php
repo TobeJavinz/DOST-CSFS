@@ -1,6 +1,9 @@
 <?php
 
 include 'session_auth.php';
+
+
+
 include 'DBConn.php';
 $conn = connect_to_database();
 // get no. male
@@ -128,15 +131,25 @@ $total_food = $row_food["food_count"];
           <ul
             class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
             <li>
-              <a href="#"
-                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50"><?php echo $_SESSION['name']?></a>
+              <a class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-red-500 hover:bg-gray-50">
+              <?php
+              if (isset($_SESSION['login']) && !isset($_SESSION['name'])) {
+                echo $_SESSION['login'];
+              } elseif (isset($_SESSION['name']) && !isset($_SESSION['login'])) {
+                echo $_SESSION['name'];
+              } elseif (isset($_SESSION['login']) && isset($_SESSION['name'])) {
+                echo $_SESSION['name'];
+              } 
+              ?> 
+              </a>
             </li>
-            <!-- <li>
+                <!-- <li>
               <a href="#"
                 class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
             </li> -->
-            <li>  
-              <button onclick=" window.location.href ='session_destroy.php'" class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-red-500 hover:bg-gray-50">Logout</button>
+            <li>
+              <button onclick=" window.location.href ='session_destroy.php'"
+                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-red-500 hover:bg-gray-50">Logout</button>
             </li>
           </ul>
         </li>
@@ -267,7 +280,7 @@ $total_food = $row_food["food_count"];
                       $index = 1; // For numbering each row
                       while ($row = $Firms_result->fetch_assoc()) {
                         echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
-                       
+
                         echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . ucwords($row['Services']) . "</td>";
                         echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $index . "</td>";
 
@@ -382,10 +395,10 @@ $total_food = $row_food["food_count"];
                             <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                               #
                             </th> -->
-                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                               Sector
                             </th>
-                           <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                            <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                               Total -->
                             </th>
                           </tr>

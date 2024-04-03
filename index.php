@@ -128,8 +128,8 @@ $conn->close();
                 <input required name="username" type="text" placeholder="Username">
 
                 <input required id="password" name="password" type="password" placeholder="Password"
-                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$"
-                    title="Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long">
+                pattern="^[A-Za-z\d!@#$%^&*]{8,}$"
+                    title="Password must contain at least one uppercase letter, one lowercase letter, one number, one special character(!@#$%^&*), and be at least 8 characters long">
 
                 <input type="checkbox" id="showPassword">
                 <label for="showPassword" class=" text-gray-100 text-sm">Show Password</label>
