@@ -18,7 +18,7 @@ if (isset($_GET['page'])) {
 $num_per_page = 9;
 $start_from = ($page - 1) * $num_per_page;
 
-echo $start_from;
+
 
 // Perform a query
 if (isset($_GET['search'])) {
