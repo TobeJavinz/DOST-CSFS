@@ -285,7 +285,7 @@ if (isset($_POST["submit"])) {
                     <div class="flex justify-between">
                         <!-- diri isulod na div -->
                         <div>
-                            <div class="text-3xl font-bold mb-5">
+                            <div class="text-3xl text-default font-bold mb-5">
                                 Training Information
                             </div>
 
@@ -303,7 +303,7 @@ if (isset($_POST["submit"])) {
                                                 Service</label>
                                             <div class="mt-2">
                                                 <select id="" name="service"
-                                                    class="block w-full rounded-custom border-0 px-4 py-2 pr-4 text-gray-900 outline-none shadow-sm ring-1 ring-inset ring-gray focus:ring-2 focus:ring-inset focus:ring-custom sm:max-w-xs sm:text-sm sm:leading-6">
+                                                    class="block w-full rounded-md border-0 px-4 py-2 pr-4 text-gray-900 outline-none shadow-sm ring-1 ring-inset ring-gray focus:ring-2 focus:ring-inset focus:ring-custom sm:max-w-xs sm:text-sm sm:leading-6">
                                                     <option value="" selected hidden>Select Options</option>
                                                     <option value="Technology Intervention">Technology Intervention
                                                     </option>
@@ -332,7 +332,7 @@ if (isset($_POST["submit"])) {
                                                 Title</label>
                                             <div class="mt-2">
                                                 <input type="text" name="training_name"
-                                                    class="block w-full rounded-custom border-0 py-1.5 px-4  text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                                    class="block w-full rounded-md border-0 py-1.5 px-4  text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
 
@@ -341,7 +341,7 @@ if (isset($_POST["submit"])) {
                                             text-gray-900">Date</label>
                                             <div class="mt-2">
                                                 <input id="" name="date" type="date"
-                                                    class="block w-10 rounded-custom  px-4 py-1 text-center text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                                    class="block w-full rounded-md px-4 py-1 text-center text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
 
@@ -350,7 +350,7 @@ if (isset($_POST["submit"])) {
                                                 class=" block text-sm font-medium leading-6 text-gray-900">Venue</label>
                                             <div class="mt-2">
                                                 <input type="text" name="training_venue"
-                                                    class="block w-full rounded-custom py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                                    class="block w-full rounded-md py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
                                         <!-- end -->
@@ -388,7 +388,7 @@ if (isset($_POST["submit"])) {
                 <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5 mt-6">
                     <div class="flex justify-between">
                         <div>
-                            <div class="text-3xl font-bold mb-5">
+                            <div class="text-3xl text-default font-bold mb-5">
                                 Personal Information
                             </div>
 
@@ -621,7 +621,7 @@ if (isset($_POST["submit"])) {
                     <div class="flex justify-between">
                         <!-- diri isulod na div -->
                         <div>
-                            <div class="text-2xl font-semibold mb-1">
+                            <div class="text-3xl text-default font-bold mb-6">
                                 3. What is your OVERALL MOOD/FEELING best describes your
                                 experience with us?
                             </div>
@@ -667,7 +667,7 @@ if (isset($_POST["submit"])) {
                     <div class="flex justify-between">
                         <!-- diri isulod na div -->
                         <div>
-                            <div class="text-2xl font-semibold mb-1">
+                            <div class="text-3xl text-default font-bold mb-6">
                                 4. We want to hear from you!
                             </div>
 
@@ -678,7 +678,7 @@ if (isset($_POST["submit"])) {
                             </legend>
                             <div class="mt-2">
                                 <textarea name="comments" rows="3"
-                                    class="block w-full rounded-md border-0 py-1.5  text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6 "> </textarea>
+                                    class="block w-full rounded-md border-0 py-1.5 px-2  text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6 "> </textarea>
                             </div>
 
                         </div>

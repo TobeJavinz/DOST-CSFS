@@ -2,7 +2,7 @@
     <div class="flex justify-between">
         <!-- diri isulod na div -->
         <div>
-            <div class="text-2xl font-semibold mb-10">
+            <div class="text-3xl text-default font-bold mb-10">
                 1. How will you RATE the delivery of our assistance/service?
             </div>
             <fieldset>

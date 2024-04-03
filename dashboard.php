@@ -67,6 +67,10 @@ $total_food = $row_food["food_count"];
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
   <link href="./src/output.css" rel="stylesheet" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+
 </head>
 
 <body class="text-gray-800 font-inter">
@@ -83,31 +87,194 @@ $total_food = $row_food["food_count"];
     include 'header.php';
     ?>
 
+    <div class="pl-custom mr-4 mt-4 mb-3">
+      <div class="grid grid-cols-1 ">
+        <div class="bg-white border border-black shadow-md shadow-black/5 rounded-md">
+
+          <div class="pl-custom mr-4 mt-4 mb-3">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+              <div class="bg-customs border justify-between border-black shadow-md shadow-black/5 p-6 rounded-md">
+                <div class="flex">
+                  <div
+                    class="flex h-11 w-11  items-center justify-center rounded-full bg-custom sm:mx-0 sm:h-10 sm:w-10">
+
+                    <span class="material-symbols-outlined text-white">
+                      emoji_people
+                    </span>
+
+                  </div>
+                  <div class="text-md font-bold text-black py-2 ml-4">First Time Clients</div>
+
+                </div>
+                <div class="text-xxl font-semibold text-black py-1  text-center">
+                  <?php echo $total_firsttime ?>
+                </div>
+              </div>
+
+              <div class="bg-customs border justify-between border-black shadow-md shadow-black/5 p-6 rounded-md">
+                <div class="flex">
+                  <div
+                    class="flex h-11 w-11  items-center justify-center rounded-full bg-custom sm:mx-0 sm:h-10 sm:w-10">
+
+                    <span class="material-symbols-outlined text-white">
+                      accessibility_new
+                    </span>
+
+                  </div>
+                  <div class="text-md font-bold text-black py-2 ml-4">Returning Clients</div>
+
+                </div>
+                <div class="text-xxl font-semibold text-black py-1  text-center">
+                  <?php echo $total_returning ?>
+                </div>
+              </div>
+
+              <div class="bg-customs border justify-between border-black shadow-md shadow-black/5 p-6 rounded-md">
+                <div class="flex">
+                  <div
+                    class="flex h-11 w-11  items-center justify-center rounded-full bg-custom sm:mx-0 sm:h-10 sm:w-10">
+
+                    <span class="material-symbols-outlined text-white">
+                      man
+                    </span>
+
+                  </div>
+                  <div class="text-md font-bold text-black py-2 ml-4">Total Male</div>
+
+                </div>
+                <div class="text-xxl font-semibold text-black py-1  text-center">
+                  <?php echo $male_count ?>
+                </div>
+              </div>
+
+              <div class="bg-customs border justify-between border-black shadow-md shadow-black/5 p-6 rounded-md">
+                <div class="flex">
+                  <div
+                    class="flex h-11 w-11  items-center justify-center rounded-full bg-custom sm:mx-0 sm:h-10 sm:w-10">
+
+                    <span class="material-symbols-outlined text-white">
+                      woman
+                    </span>
+
+                  </div>
+                  <div class="text-md font-bold text-black py-2 ml-4">Total Female</div>
+
+                </div>
+                <div class="text-xxl font-semibold text-black py-1  text-center">
+                  <?php echo $female_count ?>
+                </div>
+              </div>
 
 
-    <div class="p-6">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-        <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
-          <div class="flex justify-between mb-4 items-start">
-            <div class="text-lg font-medium text-gray-400">CONDUCTED TRAININGS</div>
+            </div>
+
+          </div>
+          <div class="pl-custom mr-4 mb-4">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+              <div class="bg-customs border justify-between border-black shadow-md shadow-black/5 p-6 rounded-md">
+                <div class="flex">
+                  <div
+                    class="flex h-11 w-11  items-center justify-center rounded-full bg-custom sm:mx-0 sm:h-10 sm:w-10">
+
+                    <span class="material-symbols-outlined text-white">
+                      <span class="material-symbols-outlined">
+                        groups
+                      </span>
+                    </span>
+
+                  </div>
+                  <div class="text-md font-bold text-black py-2 ml-4">Total Clients</div>
+
+                </div>
+                <div class="text-xxl font-semibold text-black py-1  text-center">
+                  <?php echo $total_count ?>
+                </div>
+              </div>
+
+              <div class="bg-customs border justify-between border-black shadow-md shadow-black/5 p-6 rounded-md">
+                <div class="flex">
+                  <div
+                    class="flex h-11 w-11  items-center justify-center rounded-full bg-custom sm:mx-0 sm:h-10 sm:w-10">
+
+                    <span class="material-symbols-outlined text-white">
+                      enterprise
+                    </span>
+
+                  </div>
+                  <div class="text-md font-bold text-black py-2 ml-4">Number of MSMEs</div>
+
+                </div>
+                <div class="text-xxl font-semibold text-black py-1  text-center">
+                  <?php echo $total_msme ?>
+                </div>
+              </div>
+
+              <div class="bg-customs border justify-between border-black shadow-md shadow-black/5 p-6 rounded-md">
+                <div class="flex">
+                  <div
+                    class="flex h-11 w-11  items-center justify-center rounded-full bg-custom sm:mx-0 sm:h-10 sm:w-10">
+
+                    <span class="material-symbols-outlined text-white">
+                      Apparel
+                    </span>
+
+                  </div>
+                  <div class="text-md font-bold text-black py-2 ml-4">Non-Food Trainings</div>
+
+                </div>
+                <div class="text-xxl font-semibold text-black py-1  text-center">
+                  <?php echo $total_nonfood ?>
+                </div>
+              </div>
+
+              <div class="bg-customs border justify-between border-black shadow-md shadow-black/5 p-6 rounded-md">
+                <div class="flex">
+                  <div
+                    class="flex h-11 w-11  items-center justify-center rounded-full bg-custom sm:mx-0 sm:h-10 sm:w-10">
+
+                    <span class="material-symbols-outlined text-white">
+                      local_dining
+                    </span>
+
+                  </div>
+                  <div class="text-md font-bold text-black py-2 ml-4">Food Trainings</div>
+
+                </div>
+                <div class="text-xxl font-semibold text-black py-1  text-center">
+                  <?php echo $total_food ?>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="pl-custom mr-4 mt-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="bg-white border border-black shadow-md shadow-black/5 p-6 rounded-md">
+          <div class="flex">
+            <div class="flex h-11 w-11  items-center justify-center rounded-full bg-custom sm:mx-0 sm:h-10 sm:w-10">
+
+              <span class="material-symbols-outlined text-white">
+                task_alt
+              </span>
+
+            </div>
+            <div class="text-lg font-bold text-black py-2 ml-4">CONDUCTED TRAINING</div>
           </div>
           <!-- LIST OF CONDUCTED TRAININGS table -->
-          <div class="flex flex-col">
+          <div class="flex justify-center mt-2">
             <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
               <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="overflow-hidden">
                   <table class="min-w-full">
-                    <thead class="bg-white border-b">
+                    <thead class="bg-white">
                       <tr>
-                        <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                          #
-                        </th> -->
-                        <!-- <th scope="col" class="text-sm font-sm text-gray-900 px-6 py-4 text-left">
-                          
-                        </th>
-                        <th scope="col" class="text-sm font-sm text-gray-900 px-6 py-4 text-left">
-                          
-                        </th> -->
                       </tr>
                     </thead>
                     <tbody>
@@ -115,9 +282,9 @@ $total_food = $row_food["food_count"];
                       // Loop through the query results and display each row
                       $counter = 1;
                       while ($row = $result_training->fetch_assoc()) {
-                        echo "<tr class='" . ($counter % 2 == 0 ? "bg-gray-100" : "bg-white") . " border-b'>";
+                        echo "<tr class='" . ($counter % 2 == 0 ? "bg-gray-100" : "bg-white") . "'>";
                         // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $counter . "</td>";
-                        echo "<td class='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>" . $row['training_name'] . "</td>";
+                        echo "<td class='text-sm text-gray-900 font-light  py-4 whitespace-nowrap'>" . $row['training_name'] . "</td>";
                         echo "<td class='text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap'>" . $row['total_recipients'] . "</td>";
                         echo "</tr>";
                         $counter++;
@@ -131,71 +298,26 @@ $total_food = $row_food["food_count"];
           </div>
         </div>
 
-        <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
-          <div class="flex justify-between mb-4 items-start">
-            <div class="text-lg font-medium text-gray-400">DELIVERED SERVICES</div>
-
-          </div>
-          <!--DELIVERED SERVICES table -->
-          <div class="flex flex-col">
-            <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-              <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                <div class="overflow-hidden">
-                  <table class="min-w-full">
-                    <thead class="bg-white border-b">
-                      <tr>
-                        <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                          #
-                        </th> -->
-                        <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                          Services
-                        </th>
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                          #
-                        </th> -->
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      // Loop through the query results and display each row
-                      $index = 1; // For numbering each row
-                      while ($row = $result_tperSer->fetch_assoc()) {
-                        echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
-                        // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $index . "</td>";
-                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $row['service'] . "</td>";
-                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $row['total_respondents'] . "</td>";
-                        echo "</tr>";
-                        $index++;
-                      }
-                      ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+        <div class="bg-white border border-black shadow-md shadow-black/5 p-6 rounded-md">
+          <div class="flex">
+            <div class="flex h-11 w-11  items-center justify-center rounded-full bg-custom sm:mx-0 sm:h-10 sm:w-10">
+              <span class="material-symbols-outlined text-white ">
+                home_work
+              </span>
             </div>
+            <div class="text-lg font-bold text-black py-2 ml-4">FIRMS ASSISTED</div>
           </div>
-        </div>
 
-
-        <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
-          <div class="flex justify-between mb-4 items-start">
-            <div class="text-lg font-medium text-gray-400">FIRMS ASSISTED</div>
-          </div>
 
           <!--Firsm Assisted table -->
-          <div class="flex flex-col">
-            <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+          <div class="flex justify-center mt-2">
+            <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5 text-left">
               <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                 <div class="overflow-hidden">
                   <table class="min-w-full">
-                    <thead class="bg-white border-b">
+                    <thead class="bg-white ">
                       <tr>
-                        <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                          #
-                        </th>
-                        <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                          Firms
-                        </th> -->
+
                       </tr>
                     </thead>
                     <tbody>
@@ -209,7 +331,7 @@ $total_food = $row_food["food_count"];
                       // Loop through the query results and display each row
                       $index = 1; // For numbering each row
                       while ($row = $Firms_result->fetch_assoc()) {
-                        echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
+                        echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . "'>";
 
                         echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . ucwords($row['Services']) . "</td>";
                         echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $index . "</td>";
@@ -226,144 +348,97 @@ $total_food = $row_food["food_count"];
           </div>
         </div>
 
-      </div> <!-- upper card closing tag -->
-      <!-- SERVICE AND TRAINING CARDZZ -->
+        <div class="bg-white border border-black shadow-md shadow-black/5 p-6 rounded-md">
+          <div class="flex">
+            <div class="flex h-11 w-11  items-center justify-center rounded-full bg-custom sm:mx-0 sm:h-10 sm:w-10">
 
-      <!-- lower cards -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-        <!-- TOTAL NUMBER CARDS -->
-        <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
-          <!-- CARD CONTENT -->
-          <div class="text-lg font-bold text-default">FIRST TIME CLIENTS</div>
-          <div class="flex justify-between mb-20">
-            <div>
-              <div class="text-2xl font-semibold mb-4">
-                <?php echo $total_firsttime ?>
-              </div>
+              <span class="material-symbols-outlined text-white">
+                support_agent
+              </span>
+
             </div>
+            <div class="text-lg font-bold text-black py-2 ml-4">DELIVERED SERVICE</div>
           </div>
-          <!-- CARD CONTENT END -->
-          <div class="text-lg font-bold text-default">RETURNING CLIENTS</div>
-          <div class="flex justify-between mb-6">
-            <div>
-              <div class="text-2xl font-semibold mb-1">
-                <?php echo $total_returning ?>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <div class="text-lg font-medium text-gray-400">TOTAL FEMALE</div>
-            <div class="flex items-center mb-20">
-              <div class="text-2xl font-semibold mb-4">
-                <?php echo $female_count ?>
-              </div>
-            </div>
-
-            <div class="text-lg font-medium text-gray-400">TOTAL MALE</div>
-            <div class="flex justify-between mb-6">
-              <div>
-                <div class="text-2xl font-semibold mb-1">
-                  <?php echo $male_count ?>
+          <!--DELIVERED SERVICES table -->
+          <div class="flex justify-center mt-2">
+            <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
+              <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="overflow-hidden">
+                  <table class="min-w-full">
+                    <thead class="bg-white">
+                      <tr>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                      // Loop through the query results and display each row
+                      $index = 1; // For numbering each row
+                      while ($row = $result_tperSer->fetch_assoc()) {
+                        echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . "'>";
+                        // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $index . "</td>";
+                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $row['service'] . "</td>";
+                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $row['total_respondents'] . "</td>";
+                        echo "</tr>";
+                        $index++;
+                      }
+                      ?>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
-
-
-
         </div>
-        <!-- CARD -->
-        <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
-          <!-- MSMEs -->
-          <div class="text-lg font-medium text-gray-400 ">NUMBER OF MSME</div>
-          <div class="flex justify-between mb-6">
-            <div>
-              <div class="text-2xl font-semibold mb-1">
-                <?php echo $total_msme ?>
-              </div>
+
+
+
+
+        <div class="bg-white border border-black shadow-md shadow-black/5 p-6 rounded-md">
+          <div class="flex">
+            <div class="flex h-11 w-11  items-center justify-center rounded-full bg-custom sm:mx-0 sm:h-10 sm:w-10">
+              <span class="material-symbols-outlined text-white ">
+                home_work
+              </span>
             </div>
+            <div class="text-lg font-bold text-black py-2 ml-4">DIFFERENT SECTORS</div>
           </div>
 
-          <div class="text-lg font-medium text-gray-400 ">NON-FOOD TRAININGS</div>
-          <div class="flex justify-between mb-6">
-            <div>
-              <div class="text-2xl font-semibold mb-1">
-                <?php echo $total_nonfood ?>
-              </div>
-            </div>
-          </div>
 
-          <div class="text-lg font-medium text-gray-400 ">FOOD TRAININGS</div>
-          <div class="flex justify-between mb-6">
-            <div>
-              <div class="text-2xl font-semibold mb-1">
-                <?php echo $total_food ?>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- CARD END -->
-
-        <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
-          <div class="flex justify-between mb-6">
-            <div>
-              <div class="text-lg font-medium text-gray-400">
-                TOTAL CLIENTS
-              </div>
-              <div class="text-2xl font-semibold mb-1">
-                <?php echo $total_count ?>
-              </div>
-              <!--  TOTAL RECIPIENTS table -->
-              <div class="flex flex-col">
-                <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-                  <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="overflow-hidden">
-                      <table class="min-w-full">
-                        <thead class="bg-white border-b">
-                          <tr>
-                            <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                              #
-                            </th> -->
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                              Sector
-                            </th>
-                            <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                              Total -->
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <?php
-                          // Loop through the query results and display each row
-                          $count = 1;
-                          while ($row = $result_tperSec->fetch_assoc()) {
-                            echo "<tr class='" . (($count % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
-                            // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $count . "</td>";
-                            echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ucwords($row['sector']) . "</td>";
-                            echo "<td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-light'>" . $row['total_respondents'] . "</td>";
-                            echo "</tr>";
-                            $count++;
-                          }
-                          ?>
-                        </tbody>
-                      </table>
-                    </div>
+          <!--Different Sectors -->
+          <div class="flex justify-center mt-2"> <!-- Added flex and justify-center classes -->
+            <div class="flex flex-col">
+              <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5"> <!-- Removed text-center class -->
+                <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                  <div class="overflow-hidden">
+                    <table class="min-w-full">
+                      <thead class="bg-white">
+                        <tr>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        // Loop through the query results and display each row
+                        $count = 1;
+                        while ($row = $result_tperSec->fetch_assoc()) {
+                          echo "<tr class='" . (($count % 2 == 0) ? "bg-gray-100" : "bg-white") . "'>";
+                          // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $count . "</td>";
+                          echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ucwords($row['sector']) . "</td>";
+                          echo "<td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-light'>" . $row['total_respondents'] . "</td>";
+                          echo "</tr>";
+                          $count++;
+                        }
+                        ?>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
+
       </div>
     </div>
-    <!-- TOTAL NUMBER CARDS END-->
-
-    <!-- SERVICE AND TRAINING CARDZZ -->
-
-    </div>
-
   </main>
   <!-- end: Main -->
   <script src="https://unpkg.com/@popperjs/core@2"></script>
