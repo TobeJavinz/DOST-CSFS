@@ -2,7 +2,7 @@
 
 session_start();
 if (isset($_SESSION['login'])) {
-  header("Location: adminView.php");
+  header("Location: tables.php");
 }
 
 // Check if the user is logged in 
@@ -27,7 +27,7 @@ if (isset($_POST['login'])) {
         
         $stmt->close();
         $conn->close();
-        header("Location: adminView.php"); // Redirect
+        header("Location: tables.php"); // Redirect
         echo "<script>alert('NAMES');</script>";
     } else {
       
