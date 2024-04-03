@@ -1,24 +1,18 @@
 <?php
-require 'conn.php';
+require 'DBConn.php';
 
 // Establish database connection
 $conn = connect_to_database();
 
 $ServiceID = "";
-$cc1_1 = "";
-$cc1_2 = "";
-$cc1_3 = "";
-$cc2_1 = "";
-$cc2_2 = "";
-$cc3_1 = "";
-$cc3_2 = "";
+
 
 $errormessage = "";
 $successmessage = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-    if (!isset ($_GET["ServiceID"])) {
+    if (!isset($_GET["ServiceID"])) {
         header("location: /DOST-CSFS/tables.php");
         exit;
     }
@@ -131,9 +125,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $overall_mood = $_POST["overall_mood"];
     $comments = $_POST["comments"];
 
+
+    $customer_categorys = ""; //basta mao ning ilahi ang customertype mao tong naa sa database
+    foreach ($customer_category as $row) {
+        $customer_categorys .= $row . ",";
+    }
+
+    // Remove the last comma from the string
+    $customer_categorys = rtrim($customer_categorys, ',');
+
+    // customer_category
+    $sectors = ""; //basta mao ning ilahi ang customertype mao tong naa sa database
+    foreach ($sector as $row) {
+        $sectors .= $row . ",";
+    }
+
+    // Remove the last comma from the string
+    $sectors = rtrim($sectors, ',');
+
     do {
         if (
-            empty ($cc1_1)
+            empty($cc1_1)
         ) {
             $errormessage = "Required fields are missing.";
             break;
@@ -143,8 +155,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             "SET cc1_1 = '$cc1_1', cc1_2 = '$cc1_2', cc1_3 = '$cc1_3', cc2_1 = '$cc2_1', cc2_2 = '$cc2_2', cc3_1 = '$cc3_1', cc3_2 = '$cc3_2', 
             service = '$service', training_name = '$training_name', date = '$date', training_venue = '$training_venue', training_type = '$training_type', 
             fname = '$fname', lname = '$lname', sex = '$sex', email = '$email', contact_info = '$contact_info', home_add = '$home_add', 
-            age = '$age', designation = '$designation', company = '$company', msme = '$msme', customer_category = '$customer_category', 
-            sector = '$sector', returning_customer = '$returning_customer', sqd0 = '$sqd0', sqd1 = '$sqd1', sqd2 = '$sqd2', sqd3 = '$sqd3', 
+            age = '$age', designation = '$designation', company = '$company', msme = '$msme', customer_category = '$customer_categorys', 
+            sector = '$sectors', returning_customer = '$returning_customer', sqd0 = '$sqd0', sqd1 = '$sqd1', sqd2 = '$sqd2', sqd3 = '$sqd3', 
             sqd4 = '$sqd4', sqd5 = '$sqd5', sqd6 = '$sqd6', sqd7 = '$sqd7', sqd8 = '$sqd8', net_promoter = '$net_promoter', 
             ateneo = '$ateneo', doa = '$doa', dti = '$dti', fda = '$fda', sbc = '$sbc', tesda = '$tesda', uic = '$uic', 
             other_agency = '$other_agency', other_agency_score = '$other_agency_score', overall_mood = '$overall_mood', comments = '$comments'" .
@@ -188,637 +200,665 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 
     <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
-        <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
-            <button type="button" class="text-lg text-gray-600 sidebar-toggle">
-                <i class="ri-menu-line"></i>
-            </button>
-            <ul class="flex items-center text-sm ml-4">
-                <li class="mr-2">
-                    <a class="text-base text-black font-bold">Admin</a>
-                </li>
-            </ul>
-            <ul class="ml-auto flex items-center">
-                <li class="dropdown ml-3">
-                    <button type="button" class="dropdown-toggle flex items-center">
-                        <img src="https://placehold.co/32x32" alt=""
-                            class="w-8 h-8 rounded block object-cover align-middle" />
-                    </button>
-                    <ul
-                        class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-                        <li>
-                            <a href="#"
-                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+        <?php
+        $headerText = "Update Form";
+        include 'header.php';
+        ?>
 
         <!-- content -->
-        <div class="p-6">
-            <div class="grid grid-cols-1 gap-6">
-                <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md s  hadow-black/5">
-                    <!-- diri isulod na div -->
-                    <form method="post" action="" autocomplete="off">
-                        <section>
-                            <div class="container">
-                                <div class="flex flex-wrap -mx-4">
-                                    <div class="w-full overflow-x-auto">
-                                        <table class="table-auto w-max">
-                                            <thead>
-                                                <tr class="bg-primary text-center">
-                                                    <th type="hidden"
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent text-center">
-                                                        Service ID
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        cc1_1
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        cc1_2
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        cc1_3
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        cc2_1
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        cc2_2
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        cc3_1
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        cc3_2
-                                                    </th>
 
-                                                    <th
-                                                        class="w-1/32 min-w-[200px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        Service
-                                                    </th>
+        <form method="post" action="" autocomplete="off">
+            <div class="p-6">
+                <div class="grid grid-cols-1 ">
+                    <div class="">
+                        <input type="hidden" value="<?php echo $row['ServiceID'] ?>" name="ServiceID"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
+                    </div>
 
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        Training Name
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[200px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        Date
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        Training Venue
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        Training Type
-                                                    </th>
-
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        First Name
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        Last Name
-                                                    </th>
-
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        Sex
-                                                    </th>
-
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 text-center">
-                                                        Email
-                                                    </th>
-
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 text-center">
-                                                        Contact Info
-                                                    </th>
-
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 text-center">
-                                                        Address
-                                                    </th>
-
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        Age
-                                                    </th>
-
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        Designation
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        Company
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        MSME?
-                                                    </th>
-
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        Customer Category
-                                                    </th>
-
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        Sector
-                                                    </th>
-
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        Returning Customer
-                                                    </th>
-
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        sqd0
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        sqd1
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        sqd2
-                                                    </th>
-
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        sqd3
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        sqd4
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        sqd5
-                                                    </th>
-
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        sqd6
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        sqd7
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        sqd8
-                                                    </th>
-
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        Net Promoter
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        ateneo
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        Doa
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        DTI
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        FDA
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        SBC
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        TESDA
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        UIC
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        other agency
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[10px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        Agency score
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[160px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4 border-l border-transparent">
-                                                        Over-all Mood
-                                                    </th>
-
-                                                    <th
-                                                        class="w-1/32 min-w-[100px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        Comments
-                                                    </th>
-                                                    <th
-                                                        class="w-1/32 min-w-[400px] text-lg font-semibold text-black py-4 lg:py-7 px-3 lg:px-4">
-                                                        Actions
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <tr class=" text-center">
-                                                    <td>
-
-                                                        <div class="mt-2">
-                                                            <input type="hidden" value="<?php echo $row['ServiceID'] ?>"
-                                                                name="ServiceID"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" value="<?php echo $row['cc1_1'] ?>"
-                                                                name="cc1_1"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" value="<?php echo $row['cc1_2'] ?>"
-                                                                name="cc1_2"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" value="<?php echo $row['cc1_3'] ?>"
-                                                                name="cc1_3"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" value="<?php echo $row['cc2_1'] ?>"
-                                                                name="cc2_1"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" value="<?php echo $row['cc2_2'] ?>"
-                                                                name="cc2_2"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" value="<?php echo $row['cc3_1'] ?>"
-                                                                name="cc3_1"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" value="<?php echo $row['cc3_2'] ?>"
-                                                                name="cc3_2"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="service"
-                                                                value="<?php echo $row['service'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="training_name"
-                                                                value="<?php echo $row['training_name'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="date"
-                                                                value="<?php echo $row['date'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="training_venue"
-                                                                value="<?php echo $row['training_venue'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="training_type"
-                                                                value="<?php echo $row['training_type'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="fname"
-                                                                value="<?php echo $row['fname'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
+                    <div class="bg-white rounded-md border border-gray-200 p-6 shadow-md shadow-black">
+                        <div class="text-3xl text-default font-bold mb-5">
+                            Customer Satisfaction Measurement
+                            Citizen’s Charter
+                        </div>
 
 
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="lname"
-                                                                value="<?php echo $row['lname'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="sex"
-                                                                value="<?php echo $row['sex'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="email" name="email"
-                                                                value="<?php echo $row['email'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="contact_info"
-                                                                value="<?php echo $row['contact_info'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="home_add"
-                                                                value="<?php echo $row['home_add'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="age"
-                                                                value="<?php echo $row['age'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="designation"
-                                                                value="<?php echo $row['designation'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="company"
-                                                                value="<?php echo $row['company'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="msme"
-                                                                value="<?php echo $row['msme'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="customer_category"
-                                                                value="<?php echo $row['customer_category'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="sector"
-                                                                value="<?php echo $row['sector'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="returning_customer"
-                                                                value="<?php echo $row['returning_customer'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="form-group mt-2">
-                                                            <input type="number" name="sqd0"
-                                                                value="<?php echo $row['sqd0'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="sqd1"
-                                                                value="<?php echo $row['sqd1'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="sqd2"
-                                                                value="<?php echo $row['sqd2'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="sqd3"
-                                                                value="<?php echo $row['sqd3'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="sqd4"
-                                                                value="<?php echo $row['sqd4'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="sqd5"
-                                                                value="<?php echo $row['sqd5'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="sqd6"
-                                                                value="<?php echo $row['sqd6'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="sqd7"
-                                                                value="<?php echo $row['sqd7'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="sqd8"
-                                                                value="<?php echo $row['sqd8'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="net_promoter"
-                                                                value="<?php echo $row['net_promoter'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="ateneo"
-                                                                value="<?php echo $row['ateneo'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="doa"
-                                                                value="<?php echo $row['doa'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="dti"
-                                                                value="<?php echo $row['dti'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="fda"
-                                                                value="<?php echo $row['fda'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="sbc"
-                                                                value="<?php echo $row['sbc'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="tesda"
-                                                                value="<?php echo $row['tesda'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="uic"
-                                                                value="<?php echo $row['uic'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="other_agency"
-                                                                value="<?php echo $row['other_agency'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="number" name="other_agency_score"
-                                                                value="<?php echo $row['other_agency_score'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="overall_mood"
-                                                                value="<?php echo $row['overall_mood'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="mt-2">
-                                                            <input type="text" name="comments"
-                                                                value="<?php echo $row['comments'] ?>"
-                                                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 text-center" />
-                                                        </div>
-                                                    </td>
+                        <div class="flex items-center mb-4 px-6 order-tab">
+                            <div class="">
+                                <p class="text-sm text-gray-400 font-semibold mt-6"> The Citizen’s Charter is an
+                                    official document
+                                    that reflects the services of a government agency/office including its requirements,
+                                    fees, and processing times among others.
+                                </p>
+                            </div>
+                        </div>
 
-                                                    <td>
+                        <!-- cc1_1 -->
+                        <hr class="mt-6">
+                        <div class=" px-2 mt-2">
+                            <label for="cc1_1" class="text-xs font-bold text-gray-900">
+                                CC1.1</label>
+                        </div>
+                        <div class="flex">
+                            <div class="mt-2">
+                                <input type="number" name="cc1_1" pattern="[1-5]" value="<?php echo $row['cc1_1'] ?>"
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                            </div>
+                            <div>
+                                <p class="py-2 ml-4 font-semibold">Yes, but aware
+                                    only when I
+                                    saw the
+                                    CC of this office</p>
+                            </div>
+                        </div>
 
-                                                        <button type="submit" name="submit"
-                                                            class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mb-1 w-full">
-                                                            Update
-                                                        </button>
 
-                                                        <a href="tables.php">
-                                                            <button type="submit" name="submit"
-                                                                class="rounded-md border px-3 py-2 text-sm font-semibold text-red-600 hover:bg-red-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 w-full">
-                                                                Cancel
-                                                            </button>
-                                                        </a>
+                        <!-- cc1_2  -->
+                        <hr class="mt-6">
+                        <div class=" px-2 mt-2">
+                            <label for="cc1_1" class="text-xs font-bold text-gray-900">
+                                CC1.2</label>
+                        </div>
+                        <div class="flex">
+                            <div class="mt-2">
+                                <input type="number" name="cc1_2" pattern="[1-5]" value="<?php echo $row['cc1_2'] ?>"
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                            </div>
+                            <div>
+                                <p class="py-2 ml-4 font-semibold">Yes,
+                                    but aware only
+                                    when
+                                    I saw the CC of this office</p>
+                            </div>
+                        </div>
+                        <hr class="mt-6">
 
-                                                    </td>
 
-                                                </tr>
+                        <!-- cc1_3 -->
 
-                                            </tbody>
-                                        </table>
+                        <div class=" px-2 mt-2">
+                            <label for="cc1_1" class="text-xs font-bold text-gray-900">
+                                CC1.3</label>
+                        </div>
+                        <div class="flex">
+                            <div class="mt-2">
+                                <input type="number" name="cc1_3" pattern="[1-5]" value="<?php echo $row['cc1_3'] ?>"
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                            </div>
+                            <div>
+                                <p class="py-2 ml-4 font-semibold">No, not
+                                    aware</p>
+                            </div>
+                        </div>
+                        <hr class="mt-6">
+
+
+
+                        <!-- cc2_1 -->
+
+                        <div class=" px-2 mt-2">
+                            <label for="cc1_1" class="text-xs font-bold text-gray-900">
+                                CC2.1</label>
+                        </div>
+                        <div class="flex">
+                            <div class="mt-2">
+                                <input type="number" name="cc2_1" pattern="[1-5]" value="<?php echo $row['cc2_1'] ?>"
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                            </div>
+                            <div>
+                                <p class="py-2 ml-4 font-semibold">Yes, I
+                                    saw the
+                                    Citizen's Charter</p>
+                            </div>
+                        </div>
+                        <hr class="mt-6">
+
+
+                        <!-- cc2_2 -->
+                        <div class=" px-2 mt-2">
+                            <label for="cc1_1" class="text-xs font-bold text-gray-900">
+                                CC2.2</label>
+                        </div>
+                        <div class="flex">
+                            <div class="mt-2">
+                                <input type="number" name="cc2_2" pattern="[1-5]" value="<?php echo $row['cc2_2'] ?>"
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                            </div>
+                            <div>
+                                <p class="py-2 ml-4 font-semibold">No, I
+                                    did not see
+                                    the Citizen's Charter</p>
+                            </div>
+                        </div>
+                        <hr class="mt-6">
+
+
+                        <!-- cc3_1 -->
+                        <div class=" px-2 mt-2">
+                            <label for="cc3_1" class="text-xs font-bold text-gray-900">
+                                CC3.1</label>
+                        </div>
+                        <div class="flex">
+                            <div class="mt-2">
+                                <input type="number" name="cc3_1" pattern="[1-5]" value="<?php echo $row['cc3_1'] ?>"
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                            </div>
+                            <div>
+                                <p class="py-2 ml-4 font-semibold">Yes, I
+                                    was able to
+                                    read</p>
+                            </div>
+                        </div>
+                        <hr class="mt-6">
+
+                        <!-- cc3_2 -->
+                        <div class=" px-2 mt-2">
+                            <label for="cc1_1" class="text-xs font-bold text-gray-900">
+                                CC3.2</label>
+                        </div>
+                        <div class="flex">
+                            <div class="mt-2">
+                                <input type="number" name="cc3_2" pattern="[1-5]" value="<?php echo $row['cc3_2'] ?>"
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                            </div>
+                            <div>
+                                <p class="py-2 ml-4 font-semibold">No, I
+                                    was not able
+                                    to
+                                    read</p>
+                            </div>
+                        </div>
+                        <hr class="mt-6">
+
+                    </div>
+
+
+                    <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5 mt-6">
+                        <div class="flex justify-between">
+                            <!-- diri isulod na div -->
+                            <div>
+                                <div class="text-3xl font-bold mb-5">
+                                    Training Information
+                                </div>
+
+                                <!-- starting of input values -->
+                                <div class="flex items-center mb-4 order-tab">
+                                    <div class="">
+
+                                        <div class=" grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+                                            <!-- type of service -->
+                                            <div class="sm:col-span-3">
+                                                <label for=""
+                                                    class="block text-sm font-medium leading-6  text-gray-900 pt-8">Type
+                                                    of
+                                                    Service</label>
+                                                <div class="mt-2">
+                                                    <select id="" name="service"
+                                                        class="block w-full rounded-custom border-0 px-4 py-2 pr-4 text-gray-900 outline-none shadow-sm ring-1 ring-inset ring-custom focus:ring-2 focus:ring-inset focus:ring-custom sm:max-w-xs sm:text-sm sm:leading-6">
+                                                        <option value="" selected hidden>
+                                                            <?php echo $row['service'] ?>
+                                                        </option>
+                                                        <option value="Technology Intervention">Technology Intervention
+                                                        </option>
+                                                        <option value="Technology Training">Technology Training</option>
+                                                        <option value="Technology Forum/Seminar">Technology
+                                                            Forum/Seminar
+                                                        </option>
+                                                        <option value="Consultancy Services">Consultancy Services
+                                                        </option>
+                                                        <option value="Testing and Calibration">Testing and Calibration
+                                                        </option>
+                                                        <option value="Packaging and Labeling Services">Packaging and
+                                                            Labeling Services</option>
+                                                        <option value="Scholarship Program Services">Scholarship Program
+                                                            Services</option>
+                                                        <option value="Formula and Conversion">Formula and Conversion
+                                                        </option>
+                                                        <option value="R&D Management">R&D Management</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!--  Training Title -->
+                                            <div class="sm:col-span-4">
+                                                <label for=""
+                                                    class="block text-sm font-medium leading-6 text-gray-900">Training
+                                                    Title</label>
+                                                <div class="mt-2">
+                                                    <input type="text" name="training_name"
+                                                        value="<?php echo $row['training_name'] ?>"
+                                                        class="block w-full rounded-custom border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                                </div>
+                                            </div>
+
+                                            <div class="m:col-span-2 sm:col-start-1"">
+                                                <label for="" class=" block text-sm font-medium leading-6
+                                                text-gray-900">Date</label>
+                                                <div class="mt-2">
+                                                    <input id="" name="date" type="date"
+                                                        value="<?php echo $row['date'] ?>"
+                                                        class="block w-10 rounded-custom  px-4 py-1 text-center text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                                </div>
+                                            </div>
+
+                                            <div class="sm:col-span-3">
+                                                <label for=""
+                                                    class=" block text-sm font-medium leading-6 text-gray-900">Venue</label>
+                                                <div class="mt-2">
+                                                    <input type="text" name="training_venue"
+                                                        value="<?php echo $row['training_venue'] ?>"
+                                                        class="block w-full rounded-custom py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                                </div>
+                                            </div>
+                                            <!-- end -->
+                                        </div>
+
+                                        <div class="pt-5">
+                                            <label class="text-sm font-semibold leading-6 text-gray-900">
+                                                Training Type
+                                            </label>
+
+                                            <div class="pt-2 flex flex-wrap items-center gap-4  ">
+                                                <div class="flex items-center gap-x-3">
+                                                    <input name="training_type" value="Food" type="radio" <?php if ($row['training_type'] == 'Food') {
+                                                        echo "checked";
+                                                    } ?>
+                                                        class="h-4 w-4 border-gray-300">
+                                                    <label for=""
+                                                        class="block text-sm  leading-6 text-gray-900">Food</label>
+                                                </div>
+                                                <div class="flex items-center gap-x-3">
+                                                    <input name="training_type" value="Non-food" type="radio" <?php if ($row['training_type'] == 'Non-food') {
+                                                        echo "checked";
+                                                    } ?>
+                                                        class="h-4 w-4 border-gray-300 text-default focus:ring-custom">
+                                                    <label for=""
+                                                        class="block text-sm  leading-6 text-gray-900">Non-Food</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal Information -->
+                    <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5 mt-6">
+                        <div class="flex justify-between">
+                            <div>
+                                <div class="text-3xl font-bold mb-5">
+                                    Personal Information
+                                </div>
+
+                                <div class="flex items-center mb-4 order-tab">
+                                    <div class="">
+                                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                                            <div class="sm:col-span-2 sm:col-start-1">
+                                                <label for=""
+                                                    class="block text-sm font-medium leading-6 text-gray-900">First
+                                                    Name</label>
+                                                <div class="mt-2">
+                                                    <input type="text" name="fname" value="<?php echo $row['fname'] ?>"
+                                                        class="block w-full rounded-md border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                                </div>
+                                            </div>
+
+                                            <div class="sm:col-span-2">
+                                                <label for=""
+                                                    class="block text-sm font-medium leading-6 text-gray-900">Last
+                                                    Name</label>
+                                                <div class="mt-2">
+                                                    <input type="text" name="lname" value="<?php echo $row['lname'] ?>"
+                                                        class="block w-full rounded-md border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                                </div>
+                                            </div>
+
+                                            <div class="sm:col-span-2 sm:col-start-1">
+                                                <label for=""
+                                                    class="block text-sm font-medium leading-6 text-gray-900">Age</label>
+                                                <div class="mt-2">
+                                                    <input type="number" name="age" value="<?php echo $row['age'] ?>"
+                                                        class="block w-full rounded-md border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                                </div>
+                                            </div>
+                                            <div class="sm:col-span-2">
+                                                <label for=""
+                                                    class="block text-sm font-medium leading-6 text-gray-900">Sex</label>
+                                                <div class="mt-2">
+                                                    <select id="" name="sex"
+                                                        class="block w-full rounded-md border-0 py-2 pl-4 text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6">
+                                                        <option value="" selected hidden>
+                                                            <?php echo $row['sex'] ?>
+                                                        </option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="sm:col-span-3">
+                                            </div>
+                                            <div class="sm:col-span-4">
+                                                <label for=""
+                                                    class="block text-sm font-medium leading-6 text-gray-900">Email
+                                                    address</label>
+                                                <div class="mt-2">
+                                                    <input id="" name="email" type="email"
+                                                        value="<?php echo $row['email'] ?>"
+                                                        class="block w-full rounded-md border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                                </div>
+                                            </div>
+                                            <div class="sm:col-span-4">
+                                                <label for=""
+                                                    class="block text-sm font-medium leading-6 text-gray-900">Contact
+                                                    No.</label>
+                                                <div class="mt-2">
+                                                    <input type="number" name="contact_info"
+                                                        value="<?php echo $row['contact_info'] ?>"
+                                                        class="block w-full rounded-md border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                                </div>
+                                            </div>
+                                            <div class="col-span-full">
+                                                <label for=""
+                                                    class="block text-sm font-medium leading-6 text-gray-900">Address</label>
+                                                <div class="mt-2">
+                                                    <input type="text" name="home_add"
+                                                        value="<?php echo $row['home_add'] ?>"
+                                                        class="block w-full rounded-md border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                                </div>
+                                            </div>
+                                            <div class="sm:col-span-2 sm:col-start-1">
+                                                <label for=""
+                                                    class="block text-sm font-medium leading-6 text-gray-900">Designation</label>
+                                                <div class="mt-2">
+                                                    <input type="text" name="designation"
+                                                        value="<?php echo $row['designation'] ?>"
+                                                        class="block w-full rounded-md border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                                </div>
+                                            </div>
+                                            <div class="sm:col-span-2">
+                                                <label for=""
+                                                    class="block text-sm font-medium leading-6 text-gray-900">Company
+                                                    Name</label>
+                                                <div class="mt-2">
+                                                    <input type="text" name="company"
+                                                        value="<?php echo $row['company'] ?>"
+                                                        class="block w-full rounded-md border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Type of Customer -->
+                                <div class="flex items-center mb-4 order-tab">
+                                    <div class="">
+
+                                        <div class="pt-5 space-y-5">
+                                            <label class="text-sm font-semibold leading-6 text-gray-900">
+                                                Is it your MSME or not?
+                                            </label>
+
+                                            <div class=" flex flex-wrap items-center gap-4">
+                                                <div class="flex items-center gap-x-3">
+                                                    <input name="msme" value="Yes" type="radio" <?php if ($row['msme'] == 'Yes') {
+                                                        echo "checked";
+                                                    } ?>
+                                                        class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                    <label for=""
+                                                        class="block text-sm  leading-6 text-gray-900">Yes</label>
+                                                </div>
+
+
+                                                <div class="flex items-center gap-x-3">
+                                                    <input name="msme" value="No" type="radio" <?php if ($row['msme'] == 'No') {
+                                                        echo "checked";
+                                                    } ?>
+                                                        class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                    <label for=""
+                                                        class="block text-sm leading-6 text-gray-900">No</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="pt-8 space-y-5">
+
+                                            <label class=" leading-4 font-semibold text-gray-900">
+                                                Are you a:
+                                            </label>
+                                            <div class=" flex flex-wrap items-center gap-4">
+                                                <div class="relative flex items-center gap-x-1">
+                                                    <input name="customer_category[]" value="senior" type="checkbox"
+                                                        <?php if ($row['customer_category'] == 'senior') {
+                                                            echo "checked";
+                                                        } ?> class="h-4 w-4 rounded border-gray-300">
+                                                    <label for="" class=" text-gray-900">Senior Citizen</label>
+                                                </div>
+                                                <div class="relative flex items-center gap-x-3">
+                                                    <input name="customer_category[]" value="disable" type="checkbox"
+                                                        <?php if ($row['customer_category'] == 'disable') {
+                                                            echo "checked";
+                                                        } ?>
+                                                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                    <label for="" class=" text-gray-900">Differently-Abled
+                                                        Person</label>
+                                                </div>
+                                                <div class="relative flex items-center gap-x-3">
+                                                    <input name="customer_category[]" value="4ps" type="checkbox" <?php if ($row['customer_category'] == '4ps') {
+                                                        echo "checked";
+                                                    } ?>
+                                                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                    <label for="" class=" text-gray-900">4Ps Member</label>
+                                                </div>
+                                                <div class="relative flex items-center gap-x-3">
+                                                    <input name="customer_category[]" value="youth" type="checkbox"
+                                                        <?php if ($row['customer_category'] == 'youth') {
+                                                            echo "checked";
+                                                        } ?> class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                    <label for="" class=" text-gray-900">Youth(18-30yo)
+                                                    </label>
+                                                </div>
+                                                <div class="relative flex items-center gap-x-3">
+                                                    <input name="customer_category[]" value="Ips" type="checkbox" <?php if ($row['customer_category'] == 'Ips') {
+                                                        echo "checked";
+                                                    } ?>   class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                    <label for="" class=" text-gray-900">Indigenous Group Member</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Type of Customer -->
+                                <div class="flex items-center mb-4 order-tab">
+                                    <div class="pt-8">
+
+                                        <div class="space-y-5">
+
+                                            <label class="text-m font-semibold leading-4 text-gray-900">
+                                                In What sector do you belong to?
+                                            </label>
+
+                                            <div class=" flex flex-wrap items-center gap-4">
+                                                <div class="relative flex items-center gap-x-1">
+                                                    <input name="sector[]" value="industry" type="checkbox" <?php if ($row['sector'] == 'industry') {
+                                                        echo "checked";
+                                                    } ?>
+                                                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                    <label for="" class=" text-gray-900">Industry</label>
+                                                </div>
+                                                <div class="relative flex items-center gap-x-3">
+                                                    <input name="sector[]" value="Civil Society" type="checkbox" <?php if ($row['sector'] == 'Civil Society') {
+                                                        echo "checked";
+                                                    } ?>
+                                                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                    <label for="civil-society" class=" text-gray-900">Civil Society
+                                                        Organization</label>
+                                                </div>
+                                                <div class="relative flex items-center gap-x-3">
+                                                    <input name="sector[]" value="academe" type="checkbox" <?php if ($row['sector'] == 'academe') {
+                                                        echo "checked";
+                                                    } ?>
+                                                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                    <label for="academe" class=" text-gray-900">Academe</label>
+                                                </div>
+                                                <div class="relative flex items-center gap-x-3">
+                                                    <input name="sector[]" value="government" type="checkbox" <?php if ($row['sector'] == 'government') {
+                                                        echo "checked";
+                                                    } ?>
+                                                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                    <label for="government" class=" text-gray-900">Government</label>
+                                                </div>
+                                                <div class="relative flex items-center gap-x-3">
+                                                    <input name="sector[]" value="media" type="checkbox" <?php if ($row['sector'] == 'media') {
+                                                        echo "checked";
+                                                    } ?>
+                                                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                    <label for="media" class=" text-gray-900">Media</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ftime-->
+                                <div class=" pt-8 space-y-5">
+                                    <label class="text-sm font-semibold leading-6 text-gray-900">
+                                        Is it your FIRST TIME to avail of the DOST Assistance/Service?
+                                    </label>
+
+                                    <div class="flex flex-wrap items-center gap-4">
+                                        <div class="flex items-center gap-x-3">
+                                            <input name="returning_customer" value="Yes" type="radio" <?php if ($row['returning_customer'] == 'Yes') {
+                                                echo "checked";
+                                            } ?>
+                                                class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                            <label for="" class="block text-sm  leading-6 text-gray-900">Yes</label>
+                                        </div>
+
+
+                                        <div class="flex items-center gap-x-3">
+                                            <input name="returning_customer" value="No" type="radio" <?php if ($row['returning_customer'] == 'No') {
+                                                echo "checked";
+                                            } ?>
+                                                class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                            <label for="" class="block text-sm  leading-6 text-gray-900">No</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </section>
-                    </form>
-                </div>
+                        </div>
+                    </div>
 
+
+                    <!-- next division here -->
+                    <?php include 'sqdupdate.php' ?>
+
+                    <!-- Net Promoter Score Survey -->
+                    <?php include 'netpromoterupdate.php' ?>
+                    <!--  -->
+
+                    <!-- next form  -->
+                    <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5 mt-6">
+                        <div class="flex justify-between">
+                            <!-- diri isulod na div -->
+                            <div>
+                                <div class="text-2xl font-semibold mb-1">
+                                    3. What is your OVERALL MOOD/FEELING best describes your
+                                    experience with us?
+                                </div>
+                                <legend class="text-sm font-semibold leading-6 text-gray-900">
+                                    Please check the appropriate box
+                                </legend>
+                                <div class="pt-5 flex flex-wrap items-center gap-4">
+                                    <div class="flex items-center gap-x-3">
+                                        <input name="overall_mood" value="Delighted" type="radio" <?php if ($row['overall_mood'] == 'Delighted') {
+                                            echo "checked";
+                                        } ?>   class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                        <label class="block text-sm font-medium leading-6 text-gray-900">Delighted
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center gap-x-3">
+                                        <input name="overall_mood" value="Satisfied" type="radio" <?php if ($row['overall_mood'] == 'Satisfied') {
+                                            echo "checked";
+                                        } ?>
+                                            class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                        <label class="block text-sm font-medium leading-6 text-gray-900">Satisfied
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center gap-x-3">
+                                        <input name="overall_mood" value="Neutral" type="radio" <?php if ($row['overall_mood'] == 'Neutral') {
+                                            echo "checked";
+                                        } ?>
+                                            class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                        <label class="block text-sm font-medium leading-6 text-gray-900">Neutral</label>
+                                    </div>
+                                    <div class="flex items-center gap-x-3">
+                                        <input name="overall_mood" value="Unsatisfied" type="radio" <?php if ($row['overall_mood'] == 'Unsatisfied') {
+                                            echo "checked";
+                                        } ?>
+                                            class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                        <label
+                                            class="block text-sm font-medium leading-6 text-gray-900">Unsatisfied</label>
+                                    </div>
+                                    <div class="flex items-center gap-x-3">
+                                        <input name="overall_mood" value="Disappointed" type="radio" <?php if ($row['overall_mood'] == 'Disappointed') {
+                                            echo "checked";
+                                        } ?>
+                                            class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                        <label class="block text-sm font-medium leading-6 text-gray-900">Disappointed
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- comments  -->
+                    <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5 mt-6">
+                        <div class="flex justify-between">
+                            <!-- diri isulod na div -->
+                            <div>
+                                <div class="text-2xl font-semibold mb-1">
+                                    4. We want to hear from you!
+                                </div>
+
+                                <legend class="text-sm font-semibold leading-6 text-gray-900">
+                                    What are your suggestions to improve our assistance/service?
+                                    Or are there noteworthy observations that you would like to
+                                    share?
+                                </legend>
+                                <div class="mt-2">
+                                    <textarea name="comments" rows="3" value=""
+                                        class="block w-full rounded-md border-0 py-1.5  text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6 "> <?php echo $row['comments'] ?></textarea>
+                                </div>
+
+                            </div>
+                            <!-- end of div -->
+                        </div>
+                    </div>
+                    <div class="mt-6 flex items-center justify-end gap-x-6">
+
+                        <button type="button"
+                            class="rounded-md border border-red-500 px-3 py-2 text-sm text-red-500 font-semibold hover:bg-red-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                            onclick="window.location.href = 'tables.php'">
+                            Cancel
+                        </button>
+                        <button type="submit" name="submit"
+                            class="rounded-md bg-custom px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-custom2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            Update
+                        </button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </form>
 
     </main>
     <!-- end: Main -->
 
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/src/dashboard.js"></script>
+    <script src="./src/dashboard.js"></script>
 </body>
 
 </html>

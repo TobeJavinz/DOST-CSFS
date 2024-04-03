@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php
 session_start();
 include 'DBconn.php';
@@ -197,89 +196,87 @@ FROM
   AND ('$SearchService' = '' OR service = '$SearchService') 
   AND ('$SearchTraining_name' = '' OR training_name = '$SearchTraining_name')";
 
-$result2 = $conn->query($sql2);
+  $result2 = $conn->query($sql2);
 
-if ($result2) {
-  $resp = $result2->fetch_assoc(); // Use fetch_assoc() to get a single row
+  if ($result2) {
+    $resp = $result2->fetch_assoc(); // Use fetch_assoc() to get a single row
 
-  $_SESSION['SQD_1SD'] = $resp['SQD_1SD'];
-  $_SESSION['SQD_1D'] = $resp['SQD_1D'];
-  $_SESSION['SQD_1NAD'] = $resp['SQD_1NAD'];
-  $_SESSION['SQD_1A'] = $resp['SQD_1A'];
-  $_SESSION['SQD_1SA'] = $resp['SQD_1SA'];
+    $_SESSION['SQD_1SD'] = $resp['SQD_1SD'];
+    $_SESSION['SQD_1D'] = $resp['SQD_1D'];
+    $_SESSION['SQD_1NAD'] = $resp['SQD_1NAD'];
+    $_SESSION['SQD_1A'] = $resp['SQD_1A'];
+    $_SESSION['SQD_1SA'] = $resp['SQD_1SA'];
 
-  $_SESSION['SQD_2SD'] = $resp['SQD_2SD'];
-  $_SESSION['SQD_2D'] = $resp['SQD_2D'];
-  $_SESSION['SQD_2NAD'] = $resp['SQD_2NAD'];
-  $_SESSION['SQD_2A'] = $resp['SQD_2A'];
-  $_SESSION['SQD_2SA'] = $resp['SQD_2SA'];
-  
-  $_SESSION['SQD_3SD'] = $resp['SQD_3SD'];
-  $_SESSION['SQD_3D'] = $resp['SQD_3D'];
-  $_SESSION['SQD_3NAD'] = $resp['SQD_3NAD'];
-  $_SESSION['SQD_3A'] = $resp['SQD_3A'];
-  $_SESSION['SQD_3SA'] = $resp['SQD_3SA'];
+    $_SESSION['SQD_2SD'] = $resp['SQD_2SD'];
+    $_SESSION['SQD_2D'] = $resp['SQD_2D'];
+    $_SESSION['SQD_2NAD'] = $resp['SQD_2NAD'];
+    $_SESSION['SQD_2A'] = $resp['SQD_2A'];
+    $_SESSION['SQD_2SA'] = $resp['SQD_2SA'];
 
-  $_SESSION['SQD_4SD'] = $resp['SQD_4SD'];
-  $_SESSION['SQD_4D'] = $resp['SQD_4D'];
-  $_SESSION['SQD_4NAD'] = $resp['SQD_4NAD'];
-  $_SESSION['SQD_4A'] = $resp['SQD_4A'];
-  $_SESSION['SQD_4SA'] = $resp['SQD_4SA'];
+    $_SESSION['SQD_3SD'] = $resp['SQD_3SD'];
+    $_SESSION['SQD_3D'] = $resp['SQD_3D'];
+    $_SESSION['SQD_3NAD'] = $resp['SQD_3NAD'];
+    $_SESSION['SQD_3A'] = $resp['SQD_3A'];
+    $_SESSION['SQD_3SA'] = $resp['SQD_3SA'];
 
-  $_SESSION['SQD_5SD'] = $resp['SQD_5SD'];
-  $_SESSION['SQD_5D'] = $resp['SQD_5D'];
-  $_SESSION['SQD_5NAD'] = $resp['SQD_5NAD'];
-  $_SESSION['SQD_5A'] = $resp['SQD_5A'];
-  $_SESSION['SQD_5SA'] = $resp['SQD_5SA'];
+    $_SESSION['SQD_4SD'] = $resp['SQD_4SD'];
+    $_SESSION['SQD_4D'] = $resp['SQD_4D'];
+    $_SESSION['SQD_4NAD'] = $resp['SQD_4NAD'];
+    $_SESSION['SQD_4A'] = $resp['SQD_4A'];
+    $_SESSION['SQD_4SA'] = $resp['SQD_4SA'];
 
-  $_SESSION['SQD_6SD'] = $resp['SQD_6SD'];
-  $_SESSION['SQD_6D'] = $resp['SQD_6D'];
-  $_SESSION['SQD_6NAD'] = $resp['SQD_6NAD'];
-  $_SESSION['SQD_6A'] = $resp['SQD_6A'];
-  $_SESSION['SQD_6SA'] = $resp['SQD_6SA'];
+    $_SESSION['SQD_5SD'] = $resp['SQD_5SD'];
+    $_SESSION['SQD_5D'] = $resp['SQD_5D'];
+    $_SESSION['SQD_5NAD'] = $resp['SQD_5NAD'];
+    $_SESSION['SQD_5A'] = $resp['SQD_5A'];
+    $_SESSION['SQD_5SA'] = $resp['SQD_5SA'];
 
-  $_SESSION['SQD_7SD'] = $resp['SQD_7SD'];
-  $_SESSION['SQD_7D'] = $resp['SQD_7D'];
-  $_SESSION['SQD_7NAD'] = $resp['SQD_7NAD'];
-  $_SESSION['SQD_7A'] = $resp['SQD_7A'];
-  $_SESSION['SQD_7SA'] = $resp['SQD_7SA'];
+    $_SESSION['SQD_6SD'] = $resp['SQD_6SD'];
+    $_SESSION['SQD_6D'] = $resp['SQD_6D'];
+    $_SESSION['SQD_6NAD'] = $resp['SQD_6NAD'];
+    $_SESSION['SQD_6A'] = $resp['SQD_6A'];
+    $_SESSION['SQD_6SA'] = $resp['SQD_6SA'];
 
-  $_SESSION['SQD_8SD'] = $resp['SQD_8SD'];
-  $_SESSION['SQD_8D'] = $resp['SQD_8D'];
-  $_SESSION['SQD_8NAD'] = $resp['SQD_8NAD'];
-  $_SESSION['SQD_8A'] = $resp['SQD_8A'];
-  $_SESSION['SQD_8SA'] = $resp['SQD_8SA'];
+    $_SESSION['SQD_7SD'] = $resp['SQD_7SD'];
+    $_SESSION['SQD_7D'] = $resp['SQD_7D'];
+    $_SESSION['SQD_7NAD'] = $resp['SQD_7NAD'];
+    $_SESSION['SQD_7A'] = $resp['SQD_7A'];
+    $_SESSION['SQD_7SA'] = $resp['SQD_7SA'];
 
-  $_SESSION['NET_PROMOTER_1'] = $resp['NET_PROMOTER_1'];
-  $_SESSION['NET_PROMOTER_2'] = $resp['NET_PROMOTER_2'];
-  $_SESSION['NET_PROMOTER_3'] = $resp['NET_PROMOTER_3'];
-  $_SESSION['NET_PROMOTER_4'] = $resp['NET_PROMOTER_4'];
-  $_SESSION['NET_PROMOTER_5'] = $resp['NET_PROMOTER_5'];
+    $_SESSION['SQD_8SD'] = $resp['SQD_8SD'];
+    $_SESSION['SQD_8D'] = $resp['SQD_8D'];
+    $_SESSION['SQD_8NAD'] = $resp['SQD_8NAD'];
+    $_SESSION['SQD_8A'] = $resp['SQD_8A'];
+    $_SESSION['SQD_8SA'] = $resp['SQD_8SA'];
 
-  $_SESSION['cc1_1'] = $resp['cc1_1'];
-  $_SESSION['cc1_2'] = $resp['cc1_2'];
-  $_SESSION['cc1_3'] = $resp['cc1_3'];
-  $_SESSION['cc2_1'] = $resp['cc2_1'];
-  $_SESSION['cc2_2'] = $resp['cc2_2'];
-  $_SESSION['cc3_1'] = $resp['cc3_1'];
-  $_SESSION['cc3_2'] = $resp['cc3_2'];
-  
-  $_SESSION['training_name'] = $SearchTraining_name;
-  $_SESSION['training_venue'] = $resp['training_venue'];
-  $_SESSION['date'] = $resp['date'];
- 
+    $_SESSION['NET_PROMOTER_1'] = $resp['NET_PROMOTER_1'];
+    $_SESSION['NET_PROMOTER_2'] = $resp['NET_PROMOTER_2'];
+    $_SESSION['NET_PROMOTER_3'] = $resp['NET_PROMOTER_3'];
+    $_SESSION['NET_PROMOTER_4'] = $resp['NET_PROMOTER_4'];
+    $_SESSION['NET_PROMOTER_5'] = $resp['NET_PROMOTER_5'];
 
-} else {
-  // Handle the case where the query fails
-  echo "Error: " . $conn->error;
-}
+    $_SESSION['cc1_1'] = $resp['cc1_1'];
+    $_SESSION['cc1_2'] = $resp['cc1_2'];
+    $_SESSION['cc1_3'] = $resp['cc1_3'];
+    $_SESSION['cc2_1'] = $resp['cc2_1'];
+    $_SESSION['cc2_2'] = $resp['cc2_2'];
+    $_SESSION['cc3_1'] = $resp['cc3_1'];
+    $_SESSION['cc3_2'] = $resp['cc3_2'];
+
+    $_SESSION['training_name'] = $SearchTraining_name;
+    $_SESSION['training_venue'] = $resp['training_venue'];
+    $_SESSION['date'] = $resp['date'];
+
+
+  } else {
+    // Handle the case where the query fails
+    echo "Error: " . $conn->error;
+  }
 
 }
 ?>
 
 
-=======
->>>>>>> origin/main
 <!DOCTYPE html>
 <html>
 
@@ -287,13 +284,10 @@ if ($result2) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
-<<<<<<< HEAD
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/themes/airbnb.min.css">
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"></script>
   <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
-=======
->>>>>>> origin/main
   <link href="./src/output.css" rel="stylesheet" />
 </head>
 
@@ -302,42 +296,13 @@ if ($result2) {
 
   <?php include 'sidebar.php' ?>
 
->>>>>>> origin/main
+
   <!-- start: Main -->
   <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
-    <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
-      <button type="button" class="text-lg text-gray-600 sidebar-toggle">
-        <i class="ri-menu-line"></i>
-      </button>
-      <ul class="flex items-center text-sm ml-4">
-        <li class="mr-2">
-          <a class="text-base text-black font-bold">Reports</a>
-        </li>
-      </ul>
-      <ul class="ml-auto flex items-center">
-        <li class="dropdown ml-3">
-          <button type="button" class="dropdown-toggle flex items-center">
-            <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle" />
-          </button>
-          <ul
-            class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-            <li>
-              <a href="#"
-                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-            </li>
-            <li>
-              <a href="#"
-                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
-            </li>
-            <li>
-              <a href="#"
-                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-<<<<<<< HEAD
+    <?php
+    $headerText = "Reports";
+    include 'header.php';
+    ?>
     <div class="p-6">
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6"></div>
@@ -395,13 +360,13 @@ if ($result2) {
                 $end_month = date('n', strtotime($end_date));
 
                 if ($start_month == 1 && $end_month == 3) {
-                  echo "Showing ".$_SESSION['quarter'] =  "1st Quarter ";
+                  echo "Showing " . $_SESSION['quarter'] = "1st Quarter ";
                 } elseif ($start_month == 4 && $end_month == 6) {
-                  echo "Showing ".$_SESSION['quarter'] = "2nd Quarter ";
+                  echo "Showing " . $_SESSION['quarter'] = "2nd Quarter ";
                 } elseif ($start_month == 7 && $end_month == 9) {
-                  echo "Showing ".$_SESSION['quarter'] = "3rd Quarter ";
+                  echo "Showing " . $_SESSION['quarter'] = "3rd Quarter ";
                 } elseif ($start_month == 10 && $end_month == 12) {
-                  echo "Showing ".$_SESSION['quarter'] ="4th Quarter ";
+                  echo "Showing " . $_SESSION['quarter'] = "4th Quarter ";
                 } else {
                   $start_month_formatted = date('F j, Y', strtotime($start_date));
                   $end_month_formatted = date('F j, Y', strtotime($end_date));
@@ -445,7 +410,7 @@ if ($result2) {
                         // query for debugging
                         // echo "SQL Query: " . $sql . "<br>";
                       }
-                    
+
                     }
                     ?>
                   </tbody>
@@ -657,7 +622,8 @@ if ($result2) {
           </div>
 
           <!-- LOWER PART CARD SECTION -->
-          <button id="exportButton" class="btn btn-primary hover:bg-blue-700 text-gray py-2 px-4 rounded float-right">EXPORT DATA</button>
+          <button id="exportButton"
+            class="btn btn-primary hover:bg-blue-700 text-gray py-2 px-4 rounded float-right">EXPORT DATA</button>
         </div>
 
       </div>
@@ -667,56 +633,13 @@ if ($result2) {
 
 
     </div>
-=======
-
-    <!-- chart -->
-
-    <div class="p-6">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6"></div>
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-        <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md lg:col-span-2">
-          <div class="flex justify-between mb-4 items-start">
-            <div class="font-medium">Training Statiscics</div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
-            <div class="rounded-md border border-dashed border-gray-200 p-4">
-              <div class="flex items-center mb-0.5">
-                <div class="text-xl font-semibold">10</div>
-              </div>
-              <span class="text-gray-400 text-sm">Female</span>
-            </div>
-            <div class="rounded-md border border-dashed border-gray-200 p-4">
-              <div class="flex items-center mb-0.5">
-                <div class="text-xl font-semibold">50</div>
-              </div>
-              <span class="text-gray-400 text-sm">Male</span>
-            </div>
-            <div class="rounded-md border border-dashed border-gray-200 p-4">
-              <div class="flex items-center mb-0.5">
-                <div class="text-xl font-semibold">60</div>
-              </div>
-              <span class="text-gray-400 text-sm">Total Participants</span>
-            </div>
-          </div>
-          <div>
-            <canvas id="order-chart"></canvas>
-          </div>
-        </div>
-        <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
-          <div class="flex justify-between mb-4 items-start">
-            <div class="font-medium">Print PDF</div>
-          </div>
-        </div>
-      </div>
->>>>>>> origin/main
     </div>
   </main>
   <!-- end: Main -->
 
   <script src="https://unpkg.com/@popperjs/core@2"></script>
-<<<<<<< HEAD
 
-  <script src="./src/dashboard.js"></script>
+  <script src="./src/script.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
   <script>
     document.getElementById('exportButton').addEventListener('click', function () {
@@ -742,10 +665,3 @@ if ($result2) {
 
 
 <!-- EVERYTHING YOU LOSE IS A STEP YOU TAKE -->
-=======
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="./src/dashboard.js"></script>
-</body>
-
-</html>
->>>>>>> origin/main

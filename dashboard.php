@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include 'DBConn.php';
 $conn = connect_to_database();
 // get no. male
@@ -69,75 +71,20 @@ $total_food = $row_food["food_count"];
 
 <body class="text-gray-800 font-inter">
   <!-- start: Sidebar -->
-  <div class="fixed left-0 top-0 w-64 h-full bg-gray-900 p-4 z-50 sidebar-menu transition-transform">
-    <a href="#" class="flex items-center pb-4 border-b border-b-gray-800">
-      <img src="./assets/1.png" alt="" class="w-8 h-8 rounded object-cover" />
-      <span class="text-lg font-bold text-white ml-3">DOST CSFS</span>
-    </a>
-    <ul class="mt-4">
-      <li class="mb-1 group active">
-        <a href="#"
-          class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-          <i class="ri-home-2-line mr-3 text-lg"></i>
-          <span class="text-sm">Dashboard</span>
-        </a>
-      </li>
 
-      <li class="mb-1 group">
-        <a href="forms.php"
-          class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-          <i class="ri-survey-line mr-3 text-lg"></i>
-          <span class="text-sm">Forms</span>
-        </a>
-      </li>
-
-      <li class="mb-1 group">
-        <a href="reports.php"
-          class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-          <i class="ri-settings-2-line mr-3 text-lg"></i>
-          <span class="text-sm">Reports</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-  <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
   <?php include 'sidebar.php' ?>
   <!-- end: Sidebar -->
 
   <!-- start: Main -->
   <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
-    <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
-      <button type="button" class="text-lg text-gray-600 sidebar-toggle">
-        <i class="ri-menu-line"></i>
-      </button>
-      <ul class="flex items-center text-sm ml-4">
-        <li class="mr-2">
-          <a class="text-base text-black font-bold">Dashboard</a>
-        </li>
-      </ul>
-      <ul class="ml-auto flex items-center">
-        <li class="dropdown ml-3">
-          <button type="button" class="dropdown-toggle flex items-center">
-            <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle" />
-          </button>
-          <ul
-            class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-            <li>
-              <a href="#"
-                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-            </li>
-            <li>
-              <a href="#"
-                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
-            </li>
-            <li>
-              <a href="#"
-                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+
+    <?php
+    $headerText = "Dashboard";
+    include 'header.php';
+    ?>
+
+
+
     <div class="p-6">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <div class="bg-white border border-gray-100 shadow-md shadow-black/5 p-6 rounded-md">
@@ -263,7 +210,7 @@ $total_food = $row_food["food_count"];
                       $index = 1; // For numbering each row
                       while ($row = $Firms_result->fetch_assoc()) {
                         echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
-                       
+
                         echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . ucwords($row['Services']) . "</td>";
                         echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $index . "</td>";
 
@@ -287,7 +234,7 @@ $total_food = $row_food["food_count"];
         <!-- TOTAL NUMBER CARDS -->
         <div class="bg-white rounded-md border border-gray-100 p-6 shadow-md shadow-black/5">
           <!-- CARD CONTENT -->
-          <div class="text-lg font-medium text-gray-400">FIRST TIME CLIENTS</div>
+          <div class="text-lg font-bold text-default">FIRST TIME CLIENTS</div>
           <div class="flex justify-between mb-20">
             <div>
               <div class="text-2xl font-semibold mb-4">
@@ -296,7 +243,7 @@ $total_food = $row_food["food_count"];
             </div>
           </div>
           <!-- CARD CONTENT END -->
-          <div class="text-lg font-medium text-gray-400 ">RETURNING CLIENTS</div>
+          <div class="text-lg font-bold text-default">RETURNING CLIENTS</div>
           <div class="flex justify-between mb-6">
             <div>
               <div class="text-2xl font-semibold mb-1">
@@ -378,10 +325,10 @@ $total_food = $row_food["food_count"];
                             <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                               #
                             </th> -->
-                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                               Sector
                             </th>
-                           <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                            <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                               Total -->
                             </th>
                           </tr>
@@ -421,7 +368,7 @@ $total_food = $row_food["food_count"];
   <!-- end: Main -->
   <script src="https://unpkg.com/@popperjs/core@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="./src/dashboard.js"></script>
+  <script src="./src/script.js"></script>
 </body>
 
 </html>
