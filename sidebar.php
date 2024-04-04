@@ -16,6 +16,7 @@
             </a>
         </li>
 
+        <?php if (!isset($_SESSION['login'])):?>
         <li class="mb-1 group">
             <a href="./forms.php" class=" flex items-center py-2 px-4 font-semibold text-black hover:bg-custom hover:customtext rounded-md
                 group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950
@@ -24,6 +25,7 @@
                 <span class="text-sm">Forms</span>
             </a>
         </li>
+        <?php endif; ?>
 
         <li class="mb-1 group">
             <a href="./reports.php" class=" flex items-center py-2 px-4 font-semibold text-black hover:bg-custom hover:customtext rounded-md
@@ -33,13 +35,15 @@
             </a>
         </li>
 
+    <?php if (isset($_SESSION['login'])): ?>
         <li class="mb-1 group">
-            <a href="./admin.php" class=" flex items-center py-2 px-4 font-semibold text-black hover:bg-custom hover:customtext rounded-md
-               " active>
+            <a href="./admin.php" class="flex items-center py-2 px-4 font-semibold text-black hover:bg-custom hover:customtext rounded-md">
                 <i class="ri-admin-line mr-3 text-lg"></i>
-                <span class=" text-sm">Admin</span>
+                <span class="text-sm">Edit</span>
             </a>
         </li>
+    <?php endif; ?>
+        
     </ul>
 </div>
 <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>

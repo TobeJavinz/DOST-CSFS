@@ -1,6 +1,6 @@
 <?php
-session_start();
 
+include "session_auth.php";
 include 'DBConn.php';
 $conn = connect_to_database();
 // get no. male

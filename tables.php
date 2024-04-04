@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require 'DBConn.php';
 
@@ -46,10 +47,11 @@ $result = mysqli_query($conn, $query);
 
 
   <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
-    <?php
-    $headerText = "Tables";
-    include 'header.php';
-    ?>
+  
+  <?php
+        $headerText = "Admin";
+        include 'header.php';
+        ?>
 
     <!-- content -->
     <div class="p-6">

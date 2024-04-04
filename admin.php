@@ -13,17 +13,18 @@ if (isset($_POST['login'])) {
     $login_username = $_POST['Username'];
     $login_password = $_POST['Password'];
 
-    $stmt = $conn->prepare("SELECT `password`, `name` FROM user_cred WHERE `username` = ? && `admin` = 'y'");
+    $stmt = $conn->prepare("SELECT `password`, `name`,`admin` FROM user_cred WHERE `username` = ? && `admin` = 'y'");
     $stmt->bind_param("s", $login_username);
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($hashed_password, $name);
+    $stmt->bind_result($hashed_password, $name,$admin);
     $stmt->fetch();
 
     // Verify password
     if (password_verify($login_password, $hashed_password)) {
         // Password is correct
         $_SESSION['login'] = $name;
+        $_SESSION['admin'] =  $admin;
         
         $stmt->close();
         $conn->close();

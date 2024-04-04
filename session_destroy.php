@@ -2,7 +2,8 @@
 // Start the session
 session_start();
 // Destroy the session
-session_unset();
+unset($_SESSION['name']);
+unset($_SESSION['login']);
 
 
 

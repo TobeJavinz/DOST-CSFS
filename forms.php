@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require 'DBConn.php';
 
 // Call the function to establish a database connection

@@ -13,11 +13,11 @@ if (isset($_POST['login'])) {
     $login_username = $_POST['login_username'];
     $login_password = $_POST['login_password'];
 
-    $stmt = $conn->prepare("SELECT `password`, `name`, `position` FROM user_cred WHERE `username` = ?");
+    $stmt = $conn->prepare("SELECT `password`, `name`, `position`,`admin` FROM user_cred WHERE `username` = ?");
     $stmt->bind_param("s", $login_username);
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($hashed_password, $name, $position);
+    $stmt->bind_result($hashed_password, $name, $position,$admin);
     $stmt->fetch();
 
     $stmt1 = $conn->prepare("SELECT `name` as `adminName`,`position` as `adminPos`  FROM user_cred WHERE `admin` =  'y'");
@@ -31,13 +31,18 @@ if (isset($_POST['login'])) {
     // Verify password
     if (password_verify($login_password, $hashed_password)) {
         // Password is correct
-        $_SESSION['name'] = $name;
-        $_SESSION['position'] = $position;
+        if($admin == 'y'){
+            echo "<script>alert('Incorrect Username or Password');</script>";
+        } else {
+            $_SESSION['name'] = $name;
+            $_SESSION['position'] = $position;
 
-        $stmt->close();
-        $conn->close();
-        header("Location: dashboard.php"); // Redirect
-        exit;
+            $stmt->close();
+            $conn->close();
+
+            header("Location: dashboard.php"); // Redirect
+            exit;
+        }
     } else {
         // Password is incorrect
         echo "<script>alert('Incorrect Username or Password');</script>";
