@@ -543,7 +543,7 @@
                         </p>
                         <div class="mt-2">
                             <input type="text" name="other_agency" value="<?php echo $row['other_agency'] ?>"
-                                class="block w-10 rounded-md border-0 py-1 text-gray-900 shadow-sm px-2 ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                class="block w-16 rounded-md border-0 py-1 text-gray-900 shadow-sm px-2 ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                         </div>
                     </div>
                     <div class="pl-4">

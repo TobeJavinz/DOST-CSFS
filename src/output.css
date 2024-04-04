@@ -9,6 +9,10 @@
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 200, "opsz" 24;
+}
+
 .poppins-thin {
   font-family: "Poppins", sans-serif;
   font-weight: 100;
@@ -918,6 +922,9 @@ video {
 .mr-2 {
   margin-right: 0.5rem;
 }
+.mr-4 {
+  margin-right: 1.5rem;
+}
 
 .mr-3 {
   margin-right: 0.75rem;
@@ -1066,6 +1073,13 @@ video {
   height: 2rem;
 }
 
+.h-11 {
+  height: 3rem;
+}
+.h-16 {
+  height: 16%;
+}
+
 .h-full {
   height: 100%;
 }
@@ -1101,8 +1115,16 @@ video {
   width: 3rem;
 }
 
+.w-24 {
+  width: 24px;
+}
+
 .w-10 {
-  width: 10rem;
+  width: 2rem;
+}
+
+.w-11 {
+  width: 3rem;
 }
 
 .w-\[this-is\\\\\] {
@@ -2074,8 +2096,13 @@ video {
 .rounded-md {
   border-radius: 0.375rem;
 }
-.rounded-custom {
-  border-radius: 0.6rem;
+
+.rounded-md2 {
+  border-radius: 10rem;
+}
+
+.rounded-full {
+  border-radius: 100px;
 }
 
 .rounded-b {
@@ -2273,6 +2300,10 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(79 70 229 / var(--tw-bg-opacity));
 }
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: black;
+}
 
 .bg-white {
   --tw-bg-opacity: 1;
@@ -2282,6 +2313,10 @@ video {
 .bg-custom {
   --tw-bg-opacity: 1;
   background-color: #48c4d3;
+}
+.bg-customs {
+  --tw-bg-opacity: 1;
+  background-color: #e6f4f1;
 }
 
 .decoration-slice {
@@ -2441,6 +2476,10 @@ video {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
 
 .py-4 {
   padding-top: 1rem;
@@ -2458,6 +2497,9 @@ video {
 
 .pl-4 {
   padding-left: 1rem;
+}
+.pl-custom {
+  padding-left: 1.5rem;
 }
 
 .pl-5 {
@@ -2574,6 +2616,11 @@ video {
 
 .text-xl {
   font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-xxl {
+  font-size: 1.75rem;
   line-height: 1.75rem;
 }
 
@@ -2749,6 +2796,11 @@ video {
 .text-default {
   --tw-text-opacity: 1;
   color: #48c4d3;
+}
+
+.text-secondary {
+  --tw-text-opacity: 1;
+  color: #e6f4f1;
 }
 
 .text-red-500 {
@@ -3500,6 +3552,10 @@ video {
 
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .lg\:px-4 {

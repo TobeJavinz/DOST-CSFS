@@ -2,7 +2,7 @@
   <div class="flex justify-between">
     <!-- diri isulod na div -->
     <div>
-      <div class="text-2xl font-semibold mb-1">
+      <div class="text-3xl text-default font-bold mb-10">
         2. Net Promoter Score Survey
       </div>
       <fieldset>
@@ -496,7 +496,7 @@
             </p>
             <div class="mt-2">
               <input type="text" name="other_agency"
-                class="block w-10 rounded-md border-0 py-1 pl-4 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                class="block w-64 rounded-md border-0 py-1 pl-4 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
             </div>
           </div>
           <div class="pt-2 pl-4">

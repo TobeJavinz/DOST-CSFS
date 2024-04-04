@@ -8,7 +8,7 @@
     </a>
     <ul class="mt-4">
         <li class="mb-1 group">
-            <a href="./dashboard.php" class=" flex items-center py-2 px-4 text-gray-600 hover:bg-custom hover:customtext rounded-md
+            <a href="./dashboard.php" class=" flex items-center py-2 px-4 font-semibold text-black hover:bg-custom hover:customtext rounded-md
                 group-[.active]:bg-gray-800 group-[.active]:text-white
                 group-[.selected]:text-gray-100 active">
                 <i class="ri-home-2-line mr-3 text-lg"></i>
@@ -17,7 +17,7 @@
         </li>
 
         <li class="mb-1 group">
-            <a href="./forms.php" class=" flex items-center py-2 px-4 text-gray-600 hover:bg-custom hover:customtext rounded-md
+            <a href="./forms.php" class=" flex items-center py-2 px-4 font-semibold text-black hover:bg-custom hover:customtext rounded-md
                 group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950
                 group-[.selected]:text-gray-10 active">
                 <i class=" ri-survey-line mr-3 text-lg"></i>
@@ -26,18 +26,16 @@
         </li>
 
         <li class="mb-1 group">
-            <a href="./reports.php" class=" flex items-center py-2 px-4 text-gray-600 hover:bg-custom hover:customtext rounded-md
-                group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950
-                group-[.selected]:text-gray-100">
+            <a href="./reports.php" class=" flex items-center py-2 px-4 font-semibold text-black hover:bg-custom hover:customtext rounded-md
+                ">
                 <i class="ri-file-chart-line mr-3 text-lg"></i>
                 <span class=" text-sm">Reports</span>
             </a>
         </li>
 
         <li class="mb-1 group">
-            <a href="./admin.php" class=" flex items-center py-2 px-4 text-gray-600 hover:bg-custom hover:customtext rounded-md
-                group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950
-                group-[.selected]:text-gray-100" active>
+            <a href="./admin.php" class=" flex items-center py-2 px-4 font-semibold text-black hover:bg-custom hover:customtext rounded-md
+               " active>
                 <i class="ri-admin-line mr-3 text-lg"></i>
                 <span class=" text-sm">Admin</span>
             </a>
