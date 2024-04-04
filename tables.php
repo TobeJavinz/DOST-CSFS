@@ -49,7 +49,7 @@ $result = mysqli_query($conn, $query);
   <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
   
   <?php
-        $headerText = "Admin";
+        $headerText = "Edit";
         include 'header.php';
         ?>
 

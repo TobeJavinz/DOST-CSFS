@@ -1,7 +1,7 @@
 <?php
 session_start();
 // Check if the user is logged in
-if (isset($_SESSION['name'])) {
+if (isset($_SESSION['name']) || isset($_SESSION['login'])) {
     header("Location: dashboard.php");
 }
 
@@ -26,7 +26,6 @@ if (isset($_POST['login'])) {
     $stmt1->bind_result($adminName, $adminPos);
     $stmt1->fetch();
 
-
     // Verify password
     if (password_verify($login_password, $hashed_password)) {
         // Password is correct
@@ -40,7 +39,6 @@ if (isset($_POST['login'])) {
 
             $stmt->close();
             $conn->close();
-
             header("Location: dashboard.php"); // Redirect
             exit;
         }
@@ -51,12 +49,8 @@ if (isset($_POST['login'])) {
 
     $stmt->close();
 }
-
 $conn->close();
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html class="h-full bg-white">
