@@ -74,7 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $other_agency_score = $row["other_agency_score"];
     $overall_mood = $row["overall_mood"];
     $comments = $row["comments"];
-
 } else {
 
     $ServiceID = $_POST["ServiceID"];
@@ -144,12 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $sectors = rtrim($sectors, ',');
 
     do {
-        if (
-            empty($cc1_1)
-        ) {
-            $errormessage = "Required fields are missing.";
-            break;
-        }
+        
 
         $sql = "UPDATE data " .
             "SET cc1_1 = '$cc1_1', cc1_2 = '$cc1_2', cc1_3 = '$cc1_3', cc2_1 = '$cc2_1', cc2_2 = '$cc2_2', cc3_1 = '$cc3_1', cc3_2 = '$cc3_2', 
@@ -171,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         $successmessage = "updated successfully";
 
-        header("location: tables.php");
+        header("location: /DOST-CSFS/tables.php");
         exit;
     } while (false);
 }
@@ -207,7 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         <!-- content -->
 
-        <form method="post" action="" autocomplete="off">
+        <form method="post" action="" autocomplete="on">
             <div class="p-6">
                 <div class="grid grid-cols-1 ">
                     <div class="">
@@ -240,7 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc1_1" pattern="[1-5]" value="<?php echo $row['cc1_1'] ?>"
+                                <input type="number" name="cc1_1" min="0" value="<?php echo $row['cc1_1'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -260,7 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc1_2" pattern="[1-5]" value="<?php echo $row['cc1_2'] ?>"
+                                <input type="number" name="cc1_2" min="0" pattern="[0-5]"  value="<?php echo $row['cc1_2'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -281,7 +275,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc1_3" pattern="[1-5]" value="<?php echo $row['cc1_3'] ?>"
+                                <input type="number" name="cc1_3"min="0" pattern="[0-5]"  value="<?php echo $row['cc1_3'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -301,7 +295,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc2_1" pattern="[1-5]" value="<?php echo $row['cc2_1'] ?>"
+                                <input type="number" name="cc2_1" min="0" pattern="[0-5]"  value="<?php echo $row['cc2_1'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -320,7 +314,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc2_2" pattern="[1-5]" value="<?php echo $row['cc2_2'] ?>"
+                                <input type="number" name="cc2_2" min="0" pattern="[0-5]"  value="<?php echo $row['cc2_2'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -339,7 +333,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc3_1" pattern="[1-5]" value="<?php echo $row['cc3_1'] ?>"
+                                <input type="number" name="cc3_1" min="0"   value="<?php echo $row['cc3_1'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -357,7 +351,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc3_2" pattern="[1-5]" value="<?php echo $row['cc3_2'] ?>"
+                                <input type="number" name="cc3_2" min="0" pattern="[0-5]"  value="<?php echo $row['cc3_2'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -436,9 +430,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                 text-gray-900">Date</label>
                                                 <div class="mt-2">
                                                     <input id="" name="date" type="date"
-                                                        value="<?php echo $row['date'] ?>"
-                                                        class="block w-10 rounded-custom  px-4 py-1 text-center text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                                        value="<?php echo date('Y-m-d', strtotime($row['date'])); ?>"
+                                                        class="block w-full rounded-custom border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+
+                                                        
                                                 </div>
+
                                             </div>
 
                                             <div class="sm:col-span-3">
@@ -627,42 +624,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                             <label class=" leading-4 font-semibold text-gray-900">
                                                 Are you a:
                                             </label>
+                                            <?php
+                                            $categories = explode(',', $row['customer_category']);
+                                            ?>
+
                                             <div class=" flex flex-wrap items-center gap-4">
                                                 <div class="relative flex items-center gap-x-1">
-                                                    <input name="customer_category[]" value="senior" type="checkbox"
-                                                        <?php if ($row['customer_category'] == 'senior') {
-                                                            echo "checked";
-                                                        } ?> class="h-4 w-4 rounded border-gray-300">
+                                                    <input name="customer_category[]" value="SC" type="checkbox" <?php if (in_array('SC', $categories)) {
+                                                        echo "checked";
+                                                    } ?>
+                                                        class="h-4 w-4 rounded border-gray-300">
                                                     <label for="" class=" text-gray-900">Senior Citizen</label>
                                                 </div>
+
                                                 <div class="relative flex items-center gap-x-3">
-                                                    <input name="customer_category[]" value="disable" type="checkbox"
-                                                        <?php if ($row['customer_category'] == 'disable') {
+                                                    <input name="customer_category[]" value="Differently-Abled"
+                                                        type="checkbox" <?php if (in_array('Differently-Abled', $categories)) {
                                                             echo "checked";
                                                         } ?>
                                                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                     <label for="" class=" text-gray-900">Differently-Abled
                                                         Person</label>
                                                 </div>
+
                                                 <div class="relative flex items-center gap-x-3">
-                                                    <input name="customer_category[]" value="4ps" type="checkbox" <?php if ($row['customer_category'] == '4ps') {
-                                                        echo "checked";
-                                                    } ?>
+                                                    <input name="customer_category[]" value="4Ps Member" type="checkbox"
+                                                        <?php if (in_array('4Ps Member', $categories)) {
+                                                            echo "checked";
+                                                        } ?>
                                                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                     <label for="" class=" text-gray-900">4Ps Member</label>
                                                 </div>
+
                                                 <div class="relative flex items-center gap-x-3">
                                                     <input name="customer_category[]" value="youth" type="checkbox"
-                                                        <?php if ($row['customer_category'] == 'youth') {
+                                                        <?php if (in_array('youth', $categories)) {
                                                             echo "checked";
-                                                        } ?> class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                        } ?>
+                                                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                     <label for="" class=" text-gray-900">Youth(18-30yo)
                                                     </label>
                                                 </div>
                                                 <div class="relative flex items-center gap-x-3">
-                                                    <input name="customer_category[]" value="Ips" type="checkbox" <?php if ($row['customer_category'] == 'Ips') {
-                                                        echo "checked";
-                                                    } ?>   class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                    <input name="customer_category[]" value="IP Group Member"
+                                                        type="checkbox" <?php if (in_array('IP Group Member', $categories)) {
+                                                            echo "checked";
+                                                        } ?>
+                                                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                     <label for="" class=" text-gray-900">Indigenous Group Member</label>
                                                 </div>
                                             </div>
@@ -680,16 +688,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                 In What sector do you belong to?
                                             </label>
 
+                                            <?php
+                                            $sectors = explode(',', $row['sector']);
+                                            ?>
+
                                             <div class=" flex flex-wrap items-center gap-4">
                                                 <div class="relative flex items-center gap-x-1">
-                                                    <input name="sector[]" value="industry" type="checkbox" <?php if ($row['sector'] == 'industry') {
+                                                    <input name="sector[]" value="industry" type="checkbox" <?php if (in_array('industry', $sectors)) {
                                                         echo "checked";
                                                     } ?>
                                                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                     <label for="" class=" text-gray-900">Industry</label>
                                                 </div>
+
                                                 <div class="relative flex items-center gap-x-3">
-                                                    <input name="sector[]" value="Civil Society" type="checkbox" <?php if ($row['sector'] == 'Civil Society') {
+                                                    <input name="sector[]" value="cso" type="checkbox" <?php if (in_array('cso', $sectors)) {
                                                         echo "checked";
                                                     } ?>
                                                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
@@ -697,21 +710,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                         Organization</label>
                                                 </div>
                                                 <div class="relative flex items-center gap-x-3">
-                                                    <input name="sector[]" value="academe" type="checkbox" <?php if ($row['sector'] == 'academe') {
+                                                    <input name="sector[]" value="academe" type="checkbox" <input name="sector[]" value="cso" type="checkbox" <?php if (in_array('academe', $sectors)) {
                                                         echo "checked";
                                                     } ?>
                                                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                     <label for="academe" class=" text-gray-900">Academe</label>
                                                 </div>
+
                                                 <div class="relative flex items-center gap-x-3">
-                                                    <input name="sector[]" value="government" type="checkbox" <?php if ($row['sector'] == 'government') {
+                                                    <input name="sector[]" value="government" type="checkbox" <input name="sector[]" value="cso" type="checkbox" <?php if (in_array('government', $sectors)) {
                                                         echo "checked";
                                                     } ?>
                                                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                     <label for="government" class=" text-gray-900">Government</label>
                                                 </div>
                                                 <div class="relative flex items-center gap-x-3">
-                                                    <input name="sector[]" value="media" type="checkbox" <?php if ($row['sector'] == 'media') {
+                                                    <input name="sector[]" value="media" type="checkbox" <input name="sector[]" value="cso" type="checkbox" <?php if (in_array('media', $sectors)) {
                                                         echo "checked";
                                                     } ?>
                                                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
@@ -774,7 +788,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                     <div class="flex items-center gap-x-3">
                                         <input name="overall_mood" value="Delighted" type="radio" <?php if ($row['overall_mood'] == 'Delighted') {
                                             echo "checked";
-                                        } ?>   class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                                        } ?>
+                                            class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
                                         <label class="block text-sm font-medium leading-6 text-gray-900">Delighted
                                         </label>
                                     </div>

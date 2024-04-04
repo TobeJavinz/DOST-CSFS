@@ -1,5 +1,5 @@
 <?php
-include 'session_auth.php';
+
 require 'DBConn.php';
 
 // Call the function to establish a database connection
@@ -94,13 +94,10 @@ if (isset($_POST["submit"])) {
 <html>
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
-  <link href="./src/output.css" rel="stylesheet" />
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-  <title>CSF FORM</title>
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="./src/output.css" rel="stylesheet" />
 </head>
 
 <body class="text-gray-800 font-inter">
@@ -112,46 +109,15 @@ if (isset($_POST["submit"])) {
     <!-- start: Main -->
     <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
 
-    <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
-      <button type="button" class="text-lg text-gray-600 sidebar-toggle">
-        <i class="ri-menu-line"></i>
-      </button>
-      <ul class="flex items-center text-sm ml-4">
-        <li class="mr-2">
-          <a class="text-base text-black font-bold">Forms</a>
-        </li>
-      </ul>
+        <?php
+        $headerText = "Forms";
+        include 'header.php';
+        ?>
 
-      <!-- profile avatar dropdown -->
-      <ul class="ml-auto flex items-center">
-        <!-- avatar -->
-        <li class="dropdown ml-3">
-          <button type="button" class="dropdown-toggle flex items-center">
-            <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded block object-cover align-middle" />
-          </button>
-          <ul
-            class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-1.5 rounded-md bg-white border border-gray-100 w-full max-w-[140px]">
-            <li>
-              <a href="#"
-                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Profile</a>
-            </li>
-            <li>
-              <a href="#"
-                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Settings</a>
-            </li>
-            <li>
-              <a href="session_destroy.php"
-                class="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-blue-500 hover:bg-gray-50">Logout</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </div>
 
-    <!-- content -->
-    <form method="post" action="" autocomplete="off">
-      <div class="p-6">
-        <div class="grid grid-cols-1 gap-6">
+        <form method="post" action="" autocomplete="on">
+            <div class="p-6">
+                <div class="grid grid-cols-1 gap-6">
 
                     <!-- Start of CC  -->
                     <div class="bg-white rounded-md border border-gray-200 p-6 shadow-md shadow-black">
@@ -180,7 +146,7 @@ if (isset($_POST["submit"])) {
                         <div class="flex">
                             <div class="mt-2">
                                 <input type="number" name="cc1_1" pattern="[1-5]"
-                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" value="0" />
                             </div>
                             <div>
                                 <p class="py-2 ml-4 font-semibold">Yes, but aware
@@ -200,7 +166,7 @@ if (isset($_POST["submit"])) {
                         <div class="flex">
                             <div class="mt-2">
                                 <input type="number" name="cc1_2" pattern="[1-5]"
-                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" value="0" />
                             </div>
                             <div>
                                 <p class="py-2 ml-4 font-semibold">Yes,
@@ -221,7 +187,7 @@ if (isset($_POST["submit"])) {
                         <div class="flex">
                             <div class="mt-2">
                                 <input type="number" name="cc1_3" pattern="[1-5]"
-                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" value="0" />
                             </div>
                             <div>
                                 <p class="py-2 ml-4 font-semibold">No, not
@@ -241,7 +207,7 @@ if (isset($_POST["submit"])) {
                         <div class="flex">
                             <div class="mt-2">
                                 <input type="number" name="cc2_1" pattern="[1-5]"
-                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" value="0" />
                             </div>
                             <div>
                                 <p class="py-2 ml-4 font-semibold">Yes, I
@@ -260,7 +226,7 @@ if (isset($_POST["submit"])) {
                         <div class="flex">
                             <div class="mt-2">
                                 <input type="number" name="cc2_2" pattern="[1-5]"
-                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" value="0" />
                             </div>
                             <div>
                                 <p class="py-2 ml-4 font-semibold">No, I
@@ -279,7 +245,7 @@ if (isset($_POST["submit"])) {
                         <div class="flex">
                             <div class="mt-2">
                                 <input type="number" name="cc3_1" pattern="[1-5]"
-                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" value="0" />
                             </div>
                             <div>
                                 <p class="py-2 ml-4 font-semibold">Yes, I
@@ -297,7 +263,7 @@ if (isset($_POST["submit"])) {
                         <div class="flex">
                             <div class="mt-2">
                                 <input type="number" name="cc3_2" pattern="[1-5]"
-                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" value="0" />
                             </div>
                             <div>
                                 <p class="py-2 ml-4 font-semibold">No, I
@@ -336,10 +302,8 @@ if (isset($_POST["submit"])) {
                                                 of
                                                 Service</label>
                                             <div class="mt-2">
-                                                <select id="" name="service"
+                                                <select required ="" name="service"
                                                     class="block w-full rounded-md border-0 px-4 py-2 pr-4 text-gray-900 outline-none shadow-sm ring-1 ring-inset ring-gray focus:ring-2 focus:ring-inset focus:ring-custom sm:max-w-xs sm:text-sm sm:leading-6">
-                                                <select required id="" name="service"
-                                                    class="block w-full rounded-custom border-0 px-4 py-2 pr-4 text-gray-900 outline-none shadow-sm ring-1 ring-inset ring-gray focus:ring-2 focus:ring-inset focus:ring-custom sm:max-w-xs sm:text-sm sm:leading-6">
                                                     <option value="" selected hidden>Select Options</option>
                                                     <option value="Technology Intervention">Technology Intervention
                                                     </option>
@@ -367,7 +331,7 @@ if (isset($_POST["submit"])) {
                                                 class="block text-sm font-medium leading-6 text-gray-900">Training
                                                 Title</label>
                                             <div class="mt-2">
-                                                <input type="text" name="training_name"
+                                                <input required type="text" name="training_name"
                                                     class="block w-full rounded-md border-0 py-1.5 px-4  text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
@@ -376,7 +340,7 @@ if (isset($_POST["submit"])) {
                                                 <label for="" class=" block text-sm font-medium leading-6
                                             text-gray-900">Date</label>
                                             <div class="mt-2">
-                                                <input id="" name="date" type="date"
+                                                <input required id="" name="date" type="date"
                                                     class="block w-full rounded-md px-4 py-1 text-center text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
@@ -385,7 +349,7 @@ if (isset($_POST["submit"])) {
                                             <label for=""
                                                 class=" block text-sm font-medium leading-6 text-gray-900">Venue</label>
                                             <div class="mt-2">
-                                                <input type="text" name="training_venue"
+                                                <input required type="text" name="training_venue"
                                                     class="block w-full rounded-md py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
@@ -399,7 +363,7 @@ if (isset($_POST["submit"])) {
 
                                         <div class="pt-2 flex flex-wrap items-center gap-4  ">
                                             <div class="flex items-center gap-x-3">
-                                                <input required  name="training_type" value="Food" type="radio"
+                                                <input required name="training_type" value="Food" type="radio"
                                                     class="h-4 w-4 border-gray-300 ">
                                                 <label for=""
                                                     class="block text-sm  leading-6 text-gray-900">Food</label>
@@ -465,8 +429,8 @@ if (isset($_POST["submit"])) {
                                                 <select required id="" name="sex"
                                                     class="block w-full rounded-md border-0 py-2 pl-4 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6">
                                                     <option value="" selected hidden>Select Options</option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -502,7 +466,7 @@ if (isset($_POST["submit"])) {
                                             <label for=""
                                                 class="block text-sm font-medium leading-6 text-gray-900">Designation</label>
                                             <div class="mt-2">
-                                                <input required type="text" name="designation"
+                                                <input type="text" name="designation"
                                                     class="block w-full rounded-md border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                                             </div>
                                         </div>
@@ -551,18 +515,18 @@ if (isset($_POST["submit"])) {
                                         </label>
                                         <div class=" flex flex-wrap items-center gap-4">
                                             <div class="relative flex items-center gap-x-1">
-                                                <input required name="customer_category[]" value="SC" type="checkbox"
+                                                <input name="customer_category[]" value="SC" type="checkbox"
                                                     class="h-4 w-4 rounded border-gray-300 ">
                                                 <label for="" class=" text-gray-900">Senior Citizen</label>
                                             </div>
                                             <div class="relative flex items-center gap-x-3">
-                                                <input name="customer_category[]" value="disable" type="checkbox"
+                                                <input name="customer_category[]" value="Differently-Abled" type="checkbox"
                                                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                 <label for="" class=" text-gray-900">Differently-Abled
                                                     Person</label>
                                             </div>
                                             <div class="relative flex items-center gap-x-3">
-                                                <input name="customer_category[]" value="4ps" type="checkbox"
+                                                <input name="customer_category[]" value="4Ps Member" type="checkbox"
                                                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                 <label for="" class=" text-gray-900">4Ps Member</label>
                                             </div>
@@ -573,7 +537,7 @@ if (isset($_POST["submit"])) {
                                                 </label>
                                             </div>
                                             <div class="relative flex items-center gap-x-3">
-                                                <input name="customer_category[]" value="Ips" type="checkbox"
+                                                <input name="customer_category[]" value="IP Group Member" type="checkbox"
                                                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                 <label for="" class=" text-gray-900">Indigenous Group Member</label>
                                             </div>
@@ -593,12 +557,12 @@ if (isset($_POST["submit"])) {
 
                                         <div class=" flex flex-wrap items-center gap-4">
                                             <div class="relative flex items-center gap-x-1">
-                                                <input required name="sector[]" value="industry" type="checkbox"
+                                                <input name="sector[]" value="industry" type="checkbox"
                                                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                 <label for="" class=" text-gray-900">Industry</label>
                                             </div>
                                             <div class="relative flex items-center gap-x-3">
-                                                <input name="sector[]" value="Civil Society" type="checkbox"
+                                                <input name="sector[]" value="cso" type="checkbox"
                                                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                 <label for="civil-society" class=" text-gray-900">Civil Society
                                                     Organization</label>
@@ -666,7 +630,7 @@ if (isset($_POST["submit"])) {
                             </legend>
                             <div class="pt-5 flex flex-wrap items-center gap-4">
                                 <div class="flex items-center gap-x-3">
-                                    <input checked  name="overall_mood" value="Delighted" type="radio"
+                                    <input checked name="overall_mood" value="Delighted" type="radio"
                                         class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
                                     <label class="block text-sm font-medium leading-6 text-gray-900">Delighted
                                     </label>

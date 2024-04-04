@@ -238,17 +238,17 @@ FROM
   SUM(CASE WHEN training_type = 'food' THEN 1 ELSE 0 END) AS food_count,
   SUM(CASE WHEN training_type = 'non-food' THEN 1 ELSE 0 END) AS nonfood_count,
 
-  SUM(CASE WHEN customer_category = 'youth' THEN 1 ELSE 0 END) AS youth_count,
-  SUM(CASE WHEN customer_category = '4Ps Member' THEN 1 ELSE 0 END) AS FPs_count,
-  SUM(CASE WHEN customer_category = 'IP Group Member' THEN 1 ELSE 0 END) AS IP_count,
-  SUM(CASE WHEN customer_category = 'Differently-Abled' THEN 1 ELSE 0 END) AS DA_count,
-  SUM(CASE WHEN customer_category = 'SC' THEN 1 ELSE 0 END) AS SC_count,
+SUM(CASE WHEN FIND_IN_SET('youth', customer_category) THEN 1 ELSE 0 END) AS youth_count,
+SUM(CASE WHEN FIND_IN_SET('4Ps Member', customer_category) THEN 1 ELSE 0 END) AS FPs_count,
+SUM(CASE WHEN FIND_IN_SET('IP Group Member', customer_category) THEN 1 ELSE 0 END) AS IP_count,
+SUM(CASE WHEN FIND_IN_SET('Differently-Abled', customer_category) THEN 1 ELSE 0 END) AS DA_count,
+SUM(CASE WHEN FIND_IN_SET('SC', customer_category) THEN 1 ELSE 0 END) AS SC_count,
   
-  SUM(CASE WHEN sector = 'academe' THEN 1 ELSE 0 END) AS acad_count,
-  SUM(CASE WHEN sector = 'cso' THEN 1 ELSE 0 END) AS cso_count,
-  SUM(CASE WHEN sector = 'industry' THEN 1 ELSE 0 END) AS ind_count,
-  SUM(CASE WHEN sector = 'government' THEN 1 ELSE 0 END) AS gov_count,
-  SUM(CASE WHEN sector = 'media' THEN 1 ELSE 0 END) AS med_count,
+  SUM(CASE WHEN FIND_IN_SET('academe', sector) THEN 1 ELSE 0 END) AS acad_count,
+  SUM(CASE WHEN FIND_IN_SET('cso', sector) THEN 1 ELSE 0 END) AS cso_count,
+  SUM(CASE WHEN FIND_IN_SET('industry', sector) THEN 1 ELSE 0 END) AS ind_count,
+  SUM(CASE WHEN FIND_IN_SET('government', sector) THEN 1 ELSE 0 END) AS gov_count,
+  SUM(CASE WHEN FIND_IN_SET('media', sector) THEN 1 ELSE 0 END) AS med_count
 
   other_agency,
   cc1_1,
