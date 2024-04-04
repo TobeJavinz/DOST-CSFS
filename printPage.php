@@ -5,6 +5,7 @@
 
 include 'session_auth.php';
 
+
 // Check if $SQD_1SD has no value and redirect to reports.php
 if (!isset ($_SESSION['SQD_1SD'])) {
     header("Location: reports.php");

@@ -28,7 +28,7 @@ if (isset($_POST['login'])) {
         
         $stmt->close();
         $conn->close();
-        header("Location: tables.php"); // Redirect
+        header("Location: dashboard.php"); // Redirect
         echo "<script>alert('NAMES');</script>";
     } else {
       

@@ -248,7 +248,7 @@ SUM(CASE WHEN FIND_IN_SET('SC', customer_category) THEN 1 ELSE 0 END) AS SC_coun
   SUM(CASE WHEN FIND_IN_SET('cso', sector) THEN 1 ELSE 0 END) AS cso_count,
   SUM(CASE WHEN FIND_IN_SET('industry', sector) THEN 1 ELSE 0 END) AS ind_count,
   SUM(CASE WHEN FIND_IN_SET('government', sector) THEN 1 ELSE 0 END) AS gov_count,
-  SUM(CASE WHEN FIND_IN_SET('media', sector) THEN 1 ELSE 0 END) AS med_count
+  SUM(CASE WHEN FIND_IN_SET('media', sector) THEN 1 ELSE 0 END) AS med_count, 
 
   other_agency,
   cc1_1,

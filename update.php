@@ -1,6 +1,6 @@
 <?php
 require 'DBConn.php';
-
+include "session_auth.php";
 // Establish database connection
 $conn = connect_to_database();
 
@@ -234,7 +234,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc1_1" min="0" value="<?php echo $row['cc1_1'] ?>"
+                                <input type="number" name="cc1_1" min="0" max="5" value="<?php echo $row['cc1_1'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -254,7 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc1_2" min="0" pattern="[0-5]"  value="<?php echo $row['cc1_2'] ?>"
+                                <input type="number" name="cc1_2"min="0" max="5"  value="<?php echo $row['cc1_2'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -275,7 +275,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc1_3"min="0" pattern="[0-5]"  value="<?php echo $row['cc1_3'] ?>"
+                                <input type="number" name="cc1_3" min="0" max="5"   value="<?php echo $row['cc1_3'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -295,7 +295,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc2_1" min="0" pattern="[0-5]"  value="<?php echo $row['cc2_1'] ?>"
+                                <input type="number" name="cc2_1" min="0" max="5"   value="<?php echo $row['cc2_1'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -314,7 +314,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc2_2" min="0" pattern="[0-5]"  value="<?php echo $row['cc2_2'] ?>"
+                                <input type="number" name="cc2_2" min="0" max="5"   value="<?php echo $row['cc2_2'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -333,7 +333,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc3_1" min="0"   value="<?php echo $row['cc3_1'] ?>"
+                                <input type="number" name="cc3_1" min="0" max="5"  value="<?php echo $row['cc3_1'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -351,7 +351,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc3_2" min="0" pattern="[0-5]"  value="<?php echo $row['cc3_2'] ?>"
+                                <input type="number" name="cc3_2"min="0" max="5"   value="<?php echo $row['cc3_2'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>

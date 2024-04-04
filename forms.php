@@ -1,5 +1,7 @@
 <?php
-session_start();
+
+include "session_auth.php";
+
 require 'DBConn.php';
 
 // Call the function to establish a database connection
@@ -132,7 +134,7 @@ if (isset($_POST["submit"])) {
                                 <p class="text-sm text-gray-400 font-semibold mt-6"> The Citizen’s Charter is an
                                     official document
                                     that reflects the services of a government agency/office including its requirements,
-                                    fees, and processing times among others.
+                                    fees, and processing times among others. <br><br> <strong>(NOTE: Fill in once every entry).</strong> 
                                 </p>
                             </div>
                         </div>

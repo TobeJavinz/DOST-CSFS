@@ -1,6 +1,6 @@
 <?php
-session_start();
 
+include "session_auth.php";
 require 'DBConn.php';
 
 // Establish database connection
