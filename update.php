@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $sectors = rtrim($sectors, ',');
 
     do {
-        
+
 
         $sql = "UPDATE data " .
             "SET cc1_1 = '$cc1_1', cc1_2 = '$cc1_2', cc1_3 = '$cc1_3', cc2_1 = '$cc2_1', cc2_2 = '$cc2_2', cc3_1 = '$cc3_1', cc3_2 = '$cc3_2', 
@@ -254,7 +254,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc1_2"min="0" max="5"  value="<?php echo $row['cc1_2'] ?>"
+                                <input type="number" name="cc1_2" min="0" max="5" value="<?php echo $row['cc1_2'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -275,7 +275,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc1_3" min="0" max="5"   value="<?php echo $row['cc1_3'] ?>"
+                                <input type="number" name="cc1_3" min="0" max="5" value="<?php echo $row['cc1_3'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -295,7 +295,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc2_1" min="0" max="5"   value="<?php echo $row['cc2_1'] ?>"
+                                <input type="number" name="cc2_1" min="0" max="5" value="<?php echo $row['cc2_1'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -314,7 +314,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc2_2" min="0" max="5"   value="<?php echo $row['cc2_2'] ?>"
+                                <input type="number" name="cc2_2" min="0" max="5" value="<?php echo $row['cc2_2'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -333,7 +333,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc3_1" min="0" max="5"  value="<?php echo $row['cc3_1'] ?>"
+                                <input type="number" name="cc3_1" min="0" max="5" value="<?php echo $row['cc3_1'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -351,7 +351,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                         </div>
                         <div class="flex">
                             <div class="mt-2">
-                                <input type="number" name="cc3_2"min="0" max="5"   value="<?php echo $row['cc3_2'] ?>"
+                                <input type="number" name="cc3_2" min="0" max="5" value="<?php echo $row['cc3_2'] ?>"
                                     class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                             </div>
                             <div>
@@ -389,26 +389,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                 <div class="mt-2">
                                                     <select required id="" name="service"
                                                         class="block w-full rounded-custom border-0 px-4 py-2 pr-4 text-gray-900 outline-none shadow-sm ring-1 ring-inset ring-custom focus:ring-2 focus:ring-inset focus:ring-custom sm:max-w-xs sm:text-sm sm:leading-6">
-                                                        <option value="" selected hidden>
-                                                            <?php echo $row['service'] ?>
-                                                        </option>
-                                                        <option value="Technology Intervention">Technology Intervention
-                                                        </option>
-                                                        <option value="Technology Training">Technology Training</option>
-                                                        <option value="Technology Forum/Seminar">Technology
-                                                            Forum/Seminar
-                                                        </option>
-                                                        <option value="Consultancy Services">Consultancy Services
-                                                        </option>
-                                                        <option value="Testing and Calibration">Testing and Calibration
-                                                        </option>
-                                                        <option value="Packaging and Labeling Services">Packaging and
-                                                            Labeling Services</option>
-                                                        <option value="Scholarship Program Services">Scholarship Program
-                                                            Services</option>
-                                                        <option value="Formula and Conversion">Formula and Conversion
-                                                        </option>
-                                                        <option value="R&D Management">R&D Management</option>
+                                                        <?php
+                                                        // Assuming $services is an array of all possible services
+                                                        $services = ['Technology Intervention', 'Technology Training', 'Technology Forum/Seminar', 'Consultancy Services', 'Testing and Calibration', 'Packaging and Labeling Services', 'Scholarship Program Services', 'Formula and Conversion', 'R&D Management'];
+
+                                                        foreach ($services as $service) {
+                                                            if ($service == $row['service']) {
+                                                                echo "<option value=\"$service\" selected>$service</option>";
+                                                            } else {
+                                                                echo "<option value=\"$service\">$service</option>";
+                                                            }
+                                                        }
+                                                        ?>
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -433,7 +426,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                         value="<?php echo date('Y-m-d', strtotime($row['date'])); ?>"
                                                         class="block w-full rounded-custom border-0 py-1.5 pl-4 text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
 
-                                                        
+
                                                 </div>
 
                                             </div>
@@ -526,11 +519,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                 <div class="mt-2">
                                                     <select id="" name="sex"
                                                         class="block w-full rounded-md border-0 py-2 pl-4 text-gray-900 shadow-sm ring-1 ring-custom input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6">
-                                                        <option value="" selected hidden>
-                                                            <?php echo $row['sex'] ?>
-                                                        </option>
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
+                                                        <?php
+                                                        // Assuming $services is an array of all possible services
+                                                        $sex = ['Male', 'Female'];
+
+                                                        foreach ($sex as $sex) {
+                                                            if ($sex == $row['sex']) {
+                                                                echo "<option value=\"$sex\" selected>$sex</option>";
+                                                            } else {
+                                                                echo "<option value=\"$sex\">$sex</option>";
+                                                            }
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                             </div>
@@ -710,24 +710,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                         Organization</label>
                                                 </div>
                                                 <div class="relative flex items-center gap-x-3">
-                                                    <input name="sector[]" value="academe" type="checkbox" <input name="sector[]" value="cso" type="checkbox" <?php if (in_array('academe', $sectors)) {
-                                                        echo "checked";
-                                                    } ?>
+                                                    <input name="sector[]" value="academe" type="checkbox" <input
+                                                        name="sector[]" value="cso" type="checkbox" <?php if (in_array('academe', $sectors)) {
+                                                            echo "checked";
+                                                        } ?>
                                                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                     <label for="academe" class=" text-gray-900">Academe</label>
                                                 </div>
 
                                                 <div class="relative flex items-center gap-x-3">
-                                                    <input name="sector[]" value="government" type="checkbox" <input name="sector[]" value="cso" type="checkbox" <?php if (in_array('government', $sectors)) {
-                                                        echo "checked";
-                                                    } ?>
+                                                    <input name="sector[]" value="government" type="checkbox" <input
+                                                        name="sector[]" value="cso" type="checkbox" <?php if (in_array('government', $sectors)) {
+                                                            echo "checked";
+                                                        } ?>
                                                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                     <label for="government" class=" text-gray-900">Government</label>
                                                 </div>
                                                 <div class="relative flex items-center gap-x-3">
-                                                    <input name="sector[]" value="media" type="checkbox" <input name="sector[]" value="cso" type="checkbox" <?php if (in_array('media', $sectors)) {
-                                                        echo "checked";
-                                                    } ?>
+                                                    <input name="sector[]" value="media" type="checkbox" <input
+                                                        name="sector[]" value="cso" type="checkbox" <?php if (in_array('media', $sectors)) {
+                                                            echo "checked";
+                                                        } ?>
                                                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                     <label for="media" class=" text-gray-900">Media</label>
                                                 </div>

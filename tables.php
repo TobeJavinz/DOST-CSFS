@@ -100,7 +100,7 @@ $result = mysqli_query($conn, $query);
                         </h3>
                         <div class="mt-2">
                           <p class="text-sm text-gray-500">
-                            Are you sure you want to deactivate your account? All of your data will be
+                            Are you sure you want to delete this data? Data will be
                             permanently removed. This action cannot be undone.
                           </p>
                         </div>

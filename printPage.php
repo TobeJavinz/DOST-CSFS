@@ -977,12 +977,29 @@ $training_date = $_SESSION['date'];
                 <td>
                     <?php
                     if (isset ($_SESSION['comments']) && is_array($_SESSION['comments'])) {
+                        // Initialize the comment count
+                        $count = 0;
+
                         // Loop through the array and print each comment
-                        foreach ($_SESSION['comments'] as $index => $comment) {
-                            echo ($index + 1) . ". " . nl2br(htmlspecialchars(ucwords($comment))) . "<br>";
+                        foreach ($_SESSION['comments'] as $comment) {
+                            // Skip blank comments
+                            if (trim($comment) == '') {
+                                continue;
+                            }
+
+                            // Print the comment
+                            echo ($count + 1) . ". " . ucwords($comment) . "<br>";
+
+                            // Increment the comment count
+                            $count++;
+                        }
+
+                        // If no comments were printed, print a dash
+                        if ($count == 0) {
+                            echo "";
                         }
                     } else {
-                        echo "-";
+                        echo "";
                     }
                     ?>
                 </td>
