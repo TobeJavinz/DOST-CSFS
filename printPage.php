@@ -1,8 +1,5 @@
 <?php
 
-// header("Cache-Control: no cache");
-// session_cache_limiter("private_no_expire");
-
 include 'session_auth.php';
 
 
@@ -1021,8 +1018,20 @@ $training_date = $_SESSION['date'];
             </tr>
             </table>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
+      
+
+            <?php if (isset($_SESSION['login'])): ?>
+    
 
             <p class="mt-5">
+               Prepared and Approved by:<br><br> <b>
+                    <?php echo $_SESSION['AdminName'] ?>
+                </b><br>
+                <?php echo $_SESSION['AdminPosition'] ?><br>
+                <?php echo date('m/d/Y') ?>
+            </p>
+            <?php else: ?>
+                <p class="mt-5">
                 Prepared by:<br><br> <b>
                     <?php echo $_SESSION['name'] ?>
                 </b><br>
@@ -1037,7 +1046,8 @@ $training_date = $_SESSION['date'];
                 <?php echo $_SESSION['AdminPosition'] ?><br>
                 <?php echo date('m/d/Y') ?>
             </p>
- 
+            <?php endif; ?>
+            
             </div>
 
             <a href="javascript:void(0);" onclick="history.back()" id="backButton" style="margin-bottom: 20px; font-size: 18px;">&#8592; Back</a>

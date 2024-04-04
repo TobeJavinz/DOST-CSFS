@@ -387,7 +387,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                                     of
                                                     Service</label>
                                                 <div class="mt-2">
-                                                    <select id="" name="service"
+                                                    <select required id="" name="service"
                                                         class="block w-full rounded-custom border-0 px-4 py-2 pr-4 text-gray-900 outline-none shadow-sm ring-1 ring-inset ring-custom focus:ring-2 focus:ring-inset focus:ring-custom sm:max-w-xs sm:text-sm sm:leading-6">
                                                         <option value="" selected hidden>
                                                             <?php echo $row['service'] ?>

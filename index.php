@@ -25,8 +25,7 @@ if (isset($_POST['login'])) {
     $stmt1->store_result();
     $stmt1->bind_result($adminName, $adminPos);
     $stmt1->fetch();
-    $_SESSION['AdminName'] = $adminName;
-    $_SESSION['AdminPosition'] = $adminPos;
+
 
     // Verify password
     if (password_verify($login_password, $hashed_password)) {
@@ -34,6 +33,8 @@ if (isset($_POST['login'])) {
         if($admin == 'y'){
             echo "<script>alert('Incorrect Username or Password');</script>";
         } else {
+            $_SESSION['AdminName'] = $adminName;
+            $_SESSION['AdminPosition'] = $adminPos;
             $_SESSION['name'] = $name;
             $_SESSION['position'] = $position;
 
