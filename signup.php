@@ -14,43 +14,41 @@ if (isset($_POST['register'])) {
     $name = trim($_POST['name']);
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
+    $position = trim($_POST['position']);
 
-    if (empty($name) || empty($username) || empty($password)) {
+    if (empty($name) || empty($username) || empty($password) || empty($position)) {
         echo "<script>alert('Please Fill In All Fields Properly.');</script>";
     } else {
-        // Check if username already exists
-        $stmt = $conn->prepare("SELECT * FROM user_cred WHERE username = ?");
-        $stmt->bind_param("s", $username);
+        // Check if username or name already exists
+        $stmt = $conn->prepare("SELECT * FROM user_cred WHERE username = ? OR name = ?");
+        $stmt->bind_param("ss", $username, $name);
         $stmt->execute();
-        $result_username = $stmt->get_result();
+        $result = $stmt->get_result();
 
-        // Check if name already exists
-        $stmt = $conn->prepare("SELECT * FROM user_cred WHERE name = ?");
-        $stmt->bind_param("s", $name);
-        $stmt->execute();
-        $result_name = $stmt->get_result();
-
-        if ($result_username->num_rows > 0) {
-            echo "<script>alert('Staff Username Already Exists!');</script>";
-        } elseif ($result_name->num_rows > 0) {
-            echo "<script>alert('Staff Name Already Exists!');</script>";
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            if ($row['username'] == $username) {
+                echo "<script>alert('Staff Already Registered!');</script>";
+            } else {
+                echo "<script>alert('Staff Already Registered!');</script>";
+            }
         } else {
             // No duplicate username or name found, proceed with registration
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-            $stmt = $conn->prepare("INSERT INTO user_cred (username, password, name) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $username, $hashed_password, $name);
+            $stmt = $conn->prepare("INSERT INTO user_cred (username, password, name, position) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $username, $hashed_password, $name, $position);
 
             if ($stmt->execute()) {
                 echo "<script>alert('Staff Registered Successfully!');</script>";
             } else {
                 echo "<script>alert('Registration Error " . $stmt->error . "');</script>";
             }
-
+        }
             $stmt->close();
         }
     }
-}
+
 $conn->close();
 ?>
 
@@ -106,7 +104,7 @@ $conn->close();
                                             class="block text-sm font-medium leading-6 text-gray-900">Name</label>
                                         <div class="mt-2">
                                             <input required name="name" type="text" placeholder="Full Name"
-                                                pattern="[A-Za-z ]+" title="Please enter letters only"
+                                              
                                                 class="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                                         </div>
                                     </div>
@@ -117,6 +115,16 @@ $conn->close();
                                             <input required name="username" type="text" placeholder="Username"
                                                 pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z0-9]+$"
                                                 title="Username must contain at least one letter and can include numbers"
+                                                class="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label for="Position"
+                                            class="block text-sm font-medium leading-6 text-gray-900">Position</label>
+                                        <div class="mt-2">
+                                            <input required name="position" type="text" placeholder="Position"
+                                               
                                                 class="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" />
                                         </div>
                                     </div>

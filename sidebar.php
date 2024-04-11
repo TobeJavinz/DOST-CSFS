@@ -39,7 +39,13 @@
         <li class="mb-1 group">
             <a href="./admin.php" class="flex items-center py-2 px-4 font-semibold text-black hover:bg-custom hover:customtext rounded-md">
                 <i class="ri-admin-line mr-3 text-lg"></i>
-                <span class="text-sm">Edit</span>
+                <span class="text-sm">Edit Entries</span>
+            </a>
+        </li>
+        <li class="mb-1 group">
+            <a href="./manageAcc.php" class="flex items-center py-2 px-4 font-semibold text-black hover:bg-custom hover:customtext rounded-md">
+                <i class="ri-admin-line mr-3 text-lg"></i>
+                <span class="text-sm">Manage Accounts</span>
             </a>
         </li>
     <?php endif; ?>

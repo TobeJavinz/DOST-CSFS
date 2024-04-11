@@ -1,32 +1,32 @@
 <?php
-require 'DBConn.php';
-include "session_auth.php";
-// Establish database connection
-$conn = connect_to_database();
+    require 'DBConn.php';
+    include "session_auth.php";
+    // Establish database connection
+    $conn = connect_to_database();
 
-$ServiceID = "";
+    $ServiceID = "";
 
 
-$errormessage = "";
-$successmessage = "";
+    $errormessage = "";
+    $successmessage = "";
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-    if (!isset($_GET["ServiceID"])) {
-        header("location: /DOST-CSFS/tables.php");
-        exit;
-    }
+        if (!isset($_GET["ServiceID"])) {
+            header("location: /DOST-CSFS/tables.php");
+            exit;
+        }
 
-    $ServiceID = $_GET["ServiceID"];
+        $ServiceID = $_GET["ServiceID"];
 
-    $sql = "SELECT * FROM data WHERE ServiceID=$ServiceID";
-    $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
+        $sql = "SELECT * FROM data WHERE ServiceID=$ServiceID";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
 
-    if (!$row) {
-        header("location: /DOST-CSFS/tables.php");
-        exit;
-    }
+        if (!$row) {
+            header("location: /DOST-CSFS/tables.php");
+            exit;
+        }
 
     $cc1_1 = $row["cc1_1"];
     $cc1_2 = $row["cc1_2"];
@@ -184,7 +184,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <link href="./src/output.css" rel="stylesheet" />
-    <title>Admin</title>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <title>CSFS | EDIT</title>
 </head>
 
 <body class="text-gray-800 font-inter">
@@ -845,7 +846,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                                 <legend class="text-sm font-semibold leading-6 text-gray-900">
                                     What are your suggestions to improve our assistance/service?
                                     Or are there noteworthy observations that you would like to
-                                    share?
+                                    share? <br> Or you rated 3 below in the SQDs.
                                 </legend>
                                 <div class="mt-2">
                                     <textarea name="comments" rows="3" value=""

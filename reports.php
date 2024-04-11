@@ -484,7 +484,7 @@ LIMIT 1";
   <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
   <link href="./src/output.css" rel="stylesheet" />
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
-  <title>REPORTS</title>
+  <title>CSFS | REPORTS</title>
 
 </head>
 

@@ -100,6 +100,9 @@ if (isset($_POST["submit"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <link href="./src/output.css" rel="stylesheet" />
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <title>CSFS | FORM</title>
 </head>
 
 <body class="text-gray-800 font-inter">
@@ -676,7 +679,7 @@ if (isset($_POST["submit"])) {
                             <legend class="text-sm font-semibold leading-6 text-gray-900">
                                 What are your suggestions to improve our assistance/service?
                                 Or are there noteworthy observations that you would like to
-                                share?
+                                share?  <br> Or you rated 3 below in the SQDs.
                             </legend>
                             <div class="mt-2">
                                 <textarea name="comments" rows="3"
