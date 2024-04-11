@@ -486,6 +486,18 @@ LIMIT 1";
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
   <title>CSFS | REPORTS</title>
 
+  <style>
+table {
+    width: 100%; /* Make table use full width */
+    table-layout: fixed; /* Fixed layout behaves better */
+}
+table td, table th {
+    overflow: hidden; /* Hide content that won't fit in a cell */
+    text-overflow: ellipsis; /* Add '...' for overflowed content */
+    white-space: nowrap; /* Prevents the content from wrapping into multiple lines */
+}
+</style>
+
 </head>
 
 <body class="text-gray-800 font-inter">

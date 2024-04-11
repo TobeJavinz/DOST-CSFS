@@ -137,7 +137,7 @@ $conn->close();
                                         <div class="mt-2">
                                             <input required id="password" name="password" type="password"
                                                 placeholder="Password"
-                                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$"
+                                               
                                                 title="Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long"
                                                 class="block w-full rounded-md border-0 py-2 px-3 text-gray-900 shadow-sm ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6 mb-2
                                                 " />

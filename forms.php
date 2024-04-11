@@ -546,6 +546,11 @@ if (isset($_POST["submit"])) {
                                                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                 <label for="" class=" text-gray-900">Indigenous Group Member</label>
                                             </div>
+                                            <div class="relative flex items-center gap-x-3">
+                                                <input   name="customer_category[]" value="N/A" type="checkbox"
+                                                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                <label for="" class=" text-gray-900">N/A</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -586,6 +591,12 @@ if (isset($_POST["submit"])) {
                                                 <input name="sector[]" value="media" type="checkbox"
                                                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                 <label for="media" class=" text-gray-900">Media</label>
+                                            </div>
+
+                                            <div class="relative flex items-center gap-x-3">
+                                                <input name="sector[]" value="N/A" type="checkbox"
+                                                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                <label for="media" class=" text-gray-900">N/A</label>
                                             </div>
                                         </div>
                                     </div>

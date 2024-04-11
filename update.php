@@ -1,32 +1,32 @@
 <?php
-    require 'DBConn.php';
-    include "session_auth.php";
-    // Establish database connection
-    $conn = connect_to_database();
+require 'DBConn.php';
+include "session_auth.php";
+// Establish database connection
+$conn = connect_to_database();
 
-    $ServiceID = "";
+$ServiceID = "";
 
 
-    $errormessage = "";
-    $successmessage = "";
+$errormessage = "";
+$successmessage = "";
 
-    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
-        if (!isset($_GET["ServiceID"])) {
-            header("location: /DOST-CSFS/tables.php");
-            exit;
-        }
+    if (!isset($_GET["ServiceID"])) {
+        header("location: /DOST-CSFS/tables.php");
+        exit;
+    }
 
-        $ServiceID = $_GET["ServiceID"];
+    $ServiceID = $_GET["ServiceID"];
 
-        $sql = "SELECT * FROM data WHERE ServiceID=$ServiceID";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
+    $sql = "SELECT * FROM data WHERE ServiceID=$ServiceID";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
 
-        if (!$row) {
-            header("location: /DOST-CSFS/tables.php");
-            exit;
-        }
+    if (!$row) {
+        header("location: /DOST-CSFS/tables.php");
+        exit;
+    }
 
     $cc1_1 = $row["cc1_1"];
     $cc1_2 = $row["cc1_2"];
@@ -675,6 +675,14 @@
                                                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                     <label for="" class=" text-gray-900">Indigenous Group Member</label>
                                                 </div>
+
+                                                <div class="relative flex items-center gap-x-3">
+                                                    <input name="customer_category[]" value="N/A" type="checkbox" 
+                                                    <?php if (in_array('N/A', $categories)) { echo "checked"; } ?> 
+                                                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                    <label for="" class="text-gray-900">N/A</label>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -736,6 +744,16 @@
                                                         class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                     <label for="media" class=" text-gray-900">Media</label>
                                                 </div>
+
+                                                <div class="relative flex items-center gap-x-3">
+                                                    <input name="sector[]" value="media" type="checkbox" <input
+                                                        name="sector[]" value="cso" type="checkbox" <?php if (in_array('N/A', $sectors)) {
+                                                            echo "checked";
+                                                        } ?>
+                                                        class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                    <label for="media" class=" text-gray-900">N/A</label>
+                                                </div>
+                                             
                                             </div>
                                         </div>
                                     </div>

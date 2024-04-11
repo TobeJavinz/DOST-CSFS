@@ -335,7 +335,7 @@ $total_food = $row_food["food_count"];
                         echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . "'>";
 
                         echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . ucwords($row['Services']) . "</td>";
-                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $index . "</td>";
+                      //  echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $index . "</td>";
 
                         echo "</tr>";
                         $index++;
