@@ -49,11 +49,11 @@ $result = mysqli_query($conn, $query);
 
 
   <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-50 min-h-screen transition-all main">
-  
-  <?php
-        $headerText = "Edit";
-        include 'header.php';
-        ?>
+
+    <?php
+    $headerText = "Edit";
+    include 'header.php';
+    ?>
 
     <!-- content -->
     <div class="p-6">
@@ -167,47 +167,55 @@ $result = mysqli_query($conn, $query);
                 <?php
                 if (isset($_GET['search'])) {
                   $search = $_GET['search'];
-                  
-                  $query = "SELECT `ServiceID`,`training_name`,`date`,`fname`,`lname`,`designation` FROM data WHERE 
-                  `sex` LIKE '%$search%' OR 
-                  `email` LIKE '%$search%' OR 
-                  `contact_info` LIKE '%$search%' OR 
-                  `home_add` LIKE '%$search%' OR 
-                  `age` LIKE '%$search%' OR 
-                  `designation` LIKE '%$search%' OR 
-                  `company` LIKE '%$search%' OR 
-                  `msme` LIKE '%$search%' OR 
-                  `customer_category` LIKE '%$search%' OR 
-                  `sector` LIKE '%$search%' OR 
-                  `returning_customer` LIKE '%$search%' OR 
-                  `sqd0` LIKE '%$search%' OR 
-                  `sqd1` LIKE '%$search%' OR 
-                  `sqd2` LIKE '%$search%' OR 
-                  `sqd3` LIKE '%$search%' OR 
-                  `sqd4` LIKE '%$search%' OR 
-                  `sqd5` LIKE '%$search%' OR 
-                  `sqd6` LIKE '%$search%' OR 
-                  `sqd7` LIKE '%$search%' OR 
-                  `sqd8` LIKE '%$search%' OR 
-                  `net_promoter` LIKE '%$search%' OR 
-                  `ateneo` LIKE '%$search%' OR 
-                  `doa` LIKE '%$search%' OR 
-                  `dti` LIKE '%$search%' OR 
-                  `fda` LIKE '%$search%' OR 
-                  `sbc` LIKE '%$search%' OR 
-                  `tesda` LIKE '%$search%' OR 
-                  `uic` LIKE '%$search%' OR 
-                  `other_agency` LIKE '%$search%' OR 
-                  `other_agency_score` LIKE '%$search%' OR 
-                  `overall_mood` LIKE '%$search%' OR 
-                  `comments` LIKE '%$search%'";
-                  
+                  $parts = explode(':', $search);
+
+                  if (count($parts) == 2) {
+                    list($column, $content) = $parts;
+
+                    $query = "SELECT `ServiceID`,`training_name`,`date`,`fname`,`lname`,`designation` FROM data WHERE `$column` LIKE '%$content%'";
+                  } else {
+                    $query = "SELECT `ServiceID`,`training_name`,`date`,`fname`,`lname`,`designation` FROM data WHERE 
+`sex` LIKE '%$search%' OR 
+`email` LIKE '%$search%' OR 
+`contact_info` LIKE '%$search%' OR 
+`home_add` LIKE '%$search%' OR 
+`age` LIKE '%$search%' OR 
+`designation` LIKE '%$search%' OR 
+`company` LIKE '%$search%' OR 
+`msme` LIKE '%$search%' OR 
+`customer_category` LIKE '%$search%' OR 
+`sector` LIKE '%$search%' OR 
+`returning_customer` LIKE '%$search%' OR 
+`sqd0` LIKE '%$search%' OR 
+`sqd1` LIKE '%$search%' OR 
+`sqd2` LIKE '%$search%' OR 
+`sqd3` LIKE '%$search%' OR 
+`sqd4` LIKE '%$search%' OR 
+`sqd5` LIKE '%$search%' OR 
+`sqd6` LIKE '%$search%' OR 
+`sqd7` LIKE '%$search%' OR 
+`sqd8` LIKE '%$search%' OR 
+`net_promoter` LIKE '%$search%' OR 
+`ateneo` LIKE '%$search%' OR 
+`doa` LIKE '%$search%' OR 
+`dti` LIKE '%$search%' OR 
+`fda` LIKE '%$search%' OR 
+`sbc` LIKE '%$search%' OR 
+`tesda` LIKE '%$search%' OR 
+`uic` LIKE '%$search%' OR 
+`other_agency` LIKE '%$search%' OR 
+`other_agency_score` LIKE '%$search%' OR 
+`overall_mood` LIKE '%$search%' OR 
+`comments` LIKE '%$search%'";
+                  } 
+
+
                   $query_run = mysqli_query($conn, $query);
 
                   if (mysqli_num_rows($query_run) > 0) {
 
                     foreach ($query_run as $rows) {
-                      
+
                       ?>
                       <tr>
                         <td class="w-1/3 text-center text-sm py-3 px-4">
