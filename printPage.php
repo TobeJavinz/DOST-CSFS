@@ -119,9 +119,23 @@ $training_date = $_SESSION['date'];
         .page-break {
             page-break-before: always;
         }
+
         #table {
-        font-size: 0.8em; /* Adjust this value as needed */
-    }
+            font-size: 0.7em;
+            /* Adjust this value as needed */
+        }
+
+        .table {
+            border-collapse: collapse;
+            /* Combine borders */
+        }
+
+        .table,
+        .table th,
+        .table td {
+            border: 1px solid black;
+            /* Add border to table and cells */
+        }
     </style>
     <script>
         function printPage() {
@@ -302,7 +316,8 @@ $training_date = $_SESSION['date'];
         </tr>
         <tr>
             <td>SQD3. Access and Facilities</td>
-            <td>The steps (including payment, if applicable) I needed to do for my transaction were easy and simple.</td>
+            <td>The steps (including payment, if applicable) I needed to do for my transaction were easy and simple.
+            </td>
             <td>
                 <?php echo $SQD_3SD ?>
             </td> <!-- Strongly Disagree-->
@@ -358,7 +373,8 @@ $training_date = $_SESSION['date'];
         </tr>
         <tr>
             <td>SQD5. Costs</td>
-            <td>I paid reasonable amount of fees for my transaction / or spent a reasonable counterpart amount for the implementation of the projects /activities.</td>
+            <td>I paid reasonable amount of fees for my transaction / or spent a reasonable counterpart amount for the
+                implementation of the projects /activities.</td>
             <td>
                 <?php echo $SQD_5SD ?>
             </td> <!-- Strongly Disagree-->
@@ -442,7 +458,8 @@ $training_date = $_SESSION['date'];
         </tr>
         <tr>
             <td>SQD8. Outcome</td>
-            <td>I got what I needed from the government office, or (if denied) denial of request was sufficiently explained to me.</td>
+            <td>I got what I needed from the government office, or (if denied) denial of request was sufficiently
+                explained to me.</td>
             <td>
                 <?php echo $SQD_8SD ?>
             </td> <!-- Strongly Disagree-->
@@ -512,6 +529,9 @@ $training_date = $_SESSION['date'];
         </tr>
         <!-- Add more rows as needed -->
     </table>
+    <p style="font-size: 14px; margin-bottom: 15px;"><i>In compliance to ARTA's Memo No. 2022-05:</i><br>*Total Score =
+        Score of respondents who rated 'Agree' and 'Strongly Agree'<br>**Rating = Total Score / Total respondents who
+        rated 'Agree' and 'Strongly Agree'</p>
     <h1 class="page-break"><b>III. Net Promoter Score</b></h1>
     <p class="bg-gray-200 bg-opacity-100 text-sm"><i>NPS = % of Promoters(5s) - % of Defractors (0 through 3)</p>
     <p style="margin-top: 10px;">NPS1. Recommend DOST XI assistance to others</i></p>
@@ -810,9 +830,90 @@ $training_date = $_SESSION['date'];
                 </strong></td>
         </tr>
         <tr>
+            <td>TESDA</td>
+            <td>
+                <?php echo $_SESSION['tesda_1'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['tesda_2'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['tesda_3'] ?>
+            </td>
+
+            <td>
+                <?php echo $_SESSION['tesda_4'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['tesda_5'] ?>
+            </td>
+            <td>
+                <?php echo $tesdaSUM = $_SESSION['tesda_1'] + $_SESSION['tesda_2'] + $_SESSION['tesda_3'] + $_SESSION['tesda_4'] + $_SESSION['tesda_5'] ?>
+            </td>
+            <?php
+            $tesda_1 = $_SESSION['tesda_1'];
+            $tesda_2 = $_SESSION['tesda_2'];
+            $tesda_3 = $_SESSION['tesda_3'];
+            $tesda_5 = $_SESSION['tesda_5'];
+            if ($tesdaSUM != 0) {
+                $result = round($tesda_5 / $tesdaSUM - ($tesda_1 + $tesda_2 + $tesda_3) / $tesdaSUM, 2) * 100;
+                if ($result < 0)
+                    $result = 0;
+            } else {
+                $result = 0;
+            }
+            ?>
+
+            <td><strong>
+                    <?php echo $result . "%"; ?>
+                </strong></td>
+        </tr>
+
+        <tr>
+            <td>UIC</td>
+            <td>
+                <?php echo $_SESSION['uic_1'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['uic_2'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['uic_3'] ?>
+            </td>
+
+            <td>
+                <?php echo $_SESSION['uic_4'] ?>
+            </td>
+            <td>
+                <?php echo $_SESSION['uic_5'] ?>
+            </td>
+            <td>
+                <?php echo $uicSUM = $_SESSION['uic_1'] + $_SESSION['uic_2'] + $_SESSION['uic_3'] + $_SESSION['uic_4'] + $_SESSION['uic_5'] ?>
+            </td>
+            <?php
+            $uic_1 = $_SESSION['uic_1'];
+            $uic_2 = $_SESSION['uic_2'];
+            $uic_3 = $_SESSION['uic_3'];
+            $uic_5 = $_SESSION['uic_5'];
+            if ($uicSUM != 0) {
+                $result = round($uic_5 / $uicSUM - ($uic_1 + $uic_2 + $uic_3) / $uicSUM, 2) * 100;
+                if ($result < 0)
+                    $result = 0;
+            } else {
+                $result = 0;
+            }
+            ?>
+
+            <td><strong>
+                    <?php echo $result . "%"; ?>
+                </strong></td>
+        </tr>
+        <tr>
+        
             <td>
                 <?php echo $_SESSION['other_agency'] ?>
             </td>
+            
             <td>
                 <?php echo $_SESSION['other_agency_1'] ?>
             </td>
@@ -829,7 +930,7 @@ $training_date = $_SESSION['date'];
                 <?php echo $_SESSION['other_agency_5'] ?>
             </td>
             <td>
-                <?php echo $other_agency_SUM = $_SESSION['other_agency_1'] + $_SESSION['other_agency_2'] + $_SESSION['other_agency_3'] + $_SESSION['other_agency_4'] + $_SESSION['other_agency_5'] ?>
+                <?php echo $other_agency_SUM =  $_SESSION['other_agency_count']  ?>
             </td>
             <?php
             $other_agency_1 = $_SESSION['other_agency_1'];

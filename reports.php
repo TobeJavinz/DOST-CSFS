@@ -9,6 +9,8 @@ include 'DBconn.php';
 $conn = connect_to_database();
 
 // Start the session
+$SearchService = ""; 
+$SearchTraining_name = "";
 $total_services = 0;
 $total_training_names = 0;
 $total_companies = 0;
@@ -132,6 +134,8 @@ FROM
 
   // retreiving RESPONSES
   $sql2 = "SELECT 
+  
+  
   SUM(CASE WHEN sqd1 = 1 THEN 1 ELSE 0 END) AS SQD_1SD,
   SUM(CASE WHEN sqd1 = 2 THEN 1 ELSE 0 END) AS SQD_1D,
   SUM(CASE WHEN sqd1 = 3 THEN 1 ELSE 0 END) AS SQD_1NAD,
@@ -227,11 +231,11 @@ FROM
   SUM(CASE WHEN uic = 4 THEN 1 ELSE 0 END) AS uic_4,
   SUM(CASE WHEN uic = 5 THEN 1 ELSE 0 END) AS uic_5,
 
-  SUM(CASE WHEN other_agency_score = 1 THEN 1 ELSE 0 END) AS other_agency_1,
-  SUM(CASE WHEN other_agency_score = 2 THEN 1 ELSE 0 END) AS other_agency_2,
-  SUM(CASE WHEN other_agency_score = 3 THEN 1 ELSE 0 END) AS other_agency_3,
-  SUM(CASE WHEN other_agency_score = 4 THEN 1 ELSE 0 END) AS other_agency_4,
-  SUM(CASE WHEN other_agency_score = 5 THEN 1 ELSE 0 END) AS other_agency_5,
+  -- SUM(CASE WHEN other_agency_score = 1 THEN 1 ELSE 0 END) AS other_agency_1,
+  -- SUM(CASE WHEN other_agency_score = 2 THEN 1 ELSE 0 END) AS other_agency_2,
+  -- SUM(CASE WHEN other_agency_score = 3 THEN 1 ELSE 0 END) AS other_agency_3,
+  -- SUM(CASE WHEN other_agency_score = 4 THEN 1 ELSE 0 END) AS other_agency_4,
+  -- SUM(CASE WHEN other_agency_score = 5 THEN 1 ELSE 0 END) AS other_agency_5,
 
   SUM(CASE WHEN msme = 'yes' THEN 1 ELSE 0 END) AS msme_count,
 
@@ -250,7 +254,7 @@ SUM(CASE WHEN FIND_IN_SET('SC', customer_category) THEN 1 ELSE 0 END) AS SC_coun
   SUM(CASE WHEN FIND_IN_SET('government', sector) THEN 1 ELSE 0 END) AS gov_count,
   SUM(CASE WHEN FIND_IN_SET('media', sector) THEN 1 ELSE 0 END) AS med_count, 
 
-  other_agency,
+  
   cc1_1,
   cc1_2,
   cc1_3,
@@ -385,12 +389,19 @@ SUM(CASE WHEN FIND_IN_SET('SC', customer_category) THEN 1 ELSE 0 END) AS SC_coun
     $_SESSION['sbc_4'] = $resp['sbc_4'];
     $_SESSION['sbc_5'] = $resp['sbc_5'];
 
-    $_SESSION['other_agency'] = $resp['other_agency'];
-    $_SESSION['other_agency_1'] = $resp['other_agency_1'];
-    $_SESSION['other_agency_2'] = $resp['other_agency_2'];
-    $_SESSION['other_agency_3'] = $resp['other_agency_3'];
-    $_SESSION['other_agency_4'] = $resp['other_agency_4'];
-    $_SESSION['other_agency_5'] = $resp['other_agency_5'];
+    $_SESSION['tesda_1'] = $resp['tesda_1'];
+    $_SESSION['tesda_2'] = $resp['tesda_2'];
+    $_SESSION['tesda_3'] = $resp['tesda_3'];
+    $_SESSION['tesda_4'] = $resp['tesda_4'];
+    $_SESSION['tesda_5'] = $resp['tesda_5'];
+
+    $_SESSION['uic_1'] = $resp['uic_1'];
+    $_SESSION['uic_2'] = $resp['uic_2'];
+    $_SESSION['uic_3'] = $resp['uic_3'];
+    $_SESSION['uic_4'] = $resp['uic_4'];
+    $_SESSION['uic_5'] = $resp['uic_5'];
+
+   
 
     $msme_count = $resp['msme_count'];
     $_SESSION['food_count'] = $resp['food_count'];
@@ -469,6 +480,40 @@ LIMIT 1";
   }
 }
 
+$agency = "SELECT 
+other_agency,
+COUNT(other_agency) AS agency_count,
+SUM(CASE WHEN other_agency_score = 1 THEN 1 ELSE 0 END) AS other_agency_1,
+SUM(CASE WHEN other_agency_score = 2 THEN 1 ELSE 0 END) AS other_agency_2,
+SUM(CASE WHEN other_agency_score = 3 THEN 1 ELSE 0 END) AS other_agency_3,
+SUM(CASE WHEN other_agency_score = 4 THEN 1 ELSE 0 END) AS other_agency_4,
+SUM(CASE WHEN other_agency_score = 5 THEN 1 ELSE 0 END) AS other_agency_5
+FROM 
+data
+WHERE 
+('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date') 
+AND ('$SearchService' = '' OR service = '$SearchService') 
+AND ('$SearchTraining_name' = '' OR training_name = '$SearchTraining_name')
+AND other_agency <> '' -- Exclude blank other_agency values
+GROUP BY 
+other_agency";
+
+
+$result6 = $conn->query($agency);
+if ($result6) {
+  $agencyResp = $result6->fetch_assoc();
+  if ($agencyResp) {
+    $_SESSION['other_agency'] = $agencyResp['other_agency'];
+    $_SESSION['other_agency_count'] = $agencyResp['agency_count'];
+    $_SESSION['other_agency_1'] = $agencyResp['other_agency_1'];
+    $_SESSION['other_agency_2'] = $agencyResp['other_agency_2'];
+    $_SESSION['other_agency_3'] = $agencyResp['other_agency_3'];
+    $_SESSION['other_agency_4'] = $agencyResp['other_agency_4'];
+    $_SESSION['other_agency_5'] = $agencyResp['other_agency_5'];
+  }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -514,6 +559,7 @@ table td, table th {
     ?>
     <div class="p-6">
 
+
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6"></div>
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
 
@@ -557,7 +603,7 @@ table td, table th {
           <div class="flex justify-between mb-4 items-start">
             <div class="font-medium">
               <?php
-
+                  
               if (empty($start_date) && empty($end_date)) {
                 echo  "Showing All CSF Data";
               } else {
