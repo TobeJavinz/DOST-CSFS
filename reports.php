@@ -424,7 +424,10 @@ SUM(CASE WHEN FIND_IN_SET('SC', customer_category) THEN 1 ELSE 0 END) AS SC_coun
   }
 
   // Gettingv commenrs separetu
-  $com = "SELECT comments FROM data";
+  $com = "SELECT comments FROM data WHERE 
+  ('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date') 
+  AND ('$SearchService' = '' OR service = '$SearchService') 
+  AND ('$SearchTraining_name' = '' OR training_name = '$SearchTraining_name')";
 
   // Execute the query
   $result4 = $conn->query($com);

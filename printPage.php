@@ -9,6 +9,14 @@ if (!isset($_SESSION['SQD_1SD'])) {
     exit;
 }
 
+            
+$_SESSION['other_agency'] = "";
+ $_SESSION['other_agency_1'] = 0;
+ $_SESSION['other_agency_2'] = 0;
+ $_SESSION['other_agency_3'] = 0;
+ $_SESSION['other_agency_5'] = 0;
+ $_SESSION['other_agency_count'] = 0;
+
 
 // Retrieve the session variables
 $SQD_1SD = $_SESSION['SQD_1SD'];
@@ -228,7 +236,7 @@ $training_date = $_SESSION['date'];
         <tr>
             <td>CC3. No, I was not able to wear</td>
             <td>
-                <?php echo $cc3_1 ?>
+                <?php echo $cc3_2 ?>
             </td>
 
         </tr>
@@ -910,6 +918,7 @@ $training_date = $_SESSION['date'];
         </tr>
         <tr>
         
+        
             <td>
                 <?php echo $_SESSION['other_agency'] ?>
             </td>
@@ -933,6 +942,7 @@ $training_date = $_SESSION['date'];
                 <?php echo $other_agency_SUM =  $_SESSION['other_agency_count']  ?>
             </td>
             <?php
+            
             $other_agency_1 = $_SESSION['other_agency_1'];
             $other_agency_2 = $_SESSION['other_agency_2'];
             $other_agency_3 = $_SESSION['other_agency_3'];

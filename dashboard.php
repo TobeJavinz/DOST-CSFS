@@ -419,8 +419,12 @@ $total_food = $row_food["food_count"];
                       <tbody>
                         <?php
                         // Loop through the query results and display each row
+                        
                         $count = 1;
                         while ($row = $result_tperSec->fetch_assoc()) {
+                          if (empty($row['sector']) || $row['sector'] == "N/A" ) {
+                            continue;
+                          }
                           echo "<tr class='" . (($count % 2 == 0) ? "bg-gray-100" : "bg-white") . "'>";
                           // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . $count . "</td>";
                           echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ucwords($row['sector']) . "</td>";
@@ -428,6 +432,7 @@ $total_food = $row_food["food_count"];
                           echo "</tr>";
                           $count++;
                         }
+                        
                         ?>
                       </tbody>
                     </table>

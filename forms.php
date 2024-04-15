@@ -7,7 +7,20 @@ require 'DBConn.php';
 // Call the function to establish a database connection
 $conn = connect_to_database();
 
+
+
+
 if (isset($_POST["submit"])) {
+   
+    $customer_category = "";
+    $sector = "";
+    if (!empty($_POST['customer_category'])) {
+        $customer_category = $_POST['customer_category'];
+    }
+    if (!empty($_POST['sector'])) {
+        $sector = $_POST['sector'];
+    }
+    
     $cc1_1 = $_POST["cc1_1"];
     $cc1_2 = $_POST["cc1_2"];
     $cc1_3 = $_POST["cc1_3"];
@@ -30,8 +43,9 @@ if (isset($_POST["submit"])) {
     $designation = $_POST["designation"];
     $company = $_POST["company"];
     $msme = $_POST["msme"];
-    $customer_category = $_POST["customer_category"];
-    $sector = $_POST["sector"];
+    
+
+    // $sector = $_POST["sector"];
     $returning_customer = $_POST["returning_customer"];
     $sqd0 = $_POST["sqd0"];
     $sqd1 = $_POST["sqd1"];
@@ -53,7 +67,9 @@ if (isset($_POST["submit"])) {
     $other_agency = $_POST["other_agency"];
     $other_agency_score = $_POST["other_agency_score"];
     $overall_mood = $_POST["overall_mood"];
-    $comments = $_POST["comments"];
+
+    $comments = mysqli_real_escape_string($conn, $_POST['comments']);
+
 
 
 
@@ -137,7 +153,8 @@ if (isset($_POST["submit"])) {
                                 <p class="text-sm text-gray-400 font-semibold mt-6"> The Citizen’s Charter is an
                                     official document
                                     that reflects the services of a government agency/office including its requirements,
-                                    fees, and processing times among others. <br><br> <strong>(NOTE: Fill in once every entry).</strong> 
+                                    fees, and processing times among others. <br><br> <strong>(NOTE: Fill in once every
+                                        entry).</strong>
                                 </p>
                             </div>
                         </div>
@@ -151,7 +168,8 @@ if (isset($_POST["submit"])) {
                         <div class="flex">
                             <div class="mt-2">
                                 <input type="number" name="cc1_1" pattern="[1-5]"
-                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" value="0" />
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6"
+                                    value="0" />
                             </div>
                             <div>
                                 <p class="py-2 ml-4 font-semibold">Yes, but aware
@@ -171,7 +189,8 @@ if (isset($_POST["submit"])) {
                         <div class="flex">
                             <div class="mt-2">
                                 <input type="number" name="cc1_2" pattern="[1-5]"
-                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" value="0" />
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6"
+                                    value="0" />
                             </div>
                             <div>
                                 <p class="py-2 ml-4 font-semibold">Yes,
@@ -192,7 +211,8 @@ if (isset($_POST["submit"])) {
                         <div class="flex">
                             <div class="mt-2">
                                 <input type="number" name="cc1_3" pattern="[1-5]"
-                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" value="0" />
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6"
+                                    value="0" />
                             </div>
                             <div>
                                 <p class="py-2 ml-4 font-semibold">No, not
@@ -212,7 +232,8 @@ if (isset($_POST["submit"])) {
                         <div class="flex">
                             <div class="mt-2">
                                 <input type="number" name="cc2_1" pattern="[1-5]"
-                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" value="0" />
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6"
+                                    value="0" />
                             </div>
                             <div>
                                 <p class="py-2 ml-4 font-semibold">Yes, I
@@ -231,7 +252,8 @@ if (isset($_POST["submit"])) {
                         <div class="flex">
                             <div class="mt-2">
                                 <input type="number" name="cc2_2" pattern="[1-5]"
-                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" value="0" />
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6"
+                                    value="0" />
                             </div>
                             <div>
                                 <p class="py-2 ml-4 font-semibold">No, I
@@ -250,7 +272,8 @@ if (isset($_POST["submit"])) {
                         <div class="flex">
                             <div class="mt-2">
                                 <input type="number" name="cc3_1" pattern="[1-5]"
-                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" value="0" />
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6"
+                                    value="0" />
                             </div>
                             <div>
                                 <p class="py-2 ml-4 font-semibold">Yes, I
@@ -268,7 +291,8 @@ if (isset($_POST["submit"])) {
                         <div class="flex">
                             <div class="mt-2">
                                 <input type="number" name="cc3_2" pattern="[1-5]"
-                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6" value="0" />
+                                    class="block w-16 rounded-md py-1 text-sm  text-center ring-1 ring-gray input-spinner outline-none focus:ring-2 focus:ring-inset focus:ring-custom sm:text-sm sm:leading-6"
+                                    value="0" />
                             </div>
                             <div>
                                 <p class="py-2 ml-4 font-semibold">No, I
@@ -307,7 +331,7 @@ if (isset($_POST["submit"])) {
                                                 of
                                                 Service</label>
                                             <div class="mt-2">
-                                                <select required ="" name="service"
+                                                <select required="" name="service"
                                                     class="block w-full rounded-md border-0 px-4 py-2 pr-4 text-gray-900 outline-none shadow-sm ring-1 ring-inset ring-gray focus:ring-2 focus:ring-inset focus:ring-custom sm:max-w-xs sm:text-sm sm:leading-6">
                                                     <option value="" selected hidden>Select Options</option>
                                                     <option value="Technology Intervention">Technology Intervention
@@ -525,7 +549,8 @@ if (isset($_POST["submit"])) {
                                                 <label for="" class=" text-gray-900">Senior Citizen</label>
                                             </div>
                                             <div class="relative flex items-center gap-x-3">
-                                                <input name="customer_category[]" value="Differently-Abled" type="checkbox"
+                                                <input name="customer_category[]" value="Differently-Abled"
+                                                    type="checkbox"
                                                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                 <label for="" class=" text-gray-900">Differently-Abled
                                                     Person</label>
@@ -542,12 +567,13 @@ if (isset($_POST["submit"])) {
                                                 </label>
                                             </div>
                                             <div class="relative flex items-center gap-x-3">
-                                                <input name="customer_category[]" value="IP Group Member" type="checkbox"
+                                                <input name="customer_category[]" value="IP Group Member"
+                                                    type="checkbox"
                                                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                 <label for="" class=" text-gray-900">Indigenous Group Member</label>
                                             </div>
                                             <div class="relative flex items-center gap-x-3">
-                                                <input   name="customer_category[]" value="N/A" type="checkbox"
+                                                <input name="customer_category[]" value="N/A" type="checkbox"
                                                     class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                                                 <label for="" class=" text-gray-900">N/A</label>
                                             </div>
@@ -690,7 +716,7 @@ if (isset($_POST["submit"])) {
                             <legend class="text-sm font-semibold leading-6 text-gray-900">
                                 What are your suggestions to improve our assistance/service?
                                 Or are there noteworthy observations that you would like to
-                                share?  <br> Or you rated 3 below in the SQDs.
+                                share? <br> Or you rated 3 below in the SQDs.
                             </legend>
                             <div class="mt-2">
                                 <textarea name="comments" rows="3"
