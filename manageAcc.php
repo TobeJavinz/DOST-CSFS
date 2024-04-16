@@ -162,19 +162,19 @@ $result = mysqli_query($conn, $query);
           <div class="flex items-center justify-center mt-6">
             <div class="flex items-center">
               <?php
-              $pr_query = "SELECT * FROM data";
+              $pr_query = "SELECT * FROM user_cred";
               $pr_result = mysqli_query($conn, $pr_query);
               $total_record = mysqli_num_rows($pr_result);
               $total_page = ceil($total_record / $num_per_page);
 
               if ($page > 1) {
-                echo "<a href='tables.php?page=" . ($page - 1) . "' class='rounded-md bg-custom px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-custom2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mr-2'>Previous</a>";
+                echo "<a href='manageAcc.php?page=" . ($page - 1) . "' class='rounded-md bg-custom px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-custom2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mr-2'>Previous</a>";
               }
               for ($i = 1; $i <= $total_page; $i++) {
-                echo "<a href='tables.php?page=" . $i . "' class='text-gray-600 hover:text-blue-500 border border-gray-300 px-2 rounded-md mr-2'>$i</a>";
+                echo "<a href='manageAcc.php?page=" . $i . "' class='text-gray-600 hover:text-blue-500 border border-gray-300 px-2 rounded-md mr-2'>$i</a>";
               }
               if ($i - 1 > $page) {
-                echo "<a href='tables.php?page=" . ($page + 1) . "' class='rounded-md bg-custom px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-custom2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>Next</a>";
+                echo "<a href='manageAcc.php?page=" . ($page + 1) . "' class='rounded-md bg-custom px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-custom2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>Next</a>";
               }
               ?>
             </div>

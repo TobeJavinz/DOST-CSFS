@@ -983,10 +983,10 @@ $training_date = $_SESSION['date'];
         <tr>
             <td>No. Of Customers Assisted/Participants, breakdown as follows: </td>
             <td class="text-right">Male: <strong>
-                    <?php echo $_SESSION['totalMel'] ?>
+                    <?php echo $_SESSION['total_male'] ?>
                 </strong> </td>
             <td class="text-right">Female: <strong>
-                    <?php echo $_SESSION['totalFem'] ?>
+                    <?php echo $_SESSION['total_female'] ?>
                 </strong> </td>
         </tr>
 
@@ -1073,12 +1073,12 @@ $training_date = $_SESSION['date'];
                     <?php echo $_SESSION['msme_count'] ?>
                 </strong></td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td>No. Of First Time Customers: </td>
             <td class="text-right"><strong>
                     <?php echo $_SESSION['firstTime'] ?>
                 </strong></td>
-        </tr>
+        </tr> -->
 
     </table>
     <p class="page-break"><b>Overall Mood/Feeling that best descibes the experience with DOST XI: </b>

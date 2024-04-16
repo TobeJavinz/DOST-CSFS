@@ -25,6 +25,7 @@ $training_name = '';
 $service = '';
 $msme_count = 0;
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Get the start date, end date, service, and training name from user input
   $start_date = $_POST['start_date'];
@@ -63,10 +64,10 @@ FROM
           SUM(CASE WHEN returning_customer = 'no' THEN 1 ELSE 0 END) AS first_time_customers
       FROM
           data
-      WHERE
-      ('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date')
-            AND ('$service' = '' OR service = '$service')
-            AND ('$training_name' = '' OR training_name = '$training_name')
+          WHERE
+  ('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date')
+  AND ('$SearchService' = '' OR UPPER(service) = '$SearchService')
+  AND ('$SearchTraining_name' = '' OR UPPER(training_name) = '$SearchTraining_name')
   ) AS subquery;
 ";
 
@@ -87,8 +88,8 @@ FROM
     $total_sectors = $row['total_sectors'];
     $returning_customers = $row['returning_customers'];
     $first_time_customers = $row['first_time_customers'];
-    $total_male = $row['total_male'];
-    $total_female = $row['total_female'];
+    $_SESSION['total_male'] = $row['total_male'];
+    $_SESSION['total_female']= $row['total_female'];
 
 
 
@@ -103,14 +104,14 @@ FROM
   }
   ;
 
-  
+
   $SearchService = isset($_POST['service']) ? strtoupper($_POST['service']) : '';
   $SearchTraining_name = isset($_POST['training_name']) ? strtoupper($_POST['training_name']) : '';
-  
+
 
   $sql1 = "SELECT 
       subquery.sector, 
-      subquery.sector_count 
+      subquery.sector_count
     FROM 
       (
           SELECT 
@@ -118,10 +119,10 @@ FROM
               COUNT(*) AS sector_count
           FROM 
               data 
-          WHERE 
-              ('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date') 
-              AND ('$SearchService' = '' OR service = '$SearchService') 
-              AND ('$SearchTraining_name' = '' OR training_name = '$SearchTraining_name') 
+              WHERE
+  ('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date')
+  AND ('$SearchService' = '' OR UPPER(service) = '$SearchService')
+  AND ('$SearchTraining_name' = '' OR UPPER(training_name) = '$SearchTraining_name') 
           GROUP BY 
               sector
       ) AS subquery";
@@ -138,7 +139,7 @@ FROM
   // retreiving RESPONSES
   $sql2 = "SELECT 
   
-  COUNT(ServiceID) as total_res,
+  
   SUM(CASE WHEN sqd1 = 1 THEN 1 ELSE 0 END) AS SQD_1SD,
   SUM(CASE WHEN sqd1 = 2 THEN 1 ELSE 0 END) AS SQD_1D,
   SUM(CASE WHEN sqd1 = 3 THEN 1 ELSE 0 END) AS SQD_1NAD,
@@ -279,8 +280,8 @@ SUM(CASE WHEN FIND_IN_SET('SC', customer_category) THEN 1 ELSE 0 END) AS SC_coun
 
   $result2 = $conn->query($sql2);
   if ($result2) {
-    $resp = $result2->fetch_assoc(); // Use fetch_assoc() to get a single row
-    $_SESSION['total_res'] = $resp['total_res'];
+    $resp = $result2->fetch_assoc();
+  
     $_SESSION['SQD_1SD'] = $resp['SQD_1SD'];
     $_SESSION['SQD_1D'] = $resp['SQD_1D'];
     $_SESSION['SQD_1NAD'] = $resp['SQD_1NAD'];
@@ -520,6 +521,30 @@ if ($result6) {
 }
 
 
+$totalRes = "SELECT COUNT(ServiceID) as totalcount
+FROM 
+data
+WHERE
+  ('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date')
+  AND ('$SearchService' = '' OR UPPER(service) = '$SearchService')
+  AND ('$SearchTraining_name' = '' OR UPPER(training_name) = '$SearchTraining_name')
+";
+
+
+$result7 = $conn->query($totalRes);
+if ($result7) {
+  $totalResResp = $result7->fetch_assoc();
+  if ($agencyResp) {
+    $_SESSION['totalRes'] = $totalResResp['totalcount'];
+  
+  }
+}
+
+
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -598,12 +623,14 @@ if ($result6) {
                 <!-- Service Input Field -->
                 <label for="service" class="block">Service:</label>
                 <input type="text" id="service" name="service"
-                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"  oninput="this.value = this.value.toUpperCase()">
+                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                  oninput="this.value = this.value.toUpperCase()">
 
                 <!-- Training Name Input Field -->
                 <label for="training_name" class="block">Training Name:</label>
                 <input type="text" id="training_name" name="training_name"
-                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"  oninput="this.value = this.value.toUpperCase()">
+                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                  oninput="this.value = this.value.toUpperCase()">
 
                 <!-- Submit Button -->
                 <button type="submit"
@@ -676,11 +703,11 @@ if ($result6) {
                 </div>
               </div>
               <span class="text-gray-400 text-sm">Services</span>
-    
+
             </div>
 
-            
-            
+
+
             <!-- service end -->
 
             <!-- training -->
@@ -781,7 +808,7 @@ if ($result6) {
                 </div>
               </div>
               <span class="text-gray-400 text-sm">Sectors</span>
-              
+
             </div>
             <!-- SECTORS END -->
 
@@ -819,7 +846,7 @@ if ($result6) {
               <span class="text-gray-400 text-lg ">CSF Respondents</span>
 
 
-             
+
 
             </div>
             <!-- FEMALE AND FEMALE START -->
