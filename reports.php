@@ -1,5 +1,5 @@
 <?php
- include 'session_auth.php';
+include 'session_auth.php';
 header("Cache-Control: no cache");
 
 
@@ -9,7 +9,7 @@ include 'DBconn.php';
 $conn = connect_to_database();
 
 // Start the session
-$SearchService = ""; 
+$SearchService = "";
 $SearchTraining_name = "";
 $total_services = 0;
 $total_training_names = 0;
@@ -52,7 +52,7 @@ FROM
           COUNT(DISTINCT service) AS total_services,
           COUNT(DISTINCT training_name) AS total_training_names,
           COUNT(DISTINCT company) AS total_companies,
-          COUNT(*) AS total_sectors,
+         COUNT(DISTINCT CASE WHEN sector != '' AND sector != 'N/A' THEN sector END) AS total_sectors,
           GROUP_CONCAT(DISTINCT company) AS company_names,
           GROUP_CONCAT(DISTINCT training_name) AS training_name,
           GROUP_CONCAT(DISTINCT service) AS service,
@@ -100,10 +100,13 @@ FROM
   } else {
     // Handle the case where the query fails
     echo "Error: " . $conn->error;
-  };
+  }
+  ;
 
-  $SearchService = isset($_POST['service']) ? $_POST['service'] : '';
-  $SearchTraining_name = isset($_POST['training_name']) ? $_POST['training_name'] : '';
+  
+  $SearchService = isset($_POST['service']) ? strtoupper($_POST['service']) : '';
+  $SearchTraining_name = isset($_POST['training_name']) ? strtoupper($_POST['training_name']) : '';
+  
 
   $sql1 = "SELECT 
       subquery.sector, 
@@ -135,7 +138,7 @@ FROM
   // retreiving RESPONSES
   $sql2 = "SELECT 
   
-  
+  COUNT(ServiceID) as total_res,
   SUM(CASE WHEN sqd1 = 1 THEN 1 ELSE 0 END) AS SQD_1SD,
   SUM(CASE WHEN sqd1 = 2 THEN 1 ELSE 0 END) AS SQD_1D,
   SUM(CASE WHEN sqd1 = 3 THEN 1 ELSE 0 END) AS SQD_1NAD,
@@ -268,15 +271,16 @@ SUM(CASE WHEN FIND_IN_SET('SC', customer_category) THEN 1 ELSE 0 END) AS SC_coun
 
   FROM 
   data
-  WHERE 
-  ('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date') 
-  AND ('$SearchService' = '' OR service = '$SearchService') 
-  AND ('$SearchTraining_name' = '' OR training_name = '$SearchTraining_name')";
+  WHERE
+  ('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date')
+  AND ('$SearchService' = '' OR UPPER(service) = '$SearchService')
+  AND ('$SearchTraining_name' = '' OR UPPER(training_name) = '$SearchTraining_name')
+";
 
   $result2 = $conn->query($sql2);
   if ($result2) {
     $resp = $result2->fetch_assoc(); // Use fetch_assoc() to get a single row
-
+    $_SESSION['total_res'] = $resp['total_res'];
     $_SESSION['SQD_1SD'] = $resp['SQD_1SD'];
     $_SESSION['SQD_1D'] = $resp['SQD_1D'];
     $_SESSION['SQD_1NAD'] = $resp['SQD_1NAD'];
@@ -401,7 +405,7 @@ SUM(CASE WHEN FIND_IN_SET('SC', customer_category) THEN 1 ELSE 0 END) AS SC_coun
     $_SESSION['uic_4'] = $resp['uic_4'];
     $_SESSION['uic_5'] = $resp['uic_5'];
 
-   
+
 
     $msme_count = $resp['msme_count'];
     $_SESSION['food_count'] = $resp['food_count'];
@@ -424,10 +428,11 @@ SUM(CASE WHEN FIND_IN_SET('SC', customer_category) THEN 1 ELSE 0 END) AS SC_coun
   }
 
   // Gettingv commenrs separetu
-  $com = "SELECT comments FROM data WHERE 
-  ('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date') 
-  AND ('$SearchService' = '' OR service = '$SearchService') 
-  AND ('$SearchTraining_name' = '' OR training_name = '$SearchTraining_name')";
+  $com = "SELECT comments FROM data WHERE
+  ('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date')
+  AND ('$SearchService' = '' OR UPPER(service) = '$SearchService')
+  AND ('$SearchTraining_name' = '' OR UPPER(training_name) = '$SearchTraining_name')
+";
 
   // Execute the query
   $result4 = $conn->query($com);
@@ -493,13 +498,11 @@ SUM(CASE WHEN other_agency_score = 4 THEN 1 ELSE 0 END) AS other_agency_4,
 SUM(CASE WHEN other_agency_score = 5 THEN 1 ELSE 0 END) AS other_agency_5
 FROM 
 data
-WHERE 
-('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date') 
-AND ('$SearchService' = '' OR service = '$SearchService') 
-AND ('$SearchTraining_name' = '' OR training_name = '$SearchTraining_name')
-AND other_agency <> '' -- Exclude blank other_agency values
-GROUP BY 
-other_agency";
+WHERE
+  ('$start_date' = '' OR date BETWEEN '$start_date' AND '$end_date')
+  AND ('$SearchService' = '' OR UPPER(service) = '$SearchService')
+  AND ('$SearchTraining_name' = '' OR UPPER(training_name) = '$SearchTraining_name')
+";
 
 
 $result6 = $conn->query($agency);
@@ -535,16 +538,23 @@ if ($result6) {
   <title>CSFS | REPORTS</title>
 
   <style>
-table {
-    width: 100%; /* Make table use full width */
-    table-layout: fixed; /* Fixed layout behaves better */
-}
-table td, table th {
-    overflow: hidden; /* Hide content that won't fit in a cell */
-    text-overflow: ellipsis; /* Add '...' for overflowed content */
-    white-space: nowrap; /* Prevents the content from wrapping into multiple lines */
-}
-</style>
+    table {
+      width: 100%;
+      /* Make table use full width */
+      table-layout: fixed;
+      /* Fixed layout behaves better */
+    }
+
+    table td,
+    table th {
+      overflow: hidden;
+      /* Hide content that won't fit in a cell */
+      text-overflow: ellipsis;
+      /* Add '...' for overflowed content */
+      white-space: nowrap;
+      /* Prevents the content from wrapping into multiple lines */
+    }
+  </style>
 
 </head>
 
@@ -577,22 +587,27 @@ table td, table th {
               <div class="flex flex-col space-y-4">
                 <!-- Start Date Picker -->
                 <label for="start_date" class="block">Start Date:</label>
-                <input type="date" id="start_date" name="start_date" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                <input type="date" id="start_date" name="start_date"
+                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
 
                 <!-- End Date Picker -->
                 <label for="end_date" class="block">End Date:</label>
-                <input type="date" id="end_date" name="end_date" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                <input type="date" id="end_date" name="end_date"
+                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
 
                 <!-- Service Input Field -->
                 <label for="service" class="block">Service:</label>
-                <input type="text" id="service" name="service" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                <input type="text" id="service" name="service"
+                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"  oninput="this.value = this.value.toUpperCase()">
 
                 <!-- Training Name Input Field -->
                 <label for="training_name" class="block">Training Name:</label>
-                <input type="text" id="training_name" name="training_name" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                <input type="text" id="training_name" name="training_name"
+                  class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"  oninput="this.value = this.value.toUpperCase()">
 
                 <!-- Submit Button -->
-                <button type="submit" class="bg-blue-500 text-Black px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-dashed focus:bg-blue-600">SEARCH</button>
+                <button type="submit"
+                  class="bg-blue-500 text-Black px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-dashed focus:bg-blue-600">SEARCH</button>
               </div>
             </form>
             <!-- printview
@@ -606,9 +621,9 @@ table td, table th {
           <div class="flex justify-between mb-4 items-start">
             <div class="font-medium">
               <?php
-                  
+
               if (empty($start_date) && empty($end_date)) {
-                echo  "Showing All CSF Data";
+                echo "Showing All CSF Data";
               } else {
                 $start_month = date('n', strtotime($start_date));
                 $end_month = date('n', strtotime($end_date));
@@ -636,20 +651,22 @@ table td, table th {
               // else {
               //   echo "Showing " . date('F j, Y', strtotime($start_date)) . " to " . date('F j, Y', strtotime($end_date));
               // }
-
+              
               // } else {
               //   $start_month_formatted = date('F j, Y', strtotime($start_date));
               //   $end_month_formatted = date('F j, Y', strtotime($end_date));
               //   echo $start_month_formatted . " to " . $end_month_formatted;
               // }
-
+              
               ?>
 
             </div>
           </div>
           <!-- UPPER Parent div -->
+
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
             <!-- services  -->
+
             <div class="rounded-md border border-dashed border-gray-200 p-4">
               <div class="flex items-center mb-0.5">
                 <div class="text-2xl font-semibold">
@@ -659,33 +676,11 @@ table td, table th {
                 </div>
               </div>
               <span class="text-gray-400 text-sm">Services</span>
-              <div>
-                <table class="min-w-full">
-                  <thead class="bg-white border-b">
-                    <tr>
-
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    // Loop through the array of company names and display them in the table
-                    if (empty($service)) {
-                      echo "<tr><td colspan='1'>No Data</td></tr>";
-                    } else {
-                      foreach ($service as $index => $service) {
-                        echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
-                        // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ($index + 1) . "</td>";
-                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $service . "</td>";
-                        echo "</tr>";
-                        // query for debugging
-                        // echo "SQL Query: " . $sql . "<br>";
-                      }
-                    }
-                    ?>
-                  </tbody>
-                </table>
-              </div>
+    
             </div>
+
+            
+            
             <!-- service end -->
 
             <!-- training -->
@@ -696,10 +691,11 @@ table td, table th {
                   echo $total_training_names > 0 ? $total_training_names : "0";
                   ?>
                 </div>
-                <span class="p-1 rounded text-[12px] font-semibold bg-emerald-500/10 text-emerald-500 leading-none ml-1"></span>
+                <span
+                  class="p-1 rounded text-[12px] font-semibold bg-emerald-500/10 text-emerald-500 leading-none ml-1"></span>
               </div>
               <span class="text-gray-400 text-sm">Trainings</span>
-              <div>
+              <!-- <div>
                 <table class="min-w-full">
                   <thead class="bg-white border-b">
                     <tr>
@@ -712,10 +708,10 @@ table td, table th {
                     if (empty($training_name)) {
                       echo "<tr><td colspan='1'>No Data</td></tr>";
                     } else {
-                      foreach ($training_name as $index => $training_name) {
+                      foreach ($training_name as $index => $training_item) {
                         echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
                         // echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>" . ($index + 1) . "</td>";
-                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $training_name . "</td>";
+                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $training_item . "</td>";
                         echo "</tr>";
                         // query for debugging
                         // echo "SQL Query: " . $sql . "<br>";
@@ -724,7 +720,7 @@ table td, table th {
                     ?>
                   </tbody>
                 </table>
-              </div>
+              </div> -->
             </div>
             <!-- training end -->
 
@@ -739,7 +735,7 @@ table td, table th {
                 </div>
               </div>
               <span class="text-gray-400 text-sm">Firms</span>
-              <div>
+              <!-- <div>
                 <table class="min-w-full">
                   <thead class="bg-white border-b">
                     <tr>
@@ -770,7 +766,7 @@ table td, table th {
                   </tbody>
                 </table>
 
-              </div>
+              </div> -->
             </div>
             <!-- COMPANY END -->
 
@@ -785,40 +781,7 @@ table td, table th {
                 </div>
               </div>
               <span class="text-gray-400 text-sm">Sectors</span>
-              <div>
-                <table class="min-w-full">
-                  <thead class="bg-white border-b">
-                    <tr>
-                      <!-- <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-
-                      </th>
-                      <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                        #
-                      </th> -->
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-
-
-                    // Loop through the arrays of sectors and their counts
-                    if (empty($sectors)) {
-                      echo "<tr><td colspan='2'>No Data</td></tr>";
-                    } else {
-                      // Initialize an empty array to store the sectors and their counts
-                      $sectorData = array();
-
-                      foreach ($sectors as $index => $sector) {
-                        echo "<tr class='" . (($index % 2 == 0) ? "bg-gray-100" : "bg-white") . " border-b'>";
-                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $sector['sector'] . "</td>";
-                        echo "<td class='px-6 py-4 whitespace-nowrap text-sm font-light text-gray-900'>" . $sector['sector_count'] . "</td>";
-                        echo "</tr>";
-                      }
-                    }
-                    ?>
-                  </tbody>
-                </table>
-              </div>
+              
             </div>
             <!-- SECTORS END -->
 
@@ -850,31 +813,13 @@ table td, table th {
 
               <div class="text-2xl font-semibold">
                 <?php
-                echo $_SESSION['totalRes'] = $total_male + $total_female;
+                echo $_SESSION['totalRes'];
                 ?>
               </div>
               <span class="text-gray-400 text-lg ">CSF Respondents</span>
 
 
-              <!-- Female -->
-              <div class="flex items-center mt-2">
-
-
-                <div class="text-l font-semibold">
-                  <?php
-                  echo $_SESSION['totalFem'] = $total_female > 0 ? $total_female : "0";
-                  ?>
-                </div>
-              </div>
-              <span class="text-gray-400 text-sm">Female Clients</span>
-              <!-- MALE -->
-              <div class="flex items-center mt-0.5">
-
-                <div class="text-l font-semibold">
-                  <?php echo $_SESSION['totalMel'] = $total_male > 0 ? $total_male : "0"; ?>
-                </div>
-              </div>
-              <span class="text-gray-400 text-sm">Male Clients</span>
+             
 
             </div>
             <!-- FEMALE AND FEMALE START -->
@@ -883,20 +828,18 @@ table td, table th {
           <!-- Upper Parent div end -->
 
           <!-- LOWER PART CARD SECTION -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
+          <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4 mb-4">
             <div class="rounded-md border border-dashed border-gray-200 p-4 mt-4">
 
               <div class="flex items-center mt-0.5">
-
                 <div class="text-2xl font-semibold">
                   <?php echo $_SESSION['msme_count'] = $msme_count ?>
                 </div>
               </div>
+
               <span class="text-gray-400 text-sm">MSMEs Assisted</span>
 
             </div>
-
-
           </div>
 
           <!-- LOWER PART CARD SECTION -->
@@ -918,7 +861,7 @@ table td, table th {
   <script src="./src/script.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
   <script>
-    document.getElementById('exportButton').addEventListener('click', function() {
+    document.getElementById('exportButton').addEventListener('click', function () {
 
       // Redirect to printPage.php
 

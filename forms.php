@@ -162,8 +162,8 @@ if (isset($_POST["submit"])) {
                         <!-- cc1_1 -->
                         <hr class="mt-6">
                         <div class=" px-2 mt-2">
-                            <label for="cc1_1" class="text-xs font-bold text-gray-900">
-                                CC1.1</label>
+                            <label for="cc1_1" class="text-xl font-bold text-gray-900">
+                                CC1</label>
                         </div>
                         <div class="flex">
                             <div class="mt-2">
@@ -172,10 +172,8 @@ if (isset($_POST["submit"])) {
                                     value="0" />
                             </div>
                             <div>
-                                <p class="py-2 ml-4 font-semibold">Yes, but aware
-                                    only when I
-                                    saw the
-                                    CC of this office</p>
+                                <p class="py-2 ml-4 font-bold">Yes, aware
+                                    before my transaction here</p>
                             </div>
                         </div>
 
@@ -184,7 +182,7 @@ if (isset($_POST["submit"])) {
                         <hr class="mt-6">
                         <div class=" px-2 mt-2">
                             <label for="cc1_1" class="text-xs text-gray-900">
-                                CC1.2</label>
+                                </label>
                         </div>
                         <div class="flex">
                             <div class="mt-2">
@@ -206,7 +204,7 @@ if (isset($_POST["submit"])) {
 
                         <div class=" px-2 mt-2">
                             <label for="cc1_1" class="text-xs  text-gray-900">
-                                CC1.3</label>
+                                </label>
                         </div>
                         <div class="flex">
                             <div class="mt-2">
@@ -226,8 +224,8 @@ if (isset($_POST["submit"])) {
                         <!-- cc2_1 -->
 
                         <div class=" px-2 mt-2">
-                            <label for="cc1_1" class="text-xs font-bold text-gray-900">
-                                CC2.1</label>
+                            <label for="cc1_1" class="text-xl font-bold text-gray-900">
+                                CC2</label>
                         </div>
                         <div class="flex">
                             <div class="mt-2">
@@ -236,7 +234,7 @@ if (isset($_POST["submit"])) {
                                     value="0" />
                             </div>
                             <div>
-                                <p class="py-2 ml-4 font-semibold">Yes, I
+                                <p class="py-2 ml-4 font-bold">Yes, I
                                     saw the
                                     Citizen's Charter</p>
                             </div>
@@ -247,7 +245,7 @@ if (isset($_POST["submit"])) {
                         <!-- cc2_2 -->
                         <div class=" px-2 mt-2">
                             <label for="cc1_1" class="text-xs  text-gray-900">
-                                CC2.2</label>
+                                </label>
                         </div>
                         <div class="flex">
                             <div class="mt-2">
@@ -266,8 +264,8 @@ if (isset($_POST["submit"])) {
 
                         <!-- cc3_1 -->
                         <div class=" px-2 mt-2">
-                            <label for="cc3_1" class="text-xs font-bold text-gray-900">
-                                CC3.1</label>
+                            <label for="cc3_1" class="text-xl font-bold text-gray-900">
+                                CC3</label>
                         </div>
                         <div class="flex">
                             <div class="mt-2">
@@ -276,7 +274,7 @@ if (isset($_POST["submit"])) {
                                     value="0" />
                             </div>
                             <div>
-                                <p class="py-2 ml-4 font-semibold">Yes, I
+                                <p class="py-2 ml-4 font-bold">Yes, I
                                     was able to
                                     read</p>
                             </div>
@@ -286,7 +284,7 @@ if (isset($_POST["submit"])) {
                         <!-- cc3_2 -->
                         <div class=" px-2 mt-2">
                             <label for="cc1_1" class="text-xs  text-gray-900">
-                                CC3.2</label>
+                                </label>
                         </div>
                         <div class="flex">
                             <div class="mt-2">
