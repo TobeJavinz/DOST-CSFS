@@ -65,6 +65,17 @@ $conn->close();
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+        <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 70vh;
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
+</style>
 </head>
 
 <body>
@@ -154,10 +165,10 @@ $conn->close();
 
                                 </form>
                                 <p class="mt-10 text-center text-sm text-gray-500">
-                                    Already a member?
+                                    Already a Registered?
                                     <a href="index.php"
-                                        class="font-semibold leading-6 text-default hover:text-indigo-500">Please Log
-                                        in!</a>
+                                        class="font-semibold leading-6 text-default hover:text-indigo-500">Log
+                                        In.</a>
                                 </p>
                             </div>
                         </div>

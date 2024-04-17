@@ -68,6 +68,18 @@ $conn->close();
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <title>DOST-XI CSFS</title>
 
+        <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
+</style>
+
 </head>
 
 <body>
@@ -79,9 +91,9 @@ $conn->close();
                 <div class="flex flex-col px-6 py-12 lg:px-8">
                     <div class="sm:mx-auto sm:w-full sm:max-w-sm mt-10">
                         <img class="" src="assets/csfs.png" alt="Your Company" />
-                        <h2 class="mt-10 text-left text-4xl font-bold leading-9 tracking-tight text-black font-poppins">
-                            Welcome to <br>Department of Science and Technology</h2>
-                        <p class="mt-10 text-left text-lg font-bold text-default">
+                        <h2 class="mt-10 text-left text-3xl font-bold leading-9 tracking-tight text-black font-poppins">
+                            Welcome to <br>Department Of Science and Technology</h2>
+                        <p class="mt-5 text-left text-xl font-bold text-default">
                             Customer
                             Satisfaction Feedback System</p>
                     </div>
@@ -142,14 +154,13 @@ $conn->close();
                                     </div>
                                 </form>
                                 <p class="mt-6 text-center text-sm text-gray-500">
-                                    Not yet a member?
+                                    Not Yet Registered?
                                     <a href="signup.php" class="font-semibold leading-6 text-default ">Sign
-                                        Up
-                                        now!</a>
+                                        Up.</a>
                                 </p>
-                                <p class=" mt-4 text-center text-sm text-gray-500">
-                                    Are you an admin?
-                                    <a href="admin.php" class="font-semibold leading-6 text-default ">Login here!</a>
+                                <p class=" mt-3 text-center text-sm text-gray-500">
+                                For
+                                    <a href="admin.php" class="font-semibold leading-6 text-default "> Admin.</a>
                                 </p>
 
                             </div>
