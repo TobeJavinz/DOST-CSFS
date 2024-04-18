@@ -1,7 +1,15 @@
 <?php
-
+include 'DBconn.php';
 include 'session_auth.php';
+$conn = connect_to_database();
 
+$stmt = $conn->prepare("SELECT `name`,`position` FROM user_cred WHERE position = 'PSTD'");
+
+$stmt->execute();
+$stmt->store_result();
+$stmt->bind_result( $name,$position);
+$stmt->fetch();
+$conn->close();
 
 // Check if $SQD_1SD has no value and redirect to reports.php
 if (!isset($_SESSION['SQD_1SD'])) {
@@ -1157,8 +1165,8 @@ $training_date = $_SESSION['date'];
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
 
 
-        <?php if (isset($_SESSION['login'])): ?>
-
+        <?php if ( $_SESSION['AdminPosition'] == "PSTD" ): ?>
+ 
 
             <p class="mt-5">
                 Prepared and Approved by:<br><br> <b>
@@ -1170,17 +1178,17 @@ $training_date = $_SESSION['date'];
         <?php else: ?>
             <p class="mt-5">
                 Prepared by:<br><br> <b>
-                    <?php echo $_SESSION['name'] ?>
+                    <?php echo $_SESSION['AdminName'] ?>
                 </b><br>
-                <?php echo $_SESSION['position'] ?><br>
+                <?php echo $_SESSION['AdminPosition'] ?><br>
                 <?php echo date('m/d/Y') ?>
             </p>
 
             <p class="mt-5">
                 Approved by:<br><br> <b>
-                    <?php echo $_SESSION['AdminName'] ?>
+                    <?php echo $name?>
                 </b><br>
-                <?php echo $_SESSION['AdminPosition'] ?><br>
+                <?php echo $position?><br>
                 <?php echo date('m/d/Y') ?>
             </p>
         <?php endif; ?>

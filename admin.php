@@ -26,8 +26,8 @@ if (isset($_POST['login'])) {
         $_SESSION['login'] = $name;
         $_SESSION['admin'] =  $admin;
 
-        $_SESSION['AdminName'] = $name;
-        $_SESSION['AdminPosition'] = $position;
+         $_SESSION['AdminName'] = $name;
+         $_SESSION['AdminPosition'] = $position;
 
         
         
