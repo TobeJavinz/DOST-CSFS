@@ -9,7 +9,7 @@ if (isset($_SESSION['login'])) {
 include 'DBconn.php';
 $conn = connect_to_database();
 
-if (isset($_POST['login'])) {
+if (isset($_POST['login'])) { 
     $login_username = $_POST['Username'];
     $login_password = $_POST['Password'];
 
