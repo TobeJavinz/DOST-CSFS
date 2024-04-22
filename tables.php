@@ -85,59 +85,59 @@ $result = mysqli_query($conn, $query);
             </form>
           </div>
 
-      
 
 
 
 
 
-                
-                </div>
-              </div>
-            </div>
-          </div>
 
 
-          <div class="shadow overflow-hidden rounded border-b border-gray-200">
-            <table class="table-auto w-full bg-white mb-4">
-              <thead class="bg-custom h-10 text-white >
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+    <div class="shadow overflow-hidden rounded border-b border-gray-200">
+      <table class="table-auto w-full bg-white mb-4">
+        <thead class="bg-custom h-10 text-white >
                 <tr class=" text-center">
-                <th class="w-1/3 text-center py-3 px-4 uppercase font-semibold text-sm">
-                  Database No.
-                </th>
+          <th class="w-1/3 text-center py-3 px-4 uppercase font-semibold text-sm">
+            Database No.
+          </th>
 
 
 
-                <th class="text-center py-3 px-4 uppercase font-semibold text-sm">
-                  Training Name
-                </th>
-                <th class="  py-3 px-4 uppercase font-semibold text-sm text-center">
-                  Date
-                </th>
+          <th class="text-center py-3 px-4 uppercase font-semibold text-sm">
+            Training Name
+          </th>
+          <th class="  py-3 px-4 uppercase font-semibold text-sm text-center">
+            Date
+          </th>
 
-                <th class="text-center py-3 px-4 uppercase font-semibold text-sm">
-                  First Name
-                </th>
-                <th class="w-1/3 py-3 px-4 uppercase font-semibold text-sm text-center">
-                  Last Name
-                </th>
-                <th class="w-1/3 py-3 px-4 uppercase font-semibold text-sm text-center">
-                  Actions
-                </th>
-                </tr>
-              </thead>
-              <tbody class=" text-center text-gray-500 ">
-                <?php
-                if (isset($_GET['search'])) {
-                  $search = $_GET['search'];
-                  $parts = explode(':', $search);
+          <th class="text-center py-3 px-4 uppercase font-semibold text-sm">
+            First Name
+          </th>
+          <th class="w-1/3 py-3 px-4 uppercase font-semibold text-sm text-center">
+            Last Name
+          </th>
+          <th class="w-1/3 py-3 px-4 uppercase font-semibold text-sm text-center">
+            Actions
+          </th>
+          </tr>
+        </thead>
+        <tbody class=" text-center text-gray-500 ">
+          <?php
+          if (isset($_GET['search'])) {
+            $search = $_GET['search'];
+            $parts = explode(':', $search);
 
-                  if (count($parts) == 2) {
-                    list($column, $content) = $parts;
+            if (count($parts) == 2) {
+              list($column, $content) = $parts;
 
-                    $query = "SELECT `ServiceID`,`training_name`,`date`,`fname`,`lname`,`designation` FROM data WHERE `$column` LIKE '%$content%'";
-                  } else {
-                    $query = "SELECT `ServiceID`,`training_name`,`date`,`fname`,`lname`,`designation` FROM data WHERE 
+              $query = "SELECT `ServiceID`,`training_name`,`date`,`fname`,`lname`,`designation` FROM data WHERE `$column` LIKE '%$content%'";
+            } else {
+              $query = "SELECT `ServiceID`,`training_name`,`date`,`fname`,`lname`,`designation` FROM data WHERE 
 `sex` LIKE '%$search%' OR 
 `email` LIKE '%$search%' OR 
 `contact_info` LIKE '%$search%' OR 
@@ -170,139 +170,153 @@ $result = mysqli_query($conn, $query);
 `other_agency_score` LIKE '%$search%' OR 
 `overall_mood` LIKE '%$search%' OR 
 `comments` LIKE '%$search%'";
-                  } 
+            }
 
 
-                  $query_run = mysqli_query($conn, $query);
+            $query_run = mysqli_query($conn, $query);
 
-                  if (mysqli_num_rows($query_run) > 0) {
+            if (mysqli_num_rows($query_run) > 0) {
 
-                    foreach ($query_run as $rows) {
+              foreach ($query_run as $rows) {
 
-                      ?>
-                      <tr>
-                        <td class="w-1/3 text-center text-sm py-3 px-4">
-                          <?= $rows['ServiceID'] ?>
-                        </td>
-                        <td class="w-1/3 text-center text-sm py-3 px-4">
-                          <?= $rows['training_name'] ?>
-                        </td>
-                        <td class="w-1/3 text-center text-sm py-3 px-4">
-                          <?= $rows['date'] ?>
-                        </td>
-                        <td class="w-1/3 text-center text-sm py-3 px-4">
-                          <?= $rows['fname'] ?>
-                        </td>
-                        <td class="w-1/3 text-center text-sm py-3 px-4">
-                          <?= $rows['lname'] ?>
-                        </td>
-                        <td class="py-2 px-4">
-                          <a href="update.php?ServiceID=<?= $rows['ServiceID'] ?>">
-                            <button type="submit" name="submit"
-                              class="rounded-md border border-custom px-3 py-1 text-sm text-default font-semibold hover:bg-custom2 hover:customtext  ml-2">
-                              Edit
-                            </button>
-                          </a>
+                ?>
+                <tr>
+                  <td class="w-1/3 text-center text-sm py-3 px-4">
+                    <?= $rows['ServiceID'] ?>
+                  </td>
+                  <td class="w-1/3 text-center text-sm py-3 px-4">
+                    <?= $rows['training_name'] ?>
+                  </td>
+                  <td class="w-1/3 text-center text-sm py-3 px-4">
+                    <?= $rows['date'] ?>
+                  </td>
+                  <td class="w-1/3 text-center text-sm py-3 px-4">
+                    <?= $rows['fname'] ?>
+                  </td>
+                  <td class="w-1/3 text-center text-sm py-3 px-4">
+                    <?= $rows['lname'] ?>
+                  </td>
+                  <td class="py-2 px-4">
+                    <a href="update.php?ServiceID=<?= $rows['ServiceID'] ?>">
+                      <button type="submit" name="submit"
+                        class="rounded-md border border-custom px-3 py-1 text-sm text-default font-semibold hover:bg-custom2 hover:customtext  ml-2">
+                        Edit
+                      </button>
+                    </a>
 
-                          <a href='deleteEntry.php?UserID=<?= $row['ServiceID'] ?> '>
-                          <button type="submit" name="submit"
-                            class="rounded-md border border-red-500 px-3 py-1 text-sm text-red-500 font-semibold hover:bg-red-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 ml-2"
-                            onclick="return confirm('Are you sure you want to delete this entry?')">
-                            Delete
-                          </button>
-                        </a>
+                    <a href='deleteEntry.php?UserID=<?= $row['ServiceID'] ?> '>
+                      <button type="submit" name="submit"
+                        class="rounded-md border border-red-500 px-3 py-1 text-sm text-red-500 font-semibold hover:bg-red-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 ml-2"
+                        onclick="return confirm('Are you sure you want to delete this entry?')">
+                        Delete
+                      </button>
+                    </a>
 
-                        </td>
-                      </tr>
-                      <?php
-                    }
-                  } else {
-                    echo "
+                  </td>
+                </tr>
+                <?php
+              }
+            } else {
+              echo "
                     <tr>
                       <td colspan='6'>No record found</td>
                     </tr>";
-                  }
-                } else {
-                  $query = "SELECT * FROM data LIMIT $start_from, $num_per_page";
-                  $result = mysqli_query($conn, $query);
-                  while ($row = mysqli_fetch_assoc($result)) {
-                    ?>
-                    <tr>
-                      <td class="w-1/3 text-center text-sm py-3 px-4">
-                        <?php echo $row['ServiceID'] ?>
-                      </td>
-
-                      <td class="text-center py-3 px-4  text-sm">
-                        <?php echo $row['training_name'] ?>
-                      </td>
-                      <td class="text-center py-3 px-4  text-sm">
-                        <?php echo $row['date'] ?>
-                      </td>
-                      <td class="text-center py-3 px-4  text-sm">
-                        <?php echo $row['fname'] ?>
-                      </td>
-                      <td class="text-center py-3 px-4  text-sm">
-                        <?php echo $row['lname'] ?>
-                      </td>
-                      <td class="py-2 px-4">
-                        <a href="update.php?ServiceID=<?php echo $row['ServiceID'] ?>">
-                          <button type="submit" name="submit"
-                            class="rounded-md border border-custom px-3 py-1 text-sm text-default font-semibold hover:bg-custom2 hover:customtext  ml-2">
-                            Edit
-                          </button>
-                        </a>
-
-                        <a href='deleteEntry.php?UserID=<?= $row['ServiceID'] ?> '>
-                          <button type="submit" name="submit"
-                            class="rounded-md border border-red-500 px-3 py-1 text-sm text-red-500 font-semibold hover:bg-red-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 ml-2"
-                            onclick="return confirm('Are you sure you want to delete this user?')">
-                            Delete
-                          </button>
-                        </a>
-
-
-
-
-
-                        
-                      </td>
-                    </tr>
-                    <?php
-                  }
-                }
-                ?>
-              </tbody>
-            </table>
-
-
-          </div>
-
-          <!-- pagination -->
-          <div class="flex items-center justify-center mt-6">
-            <div class="flex items-center">
-              <?php
-              $pr_query = "SELECT * FROM data";
-              $pr_result = mysqli_query($conn, $pr_query);
-              $total_record = mysqli_num_rows($pr_result);
-              $total_page = ceil($total_record / $num_per_page);
-
-              if ($page > 1) {
-                echo "<a href='tables.php?page=" . ($page - 1) . "' class='rounded-md bg-custom px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-custom2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mr-2'>Previous</a>";
-              }
-              for ($i = 1; $i <= $total_page; $i++) {
-                echo "<a href='tables.php?page=" . $i . "' class='text-gray-600 hover:text-blue-500 border border-gray-300 px-2 rounded-md mr-2'>$i</a>";
-              }
-              if ($i - 1 > $page) {
-                echo "<a href='tables.php?page=" . ($page + 1) . "' class='rounded-md bg-custom px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-custom2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>Next</a>";
-              }
+            }
+          } else {
+            $query = "SELECT * FROM data LIMIT $start_from, $num_per_page";
+            $result = mysqli_query($conn, $query);
+            while ($row = mysqli_fetch_assoc($result)) {
               ?>
-            </div>
-          </div>
-        </div>
+              <tr>
+                <td class="w-1/3 text-center text-sm py-3 px-4">
+                  <?php echo $row['ServiceID'] ?>
+                </td>
+
+                <td class="text-center py-3 px-4  text-sm">
+                  <?php echo $row['training_name'] ?>
+                </td>
+                <td class="text-center py-3 px-4  text-sm">
+                  <?php echo $row['date'] ?>
+                </td>
+                <td class="text-center py-3 px-4  text-sm">
+                  <?php echo $row['fname'] ?>
+                </td>
+                <td class="text-center py-3 px-4  text-sm">
+                  <?php echo $row['lname'] ?>
+                </td>
+                <td class="py-2 px-4">
+                  <a href="update.php?ServiceID=<?php echo $row['ServiceID'] ?>">
+                    <button type="submit" name="submit"
+                      class="rounded-md border border-custom px-3 py-1 text-sm text-default font-semibold hover:bg-custom2 hover:customtext  ml-2">
+                      Edit
+                    </button>
+                  </a>
+
+                  <a href='deleteEntry.php?UserID=<?= $row['ServiceID'] ?> '>
+                    <button type="submit" name="submit"
+                      class="rounded-md border border-red-500 px-3 py-1 text-sm text-red-500 font-semibold hover:bg-red-500 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 ml-2"
+                      onclick="return confirm('Are you sure you want to delete this user?')">
+                      Delete
+                    </button>
+                  </a>
 
 
 
+
+
+
+                </td>
+              </tr>
+              <?php
+            }
+          }
+          ?>
+        </tbody>
+      </table>
+
+
+    </div>
+
+    <!-- pagination -->
+    <div class="flex items-center justify-center mt-6 mb-3'">
+      <div class="flex items-center">
+        <?php
+        $pr_query = "SELECT * FROM data";
+        $pr_result = mysqli_query($conn, $pr_query);
+        $total_record = mysqli_num_rows($pr_result);
+        $total_page = ceil($total_record / $num_per_page);
+
+        if ($page > 1) {
+          echo "<a href='tables.php?page=" . ($page - 1) . "' class='text-gray-600 hover:text-blue-500 border border-gray-300 px-2 rounded-md mr-2'>Previous</a>";
+      }
+      
+      $start = max(1, $page - 3);
+      $end = min($total_page, $page + 3);
+      for ($i = $start; $i <= $end; $i++) {
+          echo "<a href='tables.php?page=" . $i . "' class='text-gray-600 hover:text-blue-500 border border-gray-300 px-2 rounded-md mr-2 '>$i</a>";
+      }
+      
+      if ($page < $total_page) {
+          echo "<a href='tables.php?page=" . ($page + 1) . "' class='text-gray-600 hover:text-blue-500 border border-gray-300 px-2 rounded-md mr-2'>Next</a>";
+      }
+
+        // if ($page > 1) {
+        //   echo "<a href='tables.php?page=" . ($page - 1) . "' class='rounded-md bg-custom px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-custom2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mr-2'>Previous</a>";
+        // }
+        // for ($i = 1; $i <= $total_page; $i++) {
+        //   echo "<a href='tables.php?page=" . $i . "' class='text-gray-600 hover:text-blue-500 border border-gray-300 px-2 rounded-md mr-2'>$i</a>";
+        // }
+        // if ($i - 1 > $page) {
+        //   echo "<a href='tables.php?page=" . ($page + 1) . "' class='rounded-md bg-custom px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-custom2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'>Next</a>";
+        // }
+        ?>
       </div>
+    </div>
+    </div>
+
+
+
+    </div>
     </div>
     </div>
   </main>
