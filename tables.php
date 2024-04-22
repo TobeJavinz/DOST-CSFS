@@ -288,17 +288,17 @@ $result = mysqli_query($conn, $query);
 
         if ($page > 1) {
           echo "<a href='tables.php?page=" . ($page - 1) . "' class='text-gray-600 hover:text-blue-500 border border-gray-300 px-2 rounded-md mr-2'>Previous</a>";
-      }
-      
-      $start = max(1, $page - 3);
-      $end = min($total_page, $page + 3);
-      for ($i = $start; $i <= $end; $i++) {
+        }
+
+        $start = max(1, $page - 3);
+        $end = min($total_page, $page + 3);
+        for ($i = $start; $i <= $end; $i++) {
           echo "<a href='tables.php?page=" . $i . "' class='text-gray-600 hover:text-blue-500 border border-gray-300 px-2 rounded-md mr-2 '>$i</a>";
-      }
-      
-      if ($page < $total_page) {
+        }
+
+        if ($page < $total_page) {
           echo "<a href='tables.php?page=" . ($page + 1) . "' class='text-gray-600 hover:text-blue-500 border border-gray-300 px-2 rounded-md mr-2'>Next</a>";
-      }
+        }
 
         // if ($page > 1) {
         //   echo "<a href='tables.php?page=" . ($page - 1) . "' class='rounded-md bg-custom px-4 py-1 text-sm font-semibold text-white shadow-sm hover:bg-custom2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mr-2'>Previous</a>";
