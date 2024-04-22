@@ -369,6 +369,14 @@
                                 Strongly Disagree</label>
                         </div>
                     </div>
+                    <div class="flex items-center gap-x-3">
+                        <input name="sqd5" value="0" type="radio" type="radio"
+                            class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+                        <div class="flex items-center gap-x-3">
+                            <label for="push-everything" class="block text-xs font-medium leading-6 text-gray-900">0 -
+                                Not Applicable</label>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- end of sqd5 -->
