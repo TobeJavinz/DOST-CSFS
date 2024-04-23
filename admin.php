@@ -23,11 +23,10 @@ if (isset($_POST['login'])) {
     // Verify password
     if (password_verify($login_password, $hashed_password)) {
         // Password is correct
-        $_SESSION['login'] = $name;
-        $_SESSION['admin'] =  $admin;
+   
 
-         $_SESSION['AdminName'] = $name;
-         $_SESSION['AdminPosition'] = $position;
+         $_SESSION['name'] = $name;
+         $_SESSION['position'] = $position;
 
         
         

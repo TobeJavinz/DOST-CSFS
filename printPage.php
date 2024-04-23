@@ -1165,22 +1165,20 @@ $training_date = $_SESSION['date'];
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-4">
 
 
-        <?php if ( $_SESSION['AdminPosition'] == "PSTD" ): ?>
+        <?php if ( $_SESSION['position'] == "PSTD" ): ?>
  
 
-            <p class="mt-5">
-                Prepared and Approved by:<br><br> <b>
-                    <?php echo $_SESSION['AdminName'] ?>
-                </b><br>
-                <?php echo $_SESSION['AdminPosition'] ?><br>
-                <?php echo date('m/d/Y') ?>
+            <p class="" style="font-size: smaller;">
+
+                <?php echo "PROCESSED ON ". date('m/d/Y') ?> 
             </p>
+
         <?php else: ?>
             <p class="mt-5">
                 Prepared by:<br><br> <b>
-                    <?php echo $_SESSION['AdminName'] ?>
+                    <?php echo  $_SESSION['name'] ?>
                 </b><br>
-                <?php echo $_SESSION['AdminPosition'] ?><br>
+                <?php  echo $_SESSION['position'] ?><br>
                 <?php echo date('m/d/Y') ?>
             </p>
 
